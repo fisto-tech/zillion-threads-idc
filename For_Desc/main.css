@@ -1,0 +1,1377 @@
+#navMenuBarMobile {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+
+    #navContainerMain {
+        height: 7%;
+        position: fixed;
+        z-index: 998;
+    }
+
+    #navMenuBarMobile {
+        display: block;
+        position: absolute;
+        right: 3%;
+        top: 47%;
+        width: 9%;
+        z-index: 99;
+        cursor: pointer;
+    }
+
+    #shareBtn,
+    #navToggle1,
+    #download-btn,
+    #musicOnImg,
+    #musicOffImg,
+    .bgm-container,
+    #searchIconDesktop,
+    .shadow-img {
+        display: none;
+    }
+
+    .social-icon {
+        height: 2%;
+    }
+
+    .social-icon-insta {
+        height: 2.8%;
+    }
+}
+
+
+
+@media screen and (min-width: 600px) and (max-width: 834px) {
+
+    #navContainerMain {
+        height: 7%;
+        position: fixed;
+        z-index: 998;
+    }
+
+    #navMenuBarMobile {
+        display: block;
+        position: absolute;
+        right: 3%;
+        top: 47%;
+        width: 6%;
+        z-index: 99;
+        cursor: pointer;
+    }
+
+    #shareBtn,
+    #navToggle1,
+    #download-btn,
+    #musicOnImg,
+    #musicOffImg,
+    .bgm-container,
+    #searchIconDesktop,
+    .zoom-control-container,
+    #full-screen-btn,
+    .page-no {
+        display: none;
+    }
+
+    /* 
+                                                    #goToPage1{
+                                                        width: 5vw;
+                                                    } */
+    .social-icon {
+        height: 2%;
+    }
+
+    .social-icon-insta {
+        height: 2.9%;
+    }
+}
+
+/* overlay container */
+.nav-mobile-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+/* when visible */
+.nav-mobile-overlay--visible {
+    display: flex;
+}
+
+/* blurred dark background */
+.nav-mobile-overlay__backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(6px);
+}
+
+/* vertical buttons panel */
+.nav-mobile-overlay__panel {
+    position: absolute;
+    right: 3%;
+    top: 50%;
+    transform: translateY(-50%) translateX(120%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 1;
+    opacity: 0;
+}
+
+/* slide‑in animation */
+.nav-mobile-overlay--visible .nav-mobile-overlay__panel {
+    animation: navPanelSlideIn 260ms ease-in-out forwards;
+}
+
+@keyframes navPanelSlideIn {
+    from {
+        transform: translateY(-50%) translateX(120%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(-50%) translateX(0%);
+        opacity: 1;
+    }
+}
+
+/* icon styles */
+.nav-mobile-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #ffffff;
+    padding: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    transform: scale(0.9);
+    transition: transform 160ms ease-out;
+}
+
+/* small pop on show / tap */
+.nav-mobile-overlay--visible .nav-mobile-icon {
+    transform: scale(1);
+}
+
+.nav-mobile-icon:active {
+    transform: scale(0.93);
+}
+
+.hidden-controls,
+#controls {
+    display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* **************************************************************************************************  */
+
+
+
+
+/* *********************************************************************************************** */
+
+
+
+.infinite-zoom {
+    animation: infiniteZoom 2s ease-in-out infinite;
+    transform-origin: center;
+}
+
+@keyframes infiniteZoom {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+        /* little zoom in */
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+/* @media screen and (min-width: 799px) {
+                                                    #dummyNext,
+                                                    #dummyPrev {display: none;}
+                                                    } */
+
+@media screen and (max-width: 768px) {
+    /* .next-arrow,
+                                                    .prev-arrow {
+                                                    position: fixed;
+                                                    bottom: 10%;
+                                                    background: white;
+                                                    color: black;
+                                                    padding: 5%;
+                                                    z-index: 999999999;
+                                                    }
+                                                    .prev-arrow {
+                                                    left: 5%;
+                                                    }
+                                                    .next-arrow {
+                                                    right: 5%;
+                                                    } */
+
+}
+
+/* ******************duplicate pages hide css code******************************  */
+/* .hide-mobile {
+                                                    background: red !important;
+                                                    } */
+
+/* Hide pages with hide-mobile class on tablets and mobile */
+@media screen and (max-width: 1024px) {
+    .hide-mobile {
+        display: none !important;
+    }
+
+    .hide-mobile {
+        background: red !important;
+    }
+
+    .hide-mobile {
+        border: 5px solid red;
+    }
+
+
+}
+
+/* Alternative: Hide only on mobile screens */
+@media screen and (max-width: 768px) {
+    .hide-mobile {
+        display: none !important;
+    }
+
+    .hide-mobile {
+        background: red !important;
+    }
+
+    .hide-mobile {
+        border: 5px solid red;
+    }
+
+}
+
+
+
+
+
+
+.catalog-app {
+    position: relative;
+    overflow: hidden;
+}
+
+.floating-layer {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.float-item {
+    position: absolute;
+    width: 60px;
+    opacity: 0.35;
+
+    animation: floatSoft ease-in-out infinite;
+}
+
+@media (max-width: 768px) {
+    .float-item {
+        width: 40px;
+    }
+
+    .image-fade-wrapper {
+        height: 27% !important;
+    }
+}
+
+@keyframes floatSoft {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+
+/* **********************background animation code end*****************************  */
+
+
+/* *************************About us Page Image Animation code********************* */
+
+.image-fade-wrapper {
+    position: absolute;
+}
+
+.fade-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: auto;
+    opacity: 0;
+    animation: fadeAnim 6s infinite;
+}
+
+.img-1 {
+    animation-delay: 0s;
+}
+
+.img-2 {
+    animation-delay: 3s;
+}
+
+@keyframes fadeAnim {
+    0% {
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    40% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+
+/* mobile screen shadow code  */
+
+
+/* Mobile screens only */
+@media (max-width: 767px) {
+    .mobile-left-shadow {
+        position: absolute;
+        left: -6%;
+        top: -9%;
+        height: 112%;
+        width: 16%;
+        z-index: 1111;
+        pointer-events: none;
+    }
+
+    .over-6-years-of-IML-img {
+        top: 59.5%;
+    }
+}
+
+/* Hide on tablet & desktop */
+@media (min-width: 768px) {
+    .mobile-left-shadow {
+        display: none;
+    }
+}
+
+
+
+
+/* ==================== MOBILE TOP NAVIGATION ==================== */
+
+/* Hide on Desktop, Show on Mobile/Tablet */
+.mobile-top-nav {
+    display: none;
+}
+
+@media screen and (max-width: 1024px) {
+    .mobile-top-nav {
+        display: flex;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 56px;
+        background: linear-gradient(135deg, #ffffff 0%, #f8fffe 100%);
+        border-bottom: 1px solid rgba(13, 148, 136, 0.15);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        z-index: 999999;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 12px;
+    }
+
+    /* Hide Desktop Navigation */
+    #topIconNav,
+    #navContainerMain,
+    .thumbnail-preview-container,
+    .page-controller {
+        display: none !important;
+    }
+
+    /* Adjust flipbook position */
+    .catalog-app {
+        padding-top: 56px;
+    }
+
+    #viewer {
+        margin-top: 0;
+    }
+}
+
+/* Left Section */
+.mobile-nav-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Center Section */
+.mobile-nav-center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.mobile-logo {
+    height: 32px;
+    width: auto;
+    cursor: pointer;
+}
+
+/* Right Section */
+.mobile-nav-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Mobile Nav Buttons */
+.mobile-nav-btn {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: transparent;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #0D9488;
+    transition: all 0.2s ease;
+}
+
+.mobile-nav-btn:hover,
+.mobile-nav-btn:active {
+    background: rgba(13, 148, 136, 0.1);
+}
+
+.mobile-nav-btn svg {
+    width: 22px;
+    height: 22px;
+}
+
+/* Page Number Display */
+.mobile-page-display {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: linear-gradient(135deg, #0D9488, #14B8A6);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-family: 'Inter', sans-serif;
+}
+
+.mobile-page-current {
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.mobile-page-divider {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 12px;
+}
+
+.mobile-page-total {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+    font-size: 13px;
+}
+
+/* ==================== MOBILE DROPDOWN MENU ==================== */
+.mobile-dropdown-menu {
+    position: fixed;
+    top: 60px;
+    right: 12px;
+    width: 200px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    z-index: 9999999;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px) scale(0.95);
+    transform-origin: top right;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    border: 1px solid rgba(13, 148, 136, 0.1);
+}
+
+.mobile-dropdown-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+}
+
+.mobile-dropdown-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 14px 16px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    gap: 12px;
+    text-align: left;
+}
+
+.mobile-dropdown-item:hover,
+.mobile-dropdown-item:active {
+    background: rgba(13, 148, 136, 0.08);
+}
+
+.mobile-dropdown-item:not(:last-child) {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.mobile-dropdown-icon {
+    width: 36px;
+    height: 36px;
+    /* background: linear-gradient(135deg, rgba(13, 148, 136, 0.1), rgba(20, 184, 166, 0.1)); */
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background: #0D9488;
+}
+
+.mobile-dropdown-icon svg {
+    width: 18px;
+    height: 18px;
+    color: #ffffff;
+    stroke: #ffffff;
+}
+
+.mobile-dropdown-icon img {
+    width: 20px;
+    height: 20px;
+}
+
+.mobile-dropdown-label {
+    flex: 1;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+.mobile-dropdown-arrow {
+    color: #aaa;
+    flex-shrink: 0;
+}
+
+.mobile-toggle-indicator {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 12px;
+    background: #f0f0f0;
+    color: #666;
+}
+
+.mobile-toggle-indicator.on {
+    background: linear-gradient(135deg, #0D9488, #14B8A6);
+    color: #fff;
+}
+
+/* Menu Overlay */
+.mobile-menu-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 999998;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.25s ease;
+}
+
+.mobile-menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ==================== MOBILE TABLE OF CONTENTS ==================== */
+.mobile-toc-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100%;
+    background: #ffffff;
+    z-index: 99999999;
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 4px 0 30px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+}
+
+.mobile-toc-panel.active {
+    transform: translateX(0);
+}
+
+.mobile-toc-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background: linear-gradient(135deg, #0D9488, #14B8A6);
+    color: #fff;
+}
+
+.mobile-toc-header h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+}
+
+.mobile-toc-close {
+    width: 36px;
+    height: 36px;
+    border: none;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #fff;
+    transition: all 0.2s ease;
+}
+
+.mobile-toc-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.mobile-toc-list {
+    list-style: none;
+    margin: 0;
+    padding: 12px 0;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.mobile-toc-item {
+    display: flex;
+    align-items: center;
+    padding: 14px 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    gap: 12px;
+    border-left: 3px solid transparent;
+}
+
+.mobile-toc-item:hover,
+.mobile-toc-item.active {
+    background: rgba(13, 148, 136, 0.08);
+    border-left-color: #0D9488;
+}
+
+.mobile-toc-item.active {
+    background: rgba(13, 148, 136, 0.15);
+}
+
+.mobile-toc-number {
+    width: 28px;
+    height: 28px;
+    background: linear-gradient(135deg, #0D9488, #14B8A6);
+    color: #fff;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.mobile-toc-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+/* TOC Overlay */
+.mobile-toc-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9999998;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.mobile-toc-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ==================== TABLET SPECIFIC (768px - 1024px) ==================== */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .mobile-top-nav {
+        height: 60px;
+        padding: 0 20px;
+    }
+
+    .mobile-nav-btn {
+        width: 44px;
+        height: 44px;
+    }
+
+    .mobile-logo {
+        height: 36px;
+    }
+
+    .mobile-page-display {
+        padding: 8px 16px;
+    }
+
+    .mobile-page-current {
+        font-size: 15px;
+    }
+
+    .mobile-dropdown-menu {
+        width: 240px;
+        top: 64px;
+        right: 20px;
+    }
+
+    .mobile-toc-panel {
+        width: 320px;
+    }
+}
+
+/* ==================== SMALL MOBILE (< 375px) ==================== */
+@media screen and (max-width: 375px) {
+    .mobile-top-nav {
+        padding: 0 8px;
+    }
+
+    .mobile-logo {
+        height: 28px;
+    }
+
+    .mobile-page-display {
+        padding: 4px 8px;
+    }
+
+    .mobile-page-current {
+        font-size: 12px;
+    }
+
+    .mobile-page-total {
+        font-size: 11px;
+    }
+
+    .mobile-nav-btn {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+/* ==================== HIDE ELEMENTS ON MOBILE ==================== */
+@media screen and (max-width: 1024px) {
+
+    /* Hide desktop specific elements */
+    .toc-floating,
+    .toc-floating1,
+    #navOverlay,
+    #navOverlay1 {
+        display: none !important;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ****************************************ROUND CONTAINER ANIMATION CODE START*************************************** */
+/* ================================================================
+                                                    ROUND CONTAINER CAROUSEL - PHYSICAL CARD MOVEMENT
+                                                    Cards physically slide between left / center / right positions
+                                                    ================================================================ */
+/* ================================================================
+                                                    CAROUSEL WRAPPER & CARD SLOTS
+                                                    ================================================================ */
+
+#carousel-wrapper {
+    position: relative;
+    perspective: 1000px;
+}
+
+/* Each card slot is a container for card-bg and card-container */
+.card-slot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 35%;
+    height: auto;
+    transform-origin: center center;
+    transition:
+        transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        filter 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: transform, opacity, filter;
+}
+
+.card-slot .card-bg {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.card-slot .card-container {
+    position: absolute;
+    top: 19%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 55%;
+    height: auto;
+}
+
+/* ================================================================
+                                                    POSITION STATES - Applied to .card-slot
+                                                    ================================================================ */
+
+/* CENTER — big, bright, front */
+.card-center {
+    transform: translate(-50%, -50%) translateX(0%) scale(1.1);
+    opacity: 1;
+    filter: brightness(1);
+    z-index: 10;
+}
+
+/* LEFT — shifted left, smaller, dimmed */
+.card-left {
+    transform: translate(-50%, -50%) translateX(-120%) scale(0.85);
+    opacity: 0.85;
+    filter: brightness(0.75);
+    z-index: 5;
+}
+
+/* RIGHT — shifted right, smaller, dimmed */
+.card-right {
+    transform: translate(-50%, -50%) translateX(120%) scale(0.85);
+    opacity: 0.85;
+    filter: brightness(0.75);
+    z-index: 5;
+}
+
+/* FAR LEFT — off-screen left (hidden, waiting to recycle) */
+.card-far-left {
+    transform: translate(-50%, -50%) translateX(-220%) scale(0.7);
+    opacity: 0;
+    filter: brightness(0.3);
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* FAR RIGHT — off-screen right (hidden, waiting to recycle) */
+.card-far-right {
+    transform: translate(-50%, -50%) translateX(220%) scale(0.7);
+    opacity: 0;
+    filter: brightness(0.3);
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Disable transition for instant repositioning */
+.no-transition {
+    transition: none !important;
+}
+
+/* ================================================================
+                                                    BOTTOM SECTION ANIMATIONS
+                                                    ================================================================ */
+
+@keyframes containerFlow {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.flow-active {
+    animation: containerFlow 4s ease-in-out infinite;
+}
+
+@keyframes slideInRight {
+    0% {
+        transform: translateX(100px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.slide-in-active {
+    animation: slideInRight 0.8s ease-out forwards;
+}
+
+@keyframes slideInLeft {
+    0% {
+        transform: translateX(-100px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.slide-in-active-left {
+    animation: slideInLeft 0.8s ease-out forwards;
+}
+
+@keyframes slideInLeftImg {
+    0% {
+        transform: translateX(-100px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.slide-in-active-left-img {
+    animation: slideInLeftImg 0.45s ease-out forwards;
+}
+
+#round-next-button {
+    animation: moveRightLoop 1.8s ease-in-out infinite;
+}
+
+@keyframes moveRightLoop {
+    0% {
+        transform: translateX(0);
+        /* opacity: 1; */
+    }
+
+    50% {
+        transform: translateX(8px);
+        /* move right */
+        /* opacity: 0.7; */
+    }
+
+    100% {
+        transform: translateX(0);
+        /* come back */
+        /* opacity: 1; */
+    }
+}
+
+/* ****************************************ROUND CONTAINER ANIMATION CODE END************************************** */
+
+/* ===================== ROUND BUCKET PAGE ANIMATIONS ===================== */
+
+/* --- Green Icon Popup --- */
+@keyframes iconPopup {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    70% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.rb-icon-popup {
+    animation: iconPopup 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    opacity: 0;
+}
+
+/* Staggered delays for 3 icons */
+.rb-icon-popup.delay-1 {
+    animation-delay: 0.1s;
+}
+
+.rb-icon-popup.delay-2 {
+    animation-delay: 0.3s;
+}
+
+.rb-icon-popup.delay-3 {
+    animation-delay: 0.5s;
+}
+
+/* --- 4 Images reveal from corners toward center --- */
+@keyframes imgFromTopLeft {
+    0% {
+        transform: translate(-40px, -40px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+}
+
+@keyframes imgFromTopRight {
+    0% {
+        transform: translate(40px, -40px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+}
+
+@keyframes imgFromBottomLeft {
+    0% {
+        transform: translate(-40px, 40px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+}
+
+@keyframes imgFromBottomRight {
+    0% {
+        transform: translate(40px, 40px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+}
+
+.rb-img-tl {
+    animation: imgFromTopLeft 0.5s ease-out forwards;
+    opacity: 0;
+}
+
+.rb-img-tr {
+    animation: imgFromTopRight 0.5s ease-out forwards;
+    opacity: 0;
+}
+
+.rb-img-bl {
+    animation: imgFromBottomLeft 0.5s ease-out forwards;
+    opacity: 0;
+}
+
+.rb-img-br {
+    animation: imgFromBottomRight 0.5s ease-out forwards;
+    opacity: 0;
+}
+
+/* Stagger the 4 images */
+.rb-img-tl {
+    animation-delay: 0.6s;
+}
+
+.rb-img-tr {
+    animation-delay: 0.75s;
+}
+
+.rb-img-bl {
+    animation-delay: 0.9s;
+}
+
+.rb-img-br {
+    animation-delay: 1.05s;
+}
+
+/* --- Text slide in from left --- */
+@keyframes rbTextSlide {
+    0% {
+        transform: translateX(-50px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.rb-text-slide {
+    animation: rbTextSlide 0.6s ease-out forwards;
+    opacity: 0;
+}
+
+.rb-text-slide.delay-1 {
+    animation-delay: 0.2s;
+}
+
+.rb-text-slide.delay-2 {
+    animation-delay: 0.35s;
+}
+
+.rb-text-slide.delay-3 {
+    animation-delay: 0.5s;
+}
+
+/* --- Container floating --- */
+@keyframes rbFloat {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-12px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.rb-float {
+    animation: rbFloat 3s ease-in-out infinite;
+}
+
+/* --- Second section (2000ml) gets extra delay so it doesn't clash --- */
+.rb-section2 {
+    animation-delay: 0.2s !important;
+}
+
+.rb-section2.delay-1 {
+    animation-delay: 0.3s !important;
+}
+
+.rb-section2.delay-2 {
+    animation-delay: 0.45s !important;
+}
+
+.rb-section2.delay-3 {
+    animation-delay: 0.6s !important;
+}
+
+
+/* ================================================================
+   BOTTOM BACKGROUND CROSSFADE ANIMATION - FIXED
+================================================================ */
+
+/* Wrapper maintains proper sizing */
+.bottom-bg-wrapper {
+    position: absolute;
+    overflow: hidden;
+}
+
+/* Base image - always visible, controls container size */
+.bottom-bg-img-base {
+    display: block;
+    width: 100%;
+    height: auto;
+    opacity: 1;
+    transition: opacity 0.6s ease-in-out;
+}
+
+/* Overlay image - sits exactly on top of base */
+.bottom-bg-img-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.6s ease-in-out;
+}
+
+/* Active states */
+.bottom-bg-img-base.bottom-bg-hidden {
+    opacity: 0;
+}
+
+.bottom-bg-img-overlay.bottom-bg-visible {
+    opacity: 1;
+}
+
+
+.page-corner-no {
+    position: absolute;
+    bottom: 1.5%;
+    font-size: 0.85vw;
+    font-family: 'Inter', sans-serif;
+    color: #555;
+    font-weight: 800;
+    z-index: 20;
+}
+
+.page-corner-right {
+    right: 47%;
+}
+
+.page-corner-left {
+    left: 48%;
+}
+
+@media (max-width: 500px) {
+    .page-corner-no {
+        font-size: 2.5vw;
+    }
+
+
+    /* @media (min-width: 501px) and (max-width: 1024px) {
+
+     .page-corner-no {
+      font-size: 2vw;
+     }
+  } */
+
+    #ice-cream-round-next-btn,
+    #ice-cream-round-previous-btn {
+        width: 11%;
+        height: 8%;
+        bottom: -1% !important;
+    }
+}
+
+
+
+/* Table of content hover effect  */
+
+
+/* Common style for all TOC items */
+.table-hover-effect {
+    transition: all 0.35s ease;
+    transform-origin: left center;
+    cursor: pointer;
+}
+
+/* Hover effect */
+.table-hover-effect:hover {
+    transform: scale(1.05) translateX(10px);
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.25));
+}
+
+/* Optional: active click feel */
+.table-hover-effect:active {
+    transform: scale(0.98) translateX(5px);
+}
+
+
+html body .zoom-control-container .zoom-btn,
+html body .zoom-control-container .icon-btn {
+    width: 28px !important;
+    height: 28px !important;
+    min-width: 28px !important;
+    max-width: 28px !important;
+    min-height: 28px !important;
+    max-height: 28px !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-radius: 6px !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+    cursor: pointer !important;
+}
+
+html body .zoom-control-container .zoom-btn img,
+html body .zoom-control-container .icon-btn img {
+    width: 14px !important;
+    height: 14px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: block !important;
+}

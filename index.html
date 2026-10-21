@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zillion Threads IDC</title>
+    <!-- <title>Mathurams Engineering IDC</title>/ -->
+	<!-- <meta name="description" content="">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="">
+    <meta name="twitter:description" content="">
+    <meta name="twitter:image" content=""> -->
+    
+
+<meta name="description"
+      content="">
+
+<meta name="twitter:card" content="summary_large_image">
+
+<meta name="twitter:title"
+      content="">
+
+<meta name="twitter:description"
+      content="">
+
+<meta name="twitter:image"
+      content="./global assets/Images/logo.svg">
+    <link rel="icon" href="./global assets/Images/logo.svg">
+    <link rel="preload" href="./global assets/Images/logo.svg" as="image" type="image/svg+xml" fetchpriority="high">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        @media screen and (min-width: 992px) {
+            body {
+                overflow: hidden;
+            }
+        }
+
+        #content {
+            width: 100%;
+            margin: 0 auto;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        #content.visible {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        #content object {
+            width: 100%;
+            height: 100%;
+            border: none;
+            min-height: 90vh;
+        }
+        /* ==================== CINEMATIC GOLDEN THREAD PRELOADER ==================== */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #07232e;
+            background-image: 
+                radial-gradient(circle at center, rgba(10, 51, 68, 0.45) 0%, rgba(2, 16, 23, 0.85) 75%, rgba(1, 9, 13, 0.95) 100%),
+                url('./global%20assets/Images/background-images/golden-thread-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999999999;
+            overflow: hidden;
+            transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+            user-select: none;
+        }
+
+        /* Subtle dark translucent vignette overlay for contrast & readability */
+        .preloader-overlay {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(3, 24, 34, 0.55) 0%, rgba(1, 12, 17, 0.82) 80%);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Floating Golden Ambient Dust Particles */
+        .ambient-dust {
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(2px 2px at 20% 30%, rgba(234, 185, 75, 0.6), transparent),
+                              radial-gradient(2px 2px at 40% 70%, rgba(255, 215, 120, 0.5), transparent),
+                              radial-gradient(3px 3px at 65% 25%, rgba(234, 185, 75, 0.7), transparent),
+                              radial-gradient(2px 2px at 80% 65%, rgba(220, 160, 65, 0.4), transparent),
+                              radial-gradient(3px 3px at 85% 35%, rgba(255, 220, 140, 0.55), transparent);
+            background-size: 100% 100%;
+            pointer-events: none;
+            opacity: 0.75;
+            animation: dustFloat 10s ease-in-out infinite alternate;
+            z-index: 1;
+        }
+
+        @keyframes dustFloat {
+            0% { transform: translateY(0px) scale(1); opacity: 0.6; }
+            100% { transform: translateY(-15px) scale(1.03); opacity: 0.9; }
+        }
+
+        /* Main Preloader Content Container */
+        .preloader-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            max-width: 90vw;
+        }
+
+        /* Top-center ZILLION Threads Brand Logo */
+        .top-brand-logo {
+            margin-bottom: clamp(24px, 4.5vh, 44px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+
+        .top-brand-logo img {
+            width: clamp(170px, 20vw, 230px);
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.65));
+        }
+
+        /* Central Thread Loader Container */
+        .thread-loader-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: clamp(20px, 3vh, 32px);
+        }
+
+        /* Thread SVG with Smooth Rotation and Golden Glow */
+        .thread-loader {
+            width: clamp(100px, 14vw, 160px);
+            height: auto;
+            transform-origin: center;
+            animation: threadRotate 8s linear infinite,
+                       threadGlow 2.5s ease-in-out infinite alternate;
+            will-change: transform, filter;
+            display: block;
+        }
+
+        @keyframes threadRotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes threadGlow {
+            from {
+                filter: drop-shadow(0 0 3px rgba(220, 160, 65, 0.35));
+            }
+            to {
+                filter: drop-shadow(0 0 16px rgba(255, 190, 80, 0.85));
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .thread-loader {
+                animation: none;
+            }
+            .ambient-dust {
+                animation: none;
+            }
+        }
+
+        /* Loading Percentage Display */
+        .loader-percent-display {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: clamp(20px, 2.5vw, 26px);
+            font-weight: 700;
+            color: #EAB94B;
+            letter-spacing: 1px;
+            margin-bottom: clamp(12px, 1.8vh, 18px);
+            text-shadow: 0 0 16px rgba(234, 185, 75, 0.65), 0 2px 6px rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+        }
+
+        .loader-percent-display .percent-symbol {
+            font-size: 0.75em;
+            margin-left: 2px;
+            color: rgba(234, 185, 75, 0.9);
+            font-weight: 600;
+        }
+
+        /* Slim, Rounded Progress Bar with Golden Gradient & Glow */
+        .progress-line {
+            position: relative;
+            width: clamp(220px, 26vw, 320px);
+            height: 4px;
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 999px;
+            overflow: hidden;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5), 0 0 12px rgba(234, 185, 75, 0.15);
+            border: 1px solid rgba(234, 185, 75, 0.22);
+            --progress: 0%;
+        }
+
+        .progress-line::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: var(--progress);
+            height: 100%;
+            background: linear-gradient(90deg, #1A7292 0%, #D4A038 50%, #FFD778 100%);
+            box-shadow: 0 0 12px rgba(234, 185, 75, 0.9), 0 0 4px rgba(255, 215, 120, 1);
+            border-radius: 999px;
+            transition: width 0.25s ease-out;
+        }
+
+        /* Subtitle Text */
+        .loader-subtitle {
+            margin-top: clamp(12px, 1.8vh, 18px);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: clamp(12px, 1.2vw, 14px);
+            color: rgba(246, 237, 225, 0.82);
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+        }
+
+        .fade-out {
+            opacity: 0 !important;
+            transform: scale(1.03);
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Cinematic ZILLION Threads IDC Preloader -->
+    <div id="preloader">
+        <div class="preloader-overlay"></div>
+        <div class="ambient-dust"></div>
+
+        <div class="preloader-content">
+            <!-- Top-center ZILLION Threads Brand Logo -->
+            <div class="top-brand-logo">
+                <img src="./global%20assets/bottom-navbar/logo.svg" alt="ZILLION Threads Logo" loading="eager" decoding="sync" fetchpriority="high">
+            </div>
+
+            <!-- Center Animated Golden Thread SVG -->
+            <div class="thread-loader-wrapper">
+                <img class="thread-loader" src="./global%20assets/Images/logo.svg" alt="Thread Loading Animation" loading="eager" decoding="sync" fetchpriority="high">
+            </div>
+
+            <!-- Loading Percentage -->
+            <div class="loader-percent-display">
+                <span class="loader-percent" id="loader-percent">1</span><span class="percent-symbol">%</span>
+            </div>
+
+            <!-- Slim Rounded Golden Progress Bar -->
+            <div class="progress-line"></div>
+
+            <!-- Experience Subtitle -->
+            <p class="loader-subtitle">Loading your experience...</p>
+        </div>
+    </div>
+
+    <div id="content"></div>
+
+    <script>
+        const preloader = document.getElementById("preloader");
+        const contentDiv = document.getElementById("content");
+        const percentText = document.getElementById("loader-percent");
+        const progressLine = document.querySelector(".progress-line");
+
+        // ── State ────────────────────────────────────────────────────────────
+        let currentProgress  = 1;   // displayed value (animated)
+        let imageRatio       = 0;   // 0→1, actual loaded/total from child frame
+        let allImagesLoaded  = false; // true when assetsLoaded fires
+        let isFullyReady     = false; // true when contentReady fires (DOM ready)
+        let contentShown     = false;
+        let progressFrame    = null;
+
+        // ── Render ───────────────────────────────────────────────────────────
+        function renderProgress() {
+            const v = Math.min(100, Math.max(1, Math.floor(currentProgress)));
+            if (percentText)   percentText.textContent = `${v}`;
+            if (progressLine)  progressLine.style.setProperty("--progress", `${v}%`);
+        }
+        renderProgress();
+
+        // ── Target calculation ────────────────────────────────────────────────
+        // Maps the current state into the target % the animation should chase.
+        function getTarget() {
+            if (isFullyReady)     return 100;   // everything done → go to 100
+            if (allImagesLoaded)  return 99;    // images done, waiting for DOM → sit at 99
+            // 1 % → 90 % proportional to real image-load ratio
+            return Math.max(1, Math.min(90, Math.round(1 + imageRatio * 89)));
+        }
+
+        // ── Animation loop ────────────────────────────────────────────────────
+        function updateProgressLoop() {
+            if (contentShown) return;
+
+            const target = getTarget();
+
+            if (target >= 100) {
+                // Final sprint to 100
+                const step = Math.max(0.5, (100 - currentProgress) * 0.08);
+                currentProgress = Math.min(100, currentProgress + step);
+                renderProgress();
+                if (currentProgress >= 100) { showContent(); return; }
+
+            } else if (currentProgress < target) {
+                // Chase the target – speed varies by zone
+                const diff = target - currentProgress;
+
+                let speed;
+                if (currentProgress < 90) {
+                    // 1 → 90 : proportional to image loading, relatively quick chase
+                    speed = Math.max(0.05, diff * 0.12);
+                } else if (currentProgress < 95) {
+                    // 90 → 95 : slightly faster
+                    speed = Math.max(0.04, diff * 0.08);
+                } else {
+                    // 95 → 99 : very slow crawl
+                    speed = Math.max(0.005, diff * 0.02);
+                }
+                currentProgress = Math.min(target, currentProgress + speed);
+
+            } else if (!allImagesLoaded && currentProgress < 89) {
+                // Minimum crawl so bar is never frozen while images are in-flight
+                const crawl = currentProgress < 60 ? 0.08 : 0.03;
+                currentProgress = Math.min(89, currentProgress + crawl);
+
+            } else if (allImagesLoaded && !isFullyReady && currentProgress < 99) {
+                // Images done but DOM not signalled yet – drift very slowly to 99
+                currentProgress = Math.min(99, currentProgress + 0.01);
+            }
+            // else: sit exactly at target, no movement
+
+            renderProgress();
+            progressFrame = requestAnimationFrame(updateProgressLoop);
+        }
+
+        progressFrame = requestAnimationFrame(updateProgressLoop);
+
+        // ── Show content ──────────────────────────────────────────────────────
+        function showContent() {
+            if (contentShown) return;
+            contentShown = true;
+            contentDiv.classList.add("visible");
+            preloader.classList.add("fade-out");
+            setTimeout(() => { preloader.style.display = "none"; }, 800);
+        }
+
+        // ── Load iframe ───────────────────────────────────────────────────────
+        function load_home() {
+            const folderPath = 'For_Desc/index.html';
+            const height = window.innerWidth <= 480 ? '90.5vh' : '100vh';
+            contentDiv.innerHTML =
+                '<object type="text/html" data="' + folderPath +
+                '" style="width:100%;height:' + height + ';border:none;"></object>';
+
+            // Hard safety fallback – if child never signals, open after 60 s
+            setTimeout(() => { isFullyReady = true; }, 60000);
+        }
+
+        // ── Message listener ──────────────────────────────────────────────────
+        window.addEventListener("message", function (event) {
+            if (!event.data || !event.data.action) return;
+
+            // Actual image-load ratio from child frame (0 → 1)
+            if (event.data.action === "loadProgress") {
+                const ratio = Number(event.data.ratio);
+                if (Number.isFinite(ratio) && ratio >= 0) {
+                    imageRatio = Math.min(1, Math.max(imageRatio, ratio)); // never go backwards
+                }
+            }
+
+            // All images in child frame finished loading
+            if (event.data.action === "assetsLoaded") {
+                imageRatio     = 1;
+                allImagesLoaded = true;
+            }
+
+            // Child frame DOM / window fully ready
+            if (event.data.action === "contentReady") {
+                imageRatio      = 1;
+                allImagesLoaded = true;
+                isFullyReady    = true;
+            }
+
+            // Fullscreen toggle
+            if (event.data.action === "toggleFullscreen") {
+                if (!document.fullscreenElement) {
+                    contentDiv.requestFullscreen?.() || contentDiv.webkitRequestFullscreen?.();
+                } else {
+                    document.exitFullscreen?.();
+                }
+            }
+        });
+
+        window.onload = load_home;
+
+        // ── Keyboard navigation ───────────────────────────────────────────────
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowLeft' ||
+                e.key === 'ArrowDown'  || e.key === 'ArrowUp') {
+                e.preventDefault();
+            }
+            if (e.target.matches('input, textarea')) return;
+            const objectEl = document.querySelector('#content object');
+            if (!objectEl) return;
+            switch (e.key) {
+                case 'ArrowRight':
+                case 'ArrowDown':
+                    objectEl.contentWindow.postMessage({ action: 'flipNext' }, '*'); break;
+                case 'ArrowLeft':
+                case 'ArrowUp':
+                    objectEl.contentWindow.postMessage({ action: 'flipPrev' }, '*'); break;
+                case 'Home':
+                    objectEl.contentWindow.postMessage({ action: 'flipFirst' }, '*'); break;
+                case 'End':
+                    objectEl.contentWindow.postMessage({ action: 'flipLast' }, '*'); break;
+            }
+        });
+    </script>
+</body>
+</html>
+
