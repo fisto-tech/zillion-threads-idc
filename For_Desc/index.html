@@ -1,11 +1,11 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <title>Zillion Threads IDC</title>
     <meta charset="UTF-8">
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https: blob: data:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https: blob: data:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: blob: https:; connect-src 'self' https: blob: data:; worker-src 'self' blob:; frame-src 'self' https:; media-src 'self' blob: data:;" />
+        content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https: blob: data: http://localhost:8000 http://127.0.0.1:8000; script-src 'self' 'unsafe-inline' 'unsafe-eval' https: blob: data:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: blob: https: http:; connect-src 'self' https: blob: data: http://localhost:8000 http://127.0.0.1:8000; worker-src 'self' blob:; frame-src 'self' https:; media-src 'self' blob: data:;" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Tailwind Css  -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
@@ -487,6 +487,22 @@
                 </svg>
             </button>
 
+            <!-- Admin Login -->
+            <button class="mobile-dropdown-item" id="mobileAdminLoginBtn" onclick="triggerAdminLogin()">
+                <div class="mobile-dropdown-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+                        <polyline points="10 17 15 12 10 7"/>
+                        <line x1="15" y1="12" x2="3" y2="12"/>
+                    </svg>
+                </div>
+                <span class="mobile-dropdown-label">Admin Login</span>
+                <svg class="mobile-dropdown-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2">
+                    <polyline points="9 18 15 12 9 6" />
+                </svg>
+            </button>
+
             <!-- Fullscreen -->
             <!-- <button class="mobile-dropdown-item" id="mobileFullscreenBtn">
         <div class="mobile-dropdown-icon">
@@ -673,6 +689,15 @@
             <!-- Download Button -->
             <button class="icon-btn" id="download-btn" title="Download">
                 <img src="../global%20assets/bottom-navbar/download-icon.svg" alt="Download PDF Catalog" />
+            </button>
+
+            <!-- Admin Login Button -->
+            <button class="icon-btn" id="adminLoginBtn" title="Admin Login" onclick="triggerAdminLogin()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: #475569;">
+                    <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+                    <polyline points="10 17 15 12 10 7"/>
+                    <line x1="15" y1="12" x2="3" y2="12"/>
+                </svg>
             </button>
         </div>
 
@@ -1258,7 +1283,7 @@
                 </div>   
                     <!-- *******************************  Page 3 end ***************************** -->
                     <!-- *******************************  Page 4 Start *************************** -->
-                <!-- <div class="page page-animated page-4">
+                <div class="page page-animated page-4">
                     <img src="../global%20assets/Images/commonThings/left-page-shadow.svg" alt="left-page-shadow"
                             class="gutter-shadow shadow-left absolute h-[100%] top-[0%] right-[-1%] z-[4]" />
                         <img src="../global%20assets/Images/commonThings/right-page-shadow.svg" alt="right-page-shadow"
@@ -1271,63 +1296,20 @@
                         </div>
 
                         <div class="products-cards-grid" id="p4-cards-grid">
-                        
-                            <div class="product-item-card" id="card-p4-1">
-                                <div class="product-img-wrap">
-                                    <img src="../global assets/Images/products/product-1.jpg" alt="Aurora Gold Thread" id="img-p4-1" loading="lazy">
-                                </div>
-                                <div class="product-info-wrap">
-                                    <span class="product-card-category" id="cat-p4-1">Metallic Embroidery</span>
-                                    <h3 class="product-card-name" id="name-p4-1">Aurora Gold Thread</h3>
-                                    <p class="product-card-desc" id="desc-p4-1">Premium 1000m high-sheen reinforced golden metallic filament.</p>
-                                </div>
-                            </div>
-                        
-                            <div class="product-item-card" id="card-p4-2">
-                                <div class="product-img-wrap">
-                                    <img src="../global assets/Images/products/product-2.jpg" alt="Golden Silk Thread" id="img-p4-2" loading="lazy">
-                                </div>
-                                <div class="product-info-wrap">
-                                    <span class="product-card-category" id="cat-p4-2">100% Pure Silk</span>
-                                    <h3 class="product-card-name" id="name-p4-2">Golden Silk Thread</h3>
-                                    <p class="product-card-desc" id="desc-p4-2">50wt luxury soft-touch Italian spun natural golden silk.</p>
-                                </div>
-                            </div>
-                           
-                            <div class="product-item-card" id="card-p4-3">
-                                <div class="product-img-wrap">
-                                    <img src="../global assets/Images/products/product-3.jpg" alt="Zillion Bonded Poly" id="img-p4-3" loading="lazy">
-                                </div>
-                                <div class="product-info-wrap">
-                                    <span class="product-card-category" id="cat-p4-3">High Tenacity</span>
-                                    <h3 class="product-card-name" id="name-p4-3">Zillion Bonded Poly</h3>
-                                    <p class="product-card-desc" id="desc-p4-3">Heavy-duty continuous filament polyester for leather &amp; footwear.</p>
-                                </div>
-                            </div>
-                     
-                            <div class="product-item-card" id="card-p4-4">
-                                <div class="product-img-wrap">
-                                    <img src="../global assets/Images/products/product-4.jpg" alt="Spun Poly Industrial" id="img-p4-4" loading="lazy">
-                                </div>
-                                <div class="product-info-wrap">
-                                    <span class="product-card-category" id="cat-p4-4">Garment &amp; Apparel</span>
-                                    <h3 class="product-card-name" id="name-p4-4">Spun Poly Industrial</h3>
-                                    <p class="product-card-desc" id="desc-p4-4">Uniform high-speed knot-free lockstitch sewing thread.</p>
-                                </div>
-                            </div>
+                            <!-- Dynamically loaded from MySQL database -->
                         </div>
 
                         <div class="products-page-footer">
                             <span class="products-footer-tag">Zillion Threads Industrial Collection</span>
-                            <a href="../admin/index.php" target="_blank" class="products-footer-action" title="Admin Portal">
+                            <a href="../admin/index.php" target="_blank" class="products-footer-action" onclick="if(window.parent && window.parent!==window){event.preventDefault(); window.parent.postMessage({action:'openAdminLogin'}, '*');}" title="Admin Portal">
                                 <span>Catalog Management</span> &rarr;
                             </a>
                         </div>
                     </div>
-                </div>    -->
+                </div>   
                     <!-- *******************************  Page 4 end ***************************** -->
                     <!-- *******************************  Page 5 Start *************************** -->
-                <!-- <div class="page page-animated page-5">
+                <div class="page page-animated page-5">
                     <div class="products-page-container" id="products-page-5-container">
                         <div class="products-page-header">
                             <span class="products-badge">Technical Yarns</span>
@@ -1336,60 +1318,17 @@
                         </div>
 
                         <div class="products-cards-grid" id="p5-cards-grid">
-                          
-                            <div class="product-item-card" id="card-p5-1">
-                                <div class="product-img-wrap">
-                                    <img src="../global assets/Images/products/product-5.jpg" alt="Flame Resistant Aramid" id="img-p5-1" loading="lazy">
-                                </div>
-                                <div class="product-info-wrap">
-                                    <span class="product-card-category" id="cat-p5-1">Safety &amp; Technical</span>
-                                    <h3 class="product-card-name" id="name-p5-1">Flame Resistant Aramid</h3>
-                                    <p class="product-card-desc" id="desc-p5-1">Thermal-resistant Nomex &amp; Kevlar blend protective threads.</p>
-                                </div>
-                            </div>
-                         
-                            <div class="product-item-card" id="card-p5-2">
-                                <div class="product-img-wrap">
-                                    <img src="../global assets/Images/products/product-6.jpg" alt="Reflective Hi-Vis Filament" id="img-p5-2" loading="lazy">
-                                </div>
-                                <div class="product-info-wrap">
-                                    <span class="product-card-category" id="cat-p5-2">High Visibility</span>
-                                    <h3 class="product-card-name" id="name-p5-2">Reflective Hi-Vis Filament</h3>
-                                    <p class="product-card-desc" id="desc-p5-2">Micro-glass bead reflective thread for safety workwear.</p>
-                                </div>
-                            </div>
-                        
-                            <div class="product-item-card" id="card-p5-3">
-                                <div class="product-img-wrap">
-                                    <img src="../global assets/Images/products/product-7.jpg" alt="Textured Stretch Poly" id="img-p5-3" loading="lazy">
-                                </div>
-                                <div class="product-info-wrap">
-                                    <span class="product-card-category" id="cat-p5-3">Activewear &amp; Swim</span>
-                                    <h3 class="product-card-name" id="name-p5-3">Textured Stretch Poly</h3>
-                                    <p class="product-card-desc" id="desc-p5-3">Ultra-soft microfilament overlock thread with extreme recovery.</p>
-                                </div>
-                            </div>
-                      
-                            <div class="product-item-card" id="card-p5-4">
-                                <div class="product-img-wrap">
-                                    <img src="../global assets/Images/products/product-8.jpg" alt="Eco-Recycled Yarn Cone" id="img-p5-4" loading="lazy">
-                                </div>
-                                <div class="product-info-wrap">
-                                    <span class="product-card-category" id="cat-p5-4">Sustainable Textile</span>
-                                    <h3 class="product-card-name" id="name-p5-4">Eco-Recycled Yarn Cone</h3>
-                                    <p class="product-card-desc" id="desc-p5-4">100% GRS certified recycled post-consumer PET sewing yarn.</p>
-                                </div>
-                            </div>
+                            <!-- Dynamically loaded from MySQL database -->
                         </div>
 
                         <div class="products-page-footer">
                             <span class="products-footer-tag">ISO 9001:2015 Certified Manufacturing</span>
-                            <a href="../admin/index.php" target="_blank" class="products-footer-action" title="Admin Portal">
+                            <a href="../admin/index.php" target="_blank" class="products-footer-action" onclick="if(window.parent && window.parent!==window){event.preventDefault(); window.parent.postMessage({action:'openAdminLogin'}, '*');}" title="Admin Portal">
                                 <span>Catalog Management</span> &rarr;
                             </a>
                         </div>
                     </div>
-/>                </div>    -->
+               </div>   
                     <!-- *******************************  Page 5 end ***************************** -->
                     <!-- *******************************  Page 6 Start *************************** -->
                 <div class="page page-animated page-6">
@@ -1624,8 +1563,134 @@
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script>
+        // Standalone Dynamic Product Sync from MySQL Database with Testing Console Logs
+        (function() {
+            window._cachedCatalogData = null;
 
-    <script src="./script2.js?v=2"></script>
+            function resolveApiUrl() {
+                // If running directly on the PHP dev server (e.g. localhost:8000), use relative path
+                if (window.location.port === '8000' || window.location.pathname.endsWith('.php')) {
+                    return '../api/get_products.php?t=' + Date.now();
+                }
+                // When accessed from VS Code Live Server (port 5500, 5501, etc.) or file system
+                return 'http://localhost:8000/api/get_products.php?t=' + Date.now();
+            }
+
+            function renderCardsToContainer(grid, items, pageNum) {
+                if (!grid || !Array.isArray(items)) return;
+                grid.innerHTML = items.map(item => `
+                    <div class="product-item-card" id="card-${item.id}">
+                        <div class="product-img-wrap">
+                            <img src="${item.image}" alt="${item.name}" id="img-${item.id}" loading="eager" onerror="this.onerror=null; this.src='../global assets/Images/products/product-1.jpg';">
+                        </div>
+                        <div class="product-info-wrap">
+                            <span class="product-card-category" id="cat-${item.id}">${item.category || ''}</span>
+                            <h3 class="product-card-name" id="name-${item.id}">${item.name || ''}</h3>
+                            <p class="product-card-desc" id="desc-${item.id}">${item.description || ''}</p>
+                        </div>
+                    </div>
+                `).join('');
+                // Ensure all rendered images have full opacity and are visible
+                const imgs = grid.querySelectorAll('img');
+                imgs.forEach(img => {
+                    img.style.opacity = '1';
+                    img.style.visibility = 'visible';
+                });
+            }
+
+            function updateCardsFromData(data) {
+                if (!data) return;
+                window._cachedCatalogData = data;
+                console.log("[DynamicCatalog] Rendering catalog from MySQL data:", data);
+
+                // --- Page 4 ---
+                if (data.page4) {
+                    document.querySelectorAll('#p4-display-title, .page-4 .products-title, [class*="page-4"] .products-title').forEach(el => {
+                        if (data.page4.title) el.textContent = data.page4.title;
+                    });
+                    document.querySelectorAll('#p4-display-subtitle, .page-4 .products-subtitle, [class*="page-4"] .products-subtitle').forEach(el => {
+                        if (data.page4.subtitle) el.textContent = data.page4.subtitle;
+                    });
+
+                    if (Array.isArray(data.page4.items)) {
+                        const grids4 = document.querySelectorAll('#p4-cards-grid, .page-4 .products-cards-grid, [class*="page-4"] .products-cards-grid');
+                        console.log(`[DynamicCatalog] Found ${grids4.length} Page 4 grids`);
+                        grids4.forEach((grid, idx) => {
+                            renderCardsToContainer(grid, data.page4.items, 4);
+                        });
+                    }
+                }
+
+                // --- Page 5 ---
+                if (data.page5) {
+                    document.querySelectorAll('#p5-display-title, .page-5 .products-title, [class*="page-5"] .products-title').forEach(el => {
+                        if (data.page5.title) el.textContent = data.page5.title;
+                    });
+                    document.querySelectorAll('#p5-display-subtitle, .page-5 .products-subtitle, [class*="page-5"] .products-subtitle').forEach(el => {
+                        if (data.page5.subtitle) el.textContent = data.page5.subtitle;
+                    });
+
+                    if (Array.isArray(data.page5.items)) {
+                        const grids5 = document.querySelectorAll('#p5-cards-grid, .page-5 .products-cards-grid, [class*="page-5"] .products-cards-grid');
+                        console.log(`[DynamicCatalog] Found ${grids5.length} Page 5 grids`);
+                        grids5.forEach((grid, idx) => {
+                            renderCardsToContainer(grid, data.page5.items, 5);
+                        });
+                    }
+                }
+            }
+
+            window.renderCatalogCardsFromCache = function() {
+                if (window._cachedCatalogData) {
+                    updateCardsFromData(window._cachedCatalogData);
+                }
+            };
+
+            window.syncProductsCatalog = function() {
+                const databaseApi = resolveApiUrl();
+                console.log("[DynamicCatalog] Fetching products directly from MySQL Database API:", databaseApi);
+
+                fetch(databaseApi)
+                    .then(r => {
+                        console.log("[DynamicCatalog] MySQL API Response Status:", r.status, r.statusText);
+                        if (!r.ok) throw new Error('Database API status ' + r.status);
+                        return r.json();
+                    })
+                    .then(data => {
+                        console.log("[DynamicCatalog] Data loaded successfully from MySQL:", data);
+                        if (data && (data.page4 || data.page5)) {
+                            updateCardsFromData(data);
+                        } else {
+                            console.warn("[DynamicCatalog] Unexpected data returned from MySQL:", data);
+                        }
+                    })
+                    .catch(err => {
+                        console.error("[DynamicCatalog] Failed to load products from MySQL Database:", err);
+                    });
+            };
+
+            // Run immediately and on DOMContentLoaded
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', () => {
+                    window.syncProductsCatalog();
+                });
+            } else {
+                window.syncProductsCatalog();
+            }
+
+            // Periodic re-check to ensure cards persist if Turn.js creates clone wrappers
+            setInterval(() => {
+                if (window._cachedCatalogData) {
+                    const emptyGrids = Array.from(document.querySelectorAll('#p4-cards-grid, #p5-cards-grid, .page-4 .products-cards-grid, .page-5 .products-cards-grid'))
+                        .filter(g => g.children.length === 0);
+                    if (emptyGrids.length > 0) {
+                        updateCardsFromData(window._cachedCatalogData);
+                    }
+                }
+            }, 1000);
+        })();
+    </script>
     <script type="text/javascript">
         // Change these settings
 
@@ -1843,6 +1908,11 @@
                     $pageEl.find('img').css('opacity', '1');
                 }
             });
+            if (currentView.includes(4) || currentView.includes(5) || page === 4 || page === 5) {
+                if (typeof window.renderCatalogCardsFromCache === 'function') {
+                    window.renderCatalogCardsFromCache();
+                }
+            }
         });
 
         function getPageElement(p) {
@@ -1875,6 +1945,8 @@
             if (alt.includes('logo') || src.includes('logo')) return false;
             // Filter out website link
             if (alt.includes('website-link') || src.includes('website-link')) return false;
+            // Filter out dynamic product card images and product page containers
+            if ($img.closest('.product-img-wrap, .products-page-container, .product-item-card').length > 0) return false;
             // Filter out specific page 2 & 3 classes to avoid double animation handling
             if (className.includes('page-2-left') || className.includes('page-2-right') ||
                 className.includes('page-2-up') || className.includes('page-2-down') ||
@@ -2171,6 +2243,19 @@
 
 
 
+    </script>
+
+    <script>
+        function triggerAdminLogin() {
+            if (window.parent && window.parent !== window) {
+                // Inside parent container (index.html), message parent to display embedded login screen on same port
+                window.parent.postMessage({ action: "openAdminLogin" }, "*");
+            } else {
+                // Standalone view: Navigate to login.html or /login based on server
+                const isPhp = window.location.port === '8000';
+                window.location.href = isPhp ? '/login' : '../index.html?login';
+            }
+        }
     </script>
 
 
@@ -3263,9 +3348,8 @@
                     //     33: "../audios/Stainless-steel-furniture-ward-accessories.mp3",
                     //     37: "../audios/General-furniture.mp3",
                     //     39: "../audios/Accessories.mp3"
-                    // };
-                    const audioPath = pageAudioMap[targetPage];
-                    if (audioPath) {
+                    if (typeof pageAudioMap !== 'undefined' && pageAudioMap[targetPage]) {
+                        const audioPath = pageAudioMap[targetPage];
                         const audio = new Audio(audioPath);
                         audio.play().catch(err => console.log('Audio play failed:', err));
                     }
@@ -3297,81 +3381,23 @@
                 });
             });
 
-            // ===== Dynamic Products Loader for Pages 4 & 5 =====
-            function syncProductsCatalog() {
-                fetch('../api/get_products.php')
-                    .then(response => {
-                        if (!response.ok) throw new Error('API unavailable, trying local fallback');
-                        return response.json();
-                    })
-                    .then(data => {
-                        if (data && data.page4 && data.page5) {
-                            applyProductsData(data);
-                        }
-                    })
-                    .catch(() => {
-                        // Check localStorage
-                        const localData = localStorage.getItem('zt_products_catalog');
-                        if (localData) {
-                            try {
-                                applyProductsData(JSON.parse(localData));
-                            } catch (e) {}
-                        }
-                    });
-            }
-
-            function applyProductsData(data) {
-                // Page 4 update
-                if (data.page4) {
-                    const p4Title = document.getElementById('p4-display-title');
-                    const p4Sub = document.getElementById('p4-display-subtitle');
-                    if (p4Title && data.page4.title) p4Title.textContent = data.page4.title;
-                    if (p4Sub && data.page4.subtitle) p4Sub.textContent = data.page4.subtitle;
-
-                    if (Array.isArray(data.page4.items)) {
-                        data.page4.items.forEach(item => {
-                            const img = document.getElementById(`img-${item.id}`);
-                            const name = document.getElementById(`name-${item.id}`);
-                            const cat = document.getElementById(`cat-${item.id}`);
-                            const desc = document.getElementById(`desc-${item.id}`);
-                            if (img && item.image) img.src = item.image;
-                            if (name && item.name) name.textContent = item.name;
-                            if (cat && item.category) cat.textContent = item.category;
-                            if (desc && item.description) desc.textContent = item.description;
-                        });
-                    }
-                }
-
-                // Page 5 update
-                if (data.page5) {
-                    const p5Title = document.getElementById('p5-display-title');
-                    const p5Sub = document.getElementById('p5-display-subtitle');
-                    if (p5Title && data.page5.title) p5Title.textContent = data.page5.title;
-                    if (p5Sub && data.page5.subtitle) p5Sub.textContent = data.page5.subtitle;
-
-                    if (Array.isArray(data.page5.items)) {
-                        data.page5.items.forEach(item => {
-                            const img = document.getElementById(`img-${item.id}`);
-                            const name = document.getElementById(`name-${item.id}`);
-                            const cat = document.getElementById(`cat-${item.id}`);
-                            const desc = document.getElementById(`desc-${item.id}`);
-                            if (img && item.image) img.src = item.image;
-                            if (name && item.name) name.textContent = item.name;
-                            if (cat && item.category) cat.textContent = item.category;
-                            if (desc && item.description) desc.textContent = item.description;
-                        });
-                    }
-                }
-            }
-
             // Sync on initial load
-            syncProductsCatalog();
+            if (window.syncProductsCatalog) {
+                console.log("[DynamicCatalog] Calling window.syncProductsCatalog() from DOMContentLoaded");
+                window.syncProductsCatalog();
+            }
         });
 
-
-        // Load SVGs when Turn.js creates new pages
+        // Load SVGs and keep products updated when Turn.js creates or turns pages
         $('#flipbook').on('turned', function (event, page, view) {
             setTimeout(() => loadSVGs(), 100); // Small delay for DOM to settle
+            console.log(`[DynamicCatalog] Flipbook turned to page: ${page}, view:`, view);
+            if (page === 4 || page === 5 || (Array.isArray(view) && (view.includes(4) || view.includes(5)))) {
+                console.log("[DynamicCatalog] Page 4 or 5 is now in view, triggering window.syncProductsCatalog()");
+                try { if (window.syncProductsCatalog) window.syncProductsCatalog(); } catch (e) {
+                    console.error("[DynamicCatalog] Error calling syncProductsCatalog on turned event:", e);
+                }
+            }
         });
 
 

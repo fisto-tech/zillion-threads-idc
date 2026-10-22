@@ -60,6 +60,174 @@
             border: none;
             min-height: 90vh;
         }
+
+        /* ==================== ROOT EMBEDDED LOGIN SCREEN ==================== */
+        #rootLoginScreen {
+            position: fixed;
+            inset: 0;
+            background: #0B1120;
+            background-image: 
+                radial-gradient(circle at center, rgba(15, 23, 42, 0.7) 0%, rgba(11, 17, 32, 0.95) 100%),
+                url('./global%20assets/Images/background-images/golden-thread-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            z-index: 9999999999;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            color: #F8FAFC;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            overflow-y: auto;
+        }
+
+        #rootLoginScreen.active {
+            display: flex;
+        }
+
+        .root-login-box {
+            width: 100%;
+            max-width: 420px;
+            background: rgba(30, 41, 59, 0.92);
+            border: 1px solid rgba(234, 185, 75, 0.35);
+            border-radius: 16px;
+            padding: 2.25rem 2rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 25px rgba(234, 185, 75, 0.15);
+            backdrop-filter: blur(12px);
+            animation: zoomInLogin 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+
+        @keyframes zoomInLogin {
+            from { opacity: 0; transform: scale(0.94) translateY(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .root-login-header {
+            text-align: center;
+            margin-bottom: 1.75rem;
+        }
+
+        .root-login-logo {
+            width: 54px;
+            height: 54px;
+            margin: 0 auto 12px;
+            display: block;
+            filter: drop-shadow(0 0 8px rgba(234, 185, 75, 0.5));
+        }
+
+        .root-login-brand {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .root-login-badge {
+            background: #EAB94B;
+            color: #0F172A;
+            font-size: 0.65rem;
+            font-weight: 800;
+            padding: 2px 7px;
+            border-radius: 6px;
+            letter-spacing: 0.8px;
+        }
+
+        .root-login-desc {
+            font-size: 0.85rem;
+            color: #94A3B8;
+            margin-top: 4px;
+        }
+
+        .root-login-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .root-login-label {
+            display: block;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #CBD5E1;
+            margin-bottom: 0.4rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .root-login-input {
+            width: 100%;
+            background: #0F172A;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            color: #fff;
+            font-size: 0.95rem;
+            outline: none;
+            box-sizing: border-box;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .root-login-input:focus {
+            border-color: #EAB94B;
+            box-shadow: 0 0 0 3px rgba(234, 185, 75, 0.25);
+        }
+
+        .root-login-btn {
+            width: 100%;
+            background: #EAB94B;
+            color: #0F172A;
+            border: none;
+            padding: 0.85rem;
+            font-size: 0.95rem;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 0.6rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .root-login-btn:hover {
+            background: #D4A338;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 14px rgba(234, 185, 75, 0.4);
+        }
+
+        .root-login-alert {
+            background: rgba(239, 68, 68, 0.18);
+            border: 1px solid #EF4444;
+            color: #FCA5A5;
+            padding: 0.65rem 0.85rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .root-login-footer {
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+
+        .root-login-back {
+            color: #94A3B8;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.2s;
+            cursor: pointer;
+        }
+
+        .root-login-back:hover {
+            color: #EAB94B;
+        }
+
         /* ==================== CINEMATIC GOLDEN THREAD PRELOADER ==================== */
         #preloader {
             position: fixed;
@@ -291,11 +459,112 @@
 
     <div id="content"></div>
 
+    <!-- Root Embedded Admin Login Screen -->
+    <div id="rootLoginScreen">
+        <div class="root-login-box">
+            <div class="root-login-header">
+                <img class="root-login-logo" src="./global%20assets/Images/logo.svg" alt="Zillion Threads Logo">
+                <div class="root-login-brand">
+                    <span>ZILLION THREADS</span>
+                    <span class="root-login-badge">ADMIN</span>
+                </div>
+                <p class="root-login-desc">Enter your credentials to manage catalog items</p>
+            </div>
+
+            <div class="root-login-alert" id="rootLoginAlert"></div>
+
+            <form id="rootLoginForm" onsubmit="handleRootLogin(event)">
+                <div class="root-login-group">
+                    <label class="root-login-label" for="rootUser">Username</label>
+                    <input type="text" id="rootUser" class="root-login-input" placeholder="e.g. admin" required autocomplete="username">
+                </div>
+                <div class="root-login-group">
+                    <label class="root-login-label" for="rootPass">Password</label>
+                    <input type="password" id="rootPass" class="root-login-input" placeholder="••••••••" required autocomplete="current-password">
+                </div>
+                <button type="submit" class="root-login-btn" id="rootLoginBtn">
+                    Log In to Admin &rarr;
+                </button>
+            </form>
+
+            <div class="root-login-footer">
+                <a class="root-login-back" onclick="closeRootLogin()">&larr; Return to Interactive Catalog</a>
+            </div>
+        </div>
+    </div>
+
     <script>
         const preloader = document.getElementById("preloader");
         const contentDiv = document.getElementById("content");
         const percentText = document.getElementById("loader-percent");
         const progressLine = document.querySelector(".progress-line");
+        const rootLoginScreen = document.getElementById("rootLoginScreen");
+
+        // ── Login Screen Handlers ─────────────────────────────────────────────
+        function isLoginRequested() {
+            const path = window.location.pathname.toLowerCase();
+            const hash = window.location.hash.toLowerCase();
+            const search = window.location.search.toLowerCase();
+            return path.includes('/login') || path.endsWith('login.html') || hash === '#login' || search.includes('login') || path.includes('index.html/login');
+        }
+
+        function openRootLogin(updateUrl = true) {
+            if (rootLoginScreen) {
+                rootLoginScreen.classList.add("active");
+                if (preloader) preloader.style.display = "none";
+                const userIn = document.getElementById("rootUser");
+                if (userIn) setTimeout(() => userIn.focus(), 150);
+                if (updateUrl && !window.location.search.includes('login') && window.location.hash !== '#login') {
+                    history.pushState({ login: true }, '', '?login');
+                }
+            }
+        }
+
+        function closeRootLogin() {
+            if (rootLoginScreen) {
+                rootLoginScreen.classList.remove("active");
+                // Remove login param or hash from URL smoothly without reloading
+                if (window.location.search.includes('login') || window.location.hash === '#login') {
+                    history.pushState(null, '', window.location.pathname);
+                }
+            }
+        }
+
+        async function handleRootLogin(e) {
+            e.preventDefault();
+            const user = document.getElementById("rootUser").value.trim();
+            const pass = document.getElementById("rootPass").value.trim();
+            const alertBox = document.getElementById("rootLoginAlert");
+            const btn = document.getElementById("rootLoginBtn");
+
+            alertBox.style.display = "none";
+            btn.innerHTML = "Authenticating...";
+            btn.disabled = true;
+
+            const isPhpServer = window.location.port === '8000';
+            const adminBase = isPhpServer ? 'admin/' : 'http://localhost:8000/admin/';
+
+            if (user === 'admin' && pass === 'admin123') {
+                btn.innerHTML = "Success! Redirecting...";
+                // Redirect directly to the full Admin Portal
+                window.location.href = adminBase + 'index.php';
+            } else {
+                alertBox.textContent = "Invalid username or password.";
+                alertBox.style.display = "block";
+                btn.innerHTML = "Log In to Admin &rarr;";
+                btn.disabled = false;
+            }
+        }
+
+        window.addEventListener("hashchange", () => {
+            if (isLoginRequested()) openRootLogin(false);
+            else closeRootLogin();
+        });
+
+        window.addEventListener("popstate", () => {
+            if (isLoginRequested()) openRootLogin(false);
+            else closeRootLogin();
+        });
 
         // ── State ────────────────────────────────────────────────────────────
         let currentProgress  = 1;   // displayed value (animated)
@@ -380,6 +649,10 @@
 
         // ── Load iframe ───────────────────────────────────────────────────────
         function load_home() {
+            if (isLoginRequested()) {
+                openRootLogin();
+            }
+
             const folderPath = 'For_Desc/index.html';
             const height = window.innerWidth <= 480 ? '90.5vh' : '100vh';
             contentDiv.innerHTML =
@@ -393,6 +666,11 @@
         // ── Message listener ──────────────────────────────────────────────────
         window.addEventListener("message", function (event) {
             if (!event.data || !event.data.action) return;
+
+            if (event.data.action === "openAdminLogin") {
+                openRootLogin();
+                return;
+            }
 
             // Actual image-load ratio from child frame (0 → 1)
             if (event.data.action === "loadProgress") {

@@ -1,70 +1,70 @@
 {
-  "page4": {
-    "title": "Industrial Threads & Spools",
-    "subtitle": "High-durability engineered synthetic and metallic threads",
-    "items": [
-      {
-        "id": "p4-1",
-        "name": "Aurora Gold Thread",
-        "category": "Metallic Embroidery",
-        "description": "Premium 1000m high-sheen reinforced golden metallic filament.",
-        "image": "../global assets/Images/products/product-1.jpg"
-      },
-      {
-        "id": "p4-2",
-        "name": "Golden Silk Thread",
-        "category": "100% Pure Silk",
-        "description": "50wt luxury soft-touch Italian spun natural golden silk.",
-        "image": "../global assets/Images/products/product-2.jpg"
-      },
-      {
-        "id": "p4-3",
-        "name": "Zillion Bonded Poly",
-        "category": "High Tenacity",
-        "description": "Heavy-duty continuous filament polyester for leather & footwear.",
-        "image": "../global assets/Images/products/product-3.jpg"
-      },
-      {
-        "id": "p4-4",
-        "name": "Spun Poly Industrial",
-        "category": "Garment & Apparel",
-        "description": "Uniform high-speed knot-free lockstitch sewing thread.",
-        "image": "../global assets/Images/products/product-4.jpg"
-      }
-    ]
-  },
-  "page5": {
-    "title": "Specialty & Protective Yarns",
-    "subtitle": "Specialized flame-retardant, high-visibility and elastic yarns",
-    "items": [
-      {
-        "id": "p5-1",
-        "name": "Flame Resistant Aramid",
-        "category": "Safety & Technical",
-        "description": "Thermal-resistant Nomex & Kevlar blend protective threads.",
-        "image": "../global assets/Images/products/product-5.jpg"
-      },
-      {
-        "id": "p5-2",
-        "name": "Reflective Hi-Vis Filament",
-        "category": "High Visibility",
-        "description": "Micro-glass bead reflective thread for safety workwear.",
-        "image": "../global assets/Images/products/product-6.jpg"
-      },
-      {
-        "id": "p5-3",
-        "name": "Textured Stretch Poly",
-        "category": "Activewear & Swim",
-        "description": "Ultra-soft microfilament overlock thread with extreme recovery.",
-        "image": "../global assets/Images/products/product-7.jpg"
-      },
-      {
-        "id": "p5-4",
-        "name": "Eco-Recycled Yarn Cone",
-        "category": "Sustainable Textile",
-        "description": "100% GRS certified recycled post-consumer PET sewing yarn.",
-        "image": "../global assets/Images/products/product-8.jpg"
-      }
-    ]
-  }
+    "page4": {
+        "title": "Industrial Threads & Spools",
+        "subtitle": "High-durability engineered synthetic and metallic threads",
+        "items": [
+            {
+                "id": "p4-1",
+                "name": "shaaaaaaaaaaaaaaaaa",
+                "category": "test",
+                "description": " test",
+                "image": "../global assets/Images/products/prod_1792647772_2985.png"
+            },
+            {
+                "id": "p4-2",
+                "name": "Riyaaaaaaa",
+                "category": "r",
+                "description": "R",
+                "image": "../global assets/Images/products/prod_1792647772_2985.png"
+            },
+            {
+                "id": "p4-3",
+                "name": "pradeepa",
+                "category": "High Tenacity",
+                "description": "Heavy-duty continuous filament polyester for leather & footwear.",
+                "image": "../global assets/Images/products/product-6.jpg"
+            },
+            {
+                "id": "p4-4",
+                "name": "Indrishaaaaaa",
+                "category": "Garment & Apparel",
+                "description": "Uniform high-speed knot-free lockstitch sewing thread.",
+                "image": "../global assets/Images/products/product-7.jpg"
+            }
+        ]
+    },
+    "page5": {
+        "title": "Specialty & Protective Yarns",
+        "subtitle": "Specialized flame-retardant, high-visibility and elastic yarns",
+        "items": [
+            {
+                "id": "p5-1",
+                "name": "Flame Resistant Aramid",
+                "category": "Safety & Technical",
+                "description": "Thermal-resistant Nomex & Kevlar blend protective threads.",
+                "image": "../global assets/Images/products/prod_1792647772_2985.png"
+            },
+            {
+                "id": "p5-2",
+                "name": "Reflective Hi-Vis Filament",
+                "category": "High Visibility",
+                "description": "Micro-glass bead reflective thread for safety workwear.",
+                "image": "../global assets/Images/products/prod_1792647772_2985.png"
+            },
+            {
+                "id": "p5-3",
+                "name": "Textured Stretch Poly",
+                "category": "Activewear & Swim",
+                "description": "Ultra-soft microfilament overlock thread with extreme recovery.",
+                "image": "../global assets/Images/products/prod_1792647772_2985.png"
+            },
+            {
+                "id": "p5-4",
+                "name": "Eco-Recycled Yarn Cone",
+                "category": "Sustainable Textile",
+                "description": "100% GRS certified recycled post-consumer PET sewing yarn.",
+                "image": "../global assets/Images/products/prod_1792647772_2985.png"
+            }
+        ]
+    }
 }

@@ -9,6 +9,36 @@
   src: url('../global%20assets/font/fonnts.com-Fieldwork-Geo-Regular.otf') format('opentype');
 }
 
+/* ==================== CRISP FONT & IMAGE SHARPNESS FIX ==================== */
+html, body, #viewer, #flipbook, .ui-flipbook, .page, .page-wrapper, .inner-page, .products-page-container {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Ensure crisp image edges during 3D transforms */
+img, .product-img-wrap img, .product-img-box img, .product-detail-img, .product-thumb-item img {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Eliminate Turn.js subpixel blur on static/hover states */
+.page, .page-wrapper, .products-page-container {
+  transform-style: flat !important;
+}
+
+.product-item-card, .product-info-wrap, .product-card-name, .product-card-desc {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  will-change: auto;
+}
+
 .beverage-reveal {
   opacity: 0;
   transform: translateY(20px);
@@ -4768,22 +4798,22 @@ a img,
 /* Animations for Page 4 & Page 5 */
 .page-4 .products-page-header,
 .page-5 .products-page-header {
-  opacity: 0;
-  transform: translateY(-20px);
+  opacity: 1;
+  transform: translateY(0);
   transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .page-4 .product-item-card,
 .page-5 .product-item-card {
-  opacity: 0;
-  transform: scale(0.85) translateY(24px);
-  transition: opacity 0.65s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1);
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  transition: opacity 0.45s ease, transform 0.45s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
 .page-4 .products-page-footer,
 .page-5 .products-page-footer {
-  opacity: 0;
-  transform: translateY(15px);
+  opacity: 1;
+  transform: translateY(0);
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 

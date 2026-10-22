@@ -1,0 +1,5 @@
+# Ignore sensitive database configuration
+admin/config.php
+
+# Backups
+*.backup.*
