@@ -1,4 +1,4 @@
-﻿const navToggle = document.getElementById('navToggle');
+const navToggle = document.getElementById('navToggle');
 const tocNav = document.getElementById('tocNav');
 const navOverlay = document.getElementById('navOverlay');
 
@@ -1457,6 +1457,18 @@ document.addEventListener("DOMContentLoaded", () => {
             e.stopPropagation();
             if (currentZoom < 150) {
                 applyZoom(currentZoom + 10);
+            }
+        });
+    }
+
+    const zoomResetBtn = document.getElementById('zoomResetBtn');
+    if (zoomResetBtn) {
+        zoomResetBtn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            if (currentZoom === 100) {
+                applyZoom(120);
+            } else {
+                applyZoom(100);
             }
         });
     }

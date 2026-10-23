@@ -654,7 +654,7 @@
             }
 
             const folderPath = 'For_Desc/index.html';
-            const height = window.innerWidth <= 480 ? '90.5vh' : '100vh';
+            const height = '100vh';
             contentDiv.innerHTML =
                 '<object type="text/html" data="' + folderPath +
                 '" style="width:100%;height:' + height + ';border:none;"></object>';
@@ -668,7 +668,7 @@
             if (!event.data || !event.data.action) return;
 
             if (event.data.action === "openAdminLogin") {
-                openRootLogin();
+                window.location.href = "login.php";
                 return;
             }
 

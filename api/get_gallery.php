@@ -1,7 +1,14 @@
 <?php
 session_start();
+// CORS Header check - allow authorized origin or localhost dev environments safely
+$allowedOrigins = ['http://localhost:8000', 'http://127.0.0.1:8000', 'http://localhost:3000', 'http://localhost:5500', 'http://127.0.0.1:5500'];
+$httpOrigin = $_SERVER['HTTP_ORIGIN'] ?? '';
+if (in_array($httpOrigin, $allowedOrigins)) {
+    header("Access-Control-Allow-Origin: $httpOrigin");
+    header("Access-Control-Allow-Credentials: true");
+}
+
 header('Content-Type: application/json; charset=utf-8');
-header('Access-Control-Allow-Origin: *');
 
 if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
     http_response_code(401);
@@ -14,7 +21,7 @@ $files = [];
 
 if (is_dir($dir)) {
     $scanned = scandir($dir);
-    $validExts = ['jpg', 'jpeg', 'png', 'webp', 'svg', 'gif'];
+    $validExts = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
     foreach ($scanned as $file) {
         if ($file === '.' || $file === '..') continue;
         $path = $dir . $file;

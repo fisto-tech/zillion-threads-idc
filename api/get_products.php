@@ -1,9 +1,19 @@
 <?php
+// CORS Header check - allow same origin or localhost dev environments safely
+$allowedOrigins = ['http://localhost:8000', 'http://127.0.0.1:8000', 'http://localhost:3000', 'http://localhost:5500', 'http://127.0.0.1:5500'];
+$httpOrigin = $_SERVER['HTTP_ORIGIN'] ?? '';
+if (in_array($httpOrigin, $allowedOrigins)) {
+    header("Access-Control-Allow-Origin: $httpOrigin");
+    header("Access-Control-Allow-Credentials: true");
+} else {
+    // If same host without explicit Origin header, do not wildcard credentials
+    header('Access-Control-Allow-Origin: *');
+}
+
 header('Content-Type: application/json; charset=utf-8');
 header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
 header('Pragma: no-cache');
 header('Expires: 0');
-header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, PUT, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
 
@@ -16,14 +26,6 @@ require_once __DIR__ . '/../admin/db.php';
 $pdo = getDbConnection();
 $dataFile = __DIR__ . '/products.json';
 
-// Helper function to read from JSON fallback
-function readJsonFallback($dataFile) {
-    if (file_exists($dataFile)) {
-        return json_decode(file_get_contents($dataFile), true) ?: [];
-    }
-    return [];
-}
-
 // ==================== GET REQUEST ====================
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if ($pdo) {
@@ -32,8 +34,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $pageStmt = $pdo->query("SELECT id, title, subtitle FROM catalog_pages ORDER BY id ASC");
             $pages = $pageStmt->fetchAll();
 
-            // Fetch products
-            $itemStmt = $pdo->query("SELECT id, page_key, sort_order, name, category, description, image FROM catalog_items ORDER BY page_key ASC, sort_order ASC");
+            // Fetch sections
+            $sectionsStmt = $pdo->query("SELECT id, page_key, label_ta, label_en, x, y, w, h FROM catalog_sections ORDER BY y ASC, x ASC");
+            $allSections = $sectionsStmt->fetchAll();
+
+            // Fetch slots
+            $slotsStmt = $pdo->query("SELECT id, page_key, section_id, x, y, w, h, radius, z_index, image, focal_x, focal_y, zoom FROM catalog_slots ORDER BY z_index ASC, id ASC");
+            $allSlots = $slotsStmt->fetchAll();
+
+            // Fetch legacy items for fallback or other pages
+            $itemStmt = $pdo->query("SELECT id, page_key, sort_order, name, category, image FROM catalog_items ORDER BY page_key ASC, sort_order ASC");
             $items = $itemStmt->fetchAll();
 
             $result = [];
@@ -42,8 +52,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 $result[$pageKey] = [
                     'title' => $p['title'],
                     'subtitle' => $p['subtitle'] ?? '',
+                    'sections' => [],
+                    'slots' => [],
                     'items' => []
                 ];
+            }
+
+            foreach ($allSections as $sec) {
+                $pageKey = $sec['page_key'];
+                if (isset($result[$pageKey])) {
+                    $result[$pageKey]['sections'][] = [
+                        'id' => $sec['id'],
+                        'label_ta' => $sec['label_ta'],
+                        'label_en' => $sec['label_en'],
+                        'x' => (float)$sec['x'],
+                        'y' => (float)$sec['y'],
+                        'w' => (float)$sec['w'],
+                        'h' => (float)$sec['h']
+                    ];
+                }
+            }
+
+            foreach ($allSlots as $slot) {
+                $pageKey = $slot['page_key'];
+                if (isset($result[$pageKey])) {
+                    $result[$pageKey]['slots'][] = [
+                        'id' => $slot['id'],
+                        'section_id' => $slot['section_id'],
+                        'x' => (float)$slot['x'],
+                        'y' => (float)$slot['y'],
+                        'w' => (float)$slot['w'],
+                        'h' => (float)$slot['h'],
+                        'radius' => $slot['radius'] ?? '0',
+                        'z_index' => (int)$slot['z_index'],
+                        'image' => $slot['image'] ?? '',
+                        'focal_x' => (float)$slot['focal_x'],
+                        'focal_y' => (float)$slot['focal_y'],
+                        'zoom' => (float)$slot['zoom']
+                    ];
+                }
             }
 
             foreach ($items as $item) {
@@ -53,20 +100,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                         'id' => $item['id'],
                         'name' => $item['name'],
                         'category' => $item['category'] ?? '',
-                        'description' => $item['description'] ?? '',
                         'image' => $item['image']
                     ];
                 }
             }
 
-            if (!empty($result)) {
-                echo json_encode($result, JSON_UNESCAPED_SLASHES);
-                exit();
-            } else {
-                http_response_code(404);
-                echo json_encode(["error" => "No catalog data found in database"]);
-                exit();
-            }
+            echo json_encode($result, JSON_UNESCAPED_SLASHES);
+            exit();
         } catch (PDOException $e) {
             http_response_code(500);
             echo json_encode(["error" => "Database query failed: " . $e->getMessage()]);
@@ -112,14 +152,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT
             ");
 
             $itemStmt = $pdo->prepare("
-                INSERT INTO catalog_items (id, page_key, sort_order, name, category, description, image)
-                VALUES (:id, :page_key, :sort_order, :name, :category, :description, :image)
+                INSERT INTO catalog_items (id, page_key, sort_order, name, category, image)
+                VALUES (:id, :page_key, :sort_order, :name, :category, :image)
                 ON DUPLICATE KEY UPDATE
                     page_key = VALUES(page_key),
                     sort_order = VALUES(sort_order),
                     name = VALUES(name),
                     category = VALUES(category),
-                    description = VALUES(description),
                     image = VALUES(image)
             ");
 
@@ -144,7 +183,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT
                             ':sort_order' => $index,
                             ':name' => $item['name'] ?? '',
                             ':category' => $item['category'] ?? '',
-                            ':description' => $item['description'] ?? '',
                             ':image' => $item['image'] ?? ''
                         ]);
                     }
@@ -161,7 +199,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT
         }
     }
 
-    // Always keep products.json synchronized as safety backup and offline redundancy
     $jsonSaved = @file_put_contents($dataFile, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
 
     if ($dbSuccess || $jsonSaved !== false) {

@@ -63,8 +63,7 @@
         rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Noto+Sans+Tamil:wght@400;500;600;700;800&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="./assets/css/cataloguemain.css">
 
@@ -203,11 +202,11 @@
             left: 0;
             width: 0%;
             height: 0.4vw;
-            background: linear-gradient(90deg, #14B8A6, #0D9488);
+            background: linear-gradient(90deg, #E7BF3F, #196F92);
             z-index: 999998;
             transition: width 0.1s linear;
             opacity: 0;
-            box-shadow: 0 -2px 10px rgba(20, 184, 166, 0.5);
+            box-shadow: 0 -2px 10px rgba(25, 111, 146, 0.5);
         }
 
         .autoplay-progress-bar.active {
@@ -216,8 +215,9 @@
 
         /* Autoplay Icon Active State */
         .icon-btn.active {
-            background: #E67429 !important;
-            box-shadow: 0 0 0 2px rgba(230, 116, 41, 0.3) !important;
+            background: #196F92 !important;
+            box-shadow: 0 0 0 2px rgba(231, 191, 63, 0.5) !important;
+            border-color: #E7BF3F !important;
         }
 
         .icon-btn.active svg,
@@ -351,7 +351,7 @@
     width: 354px;
     height: 504px;
     margin-left: 0px;
-    top: 15px !important;
+    top: 45px !important;
     left: 0px;
     transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     transform: scale(1);
@@ -362,9 +362,479 @@
 /* Large-Height Mobile Phones */
 @media screen and (max-width: 480px) and (min-height: 800px) {
   #flipbook {
-    top: 30px !important;
+    top: 60px !important;
     /* Add large-height mobile adjustments here */
   }
+}
+
+/* ==================== THEME COLOR OVERRIDES (#196F92 & #E7BF3F) ==================== */
+:root {
+  --zt-theme-primary: #196F92;
+  --zt-theme-gold: #E7BF3F;
+}
+
+/* Desktop & Mobile Icon Active / Focus / Hover States (Except Top Icon Nav) */
+:not(.top-icon-navigation) > .icon-btn:hover,
+:not(.top-icon-navigation) > .icon-btn.active,
+:not(.top-icon-navigation) > .icon-btn:focus-visible {
+  border-color: #E7BF3F !important;
+  background: rgba(25, 111, 146, 0.25) !important;
+  box-shadow: 0 4px 14px rgba(25, 111, 146, 0.4) !important;
+}
+
+:not(.top-icon-navigation) > .icon-btn:hover img,
+:not(.top-icon-navigation) > .icon-btn.active img,
+:not(.top-icon-navigation) > .icon-btn:hover svg,
+:not(.top-icon-navigation) > .icon-btn.active svg {
+  filter: invert(41%) sepia(37%) saturate(1476%) hue-rotate(156deg) brightness(93%) contrast(92%) !important;
+}
+
+/* Audio / Music Button Toggle Active */
+.icon-btn.bgm-toggle.music-active,
+.icon-btn.bgm-toggle.active {
+  border-color: #E7BF3F !important;
+  background: rgba(25, 111, 146, 0.35) !important;
+}
+
+/* Top Icon Navigation - Dark Blue Capsule Toolbar (#152532) */
+.top-icon-navigation {
+  position: fixed !important;
+  top: 14px !important;
+  right: 24px !important;
+  left: auto !important;
+  transform: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  background: rgba(21, 37, 50, 0.94) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border-radius: 9999px !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  outline: 1px solid #E7BF3F !important;
+  outline-offset: 0px !important;
+  padding: 5px 12px !important;
+  gap: 8px !important;
+  box-shadow: 0 10px 30px rgba(5, 14, 22, 0.55), 0 0 10px rgba(231, 191, 63, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.14) !important;
+  z-index: 999999 !important;
+}
+
+.top-icon-navigation .nav-btn-group {
+  display: flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+.top-icon-navigation .toolbar-divider {
+  width: 1px !important;
+  height: 20px !important;
+  background: rgba(255, 255, 255, 0.22) !important;
+  margin: 0 3px !important;
+  flex-shrink: 0 !important;
+}
+
+.top-icon-navigation .icon-btn {
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 50% !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  outline: 1px solid rgba(231, 191, 63, 0.4) !important;
+  outline-offset: 0px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  transition: all 0.22s ease !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  color: #ffffff !important;
+}
+
+.top-icon-navigation .icon-btn img,
+.top-icon-navigation .icon-btn svg {
+  width: 15px !important;
+  height: 15px !important;
+  object-fit: contain !important;
+  filter: brightness(1) invert(0) !important;
+  transition: transform 0.2s ease, filter 0.2s ease !important;
+}
+
+/* Hover: Golden theme background (#E7BF3F) with Dark Blue (#152532) icon stroke */
+.top-icon-navigation .icon-btn:hover,
+.top-icon-navigation .nav-btn-group .icon-btn:hover {
+  background: #E7BF3F !important;
+  border-color: #E7BF3F !important;
+  outline: 1px solid #E7BF3F !important;
+  transform: translateY(-1px) scale(1.06) !important;
+  box-shadow: 0 4px 14px rgba(231, 191, 63, 0.45) !important;
+}
+
+.top-icon-navigation .icon-btn:hover img,
+.top-icon-navigation .icon-btn:hover svg,
+.top-icon-navigation .nav-btn-group .icon-btn:hover img,
+.top-icon-navigation .nav-btn-group .icon-btn:hover svg {
+  /* Filter calculates to #152532 dark blue */
+  filter: invert(13%) sepia(31%) saturate(1210%) hue-rotate(167deg) brightness(91%) contrast(92%) !important;
+}
+
+.top-icon-navigation .icon-btn:hover svg path,
+.top-icon-navigation .icon-btn:hover svg circle,
+.top-icon-navigation .icon-btn:hover svg line,
+.top-icon-navigation .nav-btn-group .icon-btn:hover svg path,
+.top-icon-navigation .nav-btn-group .icon-btn:hover svg circle,
+.top-icon-navigation .nav-btn-group .icon-btn:hover svg line {
+  stroke: #152532 !important;
+  fill: none;
+}
+
+/* Active Highlight Button (Gold amber glowing gradient) */
+.top-icon-navigation .icon-btn.active,
+.top-icon-navigation .icon-btn:not(:disabled):focus-visible {
+  background: #E7BF3F !important;
+  border-color: #F8D86A !important;
+  outline: 1px solid #E7BF3F !important;
+  box-shadow: 0 0 16px rgba(231, 191, 63, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.35) !important;
+  transform: scale(1.04) !important;
+}
+
+.top-icon-navigation .icon-btn.active img,
+.top-icon-navigation .icon-btn.active svg {
+  filter: invert(13%) sepia(31%) saturate(1210%) hue-rotate(167deg) brightness(91%) contrast(92%) !important;
+}
+
+.top-icon-navigation .icon-btn:disabled {
+  opacity: 0.35 !important;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+}
+
+/* Page Controller (Bottom Left Capsule - #152532) */
+.page-controller {
+  position: fixed !important;
+  bottom: 22px !important;
+  left: 24px !important;
+  top: auto !important;
+  right: auto !important;
+  background: rgba(21, 37, 50, 0.94) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border-radius: 9999px !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  outline: 1px solid #E7BF3F !important;
+  outline-offset: 0px !important;
+  padding: 4px 12px 4px 5px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  z-index: 999999 !important;
+  box-shadow: 0 8px 26px rgba(5, 14, 22, 0.55), 0 0 10px rgba(231, 191, 63, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.14) !important;
+}
+
+#pageInput {
+  width: 38px !important;
+  height: 28px !important;
+  background: rgba(231, 191, 63, 0.2) !important;
+  border: 1.5px solid #E7BF3F !important;
+  outline: 1px solid #E7BF3F !important;
+  outline-offset: 0px !important;
+  border-radius: 7px !important;
+  color: #E7BF3F !important;
+  text-align: center !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 14px !important;
+  padding: 0 !important;
+  box-shadow: 0 0 10px rgba(231, 191, 63, 0.3) !important;
+}
+
+#pageInput:focus {
+  border-color: #ffde70 !important;
+  outline: 1.5px solid #ffde70 !important;
+  box-shadow: 0 0 14px rgba(231, 191, 63, 0.5) !important;
+}
+
+.page-controller .ctrl-sep {
+  color: rgba(255, 255, 255, 0.35) !important;
+  font-size: 14px !important;
+  line-height: 1 !important;
+  user-select: none !important;
+}
+
+#totalPages {
+  color: #ffffff !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  min-width: 14px !important;
+  text-align: center !important;
+}
+
+.go-btn {
+  background: transparent !important;
+  border: none !important;
+  cursor: pointer !important;
+  padding: 2px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #ffffff !important;
+  transition: transform 0.2s ease, color 0.2s ease !important;
+}
+
+.go-btn svg {
+  width: 15px !important;
+  height: 15px !important;
+  fill: #ffffff !important;
+  transform: rotate(-10deg) !important;
+}
+
+.go-btn:hover {
+  transform: scale(1.18) !important;
+}
+
+.go-btn:hover svg {
+  fill: #E7BF3F !important;
+  filter: drop-shadow(0 0 6px rgba(231, 191, 63, 0.7)) !important;
+}
+
+/* Zoom Control Capsule (Bottom Right - #152532) */
+.zoom-control-container {
+  position: fixed !important;
+  bottom: 22px !important;
+  right: 24px !important;
+  top: auto !important;
+  left: auto !important;
+  background: rgba(21, 37, 50, 0.94) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border-radius: 9999px !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  outline: 1px solid #E7BF3F !important;
+  outline-offset: 0px !important;
+  padding: 5px 14px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  z-index: 999999 !important;
+  box-shadow: 0 8px 26px rgba(5, 14, 22, 0.55), 0 0 10px rgba(231, 191, 63, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.14) !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+}
+
+.zoom-label {
+  color: #ffffff !important;
+  font-size: 13.5px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.2px !important;
+  user-select: none !important;
+}
+
+.zoom-reset-btn {
+  background: transparent !important;
+  border: none !important;
+  color: #ffffff !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  padding: 0 !important;
+  opacity: 0.85 !important;
+  transition: opacity 0.2s ease, transform 0.2s ease, color 0.2s ease !important;
+}
+
+.zoom-reset-btn:hover {
+  opacity: 1 !important;
+  color: #E7BF3F !important;
+  transform: scale(1.15) !important;
+}
+
+.zoom-control-container .zoom-btn {
+  background: transparent !important;
+  border: none !important;
+  color: #ffffff !important;
+  font-size: 18px !important;
+  font-weight: 400 !important;
+  line-height: 1 !important;
+  cursor: pointer !important;
+  padding: 0 4px !important;
+  min-width: 20px !important;
+  height: 24px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 4px !important;
+  transition: color 0.2s ease, transform 0.2s ease, background 0.2s ease !important;
+  box-shadow: none !important;
+}
+
+.zoom-control-container .zoom-btn:hover {
+  color: #152532 !important;
+  background: #E7BF3F !important;
+  transform: scale(1.15) !important;
+}
+
+/* Screen Edges Large Next / Previous Page Arrows (#152532 background & #E7BF3F hover) */
+.ui-arrow-next-page,
+.ui-arrow-previous-page {
+  background: #152532 !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.2) !important;
+  outline: 1px solid #E7BF3F !important;
+  outline-offset: 0px !important;
+  box-shadow: 0 6px 20px rgba(21, 37, 50, 0.5), 0 0 10px rgba(231, 191, 63, 0.25) !important;
+}
+
+.ui-arrow-next-page svg path,
+.ui-arrow-previous-page svg path {
+  stroke: #ffffff !important;
+}
+
+.ui-arrow-next-page:hover,
+.ui-arrow-previous-page:hover {
+  background: #E7BF3F !important;
+  border-color: #E7BF3F !important;
+  outline: 1px solid #E7BF3F !important;
+  box-shadow: 0 8px 24px rgba(231, 191, 63, 0.5) !important;
+}
+
+.ui-arrow-next-page:hover svg path,
+.ui-arrow-previous-page:hover svg path {
+  stroke: #152532 !important;
+}
+
+.mobile-page-display {
+  border: 1.5px solid #196F92 !important;
+  background: rgba(16, 28, 38, 0.95) !important;
+  box-shadow: 0 0 12px rgba(25, 111, 146, 0.3) !important;
+}
+
+.mobile-page-current {
+  color: #E7BF3F !important;
+  font-weight: 700 !important;
+}
+
+.mobile-page-total {
+  color: #ffffff !important;
+}
+
+/* Table of Contents Icons & Elements */
+.toc-title {
+  color: #196F92 !important;
+}
+
+.toc-header-underline {
+  background-color: #E7BF3F !important;
+}
+
+.mobile-toc-number {
+  border: 1.5px solid #196F92 !important;
+  color: #196F92 !important;
+}
+
+.toc-list li.active .mobile-toc-number,
+.toc-list a:hover .mobile-toc-number {
+  background: #196F92 !important;
+  border-color: #E7BF3F !important;
+  color: #ffffff !important;
+}
+
+.toc-list li.active a,
+.toc-list a:hover {
+  color: #196F92 !important;
+}
+
+/* Thumbnail Drawer & Icons */
+.thumbnail-drawer {
+  border: 1.5px solid rgba(25, 111, 146, 0.3) !important;
+}
+
+.thumb-grid-item:hover,
+.thumb-grid-item.active {
+  border-color: #196F92 !important;
+  box-shadow: 0 0 12px rgba(25, 111, 146, 0.45) !important;
+}
+
+.thumb-grid-label {
+  color: #E7BF3F !important;
+}
+
+/* Share Popup Theme Overrides */
+#shareModal .bg-gradient-to-r {
+  background: linear-gradient(135deg, #196F92 0%, #2282aa 100%) !important;
+}
+
+#copyBtn,
+#copyBtnMobile {
+  background: #196F92 !important;
+}
+
+#copyBtn:hover,
+#copyBtnMobile:hover {
+  background: #145a77 !important;
+}
+
+#shareModal button[id$="Btn"]:not(#copyBtn):not(#closeBtn):hover {
+  border-color: #196F92 !important;
+  background: #f0f9ff !important;
+}
+
+/* Search Popup Theme Overrides */
+#SearchModal,
+button#SearchModal {
+  background: #196F92 !important;
+  color: #ffffff !important;
+}
+
+#SearchModal:hover,
+button#SearchModal:hover {
+  background: #145a77 !important;
+}
+
+#searchModal .search-result-item:hover {
+  background: rgba(25, 111, 146, 0.08) !important;
+  border-left: 3px solid #196F92 !important;
+  color: #196F92 !important;
+}
+
+/* Download Popup Text and Card */
+#downloadPopup {
+  background: #196F92 !important;
+  color: #ffffff !important;
+  border: 1.5px solid #E7BF3F !important;
+  box-shadow: 0 4px 20px rgba(25, 111, 146, 0.45) !important;
+}
+
+/* Mobile Nav Bar & Dropdown */
+.mobile-top-nav {
+  border-bottom: 1.5px solid rgba(25, 111, 146, 0.4) !important;
+}
+
+.mobile-nav-btn:hover,
+.mobile-nav-btn:active {
+  color: #E7BF3F !important;
+}
+
+.mobile-dropdown-icon {
+  background: #196F92 !important;
+}
+
+.mobile-dropdown-item:hover,
+.mobile-dropdown-item:active {
+  color: #E7BF3F !important;
+}
+
+.mobile-dropdown-item:hover .mobile-dropdown-label {
+  color: #E7BF3F !important;
+}
+
+.mobile-dropdown-item:hover svg {
+  stroke: #E7BF3F !important;
+}
+
+.mobile-toggle-indicator.on {
+  background: #196F92 !important;
+  color: #E7BF3F !important;
 }
     </style>
 </head>
@@ -481,22 +951,6 @@
                     </svg>
                 </div>
                 <span class="mobile-dropdown-label">Download</span>
-                <svg class="mobile-dropdown-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2">
-                    <polyline points="9 18 15 12 9 6" />
-                </svg>
-            </button>
-
-            <!-- Admin Login -->
-            <button class="mobile-dropdown-item" id="mobileAdminLoginBtn" onclick="triggerAdminLogin()">
-                <div class="mobile-dropdown-icon">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
-                        <polyline points="10 17 15 12 10 7"/>
-                        <line x1="15" y1="12" x2="3" y2="12"/>
-                    </svg>
-                </div>
-                <span class="mobile-dropdown-label">Admin Login</span>
                 <svg class="mobile-dropdown-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2">
                     <polyline points="9 18 15 12 9 6" />
@@ -651,6 +1105,8 @@
                 </button>
             </div>
 
+            <div class="toolbar-divider"></div>
+
             <!-- TOC Button -->
             <button class="icon-btn" id="iconTOC" title="Table of Contents">
                 <img src="../global%20assets/bottom-navbar/table-of-content-icon.svg" alt="Table of Contents Navigation" />
@@ -690,41 +1146,34 @@
             <button class="icon-btn" id="download-btn" title="Download">
                 <img src="../global%20assets/bottom-navbar/download-icon.svg" alt="Download PDF Catalog" />
             </button>
-
-            <!-- Admin Login Button -->
-            <button class="icon-btn" id="adminLoginBtn" title="Admin Login" onclick="triggerAdminLogin()">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: #475569;">
-                    <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
-                    <polyline points="10 17 15 12 10 7"/>
-                    <line x1="15" y1="12" x2="3" y2="12"/>
-                </svg>
-            </button>
         </div>
 
         <!-- Page Controller (Bottom Left) -->
         <div class="page-controller">
-            <img src="../global%20assets/Images/commonThings/left-page-shadow.svg" alt="Catalog Page Left Shadow"
-                class="gutter-shadow shadow-left absolute h-[100%] top-[0%] right-[-1%] z-[4]" />
-            <img src="../global%20assets/Images/commonThings/right-page-shadow.svg" alt="Catalog Page Right Shadow"
-                class="gutter-shadow shadow-right absolute h-[100%] top-[0%] left-[-1%] z-[4]" />
             <input type="number" id="pageInput" min="1" value="1" />
+            <span class="ctrl-sep">|</span>
             <strong id="totalPages">0</strong>
-            <button id="goPageBtn" class="go-btn">
-                <img src="../global%20assets/bottom-navbar/go-icon.svg" alt="Go to Page Number" />
+            <span class="ctrl-sep">|</span>
+            <button id="goPageBtn" class="go-btn" title="Go to Page">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                </svg>
             </button>
         </div>
 
         <!-- Zoom Control Container (Bottom Right) -->
         <div class="zoom-control-container">
-            <span class="zoom-label">Zoom :</span>
-            <button id="zoomOutBtn" class="zoom-btn icon-btn" title="Zoom Out">
-                <img src="../global%20assets/bottom-navbar/zoom-out-icon.svg" alt="Zoom Out Catalog Page" />
+            <span class="zoom-label">Zoom</span>
+            <button id="zoomResetBtn" class="zoom-reset-btn" title="Zoom">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
             </button>
+            <button id="zoomOutBtn" class="zoom-btn icon-btn" title="Zoom Out">−</button>
             <input type="range" id="zoomSlider" min="50" max="150" value="100" step="10" class="zoom-slider hidden" />
             <span id="zoomPercentage" class="zoom-percentage hidden">100%</span>
-            <button id="zoomInBtn" class="zoom-btn icon-btn" title="Zoom In">
-                <img src="../global%20assets/bottom-navbar/zoom-in-icon.svg" alt="Zoom In Catalog Page" />
-            </button>
+            <button id="zoomInBtn" class="zoom-btn icon-btn" title="Zoom In">+</button>
         </div>
 
 
@@ -891,9 +1340,9 @@
                 class="hidden fixed w-[92vw] max-w-[28vw] bg-white rounded-2xl shadow-2xl z-[1111111111] overflow-hidden border border-gray-200"
                 style="top: 50%; left: 50%; transform: translate(-50%,-50%);">
 
-                <!-- Header Block with Orange Gradient Background -->
+                <!-- Header Block with Theme Gradient Background -->
                 <div
-                    class="bg-gradient-to-r from-[#E67429] to-[#ff8b3d] px-[1.5vw] py-[1.2vw] flex justify-between items-center relative">
+                    class="bg-gradient-to-r from-[#196F92] to-[#2589b2] px-[1.5vw] py-[1.2vw] flex justify-between items-center relative">
                     <div class="flex flex-col text-white">
                         <!-- <span class="text-[0.65vw] uppercase tracking-widest text-white! font-bold">Document Access</span> -->
                         <h2 class="text-white font-semibold text-[1.3vw] mt-[0.1vw]">Share Catalogue</h2>
@@ -917,11 +1366,11 @@
                             URL</span>
                         <div class="flex gap-[0.6vw]">
                             <input id="shareInput" type="text" readonly
-                                class="flex-1 h-[2.4vw] px-[0.8vw] bg-white border border-gray-200 rounded-lg text-[0.75vw] font-mono text-gray-700 focus:outline-none focus:border-[#E67429] transition-all"
+                                class="flex-1 h-[2.4vw] px-[0.8vw] bg-white border border-gray-200 rounded-lg text-[0.75vw] font-mono text-gray-700 focus:outline-none focus:border-[#196F92] transition-all"
                                 placeholder="Catalog link" />
                             <div class="relative">
                                 <button id="copyBtn"
-                                    class="h-[2.4vw] px-[1vw] bg-[#E67429] hover:bg-[#c35c1a] text-white font-semibold text-[0.75vw] rounded-lg transition-all cursor-pointer">
+                                    class="h-[2.4vw] px-[1vw] bg-[#196F92] hover:bg-[#145a77] text-white font-semibold text-[0.75vw] rounded-lg transition-all cursor-pointer">
                                     Copy
                                 </button>
                                 <span id="copiedMsg"
@@ -934,10 +1383,10 @@
 
                     <!-- Separator with Text -->
                     <div class="flex items-center justify-center my-[1vw]">
-                        <div class="flex-grow border-t border-[#E67429]/30"></div>
-                        <span class="mx-[0.8vw] text-[0.65vw] font-bold text-[#E67429] uppercase tracking-wider">Send
+                        <div class="flex-grow border-t border-[#196F92]/30"></div>
+                        <span class="mx-[0.8vw] text-[0.65vw] font-bold text-[#196F92] uppercase tracking-wider">Send
                             via</span>
-                        <div class="flex-grow border-t border-[#E67429]/30"></div>
+                        <div class="flex-grow border-t border-[#196F92]/30"></div>
                     </div>
 
                     <!-- Social channels -->
@@ -1035,12 +1484,12 @@
                 }
 
                 .thumb-dot:hover {
-                    background: #0D9488;
+                    background: #196F92;
                     transform: scale(1.3);
                 }
 
                 .thumb-dot.active {
-                    background: #0D9488;
+                    background: #E7BF3F;
                     transform: scale(1.2);
                 }
 
@@ -1069,7 +1518,7 @@
                     border-radius: 0.8vw;
                     box-shadow: 0 1vw 3vw rgba(0, 0, 0, 0.25);
                     overflow: hidden;
-                    border: 0.2vw solid #0D9488;
+                    border: 0.2vw solid #196F92;
                 }
 
                 .thumb-preview-image {
@@ -1084,7 +1533,7 @@
                     top: 50%;
                     left: 50%;
                     transform: translate(-50%, -50%);
-                    background: rgba(13, 148, 136, 0.95);
+                    background: rgba(25, 111, 146, 0.95);
                     color: white;
                     padding: 0.5vw 1.2vw;
                     border-radius: 2vw;
@@ -1201,7 +1650,7 @@
 
                         <div class="relative w-full md:w-auto">
                             <button id="copyBtnMobile"
-                                class="w-full md:w-auto px-4 py-2 flex items-center justify-center gap-2 bg-[#4A3AFF] hover:bg-blue-600 text-white rounded-lg text-sm font-semibold transition active:scale-95">
+                                class="w-full md:w-auto px-4 py-2 flex items-center justify-center gap-2 bg-[#196F92] hover:bg-[#145a77] text-white rounded-lg text-sm font-semibold transition active:scale-95">
                                 <img src="../global%20assets/icons/copy-link-icon.svg" class="w-4" alt="Copy Link Icon" />
                                 Copy Link
                             </button>
@@ -1286,46 +1735,52 @@
                 <div class="page page-animated page-4">
                     <img src="../global%20assets/Images/commonThings/left-page-shadow.svg" alt="left-page-shadow"
                             class="gutter-shadow shadow-left absolute h-[100%] top-[0%] right-[-1%] z-[4]" />
-                        <img src="../global%20assets/Images/commonThings/right-page-shadow.svg" alt="right-page-shadow"
+                    <img src="../global%20assets/Images/commonThings/right-page-shadow.svg" alt="right-page-shadow"
                             class="gutter-shadow hidden shadow-right absolute h-[100%] top-[0%] left-[-1%] z-[4]" />
-                    <div class="products-page-container" id="products-page-4-container">
-                        <div class="products-page-header">
-                            <span class="products-badge">Industrial Products</span>
-                            <h2 class="products-title" id="p4-display-title">Industrial Threads &amp; Spools</h2>
-                            <p class="products-subtitle" id="p4-display-subtitle">High-durability engineered synthetic and metallic threads</p>
+                    
+                    <!-- Yarika Collections Absolute Canvas Stage (3:4 ratio) -->
+                    <div class="yarika-page-stage" id="yarika-stage-page4" data-page="page4">
+                        <!-- Top Header -->
+                        <div class="yarika-brand-header">
+                            <div class="yarika-brand-logo-text">YARIKA<sup>™</sup></div>
+                            <div class="yarika-brand-sub">COLLECTIONS</div>
                         </div>
 
-                        <div class="products-cards-grid" id="p4-cards-grid">
-                            <!-- Dynamically loaded from MySQL database -->
+                        <!-- Section Headings Layer -->
+                        <div class="yarika-headings-layer" id="p4-headings-layer">
+                            <!-- Populated dynamically via renderPageContent -->
                         </div>
 
-                        <div class="products-page-footer">
-                            <span class="products-footer-tag">Zillion Threads Industrial Collection</span>
-                            <a href="../admin/index.php" target="_blank" class="products-footer-action" onclick="if(window.parent && window.parent!==window){event.preventDefault(); window.parent.postMessage({action:'openAdminLogin'}, '*');}" title="Admin Portal">
-                                <span>Catalog Management</span> &rarr;
-                            </a>
+                        <!-- Image Frames / Slots Layer -->
+                        <div class="yarika-slots-layer" id="p4-slots-layer">
+                            <!-- Populated dynamically via renderPageContent -->
                         </div>
                     </div>
                 </div>   
                     <!-- *******************************  Page 4 end ***************************** -->
                     <!-- *******************************  Page 5 Start *************************** -->
                 <div class="page page-animated page-5">
-                    <div class="products-page-container" id="products-page-5-container">
-                        <div class="products-page-header">
-                            <span class="products-badge">Technical Yarns</span>
-                            <h2 class="products-title" id="p5-display-title">Specialty &amp; Protective Yarns</h2>
-                            <p class="products-subtitle" id="p5-display-subtitle">Specialized flame-retardant, high-visibility and elastic yarns</p>
+                    <img src="../global%20assets/Images/commonThings/left-page-shadow.svg" alt="left-page-shadow"
+                            class="gutter-shadow shadow-left absolute h-[100%] top-[0%] right-[-1%] z-[4]" />
+                    <img src="../global%20assets/Images/commonThings/right-page-shadow.svg" alt="right-page-shadow"
+                            class="gutter-shadow hidden shadow-right absolute h-[100%] top-[0%] left-[-1%] z-[4]" />
+
+                    <!-- Yarika Collections Absolute Canvas Stage (3:4 ratio) -->
+                    <div class="yarika-page-stage" id="yarika-stage-page5" data-page="page5">
+                        <!-- Top Header -->
+                        <div class="yarika-brand-header">
+                            <div class="yarika-brand-logo-text">YARIKA<sup>™</sup></div>
+                            <div class="yarika-brand-sub">COLLECTIONS</div>
                         </div>
 
-                        <div class="products-cards-grid" id="p5-cards-grid">
-                            <!-- Dynamically loaded from MySQL database -->
+                        <!-- Section Headings Layer -->
+                        <div class="yarika-headings-layer" id="p5-headings-layer">
+                            <!-- Populated dynamically via renderPageContent -->
                         </div>
 
-                        <div class="products-page-footer">
-                            <span class="products-footer-tag">ISO 9001:2015 Certified Manufacturing</span>
-                            <a href="../admin/index.php" target="_blank" class="products-footer-action" onclick="if(window.parent && window.parent!==window){event.preventDefault(); window.parent.postMessage({action:'openAdminLogin'}, '*');}" title="Admin Portal">
-                                <span>Catalog Management</span> &rarr;
-                            </a>
+                        <!-- Image Frames / Slots Layer -->
+                        <div class="yarika-slots-layer" id="p5-slots-layer">
+                            <!-- Populated dynamically via renderPageContent -->
                         </div>
                     </div>
                </div>   
@@ -1564,113 +2019,144 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script>
-        // Standalone Dynamic Product Sync from MySQL Database with Testing Console Logs
+        // Yarika Collections: Shared Absolute Canvas Stage Renderer for Flipbook & Admin
         (function() {
             window._cachedCatalogData = null;
+            const isCalibrate = new URLSearchParams(window.location.search).get('calibrate') === '1';
 
             function resolveApiUrl() {
-                // If running directly on the PHP dev server (e.g. localhost:8000), use relative path
-                if (window.location.port === '8000' || window.location.pathname.endsWith('.php')) {
+                const host = window.location.hostname;
+                const isLocal = host === 'localhost' || host === '127.0.0.1';
+                if (isLocal && window.location.port === '8000') {
                     return '../api/get_products.php?t=' + Date.now();
                 }
-                // When accessed from VS Code Live Server (port 5500, 5501, etc.) or file system
-                return 'http://localhost:8000/api/get_products.php?t=' + Date.now();
+                if (isLocal || window.location.protocol === 'file:') {
+                    return 'http://localhost:8000/api/get_products.php?t=' + Date.now();
+                }
+                return '../api/get_products.php?t=' + Date.now();
             }
 
-            function renderCardsToContainer(grid, items, pageNum) {
-                if (!grid || !Array.isArray(items)) return;
-                grid.innerHTML = items.map(item => `
-                    <div class="product-item-card" id="card-${item.id}">
-                        <div class="product-img-wrap">
-                            <img src="${item.image}" alt="${item.name}" id="img-${item.id}" loading="eager" onerror="this.onerror=null; this.src='../global assets/Images/products/product-1.jpg';">
-                        </div>
-                        <div class="product-info-wrap">
-                            <span class="product-card-category" id="cat-${item.id}">${item.category || ''}</span>
-                            <h3 class="product-card-name" id="name-${item.id}">${item.name || ''}</h3>
-                            <p class="product-card-desc" id="desc-${item.id}">${item.description || ''}</p>
+            // Universal Slot Renderer shared with Admin preview
+            window.renderSlotHtml = function(slot, calibrate) {
+                const fx = typeof slot.focal_x !== 'undefined' ? slot.focal_x : 50;
+                const fy = typeof slot.focal_y !== 'undefined' ? slot.focal_y : 50;
+                const zoom = typeof slot.zoom !== 'undefined' ? slot.zoom : 1.00;
+                const radius = slot.radius || '0';
+                const zIndex = slot.z_index || 1;
+                const imgSrc = slot.image || '../global assets/Images/products/product-1.jpg';
+
+                return `
+                    <div class="slot" id="slot-${slot.id}" data-slot-id="${slot.id}" style="
+                        position: absolute;
+                        left: ${slot.x}%;
+                        top: ${slot.y}%;
+                        width: ${slot.w}%;
+                        height: ${slot.h}%;
+                        border-radius: ${radius};
+                        overflow: hidden;
+                        z-index: ${zIndex};
+                    ">
+                        <img src="${imgSrc}" alt="${slot.id}" loading="eager" style="
+                            position: absolute;
+                            inset: 0;
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                            object-position: ${fx}% ${fy}%;
+                            transform: scale(${zoom});
+                            transform-origin: ${fx}% ${fy}%;
+                        " onerror="this.onerror=null; this.src='../global assets/Images/products/product-1.jpg';">
+                        ${calibrate ? `<span class="slot-id-label">${slot.id}</span>` : ''}
+                    </div>
+                `;
+            };
+
+            // Section Heading Bar Renderer (Bilingual Tamil — English)
+            window.renderSectionHeadingHtml = function(sec) {
+                return `
+                    <div class="yarika-heading-bar" id="sec-${sec.id}" style="
+                        position: absolute;
+                        left: ${sec.x}%;
+                        top: ${sec.y}%;
+                        width: ${sec.w}%;
+                        height: ${sec.h}%;
+                    ">
+                        <div class="yarika-heading-text">
+                            <span class="yarika-heading-ta">${sec.label_ta || ''}</span>
+                            <span class="yarika-heading-sep">—</span>
+                            <span class="yarika-heading-en">${sec.label_en || ''}</span>
                         </div>
                     </div>
-                `).join('');
-                // Ensure all rendered images have full opacity and are visible
-                const imgs = grid.querySelectorAll('img');
-                imgs.forEach(img => {
-                    img.style.opacity = '1';
-                    img.style.visibility = 'visible';
+                `;
+            };
+
+            function renderYarikaPage(pageKey, pageData) {
+                if (!pageData) return;
+
+                // Find all stage instances (Turn.js may create duplicate wrappers during turn animations)
+                const stages = document.querySelectorAll(`.yarika-page-stage[data-page="${pageKey}"], #${pageKey === 'page4' ? 'yarika-stage-page4' : 'yarika-stage-page5'}`);
+                
+                stages.forEach(stage => {
+                    if (isCalibrate) {
+                        stage.classList.add('calibrate-mode');
+                        if (!stage.querySelector('.calibrate-overlay-img')) {
+                            const overlay = document.createElement('img');
+                            overlay.className = 'calibrate-overlay-img';
+                            overlay.src = `../global assets/Images/targets/${pageKey}-target.png`;
+                            overlay.alt = 'Target Overlay';
+                            stage.appendChild(overlay);
+                        }
+                    }
+
+                    const headingsLayer = stage.querySelector('.yarika-headings-layer');
+                    const slotsLayer = stage.querySelector('.yarika-slots-layer');
+
+                    if (headingsLayer && Array.isArray(pageData.sections)) {
+                        headingsLayer.innerHTML = pageData.sections.map(sec => window.renderSectionHeadingHtml(sec)).join('');
+                    }
+
+                    if (slotsLayer && Array.isArray(pageData.slots)) {
+                        slotsLayer.innerHTML = pageData.slots.map(slot => window.renderSlotHtml(slot, isCalibrate)).join('');
+                    }
                 });
             }
 
-            function updateCardsFromData(data) {
+            function updateCatalogFromData(data) {
                 if (!data) return;
                 window._cachedCatalogData = data;
-                console.log("[DynamicCatalog] Rendering catalog from MySQL data:", data);
+                console.log("[YarikaCatalog] Rendering absolute collage stages from MySQL data:", data);
 
-                // --- Page 4 ---
-                if (data.page4) {
-                    document.querySelectorAll('#p4-display-title, .page-4 .products-title, [class*="page-4"] .products-title').forEach(el => {
-                        if (data.page4.title) el.textContent = data.page4.title;
-                    });
-                    document.querySelectorAll('#p4-display-subtitle, .page-4 .products-subtitle, [class*="page-4"] .products-subtitle').forEach(el => {
-                        if (data.page4.subtitle) el.textContent = data.page4.subtitle;
-                    });
-
-                    if (Array.isArray(data.page4.items)) {
-                        const grids4 = document.querySelectorAll('#p4-cards-grid, .page-4 .products-cards-grid, [class*="page-4"] .products-cards-grid');
-                        console.log(`[DynamicCatalog] Found ${grids4.length} Page 4 grids`);
-                        grids4.forEach((grid, idx) => {
-                            renderCardsToContainer(grid, data.page4.items, 4);
-                        });
-                    }
-                }
-
-                // --- Page 5 ---
-                if (data.page5) {
-                    document.querySelectorAll('#p5-display-title, .page-5 .products-title, [class*="page-5"] .products-title').forEach(el => {
-                        if (data.page5.title) el.textContent = data.page5.title;
-                    });
-                    document.querySelectorAll('#p5-display-subtitle, .page-5 .products-subtitle, [class*="page-5"] .products-subtitle').forEach(el => {
-                        if (data.page5.subtitle) el.textContent = data.page5.subtitle;
-                    });
-
-                    if (Array.isArray(data.page5.items)) {
-                        const grids5 = document.querySelectorAll('#p5-cards-grid, .page-5 .products-cards-grid, [class*="page-5"] .products-cards-grid');
-                        console.log(`[DynamicCatalog] Found ${grids5.length} Page 5 grids`);
-                        grids5.forEach((grid, idx) => {
-                            renderCardsToContainer(grid, data.page5.items, 5);
-                        });
-                    }
-                }
+                if (data.page4) renderYarikaPage('page4', data.page4);
+                if (data.page5) renderYarikaPage('page5', data.page5);
             }
 
             window.renderCatalogCardsFromCache = function() {
                 if (window._cachedCatalogData) {
-                    updateCardsFromData(window._cachedCatalogData);
+                    updateCatalogFromData(window._cachedCatalogData);
                 }
             };
 
             window.syncProductsCatalog = function() {
                 const databaseApi = resolveApiUrl();
-                console.log("[DynamicCatalog] Fetching products directly from MySQL Database API:", databaseApi);
+                console.log("[YarikaCatalog] Fetching sections & slots from API:", databaseApi);
 
                 fetch(databaseApi)
                     .then(r => {
-                        console.log("[DynamicCatalog] MySQL API Response Status:", r.status, r.statusText);
-                        if (!r.ok) throw new Error('Database API status ' + r.status);
+                        if (!r.ok) throw new Error('API status ' + r.status);
                         return r.json();
                     })
                     .then(data => {
-                        console.log("[DynamicCatalog] Data loaded successfully from MySQL:", data);
+                        console.log("[YarikaCatalog] Data loaded successfully from API:", data);
                         if (data && (data.page4 || data.page5)) {
-                            updateCardsFromData(data);
-                        } else {
-                            console.warn("[DynamicCatalog] Unexpected data returned from MySQL:", data);
+                            updateCatalogFromData(data);
                         }
                     })
                     .catch(err => {
-                        console.error("[DynamicCatalog] Failed to load products from MySQL Database:", err);
+                        console.error("[YarikaCatalog] Failed to load catalog from API:", err);
                     });
             };
 
-            // Run immediately and on DOMContentLoaded
+            // Initial load
             if (document.readyState === 'loading') {
                 document.addEventListener('DOMContentLoaded', () => {
                     window.syncProductsCatalog();
@@ -1679,13 +2165,12 @@
                 window.syncProductsCatalog();
             }
 
-            // Periodic re-check to ensure cards persist if Turn.js creates clone wrappers
+            // Periodic sanity check to ensure Turn.js cloned pages are kept hydrated
             setInterval(() => {
                 if (window._cachedCatalogData) {
-                    const emptyGrids = Array.from(document.querySelectorAll('#p4-cards-grid, #p5-cards-grid, .page-4 .products-cards-grid, .page-5 .products-cards-grid'))
-                        .filter(g => g.children.length === 0);
-                    if (emptyGrids.length > 0) {
-                        updateCardsFromData(window._cachedCatalogData);
+                    const emptyLayers = Array.from(document.querySelectorAll('.yarika-slots-layer')).filter(l => l.children.length === 0);
+                    if (emptyLayers.length > 0) {
+                        updateCatalogFromData(window._cachedCatalogData);
                     }
                 }
             }, 1000);
@@ -1707,18 +2192,17 @@
 
         const lower = { width: widthLower, height: heightLower };
 
-        // ðŸ“± MOBILE â€” increase both width & height
+        // Mobile sizing: Turn.js 2-page spread width (2 x 449 = 898), height: 558
+        // Each page is exactly 449 x 558 (matching desktop aspect ratio)
         const mobile = {
-            width: 800,   // 98% screen width
-            height: 570  // 95% screen height
+            width: 898,
+            height: 558
         };
 
         // choose correct size
         let crctSize;
         if (windowWidth <= 768) {
-
             crctSize = mobile;
-            // alert(`Mobile size\nWidth: ${crctSize.width}px\nHeight: ${crctSize.height}px`);
         } else if (windowWidth > 1280) {
             crctSize = normal;
         } else {
@@ -1945,8 +2429,8 @@
             if (alt.includes('logo') || src.includes('logo')) return false;
             // Filter out website link
             if (alt.includes('website-link') || src.includes('website-link')) return false;
-            // Filter out dynamic product card images and product page containers
-            if ($img.closest('.product-img-wrap, .products-page-container, .product-item-card').length > 0) return false;
+            // Filter out dynamic product card images, product page containers, and Yarika collage slots
+            if ($img.closest('.product-img-wrap, .products-page-container, .product-item-card, .yarika-page-stage, .slot').length > 0) return false;
             // Filter out specific page 2 & 3 classes to avoid double animation handling
             if (className.includes('page-2-left') || className.includes('page-2-right') ||
                 className.includes('page-2-up') || className.includes('page-2-down') ||
@@ -2243,19 +2727,6 @@
 
 
 
-    </script>
-
-    <script>
-        function triggerAdminLogin() {
-            if (window.parent && window.parent !== window) {
-                // Inside parent container (index.html), message parent to display embedded login screen on same port
-                window.parent.postMessage({ action: "openAdminLogin" }, "*");
-            } else {
-                // Standalone view: Navigate to login.html or /login based on server
-                const isPhp = window.location.port === '8000';
-                window.location.href = isPhp ? '/login' : '../index.html?login';
-            }
-        }
     </script>
 
 
