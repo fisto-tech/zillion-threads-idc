@@ -377,8 +377,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login_submit'])) {
             .login-page-container {
                 flex-direction: column;
                 justify-content: center;
-                gap: 2.5rem;
-                padding: 3rem 1.5rem;
+                gap: 2rem;
+                padding: 2.5rem 1.25rem;
+                min-height: 100vh;
             }
 
             .brand-showcase-panel {
@@ -387,22 +388,76 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login_submit'])) {
             }
 
             .brand-main-title {
-                font-size: 1.55rem;
+                font-size: 1.65rem;
+                justify-content: center;
             }
 
             .brand-emblem-box {
-                width: 70px;
-                height: 70px;
-                margin-bottom: 1rem;
+                margin-bottom: 0.85rem;
+            }
+            .brand-emblem-box img {
+                width: 68px;
+                height: 68px;
             }
 
             .login-card-container {
                 width: 100%;
-                max-width: 440px;
+                max-width: 460px;
             }
 
             .login-card {
-                padding: 2.25rem 1.75rem;
+                padding: 2.25rem 2rem;
+                border-radius: 22px;
+            }
+
+            .card-heading-title {
+                font-size: 1.85rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .login-page-container {
+                padding: 2rem 1rem;
+                gap: 1.5rem;
+            }
+
+            .brand-main-title {
+                font-size: 1.35rem;
+                letter-spacing: 1px;
+            }
+
+            .brand-subline {
+                font-size: 0.68rem;
+                letter-spacing: 1.2px;
+            }
+
+            .login-card {
+                padding: 1.75rem 1.25rem;
+                border-radius: 18px;
+            }
+
+            .card-heading-title {
+                font-size: 1.6rem;
+            }
+
+            .card-subtext {
+                font-size: 0.85rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .form-input {
+                font-size: 0.95rem;
+                padding: 0.85rem 1rem 0.85rem 2.75rem;
+            }
+
+            .input-icon {
+                left: 12px;
+            }
+
+            .btn-submit {
+                padding: 0.95rem 1.25rem;
+                font-size: 0.98rem;
+                margin-top: 1.5rem;
             }
         }
     </style>

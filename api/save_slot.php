@@ -40,9 +40,77 @@ if (!$pdo) {
 $rawInput = file_get_contents('php://input');
 $data = json_decode($rawInput, true);
 
+// Support batch save if 'slots' array is supplied
+if (isset($data['slots']) && is_array($data['slots'])) {
+    $slotsList = $data['slots'];
+    if (empty($slotsList)) {
+        echo json_encode(["success" => true, "message" => "No slots to update.", "count" => 0]);
+        exit();
+    }
+
+    try {
+        $pdo->beginTransaction();
+        $updateStmtWithImg = $pdo->prepare("
+            UPDATE catalog_slots
+            SET image = :image, focal_x = :focal_x, focal_y = :focal_y, zoom = :zoom
+            WHERE id = :id
+        ");
+        $updateStmtNoImg = $pdo->prepare("
+            UPDATE catalog_slots
+            SET focal_x = :focal_x, focal_y = :focal_y, zoom = :zoom
+            WHERE id = :id
+        ");
+
+        $updatedCount = 0;
+        foreach ($slotsList as $s) {
+            if (!isset($s['id']) && !isset($s['slot_id'])) continue;
+            $sId = trim((string)($s['id'] ?? $s['slot_id']));
+            $sImg = isset($s['image']) ? trim((string)$s['image']) : null;
+            $sFx = isset($s['focal_x']) ? (float)$s['focal_x'] : 50.0;
+            $sFy = isset($s['focal_y']) ? (float)$s['focal_y'] : 50.0;
+            $sZoom = isset($s['zoom']) ? (float)$s['zoom'] : 1.0;
+
+            $sFx = max(0.0, min(100.0, $sFx));
+            $sFy = max(0.0, min(100.0, $sFy));
+            $sZoom = max(1.00, min(3.00, $sZoom));
+
+            if ($sImg !== null && $sImg !== '') {
+                $updateStmtWithImg->execute([
+                    ':image' => $sImg,
+                    ':focal_x' => $sFx,
+                    ':focal_y' => $sFy,
+                    ':zoom' => $sZoom,
+                    ':id' => $sId
+                ]);
+            } else {
+                $updateStmtNoImg->execute([
+                    ':focal_x' => $sFx,
+                    ':focal_y' => $sFy,
+                    ':zoom' => $sZoom,
+                    ':id' => $sId
+                ]);
+            }
+            $updatedCount++;
+        }
+
+        $pdo->commit();
+        echo json_encode([
+            "success" => true,
+            "message" => "All {$updatedCount} slot changes saved successfully.",
+            "count" => $updatedCount
+        ]);
+        exit();
+    } catch (PDOException $e) {
+        if ($pdo->inTransaction()) $pdo->rollBack();
+        http_response_code(500);
+        echo json_encode(["success" => false, "message" => "Database batch update failed: " . $e->getMessage()]);
+        exit();
+    }
+}
+
 if (!$data || !isset($data['slot_id'])) {
     http_response_code(400);
-    echo json_encode(["success" => false, "message" => "Missing slot_id."]);
+    echo json_encode(["success" => false, "message" => "Missing slot_id or slots array."]);
     exit();
 }
 

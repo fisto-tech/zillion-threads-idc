@@ -60,11 +60,37 @@ if (!$isLoggedIn) {
             padding: 0;
         }
 
+        /* Modern Theme Scrollbar Styling (Teal & Gold accents) */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F1F5F9;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #CBD5E1;
+            border-radius: 4px;
+            border: 2px solid #F1F5F9;
+            transition: background 0.2s;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--brand-primary);
+        }
+
+        html, body {
+            height: 100vh;
+            max-height: 100vh;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             background-color: var(--bg-body);
             color: var(--text-main);
             font-family: 'Plus Jakarta Sans', sans-serif;
-            min-height: 100vh;
             display: flex;
             flex-direction: column;
             background-image: 
@@ -144,6 +170,8 @@ if (!$isLoggedIn) {
             border: none;
             outline: none;
             transition: all 0.2s ease;
+            width: fit-content;
+            max-width: 100%;
         }
 
         .btn-primary {
@@ -176,30 +204,38 @@ if (!$isLoggedIn) {
         /* Main Container */
         .admin-container {
             max-width: 1540px;
-            margin: 1.5rem auto;
-            padding: 0 1.5rem;
+            margin: 0 auto;
+            padding: 0 1.5rem 1rem 1.5rem;
             width: 100%;
             flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            min-height: 0;
         }
 
         .dashboard-header {
-            background: #FFFFFF;
-            border: 1px solid var(--border-card);
-            border-radius: 16px;
-            padding: 1.5rem 2rem;
-            margin-bottom: 1.75rem;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: none;
+            border-bottom: 1px solid var(--border-subtle);
+            border-radius: 0;
+            padding: 0.85rem 0;
+            margin-bottom: 1rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
             flex-wrap: wrap;
             gap: 1.25rem;
+            flex-shrink: 0;
         }
 
         .header-title h1 {
             font-family: 'Prompt', sans-serif;
-            font-size: 1.45rem;
-            font-weight: 800;
+            font-size: 1.35rem;
+            font-weight: 500;
             color: #0F172A;
             display: flex;
             align-items: center;
@@ -214,55 +250,92 @@ if (!$isLoggedIn) {
 
         /* Page Switcher Tabs */
         .page-tabs {
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            gap: 8px;
-            background: #F1F5F9;
-            padding: 4px;
-            border-radius: 10px;
+            gap: 4px;
+            background: #E2E8F0;
+            padding: 3px;
+            border-radius: 9px;
         }
 
         .tab-btn {
             background: transparent;
             border: none;
-            padding: 8px 18px;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 0.85rem;
+            padding: 0.55rem 1.15rem;
+            border-radius: 7px;
+            font-weight: 600;
+            font-size: 0.86rem;
             color: var(--text-secondary);
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            min-height: auto;
+            line-height: 1.25;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .tab-btn.active {
             background: #FFFFFF;
             color: var(--brand-primary);
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+            font-weight: 700;
+            transform: translateY(0);
         }
 
         /* Two-Column Studio Layout: Left Page Canvas Stage, Right Inspector Panel */
         .studio-layout {
             display: grid;
-            grid-template-columns: 1fr 380px;
+            grid-template-columns: 1fr 420px;
             gap: 1.75rem;
-            align-items: start;
+            align-items: stretch;
+            flex: 1;
+            min-height: 0;
+            overflow: hidden;
+            padding-bottom: 0.5rem;
         }
 
-        /* Interactive Canvas Stage Preview Container */
+        /* Interactive Canvas Stage Preview Container (Separately Scrollable on Left) */
         .stage-card-wrapper {
             background: #FFFFFF;
             border: 1px solid var(--border-card);
             border-radius: 16px;
-            padding: 1.5rem;
+            padding: 1.5rem 1.5rem 3.5rem 1.5rem;
             box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
             display: flex;
             flex-direction: column;
             align-items: center;
+            height: 100%;
+            max-height: calc(100vh - 145px);
+            min-height: 0;
+            overflow-y: scroll !important;
+            overflow-x: hidden;
+            scrollbar-gutter: stable;
+            scrollbar-width: thin;
+            scrollbar-color: #94A3B8 #F1F5F9;
+        }
+
+        .stage-card-wrapper::-webkit-scrollbar {
+            width: 8px;
+        }
+        .stage-card-wrapper::-webkit-scrollbar-track {
+            background: #F1F5F9;
+            border-radius: 8px;
+            margin: 8px 0;
+        }
+        .stage-card-wrapper::-webkit-scrollbar-thumb {
+            background: #94A3B8;
+            border-radius: 8px;
+            border: 2px solid #F1F5F9;
+        }
+        .stage-card-wrapper::-webkit-scrollbar-thumb:hover {
+            background: #1A647E;
         }
 
         .stage-viewport-box {
             width: 100%;
             max-width: 620px;
+            flex-shrink: 0;
             position: relative;
             background: #FAF8F5;
             border-radius: 8px;
@@ -449,10 +522,25 @@ if (!$isLoggedIn) {
         }
 
         .slot.selected-slot {
-            outline: 3px solid #1A647E !important;
-            outline-offset: -3px;
-            box-shadow: 0 0 0 4px rgba(26, 100, 126, 0.3) !important;
+            outline: 3px solid #0284C7 !important;
+            outline-offset: -2px;
+            box-shadow: 0 0 0 3px #FFFFFF, 0 0 0 6px #0284C7, 0 0 25px rgba(2, 132, 199, 0.65) !important;
             z-index: 99 !important;
+            cursor: grab !important;
+            animation: slotSelectedPulse 1.8s infinite ease-in-out;
+        }
+
+        @keyframes slotSelectedPulse {
+            0%, 100% {
+                box-shadow: 0 0 0 3px #FFFFFF, 0 0 0 6px #0284C7, 0 0 25px rgba(2, 132, 199, 0.65);
+            }
+            50% {
+                box-shadow: 0 0 0 3px #FFFFFF, 0 0 0 7px #DFB253, 0 0 30px rgba(223, 178, 83, 0.85);
+            }
+        }
+
+        .slot.selected-slot:active {
+            cursor: grabbing !important;
         }
 
         .slot img {
@@ -463,28 +551,13 @@ if (!$isLoggedIn) {
             object-fit: cover;
             pointer-events: none;
             display: block;
+            user-select: none;
+            -webkit-user-drag: none;
         }
 
-        /* Slot Badge Overlay in Admin View */
+        /* Slot Badge Overlay in Admin View (Hidden for clean visual display) */
         .slot .admin-slot-tag {
-            position: absolute;
-            bottom: 4px;
-            right: 4px;
-            background: rgba(15, 23, 42, 0.75);
-            color: #FFFFFF;
-            font-size: 0.58rem;
-            font-weight: 700;
-            padding: 1px 5px;
-            border-radius: 4px;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.2s;
-            z-index: 5;
-        }
-
-        .slot:hover .admin-slot-tag,
-        .slot.selected-slot .admin-slot-tag {
-            opacity: 1;
+            display: none !important;
         }
 
         /* Right Side: Slot Inspector Panel */
@@ -494,11 +567,30 @@ if (!$isLoggedIn) {
             border-radius: 16px;
             padding: 1.5rem;
             box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
-            position: sticky;
-            top: 5rem;
+            height: 100%;
+            max-height: calc(100vh - 145px);
+            min-height: 0;
+            overflow-y: auto;
+            overflow-x: hidden;
             display: flex;
             flex-direction: column;
             gap: 1.25rem;
+            scrollbar-gutter: stable;
+        }
+
+        .inspector-panel::-webkit-scrollbar {
+            width: 6px;
+        }
+        .inspector-panel::-webkit-scrollbar-track {
+            background: #F8FAFC;
+            border-radius: 6px;
+        }
+        .inspector-panel::-webkit-scrollbar-thumb {
+            background: #CBD5E1;
+            border-radius: 6px;
+        }
+        .inspector-panel::-webkit-scrollbar-thumb:hover {
+            background: var(--brand-primary);
         }
 
         .inspector-header {
@@ -530,23 +622,37 @@ if (!$isLoggedIn) {
         /* Interactive Drag Reposition Viewport */
         .drag-stage-preview {
             width: 100%;
-            height: 220px;
-            background: #0F172A;
-            border-radius: 12px;
+            min-height: 330px;
+            background: #F8FAFC;
+            border-radius: 14px;
             position: relative;
             overflow: hidden;
-            border: 1px solid #CBD5E1;
-            cursor: grab;
+            border: 2px dashed #CBD5E1;
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 20px;
+            background-image: radial-gradient(#E2E8F0 1.5px, transparent 1.5px);
+            background-size: 14px 14px;
         }
 
-        .drag-stage-preview:active {
+        .drag-preview-frame {
+            position: relative;
+            overflow: hidden;
+            background: #0F172A;
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.22), 0 0 0 1px rgba(0, 0, 0, 0.08);
+            cursor: grab;
+            transition: border-radius 0.2s, aspect-ratio 0.2s, box-shadow 0.2s;
+            max-width: 100%;
+            max-height: 310px;
+        }
+
+        .drag-preview-frame:active {
             cursor: grabbing;
+            box-shadow: 0 12px 28px rgba(15, 23, 42, 0.32), 0 0 0 2px var(--brand-primary);
         }
 
-        .drag-stage-preview img {
+        .drag-preview-frame img {
             position: absolute;
             inset: 0;
             width: 100%;
@@ -554,17 +660,18 @@ if (!$isLoggedIn) {
             object-fit: cover;
             user-select: none;
             -webkit-user-drag: none;
+            pointer-events: none;
         }
 
         .drag-crosshair {
             position: absolute;
-            width: 24px;
-            height: 24px;
+            width: 26px;
+            height: 26px;
             transform: translate(-50%, -50%);
             pointer-events: none;
             border: 2px solid #FFFFFF;
             border-radius: 50%;
-            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5), 0 0 10px rgba(223, 178, 83, 0.8);
+            box-shadow: 0 0 0 1.5px rgba(0, 0, 0, 0.6), 0 0 12px rgba(223, 178, 83, 0.9);
             z-index: 10;
         }
         .drag-crosshair::before,
@@ -573,23 +680,10 @@ if (!$isLoggedIn) {
             position: absolute;
             background: #FFFFFF;
         }
-        .drag-crosshair::before { top: -6px; bottom: -6px; left: 10px; width: 2px; }
-        .drag-crosshair::after { left: -6px; right: -6px; top: 10px; height: 2px; }
+        .drag-crosshair::before { top: -7px; bottom: -7px; left: 11px; width: 2px; }
+        .drag-crosshair::after { left: -7px; right: -7px; top: 11px; height: 2px; }
 
-        .drag-instructions {
-            position: absolute;
-            bottom: 8px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(15, 23, 42, 0.8);
-            color: #FFFFFF;
-            font-size: 0.68rem;
-            padding: 3px 10px;
-            border-radius: 20px;
-            pointer-events: none;
-            white-space: nowrap;
-            letter-spacing: 0.3px;
-        }
+
 
         /* Slider Controls */
         .control-group {
@@ -648,22 +742,29 @@ if (!$isLoggedIn) {
             padding: 10px;
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 8px;
+            box-sizing: border-box;
+            width: 100%;
         }
 
         .section-input-row {
             display: flex;
-            gap: 6px;
+            gap: 8px;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .section-input-row input {
             flex: 1;
+            min-width: 0;
+            width: 100%;
             padding: 6px 10px;
             border: 1px solid #CBD5E1;
             border-radius: 6px;
             font-size: 0.78rem;
             font-family: inherit;
             outline: none;
+            box-sizing: border-box;
             transition: border-color 0.2s;
         }
 
@@ -672,7 +773,7 @@ if (!$isLoggedIn) {
         }
 
         .section-save-btn {
-            padding: 5px 10px;
+            padding: 6px 14px;
             border-radius: 6px;
             background: var(--brand-primary);
             color: #FFFFFF;
@@ -756,11 +857,26 @@ if (!$isLoggedIn) {
 
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-            gap: 0.85rem;
-            max-height: 240px;
+            grid-template-columns: repeat(auto-fill, minmax(115px, 1fr));
+            gap: 0.95rem;
+            max-height: 280px;
             overflow-y: auto;
-            padding-right: 4px;
+            padding-right: 6px;
+        }
+
+        .gallery-grid::-webkit-scrollbar {
+            width: 6px;
+        }
+        .gallery-grid::-webkit-scrollbar-track {
+            background: #F1F5F9;
+            border-radius: 4px;
+        }
+        .gallery-grid::-webkit-scrollbar-thumb {
+            background: #CBD5E1;
+            border-radius: 4px;
+        }
+        .gallery-grid::-webkit-scrollbar-thumb:hover {
+            background: var(--brand-primary);
         }
 
         .gallery-item {
@@ -775,7 +891,7 @@ if (!$isLoggedIn) {
         }
         .gallery-item:hover {
             border-color: var(--brand-primary);
-            transform: scale(1.03);
+            transform: scale(1.02);
         }
         .gallery-item.selected {
             border-color: var(--accent-gold);
@@ -785,6 +901,37 @@ if (!$isLoggedIn) {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            display: block;
+        }
+
+        .gallery-item-del-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: rgba(15, 23, 42, 0.75);
+            color: #FFFFFF;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            z-index: 5;
+            padding: 0;
+        }
+
+        .gallery-item:hover .gallery-item-del-btn {
+            opacity: 1;
+        }
+
+        .gallery-item-del-btn:hover {
+            background: #DC2626;
+            border-color: #EF4444;
+            transform: scale(1.12);
         }
 
         .modal-footer {
@@ -825,12 +972,136 @@ if (!$isLoggedIn) {
             to { transform: translateY(0); opacity: 1; }
         }
 
+        /* Responsive Design: Tablet and Mobile */
         @media (max-width: 1080px) {
+            html, body {
+                height: auto;
+                max-height: none;
+                overflow: auto;
+            }
+            .admin-container {
+                overflow: visible;
+                height: auto;
+                min-height: auto;
+            }
             .studio-layout {
                 grid-template-columns: 1fr;
+                gap: 1.5rem;
+                overflow: visible;
+                height: auto;
+            }
+            .stage-card-wrapper {
+                height: auto;
+                max-height: 80vh;
             }
             .inspector-panel {
-                position: static;
+                height: auto;
+                max-height: none;
+                overflow: visible;
+            }
+            .stage-viewport-box {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .admin-nav {
+                padding: 0.75rem 1rem;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            .admin-container {
+                padding: 0 1rem;
+                margin: 1rem auto;
+            }
+            .dashboard-header {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 1rem;
+            }
+            .header-title h1 {
+                font-size: 1.2rem;
+            }
+            .dashboard-header > div:last-child {
+                display: flex;
+                flex-direction: column;
+                align-items: stretch !important;
+                gap: 10px !important;
+                width: 100%;
+            }
+            .page-tabs {
+                width: 100%;
+                display: flex;
+            }
+            .page-tabs .tab-btn {
+                flex: 1;
+                padding: 10px 14px;
+                min-height: 44px;
+                font-size: 0.88rem;
+            }
+            #saveAllTopBtn {
+                width: 100%;
+                justify-content: center;
+            }
+            .stage-card-wrapper {
+                padding: 1rem;
+            }
+            .drag-stage-preview {
+                min-height: 260px;
+                padding: 12px;
+            }
+            .drag-preview-frame {
+                max-height: 240px;
+            }
+            .inspector-panel {
+                padding: 1.15rem;
+            }
+            .inspector-actions {
+                flex-direction: column;
+            }
+            .inspector-actions button {
+                width: 100%;
+                justify-content: center;
+            }
+            .section-input-row {
+                flex-direction: column;
+            }
+            .modal-dialog {
+                width: 95%;
+                margin: 10px auto;
+            }
+            .modal-header, .modal-body, .modal-footer {
+                padding: 1rem 1.15rem;
+            }
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(85px, 1fr));
+                gap: 0.65rem;
+            }
+            .toast {
+                left: 1rem;
+                right: 1rem;
+                bottom: 1rem;
+                text-align: center;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+            .nav-actions .btn {
+                flex: 1;
+                justify-content: center;
+                padding: 0.5rem 0.75rem;
+                font-size: 0.78rem;
+            }
+            .header-title h1 {
+                font-size: 1.1rem;
+            }
+            .header-title p {
+                font-size: 0.8rem;
             }
         }
     </style>
@@ -845,23 +1116,11 @@ if (!$isLoggedIn) {
             </div>
             <div class="brand-text-group">
                 <div class="brand-text-row">
-                    <span style="font-weight: 800; font-size: 1.1rem; color: var(--text-main);">YARIKA COLLECTIONS</span>
-                    <span class="brand-badge">STUDIO</span>
+             
                 </div>
-                <span class="brand-subtitle">Page 4 &amp; 5 Dynamic Collage &amp; Slot Manager</span>
             </div>
         </a>
         <div class="nav-actions">
-            <button type="button" class="btn btn-outline" id="calibrateToggleBtn" onclick="toggleCalibrateOverlay()" title="Overlay target image at 50% opacity to verify exact layout alignment">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <line x1="22" y1="12" x2="18" y2="12"></line>
-                    <line x1="6" y1="12" x2="2" y2="12"></line>
-                    <line x1="12" y1="6" x2="12" y2="2"></line>
-                    <line x1="12" y1="22" x2="12" y2="18"></line>
-                </svg>
-                <span id="calibrateBtnText">Calibrate Overlay: OFF</span>
-            </button>
             <a href="/For_Desc/index.html" class="btn btn-outline" target="_blank" title="Preview live catalog in new tab">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
@@ -869,6 +1128,7 @@ if (!$isLoggedIn) {
                 </svg>
                 <span>Live Flipbook</span>
             </a>
+
             <a href="?action=logout&return=/login.php" class="btn btn-danger-outline">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
@@ -885,19 +1145,30 @@ if (!$isLoggedIn) {
         <div class="dashboard-header">
             <div class="header-title">
                 <h1>
-                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--accent-gold)" stroke-width="2.5">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-gold)" stroke-width="2.5">
                         <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
                         <circle cx="8.5" cy="8.5" r="1.5"></circle>
                         <polyline points="21 15 16 10 5 21"></polyline>
                     </svg>
-                    Yarika Collage Slot Editor
+                    Catalog Layout Editor
                 </h1>
-                <p>Click any slot below to swap photo, drag focal point inside the frame, and adjust zoom without cropping.</p>
+                <p>Click any slot below or on the right to adjust framing, reposition focal point, and zoom.</p>
             </div>
 
-            <div class="page-tabs">
-                <button class="tab-btn active" id="tab-p4" onclick="switchPageTab('page4')">Page 4 (Twirly, Edge, Wave, Muse)</button>
-                <button class="tab-btn" id="tab-p5" onclick="switchPageTab('page5')">Page 5 (Silk, Maternity, Camicia)</button>
+            <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+                <div class="page-tabs">
+                    <button class="tab-btn active" id="tab-p4" onclick="switchPageTab('page4')">Page 4</button>
+                    <button class="tab-btn" id="tab-p5" onclick="switchPageTab('page5')">Page 5</button>
+                </div>
+
+                <button type="button" class="btn btn-primary" id="saveAllTopBtn" onclick="saveAllChanges()" style="padding: 10px 20px; font-weight: 700; box-shadow: 0 4px 14px rgba(26, 100, 126, 0.25);" title="Save all adjustments across all images on this page">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                        <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                        <polyline points="7 3 7 8 15 8"></polyline>
+                    </svg>
+                    <span>Save All Changes</span>
+                </button>
             </div>
         </div>
 
@@ -921,21 +1192,22 @@ if (!$isLoggedIn) {
             <div class="inspector-panel" id="slotInspector">
                 <div class="inspector-header">
                     <div class="inspector-title">
-                        <span>Slot Inspector</span>
+                        <span>Photo Adjustment</span>
                         <span class="inspector-slot-id" id="insp-slot-id">Select a slot</span>
                     </div>
                 </div>
 
-                <!-- Reposition viewport -->
+                <!-- Reposition viewport with slot shape matching -->
                 <div class="control-group">
                     <div class="control-label-row">
-                        <span>Focal Point &amp; Reposition</span>
+                        <span>Framing &amp; Position</span>
                         <span class="control-val-badge" id="insp-focal-text">50% / 50%</span>
                     </div>
-                    <div class="drag-stage-preview" id="dragPreviewViewport">
-                        <img src="" id="insp-preview-img" alt="Slot Preview">
-                        <div class="drag-crosshair" id="dragCrosshair" style="left: 50%; top: 50%;"></div>
-                        <div class="drag-instructions">Click &amp; drag to reposition focal point</div>
+                    <div class="drag-stage-preview">
+                        <div class="drag-preview-frame" id="dragPreviewViewport">
+                            <img src="" id="insp-preview-img" alt="Slot Preview">
+                            <div class="drag-crosshair" id="dragCrosshair" style="left: 50%; top: 50%;"></div>
+                        </div>
                     </div>
                 </div>
 
@@ -958,16 +1230,41 @@ if (!$isLoggedIn) {
                     <span>Swap Photo (Upload / Gallery)</span>
                 </button>
 
-                <!-- Save & Reset Action Buttons -->
+                <!-- Undo / Redo & Save Action Buttons -->
+                <div class="inspector-history-actions" style="display: flex; gap: 8px;">
+                    <button type="button" class="btn btn-outline" id="undoBtn" style="flex: 1; justify-content: center; padding: 6px 10px;" onclick="undoSlotChange()" title="Undo adjustment (Ctrl+Z)" disabled>
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="9 14 4 9 9 4"></polyline>
+                            <path d="M20 20v-7a4 4 0 0 0-4-4H4"></path>
+                        </svg>
+                        <span>Undo</span>
+                    </button>
+                    <button type="button" class="btn btn-outline" id="redoBtn" style="flex: 1; justify-content: center; padding: 6px 10px;" onclick="redoSlotChange()" title="Redo adjustment (Ctrl+Y)" disabled>
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="15 14 20 9 15 4"></polyline>
+                            <path d="M4 20v-7a4 4 0 0 1 4-4h12"></path>
+                        </svg>
+                        <span>Redo</span>
+                    </button>
+                </div>
+
                 <div class="inspector-actions">
                     <button type="button" class="btn btn-outline" style="flex: 1; justify-content: center;" onclick="resetSlotAdjustments()">
                         <span>Reset</span>
                     </button>
-                    <button type="button" class="btn btn-accent" style="flex: 2; justify-content: center;" id="saveSlotBtn" onclick="saveActiveSlot()">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <button type="button" class="btn btn-accent" style="flex: 1.4; justify-content: center;" id="saveSlotBtn" onclick="saveActiveSlot()" title="Save currently selected image">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                             <polyline points="20 6 9 17 4 12"></polyline>
                         </svg>
-                        <span>Save Slot</span>
+                        <span>Save</span>
+                    </button>
+                    <button type="button" class="btn btn-primary" style="flex: 1.8; justify-content: center; font-weight: 700;" id="saveAllPanelBtn" onclick="saveAllChanges()" title="Save all adjusted images at once">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                            <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                            <polyline points="7 3 7 8 15 8"></polyline>
+                        </svg>
+                        <span>Save All</span>
                     </button>
                 </div>
 
@@ -975,7 +1272,6 @@ if (!$isLoggedIn) {
                 <div class="section-editor-box">
                     <div class="section-editor-title">
                         <span>Section Headings Editor</span>
-                        <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 500;">Bilingual Labels</span>
                     </div>
                     <div id="sectionCardsContainer" style="display: flex; flex-direction: column; gap: 8px;">
                         <!-- Rendered dynamically per active page -->
@@ -1113,6 +1409,7 @@ if (!$isLoggedIn) {
                 const res = await fetch('../api/get_products.php?t=' + Date.now());
                 if (!res.ok) throw new Error('API error');
                 catalogData = await res.json();
+                restoreDraftFromLocalStorage();
                 renderStage();
                 renderSectionCards();
                 // Select first slot by default
@@ -1130,6 +1427,7 @@ if (!$isLoggedIn) {
             document.getElementById('tab-p4').classList.toggle('active', pageKey === 'page4');
             document.getElementById('tab-p5').classList.toggle('active', pageKey === 'page5');
             document.getElementById('admin-stage-canvas').setAttribute('data-page', pageKey);
+            restoreDraftFromLocalStorage();
             renderStage();
             renderSectionCards();
             if (catalogData[activePageKey] && catalogData[activePageKey].slots && catalogData[activePageKey].slots.length > 0) {
@@ -1179,16 +1477,19 @@ if (!$isLoggedIn) {
                 return;
             }
 
-            container.innerHTML = pageData.sections.map(sec => `
+            container.innerHTML = pageData.sections.map((sec, idx) => {
+                return `
                 <div class="section-item-card" id="card-sec-${sec.id}">
-                    <div style="font-size: 0.72rem; font-weight: 700; color: #64748B;">ID: ${sec.id}</div>
+                    <div style="font-size: 0.76rem; font-weight: 700; color: #1A647E; display: flex; justify-content: space-between;">
+                        <span>Grid ${idx + 1}</span>
+                    </div>
                     <div class="section-input-row">
                         <input type="text" id="sec-ta-${sec.id}" value="${sec.label_ta || ''}" placeholder="Tamil (e.g. சுடிதார்)">
                         <input type="text" id="sec-en-${sec.id}" value="${sec.label_en || ''}" placeholder="English (e.g. Silk Signature)">
                     </div>
                     <button type="button" class="section-save-btn" onclick="saveSectionHeading('${sec.id}')">Save Label</button>
                 </div>
-            `).join('');
+            `}).join('');
         }
 
         async function saveSectionHeading(sectionId) {
@@ -1236,6 +1537,19 @@ if (!$isLoggedIn) {
             }
         }
 
+        // Friendly Grid Name helper (e.g. "Grid 1 - Photo A")
+        function getFriendlySlotLabel(slot) {
+            if (!slot) return 'Select a photo';
+            const pageData = catalogData[activePageKey];
+            if (pageData && Array.isArray(pageData.slots)) {
+                const idx = pageData.slots.findIndex(s => s.id === slot.id);
+                if (idx !== -1) {
+                    return `Grid ${idx + 1}`;
+                }
+            }
+            return 'Selected Photo';
+        }
+
         function selectSlot(slotId) {
             const pageData = catalogData[activePageKey];
             if (!pageData || !Array.isArray(pageData.slots)) return;
@@ -1250,10 +1564,29 @@ if (!$isLoggedIn) {
             const slotEl = document.getElementById(`slot-${slot.id}`);
             if (slotEl) slotEl.classList.add('selected-slot');
 
-            // Update Inspector UI
-            document.getElementById('insp-slot-id').textContent = slot.id;
+            // Update Inspector UI with friendly label (no raw IDs)
+            document.getElementById('insp-slot-id').textContent = getFriendlySlotLabel(slot);
             const previewImg = document.getElementById('insp-preview-img');
             previewImg.src = slot.image || '../global assets/Images/products/product-1.jpg';
+
+            // Match exact slot shape & aspect ratio in inspector preview
+            const dragFrame = document.getElementById('dragPreviewViewport');
+            if (dragFrame) {
+                const w = parseFloat(slot.w) || 1;
+                const h = parseFloat(slot.h) || 1;
+                // Since stage has aspect-ratio 4/5, absolute slot width/height in px is:
+                // aspect ratio = (slot.w * 4) / (slot.h * 5) = (slot.w / slot.h) * 0.8
+                const aspect = (w / h) * 0.8;
+                let frameHeight = 300;
+                let frameWidth = frameHeight * aspect;
+                if (frameWidth > 360) {
+                    frameWidth = 360;
+                    frameHeight = frameWidth / aspect;
+                }
+                dragFrame.style.width = `${Math.round(frameWidth)}px`;
+                dragFrame.style.height = `${Math.round(frameHeight)}px`;
+                dragFrame.style.borderRadius = slot.radius || '4px';
+            }
 
             const fx = typeof slot.focal_x !== 'undefined' ? slot.focal_x : 50;
             const fy = typeof slot.focal_y !== 'undefined' ? slot.focal_y : 50;
@@ -1269,14 +1602,18 @@ if (!$isLoggedIn) {
 
             // Crosshair position
             const crosshair = document.getElementById('dragCrosshair');
-            crosshair.style.left = `${fx}%`;
-            crosshair.style.top = `${fy}%`;
+            if (crosshair) {
+                crosshair.style.left = `${fx}%`;
+                crosshair.style.top = `${fy}%`;
+            }
 
             // Preview image styling
             const previewImg = document.getElementById('insp-preview-img');
-            previewImg.style.objectPosition = `${fx}% ${fy}%`;
-            previewImg.style.transform = `scale(${zoom})`;
-            previewImg.style.transformOrigin = `${fx}% ${fy}%`;
+            if (previewImg) {
+                previewImg.style.objectPosition = `${fx}% ${fy}%`;
+                previewImg.style.transform = `scale(${zoom})`;
+                previewImg.style.transformOrigin = `${fx}% ${fy}%`;
+            }
 
             // Real-time sync to the stage canvas slot
             if (activeSlot) {
@@ -1289,65 +1626,318 @@ if (!$isLoggedIn) {
             }
         }
 
-        // Mouse Drag to Reposition Focal Point in Drag Viewport
+        // Mouse Drag to Reposition Focal Point in Right Inspector Viewport (Relative Delta Drag)
         const dragViewport = document.getElementById('dragPreviewViewport');
+        let dragStartX = 0;
+        let dragStartY = 0;
+        let focalStartX = 50;
+        let focalStartY = 50;
         
         function handleFocalDrag(e) {
-            if (!activeSlot) return;
+            if (!activeSlot || !dragViewport) return;
             const rect = dragViewport.getBoundingClientRect();
             const clientX = e.clientX || (e.touches && e.touches[0] ? e.touches[0].clientX : 0);
             const clientY = e.clientY || (e.touches && e.touches[0] ? e.touches[0].clientY : 0);
 
-            let percentX = ((clientX - rect.left) / rect.width) * 100;
-            let percentY = ((clientY - rect.top) / rect.height) * 100;
+            // Compute delta from drag start point
+            const deltaPercentX = ((clientX - dragStartX) / rect.width) * 100;
+            const deltaPercentY = ((clientY - dragStartY) / rect.height) * 100;
 
-            percentX = Math.max(0, Math.min(100, percentX));
-            percentY = Math.max(0, Math.min(100, percentY));
+            let newFx = focalStartX + deltaPercentX;
+            let newFy = focalStartY + deltaPercentY;
 
-            activeSlot.focal_x = parseFloat(percentX.toFixed(2));
-            activeSlot.focal_y = parseFloat(percentY.toFixed(2));
+            newFx = Math.max(0, Math.min(100, newFx));
+            newFy = Math.max(0, Math.min(100, newFy));
+
+            activeSlot.focal_x = parseFloat(newFx.toFixed(2));
+            activeSlot.focal_y = parseFloat(newFy.toFixed(2));
 
             updateInspectorValues(activeSlot.focal_x, activeSlot.focal_y, activeSlot.zoom);
         }
 
-        dragViewport.addEventListener('mousedown', (e) => {
-            isDraggingCrosshair = true;
-            handleFocalDrag(e);
-        });
+        if (dragViewport) {
+            dragViewport.addEventListener('mousedown', (e) => {
+                if (!activeSlot) return;
+                preDragSnapshot = getSlotSnapshot(activeSlot);
+                isDraggingCrosshair = true;
+                dragStartX = e.clientX || (e.touches && e.touches[0] ? e.touches[0].clientX : 0);
+                dragStartY = e.clientY || (e.touches && e.touches[0] ? e.touches[0].clientY : 0);
+                focalStartX = typeof activeSlot.focal_x !== 'undefined' ? parseFloat(activeSlot.focal_x) : 50;
+                focalStartY = typeof activeSlot.focal_y !== 'undefined' ? parseFloat(activeSlot.focal_y) : 50;
+            });
+
+            // Mouse Wheel Zoom inside Drag Viewport
+            dragViewport.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                if (!activeSlot) return;
+                pushUndoSnapshot(getSlotSnapshot(activeSlot));
+                let z = parseFloat(activeSlot.zoom) || 1.00;
+                z += e.deltaY < 0 ? 0.05 : -0.05;
+                z = Math.max(1.00, Math.min(3.00, z));
+                activeSlot.zoom = parseFloat(z.toFixed(2));
+                updateInspectorValues(activeSlot.focal_x, activeSlot.focal_y, activeSlot.zoom);
+                persistDraftToLocalStorage();
+            }, { passive: false });
+        }
 
         window.addEventListener('mousemove', (e) => {
             if (isDraggingCrosshair) handleFocalDrag(e);
+            if (isDraggingStageSlot) handleStageSlotDrag(e);
         });
 
         window.addEventListener('mouseup', () => {
+            if (isDraggingCrosshair || isDraggingStageSlot) {
+                // If position actually changed during drag, push preDragSnapshot to undo stack
+                if (preDragSnapshot && activeSlot) {
+                    const changed = (preDragSnapshot.focal_x !== activeSlot.focal_x || preDragSnapshot.focal_y !== activeSlot.focal_y);
+                    if (changed) {
+                        pushUndoSnapshot(preDragSnapshot);
+                    }
+                }
+                preDragSnapshot = null;
+                persistDraftToLocalStorage();
+            }
             isDraggingCrosshair = false;
+            isDraggingStageSlot = false;
         });
 
-        // Mouse Wheel Zoom inside Drag Viewport
-        dragViewport.addEventListener('wheel', (e) => {
-            e.preventDefault();
-            if (!activeSlot) return;
-            let z = parseFloat(activeSlot.zoom) || 1.00;
-            z += e.deltaY < 0 ? 0.05 : -0.05;
-            z = Math.max(1.00, Math.min(3.00, z));
-            activeSlot.zoom = parseFloat(z.toFixed(2));
+        // DIRECT STAGE CANVAS DRAGGING (Orange marked area - Relative Delta Drag)
+        let isDraggingStageSlot = false;
+        let stageDragSlotElement = null;
+        let stageDragStartX = 0;
+        let stageDragStartY = 0;
+        let stageFocalStartX = 50;
+        let stageFocalStartY = 50;
+
+        function handleStageSlotDrag(e) {
+            if (!activeSlot || !stageDragSlotElement) return;
+            const rect = stageDragSlotElement.getBoundingClientRect();
+            const clientX = e.clientX || (e.touches && e.touches[0] ? e.touches[0].clientX : 0);
+            const clientY = e.clientY || (e.touches && e.touches[0] ? e.touches[0].clientY : 0);
+
+            // Compute delta from initial mousedown point
+            const deltaPercentX = ((clientX - stageDragStartX) / rect.width) * 100;
+            const deltaPercentY = ((clientY - stageDragStartY) / rect.height) * 100;
+
+            let newFx = stageFocalStartX + deltaPercentX;
+            let newFy = stageFocalStartY + deltaPercentY;
+
+            newFx = Math.max(0, Math.min(100, newFx));
+            newFy = Math.max(0, Math.min(100, newFy));
+
+            activeSlot.focal_x = parseFloat(newFx.toFixed(2));
+            activeSlot.focal_y = parseFloat(newFy.toFixed(2));
+
             updateInspectorValues(activeSlot.focal_x, activeSlot.focal_y, activeSlot.zoom);
-        }, { passive: false });
+        }
+
+        // Attach event delegation for direct dragging and wheel zoom on Stage Slots
+        const adminSlotsLayer = document.getElementById('admin-slots-layer');
+        if (adminSlotsLayer) {
+            adminSlotsLayer.addEventListener('mousedown', (e) => {
+                const slotEl = e.target.closest('.slot');
+                if (!slotEl) return;
+                const slotId = slotEl.getAttribute('data-slot-id');
+                if (!activeSlot || activeSlot.id !== slotId) {
+                    selectSlot(slotId);
+                }
+                preDragSnapshot = getSlotSnapshot(activeSlot);
+                isDraggingStageSlot = true;
+                stageDragSlotElement = slotEl;
+                stageDragStartX = e.clientX || (e.touches && e.touches[0] ? e.touches[0].clientX : 0);
+                stageDragStartY = e.clientY || (e.touches && e.touches[0] ? e.touches[0].clientY : 0);
+                stageFocalStartX = typeof activeSlot.focal_x !== 'undefined' ? parseFloat(activeSlot.focal_x) : 50;
+                stageFocalStartY = typeof activeSlot.focal_y !== 'undefined' ? parseFloat(activeSlot.focal_y) : 50;
+            });
+
+            adminSlotsLayer.addEventListener('wheel', (e) => {
+                const slotEl = e.target.closest('.slot');
+                if (!slotEl) return;
+                const slotId = slotEl.getAttribute('data-slot-id');
+                if (!activeSlot || activeSlot.id !== slotId) {
+                    selectSlot(slotId);
+                }
+                e.preventDefault();
+                pushUndoSnapshot(getSlotSnapshot(activeSlot));
+                let z = parseFloat(activeSlot.zoom) || 1.00;
+                z += e.deltaY < 0 ? 0.05 : -0.05;
+                z = Math.max(1.00, Math.min(3.00, z));
+                activeSlot.zoom = parseFloat(z.toFixed(2));
+                updateInspectorValues(activeSlot.focal_x, activeSlot.focal_y, activeSlot.zoom);
+                persistDraftToLocalStorage();
+            }, { passive: false });
+        }
 
         // Zoom Slider change
-        document.getElementById('inspZoomSlider').addEventListener('input', function() {
+        let sliderStartSnapshot = null;
+        const zoomSliderEl = document.getElementById('inspZoomSlider');
+        zoomSliderEl.addEventListener('mousedown', () => {
+            if (activeSlot) sliderStartSnapshot = getSlotSnapshot(activeSlot);
+        });
+        zoomSliderEl.addEventListener('input', function() {
             if (!activeSlot) return;
             activeSlot.zoom = parseFloat(this.value);
             updateInspectorValues(activeSlot.focal_x, activeSlot.focal_y, activeSlot.zoom);
         });
+        zoomSliderEl.addEventListener('change', function() {
+            if (sliderStartSnapshot) {
+                pushUndoSnapshot(sliderStartSnapshot);
+                sliderStartSnapshot = null;
+            }
+            persistDraftToLocalStorage();
+        });
+
+        // ==================== UNDO / REDO & LOCALSTORAGE PERSISTENCE ====================
+        const LOCAL_STORAGE_KEY_PREFIX = 'yarika_slot_state_';
+        const undoStack = [];
+        const redoStack = [];
+        const MAX_HISTORY_STEPS = 50;
+
+        // Current snapshot factory for active slot
+        function getSlotSnapshot(slot) {
+            if (!slot) return null;
+            return {
+                slotId: slot.id,
+                pageKey: activePageKey,
+                focal_x: typeof slot.focal_x !== 'undefined' ? parseFloat(slot.focal_x) : 50,
+                focal_y: typeof slot.focal_y !== 'undefined' ? parseFloat(slot.focal_y) : 50,
+                zoom: typeof slot.zoom !== 'undefined' ? parseFloat(slot.zoom) : 1.00,
+                image: slot.image || ''
+            };
+        }
+
+        // Save current modifications for current page in LocalStorage
+        function persistDraftToLocalStorage() {
+            try {
+                if (!catalogData || !catalogData[activePageKey] || !Array.isArray(catalogData[activePageKey].slots)) return;
+                const pageDraft = {};
+                catalogData[activePageKey].slots.forEach(s => {
+                    pageDraft[s.id] = {
+                        focal_x: s.focal_x,
+                        focal_y: s.focal_y,
+                        zoom: s.zoom,
+                        image: s.image
+                    };
+                });
+                localStorage.setItem(LOCAL_STORAGE_KEY_PREFIX + activePageKey, JSON.stringify(pageDraft));
+            } catch (e) {
+                console.warn("Could not save to LocalStorage:", e);
+            }
+        }
+
+        // Restore drafts from LocalStorage
+        function restoreDraftFromLocalStorage() {
+            try {
+                const stored = localStorage.getItem(LOCAL_STORAGE_KEY_PREFIX + activePageKey);
+                if (!stored) return;
+                const pageDraft = JSON.parse(stored);
+                if (!pageDraft || !catalogData[activePageKey] || !Array.isArray(catalogData[activePageKey].slots)) return;
+
+                catalogData[activePageKey].slots.forEach(s => {
+                    if (pageDraft[s.id]) {
+                        if (typeof pageDraft[s.id].focal_x !== 'undefined') s.focal_x = pageDraft[s.id].focal_x;
+                        if (typeof pageDraft[s.id].focal_y !== 'undefined') s.focal_y = pageDraft[s.id].focal_y;
+                        if (typeof pageDraft[s.id].zoom !== 'undefined') s.zoom = pageDraft[s.id].zoom;
+                        if (pageDraft[s.id].image) s.image = pageDraft[s.id].image;
+                    }
+                });
+            } catch (e) {
+                console.warn("Could not restore from LocalStorage:", e);
+            }
+        }
+
+        function updateUndoRedoButtons() {
+            const uBtn = document.getElementById('undoBtn');
+            const rBtn = document.getElementById('redoBtn');
+            if (uBtn) uBtn.disabled = undoStack.length === 0;
+            if (rBtn) rBtn.disabled = redoStack.length === 0;
+        }
+
+        function pushUndoSnapshot(snapshot) {
+            if (!snapshot) return;
+            // Prevent pushing duplicate identical consecutive state
+            const last = undoStack[undoStack.length - 1];
+            if (last &&
+                last.slotId === snapshot.slotId &&
+                last.pageKey === snapshot.pageKey &&
+                last.focal_x === snapshot.focal_x &&
+                last.focal_y === snapshot.focal_y &&
+                last.zoom === snapshot.zoom &&
+                last.image === snapshot.image
+            ) {
+                return;
+            }
+            undoStack.push(snapshot);
+            if (undoStack.length > MAX_HISTORY_STEPS) undoStack.shift();
+            // Clear redo stack on new action
+            redoStack.length = 0;
+            updateUndoRedoButtons();
+            persistDraftToLocalStorage();
+        }
+
+        function applySlotSnapshot(snapshot) {
+            if (!snapshot) return;
+            // If snapshot belongs to another page, switch tab first
+            if (snapshot.pageKey !== activePageKey) {
+                switchPageTab(snapshot.pageKey);
+            }
+            const pageData = catalogData[snapshot.pageKey];
+            if (!pageData || !Array.isArray(pageData.slots)) return;
+            const targetSlot = pageData.slots.find(s => s.id === snapshot.slotId);
+            if (!targetSlot) return;
+
+            // Make sure slot is active
+            if (!activeSlot || activeSlot.id !== targetSlot.id) {
+                selectSlot(targetSlot.id);
+            }
+
+            targetSlot.focal_x = snapshot.focal_x;
+            targetSlot.focal_y = snapshot.focal_y;
+            targetSlot.zoom = snapshot.zoom;
+            targetSlot.image = snapshot.image;
+
+            // Update previews
+            const previewImg = document.getElementById('insp-preview-img');
+            if (previewImg && snapshot.image) previewImg.src = snapshot.image;
+            const stageSlotImg = document.querySelector(`#slot-${targetSlot.id} img`);
+            if (stageSlotImg && snapshot.image) stageSlotImg.src = snapshot.image;
+
+            updateInspectorValues(targetSlot.focal_x, targetSlot.focal_y, targetSlot.zoom);
+            persistDraftToLocalStorage();
+        }
+
+        function undoSlotChange() {
+            if (undoStack.length === 0 || !activeSlot) return;
+            const currentState = getSlotSnapshot(activeSlot);
+            const prevState = undoStack.pop();
+            redoStack.push(currentState);
+            applySlotSnapshot(prevState);
+            updateUndoRedoButtons();
+            showToast("Undo applied");
+        }
+
+        function redoSlotChange() {
+            if (redoStack.length === 0 || !activeSlot) return;
+            const currentState = getSlotSnapshot(activeSlot);
+            const nextState = redoStack.pop();
+            undoStack.push(currentState);
+            applySlotSnapshot(nextState);
+            updateUndoRedoButtons();
+            showToast("Redo applied");
+        }
+
+        // Track drag start snapshots
+        let preDragSnapshot = null;
 
         // Reset Button
         function resetSlotAdjustments() {
             if (!activeSlot) return;
+            pushUndoSnapshot(getSlotSnapshot(activeSlot));
             activeSlot.focal_x = 50.0;
             activeSlot.focal_y = 50.0;
             activeSlot.zoom = 1.00;
             updateInspectorValues(50, 50, 1.00);
+            persistDraftToLocalStorage();
             showToast("Focal point & zoom reset to default.");
         }
 
@@ -1373,7 +1963,8 @@ if (!$isLoggedIn) {
 
                 const data = await res.json();
                 if (data.success) {
-                    showToast(`Slot ${activeSlot.id} saved successfully!`);
+                    persistDraftToLocalStorage();
+                    showToast(`${getFriendlySlotLabel(activeSlot)} saved successfully!`);
                 } else {
                     showToast(data.message || 'Failed to save slot');
                 }
@@ -1386,8 +1977,80 @@ if (!$isLoggedIn) {
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                         <polyline points="20 6 9 17 4 12"></polyline>
                     </svg>
-                    <span>Save Slot</span>
+                    <span>Save</span>
                 `;
+            }
+        }
+
+        // Save All Changes across all slots on the current page to API
+        async function saveAllChanges() {
+            const pageData = catalogData[activePageKey];
+            if (!pageData || !Array.isArray(pageData.slots) || pageData.slots.length === 0) {
+                showToast("No slots found to save.");
+                return;
+            }
+
+            const topBtn = document.getElementById('saveAllTopBtn');
+            const panelBtn = document.getElementById('saveAllPanelBtn');
+
+            if (topBtn) {
+                topBtn.disabled = true;
+                topBtn.innerHTML = `<span>Saving all...</span>`;
+            }
+            if (panelBtn) {
+                panelBtn.disabled = true;
+                panelBtn.innerHTML = `<span>Saving...</span>`;
+            }
+
+            try {
+                // Map all slots with current modified values
+                const payloadSlots = pageData.slots.map(s => ({
+                    slot_id: s.id,
+                    image: s.image,
+                    focal_x: typeof s.focal_x !== 'undefined' ? s.focal_x : 50.0,
+                    focal_y: typeof s.focal_y !== 'undefined' ? s.focal_y : 50.0,
+                    zoom: typeof s.zoom !== 'undefined' ? s.zoom : 1.00
+                }));
+
+                const res = await fetch('../api/save_slot.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ slots: payloadSlots })
+                });
+
+                const data = await res.json();
+                if (data.success) {
+                    persistDraftToLocalStorage();
+                    showToast(`All changes saved successfully! (${payloadSlots.length} photos)`);
+                } else {
+                    showToast(data.message || 'Failed to save all changes');
+                }
+            } catch (err) {
+                console.error("Batch save error:", err);
+                showToast("Network error while saving all changes.");
+            } finally {
+                if (topBtn) {
+                    topBtn.disabled = false;
+                    topBtn.innerHTML = `
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                            <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                            <polyline points="7 3 7 8 15 8"></polyline>
+                        </svg>
+                        <span>Save All Changes</span>
+                    `;
+                }
+                if (panelBtn) {
+                    panelBtn.disabled = false;
+                    panelBtn.innerHTML = `
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                            <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                            <polyline points="7 3 7 8 15 8"></polyline>
+                        </svg>
+                        <span>Save All</span>
+                    `;
+                }
             }
         }
 
@@ -1414,12 +2077,27 @@ if (!$isLoggedIn) {
                 const data = await res.json();
                 if (data.success && Array.isArray(data.images)) {
                     grid.innerHTML = '';
+                    if (data.images.length === 0) {
+                        grid.innerHTML = '<div style="color: var(--text-muted); padding: 1rem; grid-column: 1 / -1;">No photos in gallery. Upload one above!</div>';
+                        return;
+                    }
                     data.images.forEach(img => {
                         const isMatch = activeSlot && activeSlot.image === img.url;
                         const item = document.createElement('div');
                         item.className = 'gallery-item' + (isMatch ? ' selected' : '');
-                        item.onclick = () => selectGalleryItem(img.url, item);
-                        item.innerHTML = `<img src="${img.url}" alt="${img.name}" loading="lazy">`;
+                        item.onclick = (e) => {
+                            if (e.target.closest('.gallery-item-del-btn')) return;
+                            selectGalleryItem(img.url, item);
+                        };
+                        item.innerHTML = `
+                            <img src="${img.url}" alt="${img.name}" loading="lazy">
+                            <button type="button" class="gallery-item-del-btn" title="Remove photo from gallery" onclick="removeGalleryImage(event, '${img.name}', '${img.url}')">
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </button>
+                        `;
                         grid.appendChild(item);
                         if (isMatch) {
                             selectedGalleryUrl = img.url;
@@ -1432,6 +2110,35 @@ if (!$isLoggedIn) {
             }
         }
 
+        async function removeGalleryImage(e, filename, url) {
+            e.stopPropagation();
+            if (!confirm(`Are you sure you want to remove "${filename}" from the gallery?`)) {
+                return;
+            }
+
+            try {
+                const res = await fetch('../api/delete_gallery_image.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ filename: filename })
+                });
+
+                const data = await res.json();
+                if (data.success) {
+                    showToast("Photo removed from gallery.");
+                    if (selectedGalleryUrl === url) {
+                        selectedGalleryUrl = null;
+                        document.getElementById('applySelectedImageBtn').disabled = true;
+                    }
+                    fetchGalleryImages();
+                } else {
+                    showToast(data.message || "Failed to remove photo.");
+                }
+            } catch (err) {
+                showToast("Network error removing photo.");
+            }
+        }
+
         function selectGalleryItem(url, el) {
             document.querySelectorAll('.gallery-item').forEach(i => i.classList.remove('selected'));
             el.classList.add('selected');
@@ -1441,6 +2148,7 @@ if (!$isLoggedIn) {
 
         function applySelectedGalleryImage() {
             if (!selectedGalleryUrl || !activeSlot) return;
+            pushUndoSnapshot(getSlotSnapshot(activeSlot));
             activeSlot.image = selectedGalleryUrl;
 
             // Update previews
@@ -1448,8 +2156,9 @@ if (!$isLoggedIn) {
             const stageSlotImg = document.querySelector(`#slot-${activeSlot.id} img`);
             if (stageSlotImg) stageSlotImg.src = selectedGalleryUrl;
 
+            persistDraftToLocalStorage();
             closeImageModal();
-            showToast("New photo applied to slot! Click 'Save Slot' to persist.");
+            showToast("New photo applied to slot! Click 'Save' to persist.");
         }
 
         // Upload Handlers
@@ -1488,13 +2197,15 @@ if (!$isLoggedIn) {
                 });
                 const data = await res.json();
                 if (data.success && data.url) {
+                    pushUndoSnapshot(getSlotSnapshot(activeSlot));
                     activeSlot.image = data.url;
                     document.getElementById('insp-preview-img').src = data.url;
                     const stageSlotImg = document.querySelector(`#slot-${activeSlot.id} img`);
                     if (stageSlotImg) stageSlotImg.src = data.url;
 
+                    persistDraftToLocalStorage();
                     closeImageModal();
-                    showToast("Photo uploaded and applied to slot! Click 'Save Slot' to persist.");
+                    showToast("Photo uploaded and applied to slot! Click 'Save' to persist.");
                 } else {
                     showToast(data.message || "Failed to upload photo.");
                 }
@@ -1510,9 +2221,24 @@ if (!$isLoggedIn) {
             setTimeout(() => { toast.classList.remove('show'); }, 3500);
         }
 
-        // Close on escape
+        // Keyboard Shortcuts (Ctrl+Z for Undo, Ctrl+Y or Ctrl+Shift+Z for Redo, Esc for modal)
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') closeImageModal();
+
+            // Ignore when typing inside an input
+            if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+
+            if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z') {
+                e.preventDefault();
+                if (e.shiftKey) {
+                    redoSlotChange();
+                } else {
+                    undoSlotChange();
+                }
+            } else if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'y') {
+                e.preventDefault();
+                redoSlotChange();
+            }
         });
 
         // Initialize Studio

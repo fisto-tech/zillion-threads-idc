@@ -396,177 +396,194 @@
   background: rgba(25, 111, 146, 0.35) !important;
 }
 
-/* Top Icon Navigation - Dark Blue Capsule Toolbar (#152532) */
+/* Top Icon Navigation - Warm Cream Circular Floating Row */
 .top-icon-navigation {
   position: fixed !important;
-  top: 14px !important;
-  right: 24px !important;
-  left: auto !important;
-  transform: none !important;
+  top: 8px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  right: auto !important;
   display: inline-flex !important;
+  flex-direction: row !important;
   align-items: center !important;
-  background: rgba(21, 37, 50, 0.94) !important;
-  backdrop-filter: blur(14px) !important;
-  -webkit-backdrop-filter: blur(14px) !important;
+  justify-content: center !important;
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
   border-radius: 9999px !important;
-  border: 1px solid rgba(255, 255, 255, 0.14) !important;
-  outline: 1px solid #E7BF3F !important;
-  outline-offset: 0px !important;
-  padding: 5px 12px !important;
-  gap: 8px !important;
-  box-shadow: 0 10px 30px rgba(5, 14, 22, 0.55), 0 0 10px rgba(231, 191, 63, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.14) !important;
+  border: none !important;
+  outline: none !important;
+  padding: 0 !important;
+  gap: 12px !important;
+  box-shadow: none !important;
   z-index: 999999 !important;
 }
 
 .top-icon-navigation .nav-btn-group {
   display: flex !important;
   align-items: center !important;
-  gap: 7px !important;
+  gap: 12px !important;
   background: transparent !important;
   border: none !important;
   padding: 0 !important;
 }
 
 .top-icon-navigation .toolbar-divider {
-  width: 1px !important;
-  height: 20px !important;
-  background: rgba(255, 255, 255, 0.22) !important;
-  margin: 0 3px !important;
-  flex-shrink: 0 !important;
+  display: none !important;
 }
 
 .top-icon-navigation .icon-btn {
-  width: 32px !important;
-  height: 32px !important;
+  width: 40px !important;
+  height: 40px !important;
+  min-width: 40px !important;
+  max-width: 40px !important;
+  min-height: 40px !important;
+  max-height: 40px !important;
+  flex: 0 0 40px !important;
+  box-sizing: border-box !important;
   border-radius: 50% !important;
-  background: rgba(255, 255, 255, 0.1) !important;
-  border: 1px solid rgba(255, 255, 255, 0.08) !important;
-  outline: 1px solid rgba(231, 191, 63, 0.4) !important;
-  outline-offset: 0px !important;
-  display: flex !important;
+  background: #F4EFE6 !important;
+  border: none !important;
+  outline: none !important;
+  display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
   cursor: pointer !important;
-  transition: all 0.22s ease !important;
-  box-shadow: none !important;
+  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.14) !important;
   padding: 0 !important;
-  color: #ffffff !important;
+  margin: 0 !important;
+  color: #2D2722 !important;
+  position: relative !important;
 }
 
-.top-icon-navigation .icon-btn img,
-.top-icon-navigation .icon-btn svg {
-  width: 15px !important;
-  height: 15px !important;
+.top-icon-navigation .icon-btn img:not(.hidden),
+.top-icon-navigation .icon-btn svg:not(.hidden) {
+  width: 17px !important;
+  height: 17px !important;
+  max-width: 17px !important;
+  max-height: 17px !important;
+  flex-shrink: 0 !important;
   object-fit: contain !important;
-  filter: brightness(1) invert(0) !important;
-  transition: transform 0.2s ease, filter 0.2s ease !important;
+  display: block !important;
+  margin: auto !important;
+  /* Dark rich charcoal/black icon color (#1A1A1A) */
+  filter: brightness(0) saturate(100%) !important;
+  transition: transform 0.2s ease, filter 0.2s ease, opacity 0.2s ease !important;
+  opacity: 0.88 !important;
 }
 
-/* Hover: Golden theme background (#E7BF3F) with Dark Blue (#152532) icon stroke */
+.top-icon-navigation .icon-btn img.hidden,
+.top-icon-navigation .icon-btn svg.hidden,
+.top-icon-navigation .icon-btn .hidden {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+.top-icon-navigation .icon-btn svg path,
+.top-icon-navigation .icon-btn svg circle,
+.top-icon-navigation .icon-btn svg line,
+.top-icon-navigation .icon-btn svg polyline,
+.top-icon-navigation .icon-btn svg rect {
+  stroke: #1A1A1A !important;
+}
+
+/* Hover: subtle lift and pure white background */
 .top-icon-navigation .icon-btn:hover,
 .top-icon-navigation .nav-btn-group .icon-btn:hover {
-  background: #E7BF3F !important;
-  border-color: #E7BF3F !important;
-  outline: 1px solid #E7BF3F !important;
-  transform: translateY(-1px) scale(1.06) !important;
-  box-shadow: 0 4px 14px rgba(231, 191, 63, 0.45) !important;
+  background: #FFFFFF !important;
+  border: none !important;
+  outline: none !important;
+  transform: translateY(-2px) scale(1.08) !important;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2) !important;
 }
 
 .top-icon-navigation .icon-btn:hover img,
 .top-icon-navigation .icon-btn:hover svg,
 .top-icon-navigation .nav-btn-group .icon-btn:hover img,
 .top-icon-navigation .nav-btn-group .icon-btn:hover svg {
-  /* Filter calculates to #152532 dark blue */
-  filter: invert(13%) sepia(31%) saturate(1210%) hue-rotate(167deg) brightness(91%) contrast(92%) !important;
+  filter: brightness(0) saturate(100%) !important;
+  opacity: 1 !important;
 }
 
 .top-icon-navigation .icon-btn:hover svg path,
 .top-icon-navigation .icon-btn:hover svg circle,
 .top-icon-navigation .icon-btn:hover svg line,
-.top-icon-navigation .nav-btn-group .icon-btn:hover svg path,
-.top-icon-navigation .nav-btn-group .icon-btn:hover svg circle,
-.top-icon-navigation .nav-btn-group .icon-btn:hover svg line {
-  stroke: #152532 !important;
-  fill: none;
+.top-icon-navigation .icon-btn:hover svg polyline,
+.top-icon-navigation .icon-btn:hover svg rect {
+  stroke: #000000 !important;
 }
 
-/* Active Highlight Button (Gold amber glowing gradient) */
+/* Active Highlight Button */
 .top-icon-navigation .icon-btn.active,
 .top-icon-navigation .icon-btn:not(:disabled):focus-visible {
-  background: #E7BF3F !important;
-  border-color: #F8D86A !important;
-  outline: 1px solid #E7BF3F !important;
-  box-shadow: 0 0 16px rgba(231, 191, 63, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.35) !important;
+  background: #ECE3D4 !important;
+  outline: 2px solid #C9972E !important;
+  outline-offset: -2px !important;
+  box-shadow: 0 4px 14px rgba(201, 151, 46, 0.35) !important;
   transform: scale(1.04) !important;
 }
 
-.top-icon-navigation .icon-btn.active img,
-.top-icon-navigation .icon-btn.active svg {
-  filter: invert(13%) sepia(31%) saturate(1210%) hue-rotate(167deg) brightness(91%) contrast(92%) !important;
-}
-
 .top-icon-navigation .icon-btn:disabled {
-  opacity: 0.35 !important;
+  opacity: 0.38 !important;
   cursor: not-allowed !important;
   pointer-events: none !important;
 }
 
-/* Page Controller (Bottom Left Capsule - #152532) */
+/* Page Controller (Bottom Left - Matching Warm Cream/Beige Theme) */
 .page-controller {
   position: fixed !important;
   bottom: 22px !important;
   left: 24px !important;
   top: auto !important;
   right: auto !important;
-  background: rgba(21, 37, 50, 0.94) !important;
+  background: #F4EFE6 !important;
   backdrop-filter: blur(14px) !important;
   -webkit-backdrop-filter: blur(14px) !important;
   border-radius: 9999px !important;
-  border: 1px solid rgba(255, 255, 255, 0.14) !important;
-  outline: 1px solid #E7BF3F !important;
-  outline-offset: 0px !important;
-  padding: 4px 12px 4px 5px !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  outline: none !important;
+  padding: 5px 14px 5px 6px !important;
   display: inline-flex !important;
   align-items: center !important;
   gap: 10px !important;
   z-index: 999999 !important;
-  box-shadow: 0 8px 26px rgba(5, 14, 22, 0.55), 0 0 10px rgba(231, 191, 63, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.14) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.14) !important;
 }
 
 #pageInput {
   width: 38px !important;
   height: 28px !important;
-  background: rgba(231, 191, 63, 0.2) !important;
-  border: 1.5px solid #E7BF3F !important;
-  outline: 1px solid #E7BF3F !important;
-  outline-offset: 0px !important;
-  border-radius: 7px !important;
-  color: #E7BF3F !important;
+  background: #FFFFFF !important;
+  border: 1.5px solid #D5C9B8 !important;
+  outline: none !important;
+  border-radius: 6px !important;
+  color: #1A1A1A !important;
   text-align: center !important;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
   font-weight: 700 !important;
   font-size: 14px !important;
   padding: 0 !important;
-  box-shadow: 0 0 10px rgba(231, 191, 63, 0.3) !important;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+  transition: all 0.2s ease !important;
 }
 
 #pageInput:focus {
-  border-color: #ffde70 !important;
-  outline: 1.5px solid #ffde70 !important;
-  box-shadow: 0 0 14px rgba(231, 191, 63, 0.5) !important;
+  border-color: #A38250 !important;
+  box-shadow: 0 0 0 2px rgba(163, 130, 80, 0.25) !important;
 }
 
 .page-controller .ctrl-sep {
-  color: rgba(255, 255, 255, 0.35) !important;
+  color: #B5A896 !important;
   font-size: 14px !important;
   line-height: 1 !important;
   user-select: none !important;
 }
 
 #totalPages {
-  color: #ffffff !important;
+  color: #2D2722 !important;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
-  font-weight: 600 !important;
+  font-weight: 700 !important;
   font-size: 14px !important;
   min-width: 14px !important;
   text-align: center !important;
@@ -576,18 +593,18 @@
   background: transparent !important;
   border: none !important;
   cursor: pointer !important;
-  padding: 2px !important;
+  padding: 3px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  color: #ffffff !important;
+  color: #1A1A1A !important;
   transition: transform 0.2s ease, color 0.2s ease !important;
 }
 
 .go-btn svg {
   width: 15px !important;
   height: 15px !important;
-  fill: #ffffff !important;
+  fill: #1A1A1A !important;
   transform: rotate(-10deg) !important;
 }
 
@@ -596,35 +613,33 @@
 }
 
 .go-btn:hover svg {
-  fill: #E7BF3F !important;
-  filter: drop-shadow(0 0 6px rgba(231, 191, 63, 0.7)) !important;
+  fill: #8B672B !important;
 }
 
-/* Zoom Control Capsule (Bottom Right - #152532) */
+/* Zoom Control Capsule (Bottom Right - Matching Warm Cream/Beige Theme) */
 .zoom-control-container {
   position: fixed !important;
   bottom: 22px !important;
   right: 24px !important;
   top: auto !important;
   left: auto !important;
-  background: rgba(21, 37, 50, 0.94) !important;
+  background: #F4EFE6 !important;
   backdrop-filter: blur(14px) !important;
   -webkit-backdrop-filter: blur(14px) !important;
   border-radius: 9999px !important;
-  border: 1px solid rgba(255, 255, 255, 0.14) !important;
-  outline: 1px solid #E7BF3F !important;
-  outline-offset: 0px !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  outline: none !important;
   padding: 5px 14px !important;
   display: inline-flex !important;
   align-items: center !important;
   gap: 12px !important;
   z-index: 999999 !important;
-  box-shadow: 0 8px 26px rgba(5, 14, 22, 0.55), 0 0 10px rgba(231, 191, 63, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.14) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.14) !important;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
 }
 
 .zoom-label {
-  color: #ffffff !important;
+  color: #1A1A1A !important;
   font-size: 13.5px !important;
   font-weight: 700 !important;
   letter-spacing: 0.2px !important;
@@ -634,7 +649,7 @@
 .zoom-reset-btn {
   background: transparent !important;
   border: none !important;
-  color: #ffffff !important;
+  color: #1A1A1A !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -644,119 +659,159 @@
   transition: opacity 0.2s ease, transform 0.2s ease, color 0.2s ease !important;
 }
 
+.zoom-reset-btn svg {
+  width: 17px !important;
+  height: 17px !important;
+  stroke: #1A1A1A !important;
+}
+
 .zoom-reset-btn:hover {
   opacity: 1 !important;
-  color: #E7BF3F !important;
   transform: scale(1.15) !important;
+}
+
+.zoom-reset-btn:hover svg {
+  stroke: #8B672B !important;
 }
 
 .zoom-control-container .zoom-btn {
-  background: transparent !important;
-  border: none !important;
-  color: #ffffff !important;
-  font-size: 18px !important;
-  font-weight: 400 !important;
+  background: #FFFFFF !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  color: #1A1A1A !important;
+  font-size: 21px !important;
+  font-weight: 700 !important;
   line-height: 1 !important;
   cursor: pointer !important;
-  padding: 0 4px !important;
-  min-width: 20px !important;
-  height: 24px !important;
+  padding: 0 !important;
+  width: 32px !important;
+  height: 32px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  border-radius: 4px !important;
-  transition: color 0.2s ease, transform 0.2s ease, background 0.2s ease !important;
-  box-shadow: none !important;
+  border-radius: 50% !important;
+  transition: all 0.2s ease !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1) !important;
 }
 
 .zoom-control-container .zoom-btn:hover {
-  color: #152532 !important;
-  background: #E7BF3F !important;
-  transform: scale(1.15) !important;
+  color: #000000 !important;
+  background: #FFFFFF !important;
+  border-color: #8B672B !important;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18) !important;
+  transform: scale(1.1) !important;
 }
 
-/* Screen Edges Large Next / Previous Page Arrows (#152532 background & #E7BF3F hover) */
+/* Screen Edges Large Next / Previous Page Arrows */
 .ui-arrow-next-page,
 .ui-arrow-previous-page {
-  background: #152532 !important;
-  border: 1.5px solid rgba(255, 255, 255, 0.2) !important;
-  outline: 1px solid #E7BF3F !important;
-  outline-offset: 0px !important;
-  box-shadow: 0 6px 20px rgba(21, 37, 50, 0.5), 0 0 10px rgba(231, 191, 63, 0.25) !important;
+  background: #F4EFE6 !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  outline: none !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.16) !important;
 }
 
 .ui-arrow-next-page svg path,
 .ui-arrow-previous-page svg path {
-  stroke: #ffffff !important;
+  stroke: #1A1A1A !important;
 }
 
 .ui-arrow-next-page:hover,
 .ui-arrow-previous-page:hover {
-  background: #E7BF3F !important;
-  border-color: #E7BF3F !important;
-  outline: 1px solid #E7BF3F !important;
-  box-shadow: 0 8px 24px rgba(231, 191, 63, 0.5) !important;
+  background: #FFFFFF !important;
+  border-color: rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22) !important;
 }
 
 .ui-arrow-next-page:hover svg path,
 .ui-arrow-previous-page:hover svg path {
-  stroke: #152532 !important;
+  stroke: #000000 !important;
 }
 
-.mobile-page-display {
-  border: 1.5px solid #196F92 !important;
-  background: rgba(16, 28, 38, 0.95) !important;
-  box-shadow: 0 0 12px rgba(25, 111, 146, 0.3) !important;
+/* ==================== TABLE OF CONTENTS (TOC) THEME OVERRIDES ==================== */
+.toc-floating,
+.toc-floating1,
+.mobile-toc-panel {
+  background: #FDFBF7 !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.16) !important;
+  border-radius: 16px !important;
 }
 
-.mobile-page-current {
-  color: #E7BF3F !important;
+.toc-title {
+  color: #2D2722 !important;
   font-weight: 700 !important;
 }
 
-.mobile-page-total {
-  color: #ffffff !important;
-}
-
-/* Table of Contents Icons & Elements */
-.toc-title {
-  color: #196F92 !important;
-}
-
 .toc-header-underline {
-  background-color: #E7BF3F !important;
+  background-color: #C9972E !important;
 }
 
+.toc-list::before,
+.mobile-toc-list::before {
+  display: none !important;
+}
+
+/* REMOVE CIRCLED NUMBERS FROM TABLE OF CONTENTS */
 .mobile-toc-number {
-  border: 1.5px solid #196F92 !important;
-  color: #196F92 !important;
+  display: none !important;
 }
 
-.toc-list li.active .mobile-toc-number,
-.toc-list a:hover .mobile-toc-number {
-  background: #196F92 !important;
-  border-color: #E7BF3F !important;
-  color: #ffffff !important;
+.toc-list li,
+.mobile-toc-list li {
+  margin: 6px 0 !important;
+}
+
+.toc-list a,
+.mobile-toc-list .mobile-toc-item {
+  color: #332B25 !important;
+  font-weight: 500 !important;
+  padding: 8px 14px !important;
+  border-radius: 8px !important;
+  transition: all 0.2s ease !important;
+  background: transparent !important;
 }
 
 .toc-list li.active a,
-.toc-list a:hover {
-  color: #196F92 !important;
+.toc-list a:hover,
+.mobile-toc-list .mobile-toc-item:hover,
+.mobile-toc-list .mobile-toc-item.active {
+  background: #F2E9DC !important;
+  color: #1A1A1A !important;
+  font-weight: 600 !important;
 }
 
-/* Thumbnail Drawer & Icons */
+/* ==================== THUMBNAIL DRAWER THEME OVERRIDES ==================== */
 .thumbnail-drawer {
-  border: 1.5px solid rgba(25, 111, 146, 0.3) !important;
+  background: #FDFBF7 !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.16) !important;
+  border-radius: 16px !important;
+}
+
+.thumbnail-drawer .toc-title {
+  color: #2D2722 !important;
+}
+
+.thumb-grid-item {
+  border: 2px solid transparent !important;
+  border-radius: 8px !important;
+  padding: 4px !important;
+  background: #F4EFE6 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+  transition: all 0.22s ease !important;
 }
 
 .thumb-grid-item:hover,
 .thumb-grid-item.active {
-  border-color: #196F92 !important;
-  box-shadow: 0 0 12px rgba(25, 111, 146, 0.45) !important;
+  border-color: #C9972E !important;
+  background: #FFFFFF !important;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.16) !important;
+  transform: translateY(-2px) scale(1.02) !important;
 }
 
 .thumb-grid-label {
-  color: #E7BF3F !important;
+  color: #4A3E36 !important;
+  font-weight: 600 !important;
 }
 
 /* Share Popup Theme Overrides */
@@ -802,7 +857,17 @@ button#SearchModal:hover {
   background: #196F92 !important;
   color: #ffffff !important;
   border: 1.5px solid #E7BF3F !important;
-  box-shadow: 0 4px 20px rgba(25, 111, 146, 0.45) !important;
+  box-shadow: 0 6px 25px rgba(25, 111, 146, 0.45) !important;
+  min-width: 260px !important;
+  width: auto !important;
+  max-width: 90vw !important;
+  white-space: nowrap !important;
+  text-align: center !important;
+  font-weight: 600 !important;
+  padding: 10px 24px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
 /* Mobile Nav Bar & Dropdown */
@@ -835,6 +900,60 @@ button#SearchModal:hover {
 .mobile-toggle-indicator.on {
   background: #196F92 !important;
   color: #E7BF3F !important;
+}
+
+/* Hide Table of Contents and Search icons */
+#iconTOC,
+#navToggle,
+#iconText,
+#searchIconDesktop {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* Hide zoom option and numbers on mobile & tablet screens */
+@media (max-width: 1024px) {
+  .mobile-top-nav .mobile-nav-left {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+  }
+
+  .mobile-top-nav .mobile-logo {
+    height: 36px !important;
+    width: auto !important;
+    object-fit: contain !important;
+    display: block !important;
+  }
+
+  .mobile-top-nav .mobile-nav-center {
+    display: none !important;
+  }
+
+  .mobile-page-display {
+    display: none !important;
+    visibility: hidden !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .zoom-control-container,
+  #zoomInBtn,
+  #zoomOutBtn,
+  #zoomResetBtn,
+  #zoomSlider,
+  #zoomPercentage,
+  .zoom-label,
+  .mobile-page-display,
+  .thumbnail-preview-container,
+  .page-controller,
+  .thumb-preview-label,
+  .thumb-grid-label {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
 }
     </style>
 </head>
@@ -875,23 +994,15 @@ button#SearchModal:hover {
 
         <!-- ==================== MOBILE TOP NAVIGATION ==================== -->
         <div id="mobileTopNav" class="mobile-top-nav">
-            <!-- Left Section: Table of Contents -->
+            <!-- Left Section: Logo on Left for Mobile & Tablet -->
             <div class="mobile-nav-left">
-                <button class="mobile-nav-btn" id="mobileTocBtn" title="Table of Contents">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="3" y1="6" x2="21" y2="6" />
-                        <line x1="3" y1="12" x2="21" y2="12" />
-                        <line x1="3" y1="18" x2="21" y2="18" />
-                    </svg>
-                </button>
-            </div>
-
-            <!-- Center Section: Logo (optional) -->
-            <div class="mobile-nav-center">
                 <img src="../global%20assets/Images/logo.svg" alt="Sri Mathurams Medical Engineering Logo" class="mobile-logo" id="mobileHomeBtn" />
             </div>
 
-            <!-- Right Section: 3-dot menu + Page Number -->
+            <!-- Center Section -->
+            <div class="mobile-nav-center"></div>
+
+            <!-- Right Section: 3-dot menu -->
             <div class="mobile-nav-right">
                 <!-- Page Number Display -->
                 <div class="mobile-page-display">
@@ -1092,59 +1203,39 @@ button#SearchModal:hover {
         </div>
 
         <div id="topIconNav" class="top-icon-navigation">
-            <!-- Group 1: Navigation Controls (First page, Play, Last page) -->
-            <div class="nav-btn-group">
-                <button class="icon-btn" id="iconFrontPage" title="First Page" disabled>
-                    <img src="../global%20assets/bottom-navbar/previous-play-icon.svg" alt="Go to First Page" />
-                </button>
-                <button class="icon-btn" id="iconAutoplay" title="Autoplay">
-                    <img src="../global%20assets/bottom-navbar/play-icon.svg" alt="Autoplay Catalog Slideshow" />
-                </button>
-                <button class="icon-btn" id="iconSkipForward" title="Last Page">
-                    <img src="../global%20assets/bottom-navbar/next-play-icon.svg" alt="Go to Last Page" />
-                </button>
-            </div>
-
-            <div class="toolbar-divider"></div>
-
-            <!-- TOC Button -->
-            <button class="icon-btn" id="iconTOC" title="Table of Contents">
-                <img src="../global%20assets/bottom-navbar/table-of-content-icon.svg" alt="Table of Contents Navigation" />
-            </button>
-
-            <!-- Thumbnail Grid Button -->
+            <!-- 1. Thumbnail Grid View (First) -->
             <button class="icon-btn" id="desktopThumbToggle" title="Thumbnails">
-                <img src="../global%20assets/bottom-navbar/thumbnail-icon.svg" alt="Thumbnail View Navigation" />
+                <img src="../global%20assets/bottom-navbar/thumbnail-icon.svg" alt="Thumbnails" />
             </button>
 
-            <!-- Search Button -->
-            <button class="icon-btn" id="iconText" title="Search">
-                <img src="../global%20assets/bottom-navbar/search-icon.svg" alt="search-icon" />
-            </button>
-
-            <!-- Audio Toggle -->
+            <!-- 2. Audio Toggle -->
             <button class="icon-btn bgm-toggle" id="bgmButton" title="Audio">
                 <audio id="bgmAudio" loop autoplay>
-                    <source src="../audios/Warm-Memories-Emotional-" type="audio/mpeg">
+                    <source src="../audios/keys-of-moon-white-petals(chosic.com).mp3" type="audio/mpeg">
                 </audio>
                 <img id="musicOnImg" src="../global%20assets/bottom-navbar/music-on-icon.svg" alt="Music On" />
-                <img id="musicOffImg" src="../global%20assets/bottom-navbar/music-on-icon.svg" alt="Music Off"
-                    class="hidden" style="filter: opacity(0.3) grayscale(1);" />
+                <img id="musicOffImg" src="../global%20assets/icons/music-off-icon.svg" alt="Music Off"
+                    class="hidden" />
             </button>
 
-            <!-- Fullscreen Button -->
-            <button class="icon-btn full-screen" id="full-screen-btn" title="Fullscreen">
-                <img src="../global%20assets/bottom-navbar/full-screen-icon.svg" alt="Toggle Fullscreen" />
+            <!-- 3. Autoplay Slideshow -->
+            <button class="icon-btn" id="iconAutoplay" title="Autoplay">
+                <img src="../global%20assets/bottom-navbar/play-icon.svg" alt="Autoplay" />
             </button>
 
-            <!-- Share Button -->
+            <!-- 4. Share -->
             <button class="icon-btn" id="shareBtn" title="Share">
                 <img src="../global%20assets/bottom-navbar/share-icon.svg" alt="Share Catalog" />
             </button>
 
-            <!-- Download Button -->
+            <!-- 5. Download -->
             <button class="icon-btn" id="download-btn" title="Download">
                 <img src="../global%20assets/bottom-navbar/download-icon.svg" alt="Download PDF Catalog" />
+            </button>
+
+            <!-- 6. Fullscreen -->
+            <button class="icon-btn full-screen" id="full-screen-btn" title="Fullscreen">
+                <img src="../global%20assets/bottom-navbar/full-screen-icon.svg" alt="Fullscreen" />
             </button>
         </div>
 
@@ -1761,9 +1852,9 @@ button#SearchModal:hover {
                     <!-- *******************************  Page 5 Start *************************** -->
                 <div class="page page-animated page-5">
                     <img src="../global%20assets/Images/commonThings/left-page-shadow.svg" alt="left-page-shadow"
-                            class="gutter-shadow shadow-left absolute h-[100%] top-[0%] right-[-1%] z-[4]" />
+                            class="gutter-shadow hidden shadow-left absolute h-[100%] top-[0%] right-[-1%] z-[4]" />
                     <img src="../global%20assets/Images/commonThings/right-page-shadow.svg" alt="right-page-shadow"
-                            class="gutter-shadow hidden shadow-right absolute h-[100%] top-[0%] left-[-1%] z-[4]" />
+                            class="gutter-shadow  shadow-right absolute h-[100%] top-[0%] left-[-1%] z-[4]" />
 
                     <!-- Yarika Collections Absolute Canvas Stage (3:4 ratio) -->
                     <div class="yarika-page-stage" id="yarika-stage-page5" data-page="page5">
@@ -1943,36 +2034,12 @@ button#SearchModal:hover {
             <div class="thumb-dot" data-page="6">
                 <div class="thumb-preview">
                     <div class="thumb-preview-card">
-                        <img src="../global%20assets/Images/Thumbnail-Images/page-6-7.webp" alt="Page 6-7"
+                        <img src="../global%20assets/Images/Thumbnail-Images/page-6.webp" alt="Page 6-7"
                             class="thumb-preview-image">
-                        <div class="thumb-preview-label">Page 6-7</div>
+                        <div class="thumb-preview-label">Page 6</div>
                     </div>
                 </div>
             </div>
-
-            <!-- Page 8-9 -->
-            <div class="thumb-dot" data-page="8">
-                <div class="thumb-preview">
-                    <div class="thumb-preview-card">
-                        <img src="../global%20assets/Images/Thumbnail-Images/page-8-9.webp" alt="Page 8-9"
-                            class="thumb-preview-image">
-                        <div class="thumb-preview-label">Page 8-9</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Page 10-11 -->
-            <div class="thumb-dot" data-page="10">
-                <div class="thumb-preview">
-                    <div class="thumb-preview-card">
-                        <img src="../global%20assets/Images/Thumbnail-Images/page-10-11.webp" alt="Page 10-11"
-                            class="thumb-preview-image">
-                        <div class="thumb-preview-label">Page 10-11</div>
-                    </div>
-                </div>
-            </div>
-
-            
 
         </div>
 
@@ -2818,6 +2885,8 @@ button#SearchModal:hover {
     </script>
 
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script type="text/javascript" src="script.js"></script>
     <script type="text/javascript" src="main.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -3143,7 +3212,17 @@ button#SearchModal:hover {
             }
 
             if (mobileTocBtn) {
-                mobileTocBtn.addEventListener('click', openToc);
+                mobileTocBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const desktopThumbToggle = document.getElementById('desktopThumbToggle');
+                    if (desktopThumbToggle) {
+                        desktopThumbToggle.click();
+                    } else if (typeof window.toggleThumbDrawer === 'function') {
+                        window.toggleThumbDrawer();
+                    } else {
+                        openToc();
+                    }
+                });
             }
 
             if (mobileTocClose) {

@@ -549,24 +549,47 @@ window.addEventListener('load', function () {
         }
     }
 
-    function toggleMusic() {
+    function toggleMusic(e) {
+        if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
         if (!bgmAudio) return;
 
-        if (isPlaying) {
+        // Check the actual audio element state rather than a variable
+        if (!bgmAudio.paused && !bgmAudio.ended && bgmAudio.currentTime > 0) {
             bgmAudio.pause();
+            isPlaying = false;
+            updateIcons(false);
         } else {
-            bgmAudio.play().catch((error) => {
-                console.log('Could not play music:', error);
-            });
+            bgmAudio.volume = 0.50;
+            const playPromise = bgmAudio.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    isPlaying = true;
+                    updateIcons(true);
+                }).catch((error) => {
+                    console.error('Audio play error:', error);
+                });
+            }
         }
     }
 
     // Event listeners
-    if (bgmButton) bgmButton.addEventListener('click', toggleMusic);
-    if (mobileAudioIcon) mobileAudioIcon.addEventListener('click', toggleMusic);
-    if (mobileAudioBtn) mobileAudioBtn.addEventListener('click', toggleMusic);
+    if (bgmButton) {
+        bgmButton.removeEventListener('click', toggleMusic);
+        bgmButton.addEventListener('click', toggleMusic);
+    }
+    if (mobileAudioIcon) {
+        mobileAudioIcon.removeEventListener('click', toggleMusic);
+        mobileAudioIcon.addEventListener('click', toggleMusic);
+    }
+    if (mobileAudioBtn) {
+        mobileAudioBtn.removeEventListener('click', toggleMusic);
+        mobileAudioBtn.addEventListener('click', toggleMusic);
+    }
 
-    // Sync with actual audio state
+    // Sync with actual audio state events
     if (bgmAudio) {
         bgmAudio.addEventListener('pause', () => {
             isPlaying = false;
@@ -574,6 +597,11 @@ window.addEventListener('load', function () {
         });
 
         bgmAudio.addEventListener('play', () => {
+            isPlaying = true;
+            updateIcons(true);
+        });
+
+        bgmAudio.addEventListener('playing', () => {
             isPlaying = true;
             updateIcons(true);
         });
@@ -870,35 +898,206 @@ document.getElementById("SearchModal")?.addEventListener("click", (e) => {
 const downloadBtn = document.getElementById("download-btn");
 const navMobileDownloadIcon = document.getElementById("navMobileDownloadIcon");
 const downloadPopup = document.getElementById("downloadPopup");
+let isGeneratingPdf = false;
 
-downloadBtn.addEventListener("click", () => {
-    startDownload();
-});
-navMobileDownloadIcon.addEventListener("click", () => {
-    startDownload();
-});
+if (downloadBtn) {
+    downloadBtn.addEventListener("click", () => {
+        startCatalogPdfDownload();
+    });
+}
+if (navMobileDownloadIcon) {
+    navMobileDownloadIcon.addEventListener("click", () => {
+        startCatalogPdfDownload();
+    });
+}
 
-function startDownload() {
-
-    // 1. Show notification popup
+function showDownloadToast(text, autoHideMs = 0) {
+    if (!downloadPopup) return;
+    downloadPopup.textContent = text;
     downloadPopup.classList.remove("hidden");
-    setTimeout(() => {
+    requestAnimationFrame(() => {
         downloadPopup.classList.add("opacity-100");
-    }, 10);
+    });
 
-    // 2. Auto-hide popup after 2 seconds
-    setTimeout(() => {
-        downloadPopup.classList.remove("opacity-100");
-        setTimeout(() => downloadPopup.classList.add("hidden"), 300);
-    }, 2000);
+    if (autoHideMs > 0) {
+        setTimeout(() => {
+            downloadPopup.classList.remove("opacity-100");
+            setTimeout(() => downloadPopup.classList.add("hidden"), 300);
+        }, autoHideMs);
+    }
+}
 
-    // 3. Trigger PDF download
-    const link = document.createElement("a");
-    link.href = "../global%20assets/Mathurams_IDC.pdf";   // <<-- put your PDF file path
-    link.download = "Mathurams_IDC.pdf";                 // <<-- filename user will download
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
+function hideDownloadToast() {
+    if (!downloadPopup) return;
+    downloadPopup.classList.remove("opacity-100");
+    setTimeout(() => downloadPopup.classList.add("hidden"), 300);
+}
+
+async function startCatalogPdfDownload() {
+    if (isGeneratingPdf) return;
+    isGeneratingPdf = true;
+
+    // Check if html2canvas and jsPDF are loaded
+    if (typeof html2canvas === "undefined" || (typeof window.jspdf === "undefined" && typeof jsPDF === "undefined")) {
+        showDownloadToast("Loading PDF engine...", 2000);
+        // Fallback direct link
+        const fallback = document.createElement("a");
+        fallback.href = "../global%20assets/Mathurams_IDC.pdf";
+        fallback.download = "ZillionThreads_Catalog.pdf";
+        document.body.appendChild(fallback);
+        fallback.click();
+        fallback.remove();
+        isGeneratingPdf = false;
+        return;
+    }
+
+    const { jsPDF } = window.jspdf || window;
+
+    try {
+        showDownloadToast("Preparing PDF: capturing pages...", 0);
+
+        // Standard Page dimensions (4:5 ratio matching Yarika catalog standard, 800x1000px)
+        const targetWidth = 800;
+        const targetHeight = 1000;
+
+        // Create PDF document (portrait, mm units, A4)
+        const pdf = new jsPDF({
+            orientation: "portrait",
+            unit: "mm",
+            format: "a4",
+            compress: true
+        });
+
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = pdf.internal.pageSize.getHeight();
+
+        // Make sure all SVGs on all pages are fully loaded into the DOM before capturing
+        if (typeof loadSVGs === "function") {
+            try { loadSVGs(); } catch (e) {}
+        }
+
+        // Define the 6 pages configuration:
+        // Pages 1, 2, 3, 6 use the direct vector SVGs from global assets/Images/home-page/
+        // Pages 4 and 5 use the live customized Yarika collage stage
+        const catalogPagesConfig = [
+            { pageNum: 1, type: 'svg', src: '../global assets/Images/home-page/home-page-image.svg' },
+            { pageNum: 2, type: 'svg', src: '../global assets/Images/home-page/problems-page.svg' },
+            { pageNum: 3, type: 'svg', src: '../global assets/Images/home-page/opportunities-page.svg' },
+            { pageNum: 4, type: 'stage', selector: '#yarika-stage-page4', pageKey: 'page4' },
+            { pageNum: 5, type: 'stage', selector: '#yarika-stage-page5', pageKey: 'page5' },
+            { pageNum: 6, type: 'svg', src: '../global assets/Images/home-page/contact-page.svg' }
+        ];
+
+        let renderedCount = 0;
+
+        for (let i = 0; i < catalogPagesConfig.length; i++) {
+            const pageCfg = catalogPagesConfig[i];
+            showDownloadToast(`Generating PDF: Page ${pageCfg.pageNum} of ${catalogPagesConfig.length}...`, 0);
+
+            // Create offscreen container
+            const sandbox = document.createElement('div');
+            sandbox.style.position = 'fixed';
+            sandbox.style.left = '-9999px';
+            sandbox.style.top = '0';
+            sandbox.style.width = targetWidth + 'px';
+            sandbox.style.height = targetHeight + 'px';
+            sandbox.style.background = '#FFFFFF';
+            sandbox.style.overflow = 'hidden';
+            sandbox.style.zIndex = '-9999';
+
+            if (pageCfg.type === 'svg') {
+                // Fetch the clean original SVG image directly without runtime reveal animation styles
+                try {
+                    const resp = await fetch(pageCfg.src);
+                    const svgText = await resp.text();
+                    const parser = new DOMParser();
+                    const svgDoc = parser.parseFromString(svgText, "image/svg+xml");
+                    const svgEl = svgDoc.querySelector("svg");
+                    if (svgEl) {
+                        svgEl.removeAttribute("width");
+                        svgEl.removeAttribute("height");
+                        svgEl.setAttribute("width", "100%");
+                        svgEl.setAttribute("height", "100%");
+                        svgEl.style.width = "100%";
+                        svgEl.style.height = "100%";
+                        svgEl.style.display = "block";
+                        // Ensure all elements inside the pure SVG have full opacity
+                        svgEl.querySelectorAll('*').forEach(node => {
+                            node.style.opacity = '1';
+                            node.style.visibility = 'visible';
+                        });
+                        sandbox.appendChild(svgEl);
+                    }
+                } catch (e) {
+                    console.error("Failed loading SVG directly for page " + pageCfg.pageNum, e);
+                }
+            } else if (pageCfg.type === 'stage') {
+                // Live customized Yarika stage for Pages 4 & 5
+                const origStage = document.querySelector(pageCfg.selector) || document.querySelector(`.page-${pageCfg.pageNum} .yarika-page-stage`);
+                if (origStage) {
+                    const clone = origStage.cloneNode(true);
+                    clone.style.width = '100%';
+                    clone.style.height = '100%';
+                    clone.style.position = 'relative';
+                    clone.style.backgroundSize = 'cover';
+                    clone.style.backgroundPosition = 'center';
+                    // Remove calibration overlays if present
+                    clone.querySelectorAll('.calibrate-overlay-img, .slot-id-label').forEach(e => e.remove());
+                    clone.querySelectorAll('.slot, .slot img, .yarika-heading-bar, img, text').forEach(el => {
+                        el.style.opacity = '1';
+                        el.style.visibility = 'visible';
+                    });
+                    sandbox.appendChild(clone);
+                }
+            }
+
+            document.body.appendChild(sandbox);
+
+            // Brief pause for layout rendering
+            await new Promise(r => setTimeout(r, 60));
+
+            // Capture to canvas
+            const canvas = await html2canvas(sandbox, {
+                width: targetWidth,
+                height: targetHeight,
+                scale: 1.5,
+                useCORS: true,
+                allowTaint: true,
+                backgroundColor: '#FFFFFF',
+                logging: false
+            });
+
+            document.body.removeChild(sandbox);
+
+            const imgData = canvas.toDataURL('image/jpeg', 0.92);
+
+            if (renderedCount > 0) {
+                pdf.addPage('a4', 'portrait');
+            }
+
+            pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight, undefined, 'FAST');
+            renderedCount++;
+        }
+
+        showDownloadToast("Download ready! Saving...", 1500);
+
+        // Save PDF with requested filename
+        pdf.save("ZillionThreads_Catalog.pdf");
+
+    } catch (err) {
+        console.error("[CatalogPDF] PDF generation error:", err);
+        showDownloadToast("Download error, using direct file...", 2000);
+        // Fallback direct download
+        const fallback = document.createElement("a");
+        fallback.href = "../global%20assets/Mathurams_IDC.pdf";
+        fallback.download = "ZillionThreads_Catalog.pdf";
+        document.body.appendChild(fallback);
+        fallback.click();
+        fallback.remove();
+    } finally {
+        isGeneratingPdf = false;
+        setTimeout(() => hideDownloadToast(), 2500);
+    }
 }
 // ***********************************download code end******************************************
 
@@ -1805,18 +2004,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (!thumbGrid || !thumbDrawer) return;
 
-    // Generate thumbnails dynamically for 42 pages
-    // Page 1 (Single)
+    // Generate thumbnails dynamically for only the 6 catalog pages:
+    // Page 1 (Single cover)
     createThumbItem(1, 'page 1', '../global%20assets/Images/Thumbnail-Images/page-1.webp');
 
-    // Pages 2-3, 4-5, ..., 38-39 (Double pages)
-    for (let p = 2; p <= 38; p += 2) {
-        const imgSrc = `../global%20assets/Images/Thumbnail-Images/page-${p}-${p + 1}.webp`;
-        createThumbItem(p, `page ${p}-${p + 1}`, imgSrc);
-    }
+    // Pages 2-3 (Double page spread)
+    createThumbItem(2, 'page 2-3', '../global%20assets/Images/Thumbnail-Images/page-2-3.webp');
 
-    // Page 40 (Single page cover - same portrait size as Page 1)
-    createThumbItem(40, 'page 40', '../global%20assets/Images/Thumbnail-Images/page-40.webp');
+    // Pages 4-5 (Double page spread - Yarika Collections)
+    createThumbItem(4, 'page 4-5', '../global%20assets/Images/Thumbnail-Images/page-4-5.webp');
+
+    // Page 6 (Single contact/back page)
+    createThumbItem(6, 'page 6', '../global%20assets/Images/Thumbnail-Images/page-6.webp');
 
     function createThumbItem(pageNumber, label, imageSrc) {
         const item = document.createElement('div');
