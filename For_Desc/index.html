@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <title>Zillion Threads IDC</title>
     <meta charset="UTF-8">
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https: blob: data: http://localhost:8000 http://127.0.0.1:8000; script-src 'self' 'unsafe-inline' 'unsafe-eval' https: blob: data:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: blob: https: http:; connect-src 'self' https: blob: data: http://localhost:8000 http://127.0.0.1:8000; worker-src 'self' blob:; frame-src 'self' https:; media-src 'self' blob: data:;" />
+        content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https: blob: data:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https: blob: data:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: blob: https: http:; connect-src 'self' https: blob: data: http://localhost:8000 http://127.0.0.1:8000; worker-src 'self' blob:; frame-src 'self' https:; media-src 'self' blob: data:;" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Tailwind Css  -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
@@ -63,7 +63,9 @@
         rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Noto+Sans+Tamil:wght@400;500;600;700;800&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Noto+Sans+Tamil:wght@400;500;600;700;800&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
 
     <link rel="stylesheet" href="./assets/css/cataloguemain.css">
 
@@ -141,17 +143,7 @@
         .midsec img {
             width: 77%;
             object-fit: contain;
-            animation: fadeIn 0.5s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
+            transition: opacity 0.3s ease;
         }
 
 
@@ -344,626 +336,888 @@
             }
         }
 
-/* Mobile Phones */
-@media screen and (max-width: 480px) {
-  #flipbook {
-    position: relative;
-    width: 354px;
-    height: 504px;
-    margin-left: 0px;
-    top: 45px !important;
-    left: 0px;
-    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    transform: scale(1);
-    transform-origin: center top;
-  }
-}
-
-/* Large-Height Mobile Phones */
-@media screen and (max-width: 480px) and (min-height: 800px) {
-  #flipbook {
-    top: 60px !important;
-    /* Add large-height mobile adjustments here */
-  }
-}
-
-/* ==================== THEME COLOR OVERRIDES (#196F92 & #E7BF3F) ==================== */
-:root {
-  --zt-theme-primary: #196F92;
-  --zt-theme-gold: #E7BF3F;
-}
-
-/* Desktop & Mobile Icon Active / Focus / Hover States (Except Top Icon Nav) */
-:not(.top-icon-navigation) > .icon-btn:hover,
-:not(.top-icon-navigation) > .icon-btn.active,
-:not(.top-icon-navigation) > .icon-btn:focus-visible {
-  border-color: #E7BF3F !important;
-  background: rgba(25, 111, 146, 0.25) !important;
-  box-shadow: 0 4px 14px rgba(25, 111, 146, 0.4) !important;
-}
-
-:not(.top-icon-navigation) > .icon-btn:hover img,
-:not(.top-icon-navigation) > .icon-btn.active img,
-:not(.top-icon-navigation) > .icon-btn:hover svg,
-:not(.top-icon-navigation) > .icon-btn.active svg {
-  filter: invert(41%) sepia(37%) saturate(1476%) hue-rotate(156deg) brightness(93%) contrast(92%) !important;
-}
-
-/* Audio / Music Button Toggle Active */
-.icon-btn.bgm-toggle.music-active,
-.icon-btn.bgm-toggle.active {
-  border-color: #E7BF3F !important;
-  background: rgba(25, 111, 146, 0.35) !important;
-}
-
-/* Top Icon Navigation - Warm Cream Circular Floating Row */
-.top-icon-navigation {
-  position: fixed !important;
-  top: 8px !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  right: auto !important;
-  display: inline-flex !important;
-  flex-direction: row !important;
-  align-items: center !important;
-  justify-content: center !important;
-  background: transparent !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  border-radius: 9999px !important;
-  border: none !important;
-  outline: none !important;
-  padding: 0 !important;
-  gap: 12px !important;
-  box-shadow: none !important;
-  z-index: 999999 !important;
-}
-
-.top-icon-navigation .nav-btn-group {
-  display: flex !important;
-  align-items: center !important;
-  gap: 12px !important;
-  background: transparent !important;
-  border: none !important;
-  padding: 0 !important;
-}
-
-.top-icon-navigation .toolbar-divider {
-  display: none !important;
-}
-
-.top-icon-navigation .icon-btn {
-  width: 40px !important;
-  height: 40px !important;
-  min-width: 40px !important;
-  max-width: 40px !important;
-  min-height: 40px !important;
-  max-height: 40px !important;
-  flex: 0 0 40px !important;
-  box-sizing: border-box !important;
-  border-radius: 50% !important;
-  background: #F4EFE6 !important;
-  border: none !important;
-  outline: none !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  cursor: pointer !important;
-  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.14) !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  color: #2D2722 !important;
-  position: relative !important;
-}
-
-.top-icon-navigation .icon-btn img:not(.hidden),
-.top-icon-navigation .icon-btn svg:not(.hidden) {
-  width: 17px !important;
-  height: 17px !important;
-  max-width: 17px !important;
-  max-height: 17px !important;
-  flex-shrink: 0 !important;
-  object-fit: contain !important;
-  display: block !important;
-  margin: auto !important;
-  /* Dark rich charcoal/black icon color (#1A1A1A) */
-  filter: brightness(0) saturate(100%) !important;
-  transition: transform 0.2s ease, filter 0.2s ease, opacity 0.2s ease !important;
-  opacity: 0.88 !important;
-}
-
-.top-icon-navigation .icon-btn img.hidden,
-.top-icon-navigation .icon-btn svg.hidden,
-.top-icon-navigation .icon-btn .hidden {
-  display: none !important;
-  visibility: hidden !important;
-}
-
-.top-icon-navigation .icon-btn svg path,
-.top-icon-navigation .icon-btn svg circle,
-.top-icon-navigation .icon-btn svg line,
-.top-icon-navigation .icon-btn svg polyline,
-.top-icon-navigation .icon-btn svg rect {
-  stroke: #1A1A1A !important;
-}
-
-/* Hover: subtle lift and pure white background */
-.top-icon-navigation .icon-btn:hover,
-.top-icon-navigation .nav-btn-group .icon-btn:hover {
-  background: #FFFFFF !important;
-  border: none !important;
-  outline: none !important;
-  transform: translateY(-2px) scale(1.08) !important;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2) !important;
-}
-
-.top-icon-navigation .icon-btn:hover img,
-.top-icon-navigation .icon-btn:hover svg,
-.top-icon-navigation .nav-btn-group .icon-btn:hover img,
-.top-icon-navigation .nav-btn-group .icon-btn:hover svg {
-  filter: brightness(0) saturate(100%) !important;
-  opacity: 1 !important;
-}
-
-.top-icon-navigation .icon-btn:hover svg path,
-.top-icon-navigation .icon-btn:hover svg circle,
-.top-icon-navigation .icon-btn:hover svg line,
-.top-icon-navigation .icon-btn:hover svg polyline,
-.top-icon-navigation .icon-btn:hover svg rect {
-  stroke: #000000 !important;
-}
-
-/* Active Highlight Button */
-.top-icon-navigation .icon-btn.active,
-.top-icon-navigation .icon-btn:not(:disabled):focus-visible {
-  background: #ECE3D4 !important;
-  outline: 2px solid #C9972E !important;
-  outline-offset: -2px !important;
-  box-shadow: 0 4px 14px rgba(201, 151, 46, 0.35) !important;
-  transform: scale(1.04) !important;
-}
-
-.top-icon-navigation .icon-btn:disabled {
-  opacity: 0.38 !important;
-  cursor: not-allowed !important;
-  pointer-events: none !important;
-}
-
-/* Page Controller (Bottom Left - Matching Warm Cream/Beige Theme) */
-.page-controller {
-  position: fixed !important;
-  bottom: 22px !important;
-  left: 24px !important;
-  top: auto !important;
-  right: auto !important;
-  background: #F4EFE6 !important;
-  backdrop-filter: blur(14px) !important;
-  -webkit-backdrop-filter: blur(14px) !important;
-  border-radius: 9999px !important;
-  border: 1px solid rgba(0, 0, 0, 0.08) !important;
-  outline: none !important;
-  padding: 5px 14px 5px 6px !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  gap: 10px !important;
-  z-index: 999999 !important;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.14) !important;
-}
-
-#pageInput {
-  width: 38px !important;
-  height: 28px !important;
-  background: #FFFFFF !important;
-  border: 1.5px solid #D5C9B8 !important;
-  outline: none !important;
-  border-radius: 6px !important;
-  color: #1A1A1A !important;
-  text-align: center !important;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
-  font-weight: 700 !important;
-  font-size: 14px !important;
-  padding: 0 !important;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08) !important;
-  transition: all 0.2s ease !important;
-}
-
-#pageInput:focus {
-  border-color: #A38250 !important;
-  box-shadow: 0 0 0 2px rgba(163, 130, 80, 0.25) !important;
-}
-
-.page-controller .ctrl-sep {
-  color: #B5A896 !important;
-  font-size: 14px !important;
-  line-height: 1 !important;
-  user-select: none !important;
-}
-
-#totalPages {
-  color: #2D2722 !important;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
-  font-weight: 700 !important;
-  font-size: 14px !important;
-  min-width: 14px !important;
-  text-align: center !important;
-}
-
-.go-btn {
-  background: transparent !important;
-  border: none !important;
-  cursor: pointer !important;
-  padding: 3px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  color: #1A1A1A !important;
-  transition: transform 0.2s ease, color 0.2s ease !important;
-}
-
-.go-btn svg {
-  width: 15px !important;
-  height: 15px !important;
-  fill: #1A1A1A !important;
-  transform: rotate(-10deg) !important;
-}
-
-.go-btn:hover {
-  transform: scale(1.18) !important;
-}
-
-.go-btn:hover svg {
-  fill: #8B672B !important;
-}
-
-/* Zoom Control Capsule (Bottom Right - Matching Warm Cream/Beige Theme) */
-.zoom-control-container {
-  position: fixed !important;
-  bottom: 22px !important;
-  right: 24px !important;
-  top: auto !important;
-  left: auto !important;
-  background: #F4EFE6 !important;
-  backdrop-filter: blur(14px) !important;
-  -webkit-backdrop-filter: blur(14px) !important;
-  border-radius: 9999px !important;
-  border: 1px solid rgba(0, 0, 0, 0.08) !important;
-  outline: none !important;
-  padding: 5px 14px !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  gap: 12px !important;
-  z-index: 999999 !important;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.14) !important;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
-}
-
-.zoom-label {
-  color: #1A1A1A !important;
-  font-size: 13.5px !important;
-  font-weight: 700 !important;
-  letter-spacing: 0.2px !important;
-  user-select: none !important;
-}
-
-.zoom-reset-btn {
-  background: transparent !important;
-  border: none !important;
-  color: #1A1A1A !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  cursor: pointer !important;
-  padding: 0 !important;
-  opacity: 0.85 !important;
-  transition: opacity 0.2s ease, transform 0.2s ease, color 0.2s ease !important;
-}
-
-.zoom-reset-btn svg {
-  width: 17px !important;
-  height: 17px !important;
-  stroke: #1A1A1A !important;
-}
-
-.zoom-reset-btn:hover {
-  opacity: 1 !important;
-  transform: scale(1.15) !important;
-}
-
-.zoom-reset-btn:hover svg {
-  stroke: #8B672B !important;
-}
-
-.zoom-control-container .zoom-btn {
-  background: #FFFFFF !important;
-  border: 1px solid rgba(0, 0, 0, 0.1) !important;
-  color: #1A1A1A !important;
-  font-size: 21px !important;
-  font-weight: 700 !important;
-  line-height: 1 !important;
-  cursor: pointer !important;
-  padding: 0 !important;
-  width: 32px !important;
-  height: 32px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  border-radius: 50% !important;
-  transition: all 0.2s ease !important;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1) !important;
-}
-
-.zoom-control-container .zoom-btn:hover {
-  color: #000000 !important;
-  background: #FFFFFF !important;
-  border-color: #8B672B !important;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18) !important;
-  transform: scale(1.1) !important;
-}
-
-/* Screen Edges Large Next / Previous Page Arrows */
-.ui-arrow-next-page,
-.ui-arrow-previous-page {
-  background: #F4EFE6 !important;
-  border: 1px solid rgba(0, 0, 0, 0.08) !important;
-  outline: none !important;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.16) !important;
-}
-
-.ui-arrow-next-page svg path,
-.ui-arrow-previous-page svg path {
-  stroke: #1A1A1A !important;
-}
-
-.ui-arrow-next-page:hover,
-.ui-arrow-previous-page:hover {
-  background: #FFFFFF !important;
-  border-color: rgba(0, 0, 0, 0.12) !important;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22) !important;
-}
-
-.ui-arrow-next-page:hover svg path,
-.ui-arrow-previous-page:hover svg path {
-  stroke: #000000 !important;
-}
-
-/* ==================== TABLE OF CONTENTS (TOC) THEME OVERRIDES ==================== */
-.toc-floating,
-.toc-floating1,
-.mobile-toc-panel {
-  background: #FDFBF7 !important;
-  border: 1px solid rgba(0, 0, 0, 0.08) !important;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.16) !important;
-  border-radius: 16px !important;
-}
-
-.toc-title {
-  color: #2D2722 !important;
-  font-weight: 700 !important;
-}
-
-.toc-header-underline {
-  background-color: #C9972E !important;
-}
-
-.toc-list::before,
-.mobile-toc-list::before {
-  display: none !important;
-}
-
-/* REMOVE CIRCLED NUMBERS FROM TABLE OF CONTENTS */
-.mobile-toc-number {
-  display: none !important;
-}
-
-.toc-list li,
-.mobile-toc-list li {
-  margin: 6px 0 !important;
-}
-
-.toc-list a,
-.mobile-toc-list .mobile-toc-item {
-  color: #332B25 !important;
-  font-weight: 500 !important;
-  padding: 8px 14px !important;
-  border-radius: 8px !important;
-  transition: all 0.2s ease !important;
-  background: transparent !important;
-}
-
-.toc-list li.active a,
-.toc-list a:hover,
-.mobile-toc-list .mobile-toc-item:hover,
-.mobile-toc-list .mobile-toc-item.active {
-  background: #F2E9DC !important;
-  color: #1A1A1A !important;
-  font-weight: 600 !important;
-}
-
-/* ==================== THUMBNAIL DRAWER THEME OVERRIDES ==================== */
-.thumbnail-drawer {
-  background: #FDFBF7 !important;
-  border: 1px solid rgba(0, 0, 0, 0.08) !important;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.16) !important;
-  border-radius: 16px !important;
-}
-
-.thumbnail-drawer .toc-title {
-  color: #2D2722 !important;
-}
-
-.thumb-grid-item {
-  border: 2px solid transparent !important;
-  border-radius: 8px !important;
-  padding: 4px !important;
-  background: #F4EFE6 !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
-  transition: all 0.22s ease !important;
-}
-
-.thumb-grid-item:hover,
-.thumb-grid-item.active {
-  border-color: #C9972E !important;
-  background: #FFFFFF !important;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.16) !important;
-  transform: translateY(-2px) scale(1.02) !important;
-}
-
-.thumb-grid-label {
-  color: #4A3E36 !important;
-  font-weight: 600 !important;
-}
-
-/* Share Popup Theme Overrides */
-#shareModal .bg-gradient-to-r {
-  background: linear-gradient(135deg, #196F92 0%, #2282aa 100%) !important;
-}
-
-#copyBtn,
-#copyBtnMobile {
-  background: #196F92 !important;
-}
-
-#copyBtn:hover,
-#copyBtnMobile:hover {
-  background: #145a77 !important;
-}
-
-#shareModal button[id$="Btn"]:not(#copyBtn):not(#closeBtn):hover {
-  border-color: #196F92 !important;
-  background: #f0f9ff !important;
-}
-
-/* Search Popup Theme Overrides */
-#SearchModal,
-button#SearchModal {
-  background: #196F92 !important;
-  color: #ffffff !important;
-}
-
-#SearchModal:hover,
-button#SearchModal:hover {
-  background: #145a77 !important;
-}
-
-#searchModal .search-result-item:hover {
-  background: rgba(25, 111, 146, 0.08) !important;
-  border-left: 3px solid #196F92 !important;
-  color: #196F92 !important;
-}
-
-/* Download Popup Text and Card */
-#downloadPopup {
-  background: #196F92 !important;
-  color: #ffffff !important;
-  border: 1.5px solid #E7BF3F !important;
-  box-shadow: 0 6px 25px rgba(25, 111, 146, 0.45) !important;
-  min-width: 260px !important;
-  width: auto !important;
-  max-width: 90vw !important;
-  white-space: nowrap !important;
-  text-align: center !important;
-  font-weight: 600 !important;
-  padding: 10px 24px !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-}
-
-/* Mobile Nav Bar & Dropdown */
-.mobile-top-nav {
-  border-bottom: 1.5px solid rgba(25, 111, 146, 0.4) !important;
-}
-
-.mobile-nav-btn:hover,
-.mobile-nav-btn:active {
-  color: #E7BF3F !important;
-}
-
-.mobile-dropdown-icon {
-  background: #196F92 !important;
-}
-
-.mobile-dropdown-item:hover,
-.mobile-dropdown-item:active {
-  color: #E7BF3F !important;
-}
-
-.mobile-dropdown-item:hover .mobile-dropdown-label {
-  color: #E7BF3F !important;
-}
-
-.mobile-dropdown-item:hover svg {
-  stroke: #E7BF3F !important;
-}
-
-.mobile-toggle-indicator.on {
-  background: #196F92 !important;
-  color: #E7BF3F !important;
-}
-
-/* Hide Table of Contents and Search icons */
-#iconTOC,
-#navToggle,
-#iconText,
-#searchIconDesktop {
-  display: none !important;
-  visibility: hidden !important;
-  pointer-events: none !important;
-}
-
-/* Hide zoom option and numbers on mobile & tablet screens */
-@media (max-width: 1024px) {
-  .mobile-top-nav .mobile-nav-left {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: flex-start !important;
-  }
-
-  .mobile-top-nav .mobile-logo {
-    height: 36px !important;
-    width: auto !important;
-    object-fit: contain !important;
-    display: block !important;
-  }
-
-  .mobile-top-nav .mobile-nav-center {
-    display: none !important;
-  }
-
-  .mobile-page-display {
-    display: none !important;
-    visibility: hidden !important;
-  }
-}
-
-@media (max-width: 768px) {
-  .zoom-control-container,
-  #zoomInBtn,
-  #zoomOutBtn,
-  #zoomResetBtn,
-  #zoomSlider,
-  #zoomPercentage,
-  .zoom-label,
-  .mobile-page-display,
-  .thumbnail-preview-container,
-  .page-controller,
-  .thumb-preview-label,
-  .thumb-grid-label {
-    display: none !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
-  }
-}
+        /* Mobile Phones */
+        @media screen and (max-width: 480px) {
+            #flipbook {
+                position: relative;
+                width: 354px;
+                height: 504px;
+                margin-left: 0px;
+                top: 45px !important;
+                left: 0px;
+                transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                transform: scale(1);
+                transform-origin: center top;
+            }
+        }
+
+        /* Large-Height Mobile Phones */
+        @media screen and (max-width: 480px) and (min-height: 800px) {
+            #flipbook {
+                top: 60px !important;
+                /* Add large-height mobile adjustments here */
+            }
+        }
+
+        /* ==================== THEME COLOR OVERRIDES (#196F92 & #E7BF3F) ==================== */
+        :root {
+            --zt-theme-primary: #196F92;
+            --zt-theme-gold: #E7BF3F;
+        }
+
+        /* Desktop & Mobile Icon Active / Focus / Hover States (Except Top Icon Nav) */
+        :not(.top-icon-navigation)>.icon-btn:hover,
+        :not(.top-icon-navigation)>.icon-btn.active,
+        :not(.top-icon-navigation)>.icon-btn:focus-visible {
+            border-color: #E7BF3F !important;
+            background: rgba(25, 111, 146, 0.25) !important;
+            box-shadow: 0 4px 14px rgba(25, 111, 146, 0.4) !important;
+        }
+
+        :not(.top-icon-navigation)>.icon-btn:hover img,
+        :not(.top-icon-navigation)>.icon-btn.active img,
+        :not(.top-icon-navigation)>.icon-btn:hover svg,
+        :not(.top-icon-navigation)>.icon-btn.active svg {
+            filter: invert(41%) sepia(37%) saturate(1476%) hue-rotate(156deg) brightness(93%) contrast(92%) !important;
+        }
+
+        /* Audio / Music Button Toggle Active */
+        .icon-btn.bgm-toggle.music-active,
+        .icon-btn.bgm-toggle.active {
+            border-color: #E7BF3F !important;
+            background: rgba(25, 111, 146, 0.35) !important;
+        }
+
+        /* Top Icon Navigation - Warm Cream Circular Floating Row */
+        .top-icon-navigation {
+            position: fixed !important;
+            top: 8px !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            right: auto !important;
+            display: inline-flex !important;
+            flex-direction: row !important;
+            align-items: center !important;
+            justify-content: center !important;
+            background: transparent !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            border-radius: 9999px !important;
+            border: none !important;
+            outline: none !important;
+            padding: 0 !important;
+            gap: 12px !important;
+            box-shadow: none !important;
+            z-index: 999999 !important;
+        }
+
+        .top-icon-navigation .nav-btn-group {
+            display: flex !important;
+            align-items: center !important;
+            gap: 12px !important;
+            background: transparent !important;
+            border: none !important;
+            padding: 0 !important;
+        }
+
+        .top-icon-navigation .toolbar-divider {
+            display: none !important;
+        }
+
+        .top-icon-navigation .icon-btn {
+            width: 40px !important;
+            height: 40px !important;
+            min-width: 40px !important;
+            max-width: 40px !important;
+            min-height: 40px !important;
+            max-height: 40px !important;
+            flex: 0 0 40px !important;
+            box-sizing: border-box !important;
+            border-radius: 50% !important;
+            background: #F4EFE6 !important;
+            border: none !important;
+            outline: none !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            cursor: pointer !important;
+            transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.14) !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            color: #2D2722 !important;
+            position: relative !important;
+        }
+
+        .top-icon-navigation .icon-btn img:not(.hidden),
+        .top-icon-navigation .icon-btn svg:not(.hidden) {
+            width: 17px !important;
+            height: 17px !important;
+            max-width: 17px !important;
+            max-height: 17px !important;
+            flex-shrink: 0 !important;
+            object-fit: contain !important;
+            display: block !important;
+            margin: auto !important;
+            /* Dark rich charcoal/black icon color (#1A1A1A) */
+            filter: brightness(0) saturate(100%) !important;
+            transition: transform 0.2s ease, filter 0.2s ease, opacity 0.2s ease !important;
+            opacity: 0.88 !important;
+        }
+
+        .top-icon-navigation .icon-btn img.hidden,
+        .top-icon-navigation .icon-btn svg.hidden,
+        .top-icon-navigation .icon-btn .hidden {
+            display: none !important;
+            visibility: hidden !important;
+        }
+
+        .top-icon-navigation .icon-btn svg path,
+        .top-icon-navigation .icon-btn svg circle,
+        .top-icon-navigation .icon-btn svg line,
+        .top-icon-navigation .icon-btn svg polyline,
+        .top-icon-navigation .icon-btn svg rect {
+            stroke: #1A1A1A !important;
+        }
+
+        /* Hover: subtle lift and pure white background */
+        .top-icon-navigation .icon-btn:hover,
+        .top-icon-navigation .nav-btn-group .icon-btn:hover {
+            background: #FFFFFF !important;
+            border: none !important;
+            outline: none !important;
+            transform: translateY(-2px) scale(1.08) !important;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2) !important;
+        }
+
+        .top-icon-navigation .icon-btn:hover img,
+        .top-icon-navigation .icon-btn:hover svg,
+        .top-icon-navigation .nav-btn-group .icon-btn:hover img,
+        .top-icon-navigation .nav-btn-group .icon-btn:hover svg {
+            filter: brightness(0) saturate(100%) !important;
+            opacity: 1 !important;
+        }
+
+        .top-icon-navigation .icon-btn:hover svg path,
+        .top-icon-navigation .icon-btn:hover svg circle,
+        .top-icon-navigation .icon-btn:hover svg line,
+        .top-icon-navigation .icon-btn:hover svg polyline,
+        .top-icon-navigation .icon-btn:hover svg rect {
+            stroke: #000000 !important;
+        }
+
+        /* Active Highlight Button */
+        .top-icon-navigation .icon-btn.active,
+        .top-icon-navigation .icon-btn:not(:disabled):focus-visible {
+            background: #ECE3D4 !important;
+            outline: 2px solid #C9972E !important;
+            outline-offset: -2px !important;
+            box-shadow: 0 4px 14px rgba(201, 151, 46, 0.35) !important;
+            transform: scale(1.04) !important;
+        }
+
+        .top-icon-navigation .icon-btn:disabled {
+            opacity: 0.38 !important;
+            cursor: not-allowed !important;
+            pointer-events: none !important;
+        }
+
+        /* Page Controller (Bottom Left - Matching Warm Cream/Beige Theme) */
+        .page-controller {
+            position: fixed !important;
+            bottom: 22px !important;
+            left: 24px !important;
+            top: auto !important;
+            right: auto !important;
+            background: #F4EFE6 !important;
+            backdrop-filter: blur(14px) !important;
+            -webkit-backdrop-filter: blur(14px) !important;
+            border-radius: 9999px !important;
+            border: 1px solid rgba(0, 0, 0, 0.08) !important;
+            outline: none !important;
+            padding: 5px 14px 5px 6px !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 10px !important;
+            z-index: 999999 !important;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.14) !important;
+        }
+
+        #pageInput {
+            width: 38px !important;
+            height: 28px !important;
+            background: #FFFFFF !important;
+            border: 1.5px solid #D5C9B8 !important;
+            outline: none !important;
+            border-radius: 6px !important;
+            color: #1A1A1A !important;
+            text-align: center !important;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+            font-weight: 700 !important;
+            font-size: 14px !important;
+            padding: 0 !important;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+            transition: all 0.2s ease !important;
+        }
+
+        #pageInput:focus {
+            border-color: #A38250 !important;
+            box-shadow: 0 0 0 2px rgba(163, 130, 80, 0.25) !important;
+        }
+
+        .page-controller .ctrl-sep {
+            color: #B5A896 !important;
+            font-size: 14px !important;
+            line-height: 1 !important;
+            user-select: none !important;
+        }
+
+        #totalPages {
+            color: #2D2722 !important;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+            font-weight: 700 !important;
+            font-size: 14px !important;
+            min-width: 14px !important;
+            text-align: center !important;
+        }
+
+        .go-btn {
+            background: transparent !important;
+            border: none !important;
+            cursor: pointer !important;
+            padding: 3px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            color: #1A1A1A !important;
+            transition: transform 0.2s ease, color 0.2s ease !important;
+        }
+
+        .go-btn svg {
+            width: 15px !important;
+            height: 15px !important;
+            fill: #1A1A1A !important;
+            transform: rotate(-10deg) !important;
+        }
+
+        .go-btn:hover {
+            transform: scale(1.18) !important;
+        }
+
+        .go-btn:hover svg {
+            fill: #8B672B !important;
+        }
+
+        /* Zoom Control Capsule (Bottom Right - Matching Warm Cream/Beige Theme) */
+        .zoom-control-container {
+            position: fixed !important;
+            bottom: 22px !important;
+            right: 24px !important;
+            top: auto !important;
+            left: auto !important;
+            background: #F4EFE6 !important;
+            backdrop-filter: blur(14px) !important;
+            -webkit-backdrop-filter: blur(14px) !important;
+            border-radius: 9999px !important;
+            border: 1px solid rgba(0, 0, 0, 0.08) !important;
+            outline: none !important;
+            padding: 5px 14px !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 12px !important;
+            z-index: 999999 !important;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.14) !important;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+        }
+
+        .zoom-label {
+            color: #1A1A1A !important;
+            font-size: 13.5px !important;
+            font-weight: 700 !important;
+            letter-spacing: 0.2px !important;
+            user-select: none !important;
+        }
+
+        .zoom-reset-btn {
+            background: transparent !important;
+            border: none !important;
+            color: #1A1A1A !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            cursor: pointer !important;
+            padding: 0 !important;
+            opacity: 0.85 !important;
+            transition: opacity 0.2s ease, transform 0.2s ease, color 0.2s ease !important;
+        }
+
+        .zoom-reset-btn svg {
+            width: 17px !important;
+            height: 17px !important;
+            stroke: #1A1A1A !important;
+        }
+
+        .zoom-reset-btn:hover {
+            opacity: 1 !important;
+            transform: scale(1.15) !important;
+        }
+
+        .zoom-reset-btn:hover svg {
+            stroke: #8B672B !important;
+        }
+
+        .zoom-control-container .zoom-btn {
+            background: #FFFFFF !important;
+            border: 1px solid rgba(0, 0, 0, 0.1) !important;
+            color: #1A1A1A !important;
+            font-size: 21px !important;
+            font-weight: 700 !important;
+            line-height: 1 !important;
+            cursor: pointer !important;
+            padding: 0 !important;
+            width: 32px !important;
+            height: 32px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            border-radius: 50% !important;
+            transition: all 0.2s ease !important;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1) !important;
+        }
+
+        .zoom-control-container .zoom-btn:hover {
+            color: #000000 !important;
+            background: #FFFFFF !important;
+            border-color: #8B672B !important;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18) !important;
+            transform: scale(1.1) !important;
+        }
+
+        /* Screen Edges Large Next / Previous Page Arrows */
+        .ui-arrow-next-page,
+        .ui-arrow-previous-page {
+            background: #F4EFE6 !important;
+            border: 1px solid rgba(0, 0, 0, 0.08) !important;
+            outline: none !important;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.16) !important;
+        }
+
+        .ui-arrow-next-page svg path,
+        .ui-arrow-previous-page svg path {
+            stroke: #1A1A1A !important;
+        }
+
+        .ui-arrow-next-page:hover,
+        .ui-arrow-previous-page:hover {
+            background: #FFFFFF !important;
+            border-color: rgba(0, 0, 0, 0.12) !important;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22) !important;
+        }
+
+        .ui-arrow-next-page:hover svg path,
+        .ui-arrow-previous-page:hover svg path {
+            stroke: #000000 !important;
+        }
+
+        /* ==================== TABLE OF CONTENTS (TOC) THEME OVERRIDES ==================== */
+        .toc-floating,
+        .toc-floating1,
+        .mobile-toc-panel {
+            background: #FDFBF7 !important;
+            border: 1px solid rgba(0, 0, 0, 0.08) !important;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.16) !important;
+            border-radius: 16px !important;
+        }
+
+        .toc-title {
+            color: #2D2722 !important;
+            font-weight: 700 !important;
+        }
+
+        .toc-header-underline {
+            background-color: #C9972E !important;
+        }
+
+        .toc-list::before,
+        .mobile-toc-list::before {
+            display: none !important;
+        }
+
+        /* REMOVE CIRCLED NUMBERS FROM TABLE OF CONTENTS */
+        .mobile-toc-number {
+            display: none !important;
+        }
+
+        .toc-list li,
+        .mobile-toc-list li {
+            margin: 6px 0 !important;
+        }
+
+        .toc-list a,
+        .mobile-toc-list .mobile-toc-item {
+            color: #332B25 !important;
+            font-weight: 500 !important;
+            padding: 8px 14px !important;
+            border-radius: 8px !important;
+            transition: all 0.2s ease !important;
+            background: transparent !important;
+        }
+
+        .toc-list li.active a,
+        .toc-list a:hover,
+        .mobile-toc-list .mobile-toc-item:hover,
+        .mobile-toc-list .mobile-toc-item.active {
+            background: #F2E9DC !important;
+            color: #1A1A1A !important;
+            font-weight: 600 !important;
+        }
+
+        /* ==================== THUMBNAIL DRAWER THEME OVERRIDES ==================== */
+        .thumbnail-drawer {
+            background: #FDFBF7 !important;
+            border: 1px solid rgba(0, 0, 0, 0.08) !important;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.16) !important;
+            border-radius: 16px !important;
+        }
+
+        .thumbnail-drawer .toc-title {
+            color: #2D2722 !important;
+        }
+
+        .thumb-grid-item {
+            border: 2px solid transparent !important;
+            border-radius: 8px !important;
+            padding: 4px !important;
+            background: #F4EFE6 !important;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+            transition: all 0.22s ease !important;
+        }
+
+        .thumb-grid-item:hover,
+        .thumb-grid-item.active {
+            border-color: #C9972E !important;
+            background: #FFFFFF !important;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.16) !important;
+            transform: translateY(-2px) scale(1.02) !important;
+        }
+
+        .thumb-grid-label {
+            color: #4A3E36 !important;
+            font-weight: 600 !important;
+        }
+
+        /* Share Popup Theme Overrides */
+        #shareModal .bg-gradient-to-r {
+            background: linear-gradient(135deg, #196F92 0%, #2282aa 100%) !important;
+        }
+
+        #copyBtn,
+        #copyBtnMobile {
+            background: #196F92 !important;
+        }
+
+        #copyBtn:hover,
+        #copyBtnMobile:hover {
+            background: #145a77 !important;
+        }
+
+        #shareModal button[id$="Btn"]:not(#copyBtn):not(#closeBtn):hover {
+            border-color: #196F92 !important;
+            background: #f0f9ff !important;
+        }
+
+        /* Search Popup Theme Overrides */
+        #SearchModal,
+        button#SearchModal {
+            background: #196F92 !important;
+            color: #ffffff !important;
+        }
+
+        #SearchModal:hover,
+        button#SearchModal:hover {
+            background: #145a77 !important;
+        }
+
+        #searchModal .search-result-item:hover {
+            background: rgba(25, 111, 146, 0.08) !important;
+            border-left: 3px solid #196F92 !important;
+            color: #196F92 !important;
+        }
+
+        /* Download Center Modal & Full-Coverage Overlay */
+        #downloadOverlay {
+            position: fixed !important;
+            inset: 0 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            background: rgba(0, 0, 0, 0.75) !important;
+            -webkit-backdrop-filter: blur(8px) !important;
+            backdrop-filter: blur(8px) !important;
+            z-index: 2147483647 !important;
+            display: none !important;
+            align-items: center !important;
+            justify-content: center !important;
+            opacity: 0 !important;
+            transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            pointer-events: none !important;
+        }
+
+        #downloadOverlay.active {
+            display: flex !important;
+            opacity: 1 !important;
+            pointer-events: auto !important;
+        }
+
+        #downloadModalCard {
+            position: relative !important;
+            background: #ffffff !important;
+            border-radius: 20px !important;
+            padding: 32px 28px !important;
+            max-width: 440px !important;
+            width: min(90vw, 440px) !important;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.2) !important;
+            text-align: center !important;
+            transform: scale(0.92) !important;
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+            color: #1e293b !important;
+            box-sizing: border-box !important;
+            pointer-events: auto !important;
+        }
+
+        #downloadOverlay.active #downloadModalCard {
+            transform: scale(1) !important;
+            pointer-events: auto !important;
+        }
+
+        /* Centered Cancel Button Style (Hidden) */
+        .download-cancel-btn,
+        #downloadCancelActionBtn,
+        #downloadCancelContainer {
+            display: none !important;
+        }
+
+        /* Mobile Responsive adjustments for modal & cancel button */
+        @media (max-width: 640px) {
+            #downloadModalCard {
+                padding: 24px 20px !important;
+                border-radius: 18px !important;
+                width: 90vw !important;
+                max-width: 360px !important;
+            }
+
+            #downloadModalTitle {
+                font-size: 18px !important;
+            }
+
+            #downloadModalSubtitle {
+                font-size: 13px !important;
+                line-height: 1.4 !important;
+            }
+
+            .download-cancel-btn {
+                padding: 12px 28px !important;
+                font-size: 14px !important;
+                width: auto !important;
+                min-width: 140px !important;
+                cursor: pointer !important;
+            }
+        }
+
+        @media (max-width: 380px) {
+            #downloadModalCard {
+                padding: 20px 16px !important;
+                width: 94vw !important;
+            }
+
+            .download-cancel-btn {
+                width: 100% !important;
+                min-width: unset !important;
+            }
+        }
+
+        /* Hide distracting chrome and surrounding UI elements when download popup is active */
+        body.download-active .top-left-brand,
+        body.download-active .top-icon-navigation,
+        body.download-active .page-controller,
+        body.download-active .zoom-control-container,
+        body.download-active .ui-arrow-control,
+        body.download-active .next-arrow,
+        body.download-active .prev-arrow,
+        body.download-active .thumbnail-preview-container,
+        body.download-active .mobile-top-nav,
+        body.download-active #navContainerMain {
+            opacity: 0 !important;
+            pointer-events: none !important;
+            visibility: hidden !important;
+            transition: opacity 0.25s ease, visibility 0.25s ease !important;
+        }
+
+        /* Mobile Nav Bar & Dropdown */
+        .mobile-top-nav {
+            border-bottom: 1.5px solid rgba(25, 111, 146, 0.4) !important;
+        }
+
+        .mobile-nav-btn:hover,
+        .mobile-nav-btn:active {
+            color: #E7BF3F !important;
+        }
+
+        .mobile-dropdown-icon {
+            background: #196F92 !important;
+        }
+
+        .mobile-dropdown-item:hover,
+        .mobile-dropdown-item:active {
+            color: #E7BF3F !important;
+        }
+
+        .mobile-dropdown-item:hover .mobile-dropdown-label {
+            color: #E7BF3F !important;
+        }
+
+        .mobile-dropdown-item:hover svg {
+            stroke: #E7BF3F !important;
+        }
+
+        .mobile-dropdown-item {
+            cursor: pointer !important;
+            user-select: none !important;
+            -webkit-tap-highlight-color: transparent !important;
+        }
+
+        #mobileAudioBtn * {
+            pointer-events: none !important;
+        }
+
+        .mobile-toggle-indicator.on {
+            background: #196F92 !important;
+            color: #E7BF3F !important;
+        }
+
+        /* Gutter shadows should not intercept clicks or block interactive SVG elements */
+        .gutter-shadow {
+            pointer-events: none !important;
+        }
+
+        /* ==========================================================================
+           Page 1, 2, 3, 6 Mouse Cursor Restrictions:
+           Ensure entire page has default cursor. Only interactive links (websites,
+           mobile/phone, emails, locations, brand logos) display cursor: pointer.
+           ========================================================================== */
+        .page-1,
+        .page-2,
+        .page-3,
+        .page-6,
+        .page-1 *,
+        .page-2 *,
+        .page-3 *,
+        .page-6 * {
+            cursor: default !important;
+        }
+
+        /* Specific interactive items on Page 6 (and other SVG pages) */
+        .page-6 .interactive-link,
+        .page-6 .interactive-link *,
+        .page-6 a,
+        .page-6 a *,
+        .page-6 [id*="www."],
+        .page-6 [id*="www."] *,
+        .page-6 [id*="@"],
+        .page-6 [id*="@"] *,
+        .page-6 #location,
+        .page-6 #location *,
+        .page-6 [id="9489042220"],
+        .page-6 [id="9489042220"] *,
+        .page-6 [id="9489042224"],
+        .page-6 [id="9489042224"] *,
+        .page-6 [id="9489042226"],
+        .page-6 [id="9489042226"] *,
+        .page-6 [id="9489042227"],
+        .page-6 [id="9489042227"] *,
+        .page-6 [id="9489042228"],
+        .page-6 [id="9489042228"] *,
+        .page-6 [id="9489042229"],
+        .page-6 [id="9489042229"] *,
+        .page-6 #brand-1,
+        .page-6 #brand-1 *,
+        .page-6 #brand-2,
+        .page-6 #brand-2 *,
+        .page-6 #brand-3,
+        .page-6 #brand-3 *,
+        .page-6 #logo,
+        .page-6 .interactive-hitbox,
+        .page-6 #logo * {
+            cursor: pointer !important;
+            pointer-events: auto !important;
+        }
+
+        /* Hide Table of Contents and Search icons */
+        #iconTOC,
+        #navToggle,
+        #iconText,
+        #searchIconDesktop {
+            display: none !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+        }
+
+        /* Hide zoom option and numbers on mobile & tablet screens */
+        @media (max-width: 1024px) {
+            .mobile-top-nav .mobile-nav-left {
+                display: flex !important;
+                align-items: center !important;
+                justify-content: flex-start !important;
+            }
+
+            .mobile-top-nav .mobile-logo {
+                height: 36px !important;
+                width: auto !important;
+                object-fit: contain !important;
+                display: block !important;
+            }
+
+            .mobile-top-nav .mobile-nav-center {
+                display: none !important;
+            }
+
+            .mobile-page-display {
+                display: none !important;
+                visibility: hidden !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            .zoom-control-container,
+            #zoomInBtn,
+            #zoomOutBtn,
+            #zoomResetBtn,
+            #zoomSlider,
+            #zoomPercentage,
+            .zoom-label,
+            .mobile-page-display,
+            .thumbnail-preview-container,
+            .page-controller,
+            .thumb-preview-label,
+            .thumb-grid-label {
+                display: none !important;
+                visibility: hidden !important;
+                pointer-events: none !important;
+            }
+        }
+
+        /* ==================== ZOOM ALERT POPUP THEME OVERRIDE ==================== */
+        #zoom-alert-box {
+            background: #196F92 !important;
+            border: 1.5px solid #E7BF3F !important;
+            box-shadow: 0 12px 35px rgba(25, 111, 146, 0.45), 0 0 0 1px rgba(231, 191, 63, 0.2) !important;
+            color: #ffffff !important;
+        }
+
+        .zoom-alert-icon {
+            background: rgba(231, 191, 63, 0.18) !important;
+            border: 1.5px solid rgba(231, 191, 63, 0.5) !important;
+        }
+
+        .zoom-alert-icon svg {
+            stroke: #E7BF3F !important;
+        }
+
+        .zoom-alert-title {
+            color: #ffffff !important;
+        }
+
+        .zoom-alert-message {
+            color: rgba(255, 255, 255, 0.9) !important;
+        }
+
+        .zoom-alert-hint {
+            color: rgba(255, 255, 255, 0.75) !important;
+        }
+
+        .zoom-alert-hint kbd {
+            background: rgba(255, 255, 255, 0.2) !important;
+            color: #ffffff !important;
+            border: 1px solid rgba(231, 191, 63, 0.4) !important;
+        }
+
+        .zoom-alert-progress {
+            background: rgba(255, 255, 255, 0.2) !important;
+        }
+
+        .zoom-alert-progress-bar {
+            background: linear-gradient(90deg, #E7BF3F, #ffffff) !important;
+        }
+
+        /* Zoom Tooltip & Indicator */
+        .zoom-blocked-tooltip,
+        .zoom-indicator {
+            background: #196F92 !important;
+            border: 1px solid #E7BF3F !important;
+            color: #ffffff !important;
+            box-shadow: 0 4px 20px rgba(25, 111, 146, 0.4) !important;
+        }
+
+        /* ==================== ZOOMED FLIPBOOK SCROLLBAR THEME ==================== */
+        .flipbook-scroll-wrapper.zoomed {
+            scrollbar-color: #196F92 rgba(0, 0, 0, 0.08) !important;
+        }
+
+        .flipbook-scroll-wrapper.zoomed::-webkit-scrollbar {
+            width: 10px !important;
+            height: 10px !important;
+        }
+
+        .flipbook-scroll-wrapper.zoomed::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.06) !important;
+            border-radius: 10px !important;
+        }
+
+        .flipbook-scroll-wrapper.zoomed::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #196F92, #145a77) !important;
+            border: 2px solid transparent !important;
+            border-radius: 10px !important;
+            background-clip: padding-box !important;
+        }
+
+        .flipbook-scroll-wrapper.zoomed::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #2282aa, #196F92) !important;
+            background-clip: padding-box !important;
+        }
+
+        /* Zoom Blocked Elements Visual Cue */
+        .zoom-blocked,
+        .icon-btn.zoom-blocked,
+        .ui-arrow-control.zoom-blocked,
+        .ui-arrow-next-page.zoom-blocked,
+        .ui-arrow-previous-page.zoom-blocked {
+            opacity: 0.35 !important;
+            cursor: not-allowed !important;
+            pointer-events: auto !important;
+        }
+
+        .top-icon-navigation .icon-btn.zoom-blocked:hover,
+        .ui-arrow-control.zoom-blocked:hover,
+        .ui-arrow-next-page.zoom-blocked:hover,
+        .ui-arrow-previous-page.zoom-blocked:hover {
+            transform: none !important;
+            box-shadow: none !important;
+            background: #F4EFE6 !important;
+            opacity: 0.35 !important;
+        }
+
+        .zoom-blocked::after {
+            display: none !important;
+        }
     </style>
 </head>
 
-<body >
+<body>
 
 
     <!-- ***************************************************** DC started *************************************************-->
 
-    <div class="catalog-app " >
+    <div class="catalog-app ">
         <div id="bgLayerContainer">
             <div id="bgLayer1" class="bg-layer active"></div>
             <div id="bgLayer2" class="bg-layer"></div>
@@ -996,7 +1250,8 @@ button#SearchModal:hover {
         <div id="mobileTopNav" class="mobile-top-nav">
             <!-- Left Section: Logo on Left for Mobile & Tablet -->
             <div class="mobile-nav-left">
-                <img src="../global%20assets/Images/logo.svg" alt="Sri Mathurams Medical Engineering Logo" class="mobile-logo" id="mobileHomeBtn" />
+                <img src="../global%20assets/Images/logo.svg" alt="Sri Mathurams Medical Engineering Logo"
+                    class="mobile-logo" id="mobileHomeBtn" />
             </div>
 
             <!-- Center Section -->
@@ -1010,6 +1265,7 @@ button#SearchModal:hover {
                     <span class="mobile-page-divider">/</span>
                     <span class="mobile-page-total" id="mobilePageTotal">18</span>
                 </div>
+
 
                 <!-- 3-Dot Menu Button -->
                 <button class="mobile-nav-btn mobile-menu-btn" id="mobileMenuBtn" title="Menu">
@@ -1025,7 +1281,7 @@ button#SearchModal:hover {
         <!-- ==================== MOBILE DROPDOWN MENU ==================== -->
         <div id="mobileDropdownMenu" class="mobile-dropdown-menu">
             <!-- Music Toggle -->
-            <button class="mobile-dropdown-item" id="mobileAudioBtn">
+            <button class="mobile-dropdown-item" id="mobileAudioBtn" type="button" aria-label="Toggle Background Music">
                 <div class="mobile-dropdown-icon">
                     <img src="../global%20assets/icons/music-on-icon.svg" alt="Music" id="mobileAudioIcon"
                         class="mobile-audio-icon" />
@@ -1189,11 +1445,12 @@ button#SearchModal:hover {
             <div>
                 <p id="goToPage1" data-audio-path="../audios/home.mp3" data-page="1"
                     class="absolute top-[50%] left-[50%] w-[3vw] font-semibold"
-                    style="transform: translate(-50%, -50%) ;"><img src="../global%20assets/Images/logo.svg" alt="Sri Mathurams Logo" /></p>
+                    style="transform: translate(-50%, -50%) ;"><img src="../global%20assets/Images/logo.svg" alt="" />
+                </p>
             </div>
 
-            <img src="../global%20assets/icons/doted-icon.svg" alt="Mobile Navigation Menu Icon" id="navMenuBarMobile" class=""
-                style="transform: translateY(-50%);" />
+            <img src="../global%20assets/icons/doted-icon.svg" alt="Mobile Navigation Menu Icon" id="navMenuBarMobile"
+                class="" style="transform: translateY(-50%);" />
         </div>
 
         <!-- Add this right after the opening <div class="catalog-app"> tag -->
@@ -1247,7 +1504,7 @@ button#SearchModal:hover {
             <span class="ctrl-sep">|</span>
             <button id="goPageBtn" class="go-btn" title="Go to Page">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
                 </svg>
             </button>
         </div>
@@ -1256,7 +1513,8 @@ button#SearchModal:hover {
         <div class="zoom-control-container">
             <span class="zoom-label">Zoom</span>
             <button id="zoomResetBtn" class="zoom-reset-btn" title="Zoom">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="11" cy="11" r="8"></circle>
                     <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                 </svg>
@@ -1299,7 +1557,7 @@ button#SearchModal:hover {
                 <div class="toc-header-underline"></div>
                 <ul class="toc-list">
                     <li class="tb-link cursor-pointer" data-page="1" data-audio-path="../audios/home.mp3"><a><span
-                                class="mobile-toc-number">01</span> Home</a></li>
+                                class="mobile-toc-number">01</span> </a></li>
                     <li class="tb-link cursor-pointer" data-page="2" data-audio-path="../audios/about-us.mp3"><a><span
                                 class="mobile-toc-number">02</span>About us</a></li>
                     <li class="tb-link cursor-pointer" data-page="4" data-audio-path="../audios/products.mp3"><a> <span
@@ -1665,22 +1923,7 @@ button#SearchModal:hover {
             <!-- ***********************************download start*********************************** -->
 
 
-            <div id="downloadPopup" class="
-    hidden
-    fixed
-    top-[5.5%] right-[1%]
-    bg-teal-600 text-white
-    px-4 py-3
-    rounded-full shadow-lg
-    z-[9999]
-    text-sm
-    opacity-0 transition-opacity duration-300
 
-    w-[60vw] right-[5%] top-[10%]        /* mobile */
-    md:w-[15vw] md:right-[1%] md:top-[5.5%]  /* tablet+ */
-  ">
-                Download in progress...
-            </div>
 
 
 
@@ -1742,7 +1985,8 @@ button#SearchModal:hover {
                         <div class="relative w-full md:w-auto">
                             <button id="copyBtnMobile"
                                 class="w-full md:w-auto px-4 py-2 flex items-center justify-center gap-2 bg-[#196F92] hover:bg-[#145a77] text-white rounded-lg text-sm font-semibold transition active:scale-95">
-                                <img src="../global%20assets/icons/copy-link-icon.svg" class="w-4" alt="Copy Link Icon" />
+                                <img src="../global%20assets/icons/copy-link-icon.svg" class="w-4"
+                                    alt="Copy Link Icon" />
                                 Copy Link
                             </button>
 
@@ -1800,90 +2044,94 @@ button#SearchModal:hover {
 
 
                     <!-- ******************************* Page 1 Start *************************** -->
-                <div class="page page-animated page-1">
-                    <div class="svg-container w-full h-full" data-src="../global assets/Images/home-page/home-page-image.svg"></div>
-                    <img src="../global%20assets/Images/commonThings/left-page-shadow.svg" alt="left-page-shadow"
+                    <div class="page page-animated page-1">
+                        <div class="svg-container w-full h-full"
+                            data-src="../global assets/Images/home-page/home-page-image.svg"></div>
+                        <img src="../global%20assets/Images/commonThings/left-page-shadow.svg" alt="left-page-shadow"
                             class="gutter-shadow hidden shadow-left absolute h-[100%] top-[0%] right-[-1%] z-[4]" />
                         <img src="../global%20assets/Images/commonThings/right-page-shadow.svg" alt="right-page-shadow"
                             class="gutter-shadow shadow-right absolute h-[100%] top-[0%] left-[-1%] z-[4]" />
-                </div>
+                    </div>
                     <!-- *******************************  Page 1 end ***************************** -->
                     <!-- *******************************  Page 2 Start *************************** -->
-                <div class="page page-animated page-2">
-                    <div class="svg-container w-full h-full" data-src="../global assets/Images/home-page/problems-page.svg"></div>
-                    <img src="../global%20assets/Images/commonThings/left-page-shadow.svg" alt="left-page-shadow"
+                    <div class="page page-animated page-2">
+                        <div class="svg-container w-full h-full"
+                            data-src="../global assets/Images/home-page/problems-page.svg"></div>
+                        <img src="../global%20assets/Images/commonThings/left-page-shadow.svg" alt="left-page-shadow"
                             class="gutter-shadow shadow-left absolute h-[100%] top-[0%] right-[-1%] z-[4]" />
                         <img src="../global%20assets/Images/commonThings/right-page-shadow.svg" alt="right-page-shadow"
                             class="gutter-shadow hidden shadow-right absolute h-[100%] top-[0%] left-[-1%] z-[4]" />
-                </div>
+                    </div>
                     <!-- *******************************  Page 2 end ***************************** -->
                     <!-- *******************************  Page 3 Start *************************** -->
-                <div class="page page-animated page-3">
-                    <div class="svg-container w-full h-full" data-src="../global assets/Images/home-page/opportunities-page.svg"></div>
-                </div>   
+                    <div class="page page-animated page-3">
+                        <div class="svg-container w-full h-full"
+                            data-src="../global assets/Images/home-page/opportunities-page.svg"></div>
+                    </div>
                     <!-- *******************************  Page 3 end ***************************** -->
                     <!-- *******************************  Page 4 Start *************************** -->
-                <div class="page page-animated page-4">
-                    <img src="../global%20assets/Images/commonThings/left-page-shadow.svg" alt="left-page-shadow"
-                            class="gutter-shadow shadow-left absolute h-[100%] top-[0%] right-[-1%] z-[4]" />
-                    <img src="../global%20assets/Images/commonThings/right-page-shadow.svg" alt="right-page-shadow"
-                            class="gutter-shadow hidden shadow-right absolute h-[100%] top-[0%] left-[-1%] z-[4]" />
-                    
-                    <!-- Yarika Collections Absolute Canvas Stage (3:4 ratio) -->
-                    <div class="yarika-page-stage" id="yarika-stage-page4" data-page="page4">
-                        <!-- Top Header -->
-                        <div class="yarika-brand-header">
-                            <div class="yarika-brand-logo-text">YARIKA<sup>™</sup></div>
-                            <div class="yarika-brand-sub">COLLECTIONS</div>
-                        </div>
-
-                        <!-- Section Headings Layer -->
-                        <div class="yarika-headings-layer" id="p4-headings-layer">
-                            <!-- Populated dynamically via renderPageContent -->
-                        </div>
-
-                        <!-- Image Frames / Slots Layer -->
-                        <div class="yarika-slots-layer" id="p4-slots-layer">
-                            <!-- Populated dynamically via renderPageContent -->
-                        </div>
-                    </div>
-                </div>   
-                    <!-- *******************************  Page 4 end ***************************** -->
-                    <!-- *******************************  Page 5 Start *************************** -->
-                <div class="page page-animated page-5">
-                    <img src="../global%20assets/Images/commonThings/left-page-shadow.svg" alt="left-page-shadow"
-                            class="gutter-shadow hidden shadow-left absolute h-[100%] top-[0%] right-[-1%] z-[4]" />
-                    <img src="../global%20assets/Images/commonThings/right-page-shadow.svg" alt="right-page-shadow"
-                            class="gutter-shadow  shadow-right absolute h-[100%] top-[0%] left-[-1%] z-[4]" />
-
-                    <!-- Yarika Collections Absolute Canvas Stage (3:4 ratio) -->
-                    <div class="yarika-page-stage" id="yarika-stage-page5" data-page="page5">
-                        <!-- Top Header -->
-                        <div class="yarika-brand-header">
-                            <div class="yarika-brand-logo-text">YARIKA<sup>™</sup></div>
-                            <div class="yarika-brand-sub">COLLECTIONS</div>
-                        </div>
-
-                        <!-- Section Headings Layer -->
-                        <div class="yarika-headings-layer" id="p5-headings-layer">
-                            <!-- Populated dynamically via renderPageContent -->
-                        </div>
-
-                        <!-- Image Frames / Slots Layer -->
-                        <div class="yarika-slots-layer" id="p5-slots-layer">
-                            <!-- Populated dynamically via renderPageContent -->
-                        </div>
-                    </div>
-               </div>   
-                    <!-- *******************************  Page 5 end ***************************** -->
-                    <!-- *******************************  Page 6 Start *************************** -->
-                <div class="page page-animated page-6">
-                    <img src="../global%20assets/Images/commonThings/left-page-shadow.svg" alt="left-page-shadow"
+                    <div class="page page-animated page-4">
+                        <img src="../global%20assets/Images/commonThings/left-page-shadow.svg" alt="left-page-shadow"
                             class="gutter-shadow shadow-left absolute h-[100%] top-[0%] right-[-1%] z-[4]" />
                         <img src="../global%20assets/Images/commonThings/right-page-shadow.svg" alt="right-page-shadow"
                             class="gutter-shadow hidden shadow-right absolute h-[100%] top-[0%] left-[-1%] z-[4]" />
-                    <div class="svg-container w-full h-full" data-src="../global assets/Images/home-page/contact-page.svg"></div>
-                </div>      
+
+                        <!-- Yarika Collections Absolute Canvas Stage (3:4 ratio) -->
+                        <div class="yarika-page-stage" id="yarika-stage-page4" data-page="page4">
+                            <!-- Top Header -->
+                            <div class="yarika-brand-header">
+                                <div class="yarika-brand-logo-text">YARIKA<sup>™</sup></div>
+                                <div class="yarika-brand-sub">COLLECTIONS</div>
+                            </div>
+
+                            <!-- Section Headings Layer -->
+                            <div class="yarika-headings-layer" id="p4-headings-layer">
+                                <!-- Populated dynamically via renderPageContent -->
+                            </div>
+
+                            <!-- Image Frames / Slots Layer -->
+                            <div class="yarika-slots-layer" id="p4-slots-layer">
+                                <!-- Populated dynamically via renderPageContent -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- *******************************  Page 4 end ***************************** -->
+                    <!-- *******************************  Page 5 Start *************************** -->
+                    <div class="page page-animated page-5">
+                        <img src="../global%20assets/Images/commonThings/left-page-shadow.svg" alt="left-page-shadow"
+                            class="gutter-shadow hidden shadow-left absolute h-[100%] top-[0%] right-[-1%] z-[4]" />
+                        <img src="../global%20assets/Images/commonThings/right-page-shadow.svg" alt="right-page-shadow"
+                            class="gutter-shadow  shadow-right absolute h-[100%] top-[0%] left-[-1%] z-[4]" />
+
+                        <!-- Yarika Collections Absolute Canvas Stage (3:4 ratio) -->
+                        <div class="yarika-page-stage" id="yarika-stage-page5" data-page="page5">
+                            <!-- Top Header -->
+                            <div class="yarika-brand-header">
+                                <div class="yarika-brand-logo-text">YARIKA<sup>™</sup></div>
+                                <div class="yarika-brand-sub">COLLECTIONS</div>
+                            </div>
+
+                            <!-- Section Headings Layer -->
+                            <div class="yarika-headings-layer" id="p5-headings-layer">
+                                <!-- Populated dynamically via renderPageContent -->
+                            </div>
+
+                            <!-- Image Frames / Slots Layer -->
+                            <div class="yarika-slots-layer" id="p5-slots-layer">
+                                <!-- Populated dynamically via renderPageContent -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- *******************************  Page 5 end ***************************** -->
+                    <!-- *******************************  Page 6 Start *************************** -->
+                    <div class="page page-animated page-6">
+                        <img src="../global%20assets/Images/commonThings/left-page-shadow.svg" alt="left-page-shadow"
+                            class="gutter-shadow shadow-left absolute h-[100%] top-[0%] right-[-1%] z-[4]" />
+                        <img src="../global%20assets/Images/commonThings/right-page-shadow.svg" alt="right-page-shadow"
+                            class="gutter-shadow hidden shadow-right absolute h-[100%] top-[0%] left-[-1%] z-[4]" />
+                        <div class="svg-container w-full h-full"
+                            data-src="../global assets/Images/home-page/contact-page.svg"></div>
+                    </div>
                     <!-- *******************************  Page 6 end ***************************** -->
                 </div>
             </div>
@@ -1938,7 +2186,7 @@ button#SearchModal:hover {
         <!-- <div id="searchOverlay" class="fixed inset-0  bg-opacity-50 z-[999] hidden transition-opacity duration-300"></div> -->
 
         <!-- Search Modal - Green/White/Teal Theme -->
-        
+
         <div id="searchModal"
             class="fixed top-[2%] left-[2%] bg-white border border-gray-200 z-[100000000000] hidden w-[18vw] rounded-2xl shadow-2xl overflow-hidden p-[1vw]">
 
@@ -2087,30 +2335,31 @@ button#SearchModal:hover {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script>
         // Yarika Collections: Shared Absolute Canvas Stage Renderer for Flipbook & Admin
-        (function() {
+        (function () {
             window._cachedCatalogData = null;
-            const isCalibrate = new URLSearchParams(window.location.search).get('calibrate') === '1';
+            const urlParams = new URLSearchParams(window.location.search);
+            const isCalibrate = urlParams.get('calibrate') === '1';
+            const isPreviewMode = urlParams.get('preview') === '1' || urlParams.get('mode') === 'draft';
 
             function resolveApiUrl() {
-                const host = window.location.hostname;
-                const isLocal = host === 'localhost' || host === '127.0.0.1';
-                if (isLocal && window.location.port === '8000') {
-                    return '../api/get_products.php?t=' + Date.now();
+                const queryMode = isPreviewMode ? '&mode=draft' : '';
+                // When opened via file:// protocol in local browser, connect to local dev port
+                if (window.location.protocol === 'file:') {
+                    return 'http://localhost:8000/api/get_products.php?t=' + Date.now() + queryMode;
                 }
-                if (isLocal || window.location.protocol === 'file:') {
-                    return 'http://localhost:8000/api/get_products.php?t=' + Date.now();
-                }
-                return '../api/get_products.php?t=' + Date.now();
+                // On any web server (production or local), use clean relative path to the api folder
+                return '../api/get_products.php?t=' + Date.now() + queryMode;
             }
 
             // Universal Slot Renderer shared with Admin preview
-            window.renderSlotHtml = function(slot, calibrate) {
+            window.renderSlotHtml = function (slot, calibrate, idx) {
                 const fx = typeof slot.focal_x !== 'undefined' ? slot.focal_x : 50;
                 const fy = typeof slot.focal_y !== 'undefined' ? slot.focal_y : 50;
                 const zoom = typeof slot.zoom !== 'undefined' ? slot.zoom : 1.00;
                 const radius = slot.radius || '0';
                 const zIndex = slot.z_index || 1;
                 const imgSrc = slot.image || '../global assets/Images/products/product-1.jpg';
+                const animIndex = typeof idx === 'number' ? idx : 0;
 
                 return `
                     <div class="slot" id="slot-${slot.id}" data-slot-id="${slot.id}" style="
@@ -2122,6 +2371,7 @@ button#SearchModal:hover {
                         border-radius: ${radius};
                         overflow: hidden;
                         z-index: ${zIndex};
+                        --slot-idx: ${animIndex};
                     ">
                         <img src="${imgSrc}" alt="${slot.id}" loading="eager" style="
                             position: absolute;
@@ -2139,7 +2389,7 @@ button#SearchModal:hover {
             };
 
             // Section Heading Bar Renderer (Bilingual Tamil — English)
-            window.renderSectionHeadingHtml = function(sec) {
+            window.renderSectionHeadingHtml = function (sec) {
                 return `
                     <div class="yarika-heading-bar" id="sec-${sec.id}" style="
                         position: absolute;
@@ -2162,7 +2412,7 @@ button#SearchModal:hover {
 
                 // Find all stage instances (Turn.js may create duplicate wrappers during turn animations)
                 const stages = document.querySelectorAll(`.yarika-page-stage[data-page="${pageKey}"], #${pageKey === 'page4' ? 'yarika-stage-page4' : 'yarika-stage-page5'}`);
-                
+
                 stages.forEach(stage => {
                     if (isCalibrate) {
                         stage.classList.add('calibrate-mode');
@@ -2183,7 +2433,9 @@ button#SearchModal:hover {
                     }
 
                     if (slotsLayer && Array.isArray(pageData.slots)) {
-                        slotsLayer.innerHTML = pageData.slots.map(slot => window.renderSlotHtml(slot, isCalibrate)).join('');
+                        if (slotsLayer.children.length !== pageData.slots.length) {
+                            slotsLayer.innerHTML = pageData.slots.map((slot, idx) => window.renderSlotHtml(slot, isCalibrate, idx)).join('');
+                        }
                     }
                 });
             }
@@ -2197,17 +2449,17 @@ button#SearchModal:hover {
                 if (data.page5) renderYarikaPage('page5', data.page5);
             }
 
-            window.renderCatalogCardsFromCache = function() {
+            window.renderCatalogCardsFromCache = function () {
                 if (window._cachedCatalogData) {
                     updateCatalogFromData(window._cachedCatalogData);
                 }
             };
 
-            window.syncProductsCatalog = function() {
+            window.syncProductsCatalog = function () {
                 const databaseApi = resolveApiUrl();
                 console.log("[YarikaCatalog] Fetching sections & slots from API:", databaseApi);
 
-                fetch(databaseApi)
+                return fetch(databaseApi)
                     .then(r => {
                         if (!r.ok) throw new Error('API status ' + r.status);
                         return r.json();
@@ -2217,9 +2469,11 @@ button#SearchModal:hover {
                         if (data && (data.page4 || data.page5)) {
                             updateCatalogFromData(data);
                         }
+                        return data;
                     })
                     .catch(err => {
                         console.error("[YarikaCatalog] Failed to load catalog from API:", err);
+                        return null;
                     });
             };
 
@@ -2288,6 +2542,7 @@ button#SearchModal:hover {
                 height: crctSize.height,
                 autoCenter: true,
                 smartFlip: false,
+                acceleration: false,
                 pages: 6,
                 when: {
                     turning: function () {
@@ -2403,7 +2658,7 @@ button#SearchModal:hover {
 
             // ============== Page 2-3 - About Us & Table of Contents ==============
             if (page === 2 || page === 3) {
-                
+
             }
 
             // ============== Page 4-5 - Round Containers ==============
@@ -2441,8 +2696,8 @@ button#SearchModal:hover {
 
             }
 
-         
-           
+
+
             // ============== Dynamic Image Animation for All Other Pages ==============
             animateViewImages(view);
 
@@ -2885,6 +3140,55 @@ button#SearchModal:hover {
     </script>
 
 
+    <!-- Download Progress Overlay & Center Modal -->
+    <div id="downloadOverlay" class="fixed inset-0 z-[2147483647] flex items-center justify-center bg-black/70 backdrop-blur-md opacity-0 transition-all duration-300">
+        <div id="downloadModalCard" class="relative mx-4 w-full max-w-sm sm:max-w-md transform scale-95 transition-all duration-300 rounded-2xl bg-white/95 backdrop-blur-md p-6 sm:p-8 shadow-2xl border border-white/20 text-center">
+            
+            <!-- Decorative subtle glowing accent -->
+            <div class="absolute -top-12 -left-12 w-28 h-28 bg-[#196F92]/20 rounded-full blur-2xl pointer-events-none"></div>
+            <div class="absolute -bottom-12 -right-12 w-28 h-28 bg-[#E7BF3F]/25 rounded-full blur-2xl pointer-events-none"></div>
+
+            <!-- Spinner / Icon Container -->
+            <div class="relative mx-auto mb-4 flex h-16 w-16 items-center justify-center">
+                <!-- Rotating outer ring -->
+                <div id="downloadSpinnerRing" class="absolute inset-0 rounded-full border-4 border-slate-100 border-t-[#196F92] border-r-[#E7BF3F] animate-spin"></div>
+                <!-- Center download icon -->
+                <div id="downloadCenterIcon" class="text-[#196F92] transition-transform duration-300">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Heading & Messages -->
+            <h3 id="downloadModalTitle" class="text-lg sm:text-xl font-bold text-slate-800 tracking-tight">Generating PDF</h3>
+            <p id="downloadModalSubtitle" class="mt-1.5 text-xs sm:text-sm font-medium text-slate-500 transition-all duration-200">
+                Please wait while your document is being prepared...
+            </p>
+
+            <!-- Progress Bar Container -->
+            <div class="mt-5 w-full bg-slate-100 rounded-full h-2 overflow-hidden shadow-inner p-0.5 border border-slate-200/60">
+                <div id="downloadProgressBar" class="h-full bg-gradient-to-r from-[#196F92] via-[#2488b2] to-[#E7BF3F] rounded-full w-0 transition-all duration-300"></div>
+            </div>
+
+            <!-- Subtext / Note -->
+            <div class="mt-3 flex items-center justify-between text-[11px] font-semibold text-slate-400">
+                <span id="downloadProgressPercent">0%</span>
+                <span id="downloadPageIndicator">Page 0 of 6</span>
+            </div>
+
+            <!-- Centered Cancel Button (Hidden) -->
+            <div id="downloadCancelContainer" class="mt-6 pt-2 flex items-center justify-center hidden" style="display: none !important;">
+                <button type="button" id="downloadCancelActionBtn" class="download-cancel-btn" title="Cancel generating PDF">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                    <span>Cancel</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script type="text/javascript" src="script.js"></script>
@@ -3040,8 +3344,9 @@ button#SearchModal:hover {
                 const totalPages = $('#flipbook').turn('pages');
 
                 if (currentPage >= totalPages) {
-                    // âœ… Already on last page â€” stop autoplay, stay here
+                    // Autoplay finished - stop autoplay and return to home page (front page)
                     stopAutoplay();
+                    $('#flipbook').turn('page', 1);
                     return;
                 }
 
@@ -3212,7 +3517,7 @@ button#SearchModal:hover {
             }
 
             if (mobileTocBtn) {
-                mobileTocBtn.addEventListener('click', function(e) {
+                mobileTocBtn.addEventListener('click', function (e) {
                     e.stopPropagation();
                     const desktopThumbToggle = document.getElementById('desktopThumbToggle');
                     if (desktopThumbToggle) {
@@ -3257,28 +3562,7 @@ button#SearchModal:hover {
                 });
             }
 
-            // ===== Audio Toggle =====
-            if (mobileAudioBtn) {
-                mobileAudioBtn.addEventListener('click', function () {
-                    const bgmAudio = document.getElementById('bgmAudio');
-
-                    if (bgmAudio && !bgmAudio.paused) {
-                        // Turn OFF
-                        bgmAudio.pause();
-                        mobileAudioIcon.src = '../global%20assets/icons/music-off-icon.svg';
-                        mobileAudioStatus.textContent = 'OFF';
-                        mobileAudioStatus.classList.remove('on');
-                    } else {
-                        // Turn ON
-                        if (bgmAudio) bgmAudio.play();
-                        mobileAudioIcon.src = '../global%20assets/icons/music-on-icon.svg';
-                        mobileAudioStatus.textContent = 'ON';
-                        mobileAudioStatus.classList.add('on');
-                    }
-
-                    closeDropdown();
-                });
-            }
+            // ===== Audio Toggle is handled centrally by script.js (window.toggleBgmMusic) =====
 
             // ===== Share Button =====
             if (mobileShareBtn) {
@@ -3291,7 +3575,13 @@ button#SearchModal:hover {
             if (mobileDownloadBtn) {
                 mobileDownloadBtn.addEventListener('click', function () {
                     closeDropdown();
-                    startDownload(); // reuse the same function from script.js
+                    if (typeof startCatalogPdfDownload === 'function') {
+                        startCatalogPdfDownload();
+                    } else if (typeof window.startCatalogPdfDownload === 'function') {
+                        window.startCatalogPdfDownload();
+                    } else if (typeof startDownload === 'function') {
+                        startDownload();
+                    }
                 });
             }
             // ===== Fullscreen Button =====
@@ -3339,27 +3629,6 @@ button#SearchModal:hover {
                 updateMobilePageNumber(page);
                 updateTocActive(page);
             });
-
-            // ===== Sync with Desktop Audio Button =====
-            const desktopBgmButton = document.getElementById('bgmButton');
-            if (desktopBgmButton) {
-                desktopBgmButton.addEventListener('click', function () {
-                    const bgmAudio = document.getElementById('bgmAudio');
-                    if (bgmAudio) {
-                        if (bgmAudio.paused) {
-                            mobileAudioIcon.src = '../global%20assets/icons/music-off-icon.svg';
-                            mobileAudioStatus.textContent = 'OFF';
-                            mobileAudioStatus.classList.remove('on');
-                            isMobileAudioOn = false;
-                        } else {
-                            mobileAudioIcon.src = '../global%20assets/icons/music-on-icon.svg';
-                            mobileAudioStatus.textContent = 'ON';
-                            mobileAudioStatus.classList.add('on');
-                            isMobileAudioOn = true;
-                        }
-                    }
-                });
-            }
 
             // ===== Close dropdown on window resize (if going to desktop) =====
             window.addEventListener('resize', function () {
@@ -3465,11 +3734,13 @@ button#SearchModal:hover {
                 container.querySelectorAll('.svg-container') :
                 document.querySelectorAll('.svg-container');
 
+            const loadPromises = [];
+
             svgContainers.forEach(container => {
                 const src = container.getAttribute('data-src');
                 if (src && !container.dataset.loaded) {
                     container.dataset.loaded = 'true'; // Prevent double-loading
-                    fetch(src)
+                    const p = fetch(src)
                         .then(response => {
                             if (!response.ok) throw new Error(`Failed to load ${src}`);
                             return response.text();
@@ -3490,7 +3761,7 @@ button#SearchModal:hover {
                                 // would fragment and break apart.
                                 const allChildren = Array.from(svgEl.children);
                                 const staticTags = ['defs', 'clippath', 'mask', 'pattern', 'filter', 'style'];
-                                
+
                                 // Step 1: Identify background elements (definitions, masks, first background rectangles, background wave fills)
                                 allChildren.forEach((child, idx) => {
                                     const tag = child.tagName.toLowerCase();
@@ -3507,7 +3778,7 @@ button#SearchModal:hover {
                                 const animatableNodes = [];
                                 allChildren.forEach((child, idx) => {
                                     if (child.classList.contains('svg-static-bg')) return;
-                                    
+
                                     // If child is the main background banner/base path at the top
                                     const tag = child.tagName.toLowerCase();
                                     const d = child.getAttribute('d') || '';
@@ -3608,25 +3879,72 @@ button#SearchModal:hover {
 
                                 const isHomePage = src.includes('home-page-image');
                                 if (isHomePage) {
-                                    // Home Page semantic element groupings
-                                    const homeLogo = svgEl.querySelector('#home-logo') || svgEl.querySelector('#logo');
+                                    // Check if groups already exist or dynamically create groups from paths
+                                    let homeLogo = svgEl.querySelector('#home-logo') || svgEl.querySelector('#logo');
+                                    let homeBadge = svgEl.querySelector('#home-badge') || svgEl.querySelector('#badge') || svgEl.querySelector('#ribbon');
+                                    let homeContent = svgEl.querySelector('#home-content') || svgEl.querySelector('#content');
+                                    let homeFooter = svgEl.querySelector('#home-footer') || svgEl.querySelector('#footer');
+
+                                    // If new SVG does not have predefined IDs, group elements by logical section:
+                                    if (!homeLogo && !homeBadge && !homeFooter && animatableNodes.length > 0) {
+                                        const logoNodes = [];
+                                        const badgeNodes = [];
+                                        const footerNodes = [];
+
+                                        animatableNodes.forEach((node) => {
+                                            const fill = node.getAttribute('fill') || '';
+                                            const d = node.getAttribute('d') || '';
+
+                                            // Top logo & brand: typically at the top (< 90px in Y coordinate)
+                                            // Lines with fill #215D7F, #BD8B3D, #1B5C7E, #767475 and Y < 100
+                                            if (fill === '#215D7F' || fill === '#BD8B3D' || fill === '#1B5C7E' || fill === '#767475') {
+                                                logoNodes.push(node);
+                                            } else if (fill.includes('paint6') || fill.includes('paint7') || fill.includes('paint8') || fill.includes('paint9') || fill.includes('paint10') || fill.includes('paint11') || fill === '#F2F9FE' || fill === '#DCEDFA' || fill === '#2883A5' || fill === '#267196') {
+                                                // Middle circular emblem / badge / feature graphic
+                                                badgeNodes.push(node);
+                                            } else {
+                                                // Bottom footer, text banners and labels
+                                                footerNodes.push(node);
+                                            }
+                                        });
+
+                                        if (logoNodes.length > 0) {
+                                            homeLogo = document.createElementNS("http://www.w3.org/2000/svg", "g");
+                                            homeLogo.setAttribute('id', 'home-logo');
+                                            svgEl.insertBefore(homeLogo, logoNodes[0]);
+                                            logoNodes.forEach(node => homeLogo.appendChild(node));
+                                        }
+
+                                        if (badgeNodes.length > 0) {
+                                            homeBadge = document.createElementNS("http://www.w3.org/2000/svg", "g");
+                                            homeBadge.setAttribute('id', 'home-badge');
+                                            svgEl.insertBefore(homeBadge, badgeNodes[0]);
+                                            badgeNodes.forEach(node => homeBadge.appendChild(node));
+                                        }
+
+                                        if (footerNodes.length > 0) {
+                                            homeFooter = document.createElementNS("http://www.w3.org/2000/svg", "g");
+                                            homeFooter.setAttribute('id', 'home-footer');
+                                            svgEl.insertBefore(homeFooter, footerNodes[0]);
+                                            footerNodes.forEach(node => homeFooter.appendChild(node));
+                                        }
+                                    }
+
+                                    // Apply animation classes
                                     if (homeLogo) {
                                         homeLogo.classList.add('svg-parent-group', 'reveal-up');
                                     }
-                                    const homeBadge = svgEl.querySelector('#home-badge') || svgEl.querySelector('#badge') || svgEl.querySelector('#ribbon');
                                     if (homeBadge) {
                                         homeBadge.classList.add('svg-parent-group', 'anim-popup');
                                     }
-                                    const homeContent = svgEl.querySelector('#home-content') || svgEl.querySelector('#content');
                                     if (homeContent) {
                                         homeContent.classList.add('svg-parent-group', 'reveal-up');
                                     }
-                                    const homeFooter = svgEl.querySelector('#home-footer') || svgEl.querySelector('#footer');
                                     if (homeFooter) {
                                         homeFooter.classList.add('svg-parent-group', 'reveal-up');
                                     }
 
-                                    // Strip child vector animation classes so only parents animate
+                                    // Strip child vector animation classes so only parents animate smoothly
                                     [homeLogo, homeBadge, homeContent, homeFooter].forEach(el => {
                                         if (el) {
                                             el.querySelectorAll('path, rect, circle, polygon, text').forEach(v => {
@@ -3676,7 +3994,7 @@ button#SearchModal:hover {
                                             } else if (d.includes('M87 45') || d.includes('M362 45') || d.includes('M102.999 50') || d.includes('M108.116 36') || d.includes('M348 50')) {
                                                 isHeader = true;
                                             }
-                                        } catch (e) {}
+                                        } catch (e) { }
 
                                         if (isHeader) {
                                             headingNodes.push(node);
@@ -3777,7 +4095,7 @@ button#SearchModal:hover {
                                             // Wrap consecutive vector paths into a newly created parent <g>
                                             const parentG = document.createElementNS("http://www.w3.org/2000/svg", "g");
                                             parentG.classList.add('svg-parent-group', animClass);
-                                            
+
                                             const firstNode = currentChunk[0];
                                             svgEl.insertBefore(parentG, firstNode);
                                             currentChunk.forEach(node => {
@@ -3814,8 +4132,16 @@ button#SearchModal:hover {
                                         const el = container.querySelector(selector);
                                         if (el) {
                                             el.classList.add('no-flip-zone', 'interactive-link');
+                                            el.setAttribute('data-action-url', actionUrl);
+                                            el.setAttribute('data-action-newtab', isNewTab ? 'true' : 'false');
                                             el.style.cursor = 'pointer';
                                             el.style.pointerEvents = 'auto';
+
+                                            el.querySelectorAll('*').forEach(child => {
+                                                child.classList.add('no-flip-zone');
+                                                child.style.cursor = 'pointer';
+                                                child.style.pointerEvents = 'auto';
+                                            });
 
                                             const activateLink = (e) => {
                                                 e.preventDefault();
@@ -3828,7 +4154,7 @@ button#SearchModal:hover {
                                             };
 
                                             el.addEventListener('click', activateLink);
-                                            el.addEventListener('touchstart', activateLink, { passive: false });
+                                            el.addEventListener('touchend', activateLink, { passive: false });
                                         }
                                     };
 
@@ -3846,6 +4172,21 @@ button#SearchModal:hover {
                                     bindLink('[id="9489042229"]', 'tel:9489042229', false);
 
                                     // Location link (Google Maps search)
+                                    // Add solid invisible hit area over the entire #location address block so clicking anywhere on the group works
+                                    const locGroup = container.querySelector('#location');
+                                    if (locGroup) {
+                                        const hitRect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                                        hitRect.classList.add('interactive-hitbox', 'no-flip-zone');
+                                        hitRect.setAttribute('x', '65');
+                                        hitRect.setAttribute('y', '450');
+                                        hitRect.setAttribute('width', '325');
+                                        hitRect.setAttribute('height', '32');
+                                        hitRect.setAttribute('fill', 'transparent');
+                                        hitRect.setAttribute('pointer-events', 'all');
+                                        hitRect.style.cursor = 'pointer';
+                                        hitRect.style.pointerEvents = 'all';
+                                        locGroup.insertBefore(hitRect, locGroup.firstChild);
+                                    }
                                     bindLink('#location', 'https://www.google.com/maps/search/?api=1&query=SF+No.+29%2F1B%2C+Onapalayam%2C+Vadavalli+to+Thondamuthur+Road%2C+Coimbatore%2C+Tamil+Nadu+-+641109', true);
 
                                     // Website links
@@ -3862,14 +4203,24 @@ button#SearchModal:hover {
 
                                 // Trigger animation if the page is currently in view
                                 const pageParent = container.closest('.page');
-                                if (pageParent && (pageParent.classList.contains('active') || pageParent.classList.contains('animation-on'))) {
-                                    pageParent.classList.add('animation-on');
+                                if (pageParent) {
+                                    if (pageParent.classList.contains('page-1') || pageParent.classList.contains('active') || pageParent.classList.contains('animation-on')) {
+                                        pageParent.classList.remove('animation-on');
+                                        requestAnimationFrame(() => {
+                                            pageParent.classList.add('animation-on');
+                                        });
+                                    }
                                 }
                             }
                         })
-                        .catch(err => console.error("SVG Load Error:", err));
+                        .catch(err => {
+                            console.error("SVG Load Error:", err);
+                        });
+                    loadPromises.push(p);
                 }
             });
+
+            return Promise.all(loadPromises);
         }
 
         // Initial load
@@ -3898,6 +4249,7 @@ button#SearchModal:hover {
                     //     33: "../audios/Stainless-steel-furniture-ward-accessories.mp3",
                     //     37: "../audios/General-furniture.mp3",
                     //     39: "../audios/Accessories.mp3"
+                    // };
                     if (typeof pageAudioMap !== 'undefined' && pageAudioMap[targetPage]) {
                         const audioPath = pageAudioMap[targetPage];
                         const audio = new Audio(audioPath);
@@ -3953,6 +4305,120 @@ button#SearchModal:hover {
 
 
 
+        // Global capture-phase delegated handler for Page 6 interactive links (websites, phones, emails, location, brands)
+        // This ensures clicks and touches always trigger instantly without being swallowed by Turn.js or SVG child event bubbling.
+        (function setupPage6LinkDelegation() {
+            const handleContactAction = (target) => {
+                if (!target) return false;
+
+                // 1. Check if target or its ancestors have explicit data-action-url
+                const linkWithData = target.closest('[data-action-url]');
+                if (linkWithData) {
+                    const url = linkWithData.getAttribute('data-action-url');
+                    const isNewTab = linkWithData.getAttribute('data-action-newtab') === 'true';
+                    if (url) {
+                        if (isNewTab) {
+                            window.open(url, '_blank', 'noopener,noreferrer');
+                        } else {
+                            window.location.href = url;
+                        }
+                        return true;
+                    }
+                }
+
+                // 2. Websites matching
+                const webEl = target.closest('[id="www.zillionsangamam.com"], [id="www.zillionthreads.com"], [id="www.yarika.in"], [id="www.mittoys.com"], [id*="www."]');
+                if (webEl) {
+                    const id = (webEl.id || '').trim();
+                    let url = '';
+                    if (id.includes('zillionsangamam')) url = 'https://www.zillionsangamam.com';
+                    else if (id.includes('zillionthreads')) url = 'https://www.zillionthreads.com';
+                    else if (id.includes('yarika')) url = 'https://www.yarika.in';
+                    else if (id.includes('mittoys')) url = 'https://www.mittoys.com';
+                    else if (id.startsWith('www.')) url = 'https://' + id;
+
+                    if (url) {
+                        window.open(url, '_blank', 'noopener,noreferrer');
+                        return true;
+                    }
+                }
+
+                // 3. Phone numbers matching
+                const phoneEl = target.closest('[id="9489042220"], [id="9489042224"], [id="9489042226"], [id="9489042227"], [id="9489042228"], [id="9489042229"], [id^="94890"]');
+                if (phoneEl) {
+                    const phone = (phoneEl.id || '').trim();
+                    if (phone) {
+                        window.location.href = 'tel:' + phone;
+                        return true;
+                    }
+                }
+
+                // 4. Email matching
+                const mailEl = target.closest('[id="info@zillionthreads.com"], [id="sales@zillionthreads.com"], [id="sangamam@zillionthreads.com"], [id*="@"]');
+                if (mailEl) {
+                    const email = (mailEl.id || '').trim();
+                    if (email && email.includes('@')) {
+                        window.location.href = 'mailto:' + email;
+                        return true;
+                    }
+                }
+
+                // 5. Location matching
+                const locEl = target.closest('#location, [id="location"]');
+                if (locEl) {
+                    const mapsUrl = 'https://www.google.com/maps/search/?api=1&query=SF+No.+29%2F1B%2C+Onapalayam%2C+Vadavalli+to+Thondamuthur+Road%2C+Coimbatore%2C+Tamil+Nadu+-+641109';
+                    window.open(mapsUrl, '_blank', 'noopener,noreferrer');
+                    return true;
+                }
+
+                // 6. Brand logos matching
+                const brandEl = target.closest('#brand-1, #brand-2, #brand-3, #logo');
+                if (brandEl) {
+                    const id = brandEl.id;
+                    if (id === 'brand-1') window.open('https://www.yarika.in', '_blank', 'noopener,noreferrer');
+                    else if (id === 'brand-2') window.open('https://www.mittoys.com', '_blank', 'noopener,noreferrer');
+                    else if (id === 'brand-3' || id === 'logo') window.open('https://www.zillionthreads.com', '_blank', 'noopener,noreferrer');
+                    return true;
+                }
+
+                return false;
+            };
+
+            let touchStartTime = 0;
+            let touchStartX = 0;
+            let touchStartY = 0;
+
+            document.addEventListener('touchstart', function (e) {
+                const touch = e.touches[0];
+                touchStartTime = Date.now();
+                touchStartX = touch.clientX;
+                touchStartY = touch.clientY;
+            }, { passive: true, capture: true });
+
+            document.addEventListener('touchend', function (e) {
+                const touch = e.changedTouches[0];
+                const deltaX = Math.abs(touch.clientX - touchStartX);
+                const deltaY = Math.abs(touch.clientY - touchStartY);
+                const timeDiff = Date.now() - touchStartTime;
+
+                // Only handle intentional taps (not drags or swipes)
+                if (deltaX < 12 && deltaY < 12 && timeDiff < 500) {
+                    const el = document.elementFromPoint(touch.clientX, touch.clientY);
+                    if (handleContactAction(el)) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                }
+            }, { passive: false, capture: true });
+
+            document.addEventListener('click', function (e) {
+                if (handleContactAction(e.target)) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+            }, true); // useCapture: true ensures it executes before Turn.js or other handlers
+        })();
+
         window.addEventListener('message', function (event) {
             switch (event.data.action) {
                 case 'flipNext':
@@ -3998,99 +4464,143 @@ button#SearchModal:hover {
     <script>
         // Track and report asset loading progress to parent frame so preloader runs until ALL assets are loaded
         (function () {
-            function initAssetTracker() {
-                const trackedElements = new Set();
-                let assetsLoaded = 0;
-                let totalAssets = 0;
-                let isImagesFinished = false;
+            let assetsLoaded = 0;
+            let totalAssets = 0;
+            let isImagesFinished = false;
+            let isParentNotified = false;
 
-                function reportProgress() {
-                    const ratio = totalAssets > 0 ? Math.min(1, Math.max(0, assetsLoaded / totalAssets)) : 1;
-                    try {
-                        window.parent.postMessage({
-                            action: 'loadProgress',
-                            loaded: assetsLoaded,
-                            total: totalAssets,
-                            ratio: ratio
-                        }, '*');
-                    } catch (e) { }
+            function reportProgress() {
+                const ratio = totalAssets > 0 ? Math.min(1, Math.max(0, assetsLoaded / totalAssets)) : 0;
+                try {
+                    window.parent.postMessage({
+                        action: 'loadProgress',
+                        loaded: assetsLoaded,
+                        total: totalAssets,
+                        ratio: ratio
+                    }, '*');
+                } catch (e) { }
+            }
 
-                    if (totalAssets > 0 && assetsLoaded >= totalAssets && !isImagesFinished) {
-                        isImagesFinished = true;
-                        try {
-                            window.parent.postMessage({ action: 'assetsLoaded' }, '*');
-                        } catch (e) { }
-                    }
-                }
+            function notifyComplete() {
+                if (isParentNotified) return;
+                isParentNotified = true;
+                isImagesFinished = true;
 
-                function trackItem(el, isSvg = false) {
-                    if (trackedElements.has(el)) return;
-                    trackedElements.add(el);
-                    totalAssets++;
+                // Ensure Page 1 animation triggers cleanly now that it is completely loaded
+                const firstPage = window.$ && $('#flipbook').turn ? $('#flipbook').turn('page') : 1;
+                document.querySelectorAll(`.page-${firstPage}`).forEach(p => {
+                    p.classList.remove('animation-on');
+                    requestAnimationFrame(() => p.classList.add('animation-on'));
+                });
 
-                    if (isSvg) {
-                        if (el.dataset.loaded || el.children.length > 0) {
-                            assetsLoaded++;
-                            reportProgress();
-                        } else {
-                            const checkInterval = setInterval(() => {
-                                if (el.dataset.loaded || el.children.length > 0) {
-                                    clearInterval(checkInterval);
-                                    assetsLoaded++;
-                                    reportProgress();
+                try {
+                    window.parent.postMessage({ action: 'loadProgress', loaded: totalAssets, total: totalAssets, ratio: 1 }, '*');
+                    window.parent.postMessage({ action: 'assetsLoaded' }, '*');
+                    window.parent.postMessage({ action: 'contentReady' }, '*');
+                } catch (e) { }
+            }
+
+            // Collect all initial promises
+            const tasks = [];
+
+            // 1. Initial SVG loading (home page, problems, opportunities, contact)
+            if (typeof loadSVGs === 'function') {
+                totalAssets += 4; // 4 core page SVGs
+                reportProgress();
+                const svgPromise = loadSVGs()
+                    .then(() => {
+                        assetsLoaded += 4;
+                        reportProgress();
+                    })
+                    .catch(() => {
+                        assetsLoaded += 4;
+                        reportProgress();
+                    });
+                tasks.push(svgPromise);
+            }
+
+            // 2. Initial MySQL product catalog sync
+            if (typeof window.syncProductsCatalog === 'function') {
+                totalAssets += 1;
+                reportProgress();
+                const catalogPromise = window.syncProductsCatalog()
+                    .then(data => {
+                        assetsLoaded += 1;
+                        reportProgress();
+
+                        // Preload all product slot images
+                        if (data) {
+                            const imgUrls = [];
+                            ['page4', 'page5'].forEach(pk => {
+                                if (data[pk] && Array.isArray(data[pk].slots)) {
+                                    data[pk].slots.forEach(s => {
+                                        if (s.image) imgUrls.push(s.image);
+                                    });
                                 }
-                            }, 50);
-                            setTimeout(() => {
-                                clearInterval(checkInterval);
-                                if (!el.dataset.loaded && el.children.length === 0) {
-                                    assetsLoaded++;
-                                    reportProgress();
-                                }
-                            }, 500);
+                            });
+
+                            if (imgUrls.length > 0) {
+                                totalAssets += imgUrls.length;
+                                reportProgress();
+                                const imgPromises = imgUrls.map(url => new Promise(res => {
+                                    const img = new Image();
+                                    img.onload = () => { assetsLoaded++; reportProgress(); res(); };
+                                    img.onerror = () => { assetsLoaded++; reportProgress(); res(); };
+                                    img.src = url;
+                                }));
+                                return Promise.all(imgPromises);
+                            }
                         }
+                    })
+                    .catch(() => {
+                        assetsLoaded += 1;
+                        reportProgress();
+                    });
+                tasks.push(catalogPromise);
+            }
+
+            // 3. Regular static images in DOM
+            const domImages = Array.from(document.querySelectorAll('img:not(.calibrate-overlay-img)'));
+            if (domImages.length > 0) {
+                totalAssets += domImages.length;
+                reportProgress();
+                const domImgPromises = domImages.map(img => new Promise(res => {
+                    if (img.complete && img.naturalWidth !== 0) {
+                        assetsLoaded++;
+                        reportProgress();
+                        res();
                     } else {
-                        if (el.complete) {
-                            assetsLoaded++;
-                            reportProgress();
-                        } else {
-                            el.addEventListener('load', () => { assetsLoaded++; reportProgress(); }, { once: true });
-                            el.addEventListener('error', () => { assetsLoaded++; reportProgress(); }, { once: true });
-                        }
+                        img.addEventListener('load', () => { assetsLoaded++; reportProgress(); res(); }, { once: true });
+                        img.addEventListener('error', () => { assetsLoaded++; reportProgress(); res(); }, { once: true });
                     }
-                }
+                }));
+                tasks.push(Promise.all(domImgPromises));
+            }
 
-                function scanAssets() {
-                    const images = document.querySelectorAll('img');
-                    images.forEach(img => trackItem(img, false));
-
-                    const svgs = document.querySelectorAll('.svg-container[data-src]');
-                    svgs.forEach(svg => trackItem(svg, true));
-                }
-
-                scanAssets();
-
-                const observer = new MutationObserver(() => scanAssets());
-                observer.observe(document.body || document.documentElement, { childList: true, subtree: true });
-
-                const interval = setInterval(scanAssets, 200);
-                setTimeout(() => clearInterval(interval), 3000);
-
+            // 4. Window load event (stylesheets, fonts, Turn.js setup)
+            const windowLoadPromise = new Promise(res => {
                 if (document.readyState === 'complete') {
-                    try { window.parent.postMessage({ action: 'contentReady' }, '*'); } catch (e) { }
+                    res();
                 } else {
-                    window.addEventListener('load', () => {
-                        try { window.parent.postMessage({ action: 'contentReady' }, '*'); } catch (e) { }
-                    }, { once: true });
+                    window.addEventListener('load', () => res(), { once: true });
                 }
-            }
+            });
+            tasks.push(windowLoadPromise);
 
-            if (document.readyState === 'complete' || document.readyState === 'interactive') {
-                initAssetTracker();
-            } else {
-                document.addEventListener('DOMContentLoaded', () => initAssetTracker());
-            }
+            // Wait for EVERYTHING to finish before preloader hides
+            Promise.all(tasks).then(() => {
+                // Short RAF tick to allow browser layout & rasterization of Page 1 SVG
+                requestAnimationFrame(() => {
+                    setTimeout(notifyComplete, 120);
+                });
+            });
+
+            // Hard safety fallback (15 seconds max)
+            setTimeout(notifyComplete, 15000);
         })();
     </script>
+
+
     <!-- PRODUCT IMAGE LIGHTBOX POPUP MODAL -->
     <div id="product-image-modal" class="product-modal-overlay">
         <!-- <div class="product-modal-container"> -->

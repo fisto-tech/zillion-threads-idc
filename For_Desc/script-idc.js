@@ -245,7 +245,7 @@ $(document).ready(function () {
             const viewer = document.getElementById('viewer');
             const appEl = document.querySelector('.catalog-app');
             const totalPages = $('#flipbook').turn('pages');
-            
+
             const addClass = (cls) => {
                 if (viewer) viewer.classList.add(cls);
                 if (appEl) appEl.classList.add(cls);
@@ -297,7 +297,7 @@ function getVisiblePageWrappers() {
                     if (el) wrappers.push(el);
                 });
             }
-        } catch (e) {}
+        } catch (e) { }
     }
 
     if (wrappers.length === 0) {
@@ -374,7 +374,7 @@ function updateDesktopArrowPositions() {
             const currentView = $('#flipbook').turn('view') || [];
             validPages = currentView.filter(p => p > 0);
             totalPages = $('#flipbook').turn('pages') || 40;
-        } catch (e) {}
+        } catch (e) { }
     }
 
     // Fallback check DOM body/viewer classes
@@ -501,10 +501,10 @@ $(document).ready(function () {
 
 const categoryBackgrounds = {
     ranges: [
-        { start: 1, end: 1, bg: '../global%20assets/bottom-navbar/desktop-background-image.webp', name: 'Home' },
-        { start: 2, end: 3, bg: '../global%20assets/bottom-navbar/desktop-background-image.webp', name: 'About Us' },
-        { start: 4, end: 5, bg: '../global%20assets/bottom-navbar/desktop-background-image.webp', name: 'Products' },
-        { start: 5, end: 5, bg: '../global%20assets/bottom-navbar/desktop-background-image.webp', name: '3D Experience' },
+        { start: 1, end: 1, bg: '../global%20assets/Images/products/desktop-background.png', name: 'Home' },
+        { start: 2, end: 3, bg: '../global%20assets/Images/products/desktop-background.png', name: 'About Us' },
+        { start: 4, end: 5, bg: '../global%20assets/Images/products/desktop-background.png', name: 'Products' },
+        { start: 5, end: 5, bg: '../global%20assets/Images/products/desktop-background.png', name: '3D Experience' },
         { start: 6, end: 11, bg: '../global%20assets/Images/background-images/ward-furniture-image.webp', name: 'Ward Furniture' },
         { start: 12, end: 13, bg: '../global%20assets/Images/background-images/icu-critical-care-image.webp', name: 'ICU & Critical Care' },
         { start: 14, end: 15, bg: '../global%20assets/Images/background-images/labor-maternity-image.webp', name: 'Labour & Maternity' },
@@ -514,9 +514,9 @@ const categoryBackgrounds = {
         { start: 34, end: 35, bg: '../global%20assets/Images/background-images/stainless-steal-ward-accessories-image.webp', name: 'Stainless Steel Furniture & Ward Accessories' },
         { start: 36, end: 37, bg: '../global%20assets/Images/background-images/general-furniture-image.webp', name: 'General Furniture' },
         { start: 38, end: 39, bg: '../global%20assets/Images/background-images/accessories-image.webp', name: 'Accessories' },
-        { start: 40, end: 40, bg: '../global%20assets/bottom-navbar/desktop-background-image.webp', name: 'Contact Us' }
+        { start: 40, end: 40, bg: '../global%20assets/Images/products/desktop-background.png', name: 'Contact Us' }
     ],
-    defaultBg: '../global%20assets/bottom-navbar/desktop-background-image.webp'
+    defaultBg: '../global%20assets/Images/products/desktop-background.png'
 };
 
 let currentBgUrl = '';
@@ -535,7 +535,7 @@ function getCategoryBgForPage(pageNum) {
                 }
             }
         }
-        return '../global%20assets/bottom-navbar/mobile-background-image.webp';
+        return '../global%20assets/Images/products/mobile-background.png';
     }
 
     for (let r of categoryBackgrounds.ranges) {
@@ -581,7 +581,7 @@ function updateCategoryBackground(targetPage) {
 }
 
 // Global utility method so any category's background image can be updated dynamically
-window.setCategoryBackground = function(categoryNameOrPage, imagePath) {
+window.setCategoryBackground = function (categoryNameOrPage, imagePath) {
     if (typeof categoryNameOrPage === 'number') {
         const item = categoryBackgrounds.ranges.find(r => categoryNameOrPage >= r.start && categoryNameOrPage <= r.end);
         if (item) item.bg = imagePath;
@@ -603,6 +603,12 @@ $(document).ready(function () {
             updateCategoryBackground(page);
         });
     }
+
+    $(window).on('resize orientationchange', function () {
+        currentBgUrl = ''; // Force re-evaluation on screen size / orientation change
+        updateCategoryBackground();
+    });
 });
+
 
 

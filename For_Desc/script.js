@@ -479,169 +479,164 @@ document.addEventListener('keydown', (e) => {
 
 // ****************************share button navbar functionality end************************** ]
 // ****************************music button navbar functionality start************************** 
-// ==================== MUSIC/AUDIO FUNCTIONALITY (Alternative) ====================
-window.addEventListener('load', function () {
-    const bgmAudio = document.getElementById('bgmAudio');
-    const bgmButton = document.getElementById('bgmButton');
-    const musicOnImg = document.getElementById('musicOnImg');
-    const musicOffImg = document.getElementById('musicOffImg');
+// ==================== MUSIC/AUDIO FUNCTIONALITY (Robust Mobile & Desktop) ====================
+(function initMusicPlayer() {
+    function setupMusic() {
+        const bgmAudio = document.getElementById('bgmAudio');
+        const bgmButton = document.getElementById('bgmButton');
+        const musicOnImg = document.getElementById('musicOnImg');
+        const musicOffImg = document.getElementById('musicOffImg');
 
-    const mobileAudioIcon = document.getElementById('navMobileAudioIcon');
-    const mobileAudioBtn = document.getElementById('mobileAudioBtn');
-    const mobileAudioStatus = document.getElementById('mobileAudioStatus');
+        const navMobileAudioIcon = document.getElementById('navMobileAudioIcon');
+        const mobileAudioBtn = document.getElementById('mobileAudioBtn');
+        const mobileAudioIcon = document.getElementById('mobileAudioIcon');
+        const mobileAudioStatus = document.getElementById('mobileAudioStatus');
+        const mobileDirectAudioBtn = document.getElementById('mobileDirectAudioBtn');
+        const mobileDirectAudioIcon = document.getElementById('mobileDirectAudioIcon');
 
-    const MOBILE_MUSIC_ON_SRC = "../global%20assets/icons/music-on-icon.svg";
-    const MOBILE_MUSIC_OFF_SRC = "../global%20assets/icons/music-off-icon.svg";
+        const MOBILE_MUSIC_ON_SRC = "../global%20assets/icons/music-on-icon.svg";
+        const MOBILE_MUSIC_OFF_SRC = "../global%20assets/icons/music-off-icon.svg";
 
-    if (bgmAudio) {
-        bgmAudio.volume = 0.50;
-    }
-
-    let isPlaying = false;
-
-    // Default icon state ON (music enabled by default)
-    updateIcons(true);
-
-    // Function to start audio default play
-    function startDefaultMusic() {
         if (!bgmAudio) return;
+
         bgmAudio.volume = 0.50;
-        const playPromise = bgmAudio.play();
-        if (playPromise !== undefined) {
-            playPromise.then(() => {
-                isPlaying = true;
-                updateIcons(true);
-            }).catch((err) => {
-                console.log('Autoplay deferred until user interaction:', err);
-                // Keep icon in ON state so music starts on first interaction
-                updateIcons(true);
+
+        function updateAllAudioIcons(isPlaying) {
+            // 1. Desktop bottom bar images
+            if (musicOnImg && musicOffImg) {
+                if (isPlaying) {
+                    musicOnImg.classList.remove("hidden");
+                    musicOffImg.classList.add("hidden");
+                } else {
+                    musicOnImg.classList.add("hidden");
+                    musicOffImg.classList.remove("hidden");
+                }
+            }
+
+            // 2. Mobile 3-dot dropdown menu icon & text
+            if (mobileAudioIcon) {
+                mobileAudioIcon.src = isPlaying ? MOBILE_MUSIC_ON_SRC : MOBILE_MUSIC_OFF_SRC;
+            }
+            if (mobileAudioStatus) {
+                mobileAudioStatus.textContent = isPlaying ? 'ON' : 'OFF';
+                mobileAudioStatus.classList.toggle('on', isPlaying);
+            }
+
+            // 3. Mobile direct header icon
+            if (mobileDirectAudioIcon) {
+                mobileDirectAudioIcon.src = isPlaying ? MOBILE_MUSIC_ON_SRC : MOBILE_MUSIC_OFF_SRC;
+            }
+            if (mobileDirectAudioBtn) {
+                mobileDirectAudioBtn.classList.toggle('active', isPlaying);
+            }
+
+            // 4. Mobile slide overlay icon
+            if (navMobileAudioIcon) {
+                navMobileAudioIcon.src = isPlaying ? MOBILE_MUSIC_ON_SRC : MOBILE_MUSIC_OFF_SRC;
+            }
+
+            // 5. Any other audio buttons
+            const iconAudio = document.getElementById('iconAudio');
+            if (iconAudio) {
+                iconAudio.classList.toggle('active', isPlaying);
+            }
+        }
+
+        function isAudioPlaying() {
+            return !bgmAudio.paused && !bgmAudio.ended && bgmAudio.currentTime > 0;
+        }
+
+        function toggleMusic(e) {
+            if (e) {
+                if (typeof e.stopPropagation === 'function') e.stopPropagation();
+            }
+
+            if (isAudioPlaying()) {
+                bgmAudio.pause();
+                updateAllAudioIcons(false);
+            } else {
+                bgmAudio.volume = 0.50;
+                const playPromise = bgmAudio.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        updateAllAudioIcons(true);
+                    }).catch((error) => {
+                        console.warn('Audio play request prevented by browser:', error);
+                        updateAllAudioIcons(false);
+                    });
+                }
+            }
+        }
+
+        window.toggleBgmMusic = toggleMusic;
+
+        // Attach to all audio buttons
+        if (bgmButton) {
+            bgmButton.onclick = toggleMusic;
+        }
+        if (mobileAudioBtn) {
+            mobileAudioBtn.onclick = function (e) {
+                if (e) {
+                    if (typeof e.preventDefault === 'function') e.preventDefault();
+                    if (typeof e.stopPropagation === 'function') e.stopPropagation();
+                }
+                toggleMusic(e);
+            };
+        }
+        if (mobileDirectAudioBtn) {
+            mobileDirectAudioBtn.onclick = function (e) {
+                if (e) {
+                    if (typeof e.preventDefault === 'function') e.preventDefault();
+                    if (typeof e.stopPropagation === 'function') e.stopPropagation();
+                }
+                toggleMusic(e);
+            };
+        }
+        if (navMobileAudioIcon) {
+            navMobileAudioIcon.onclick = function (e) {
+                if (e) {
+                    if (typeof e.stopPropagation === 'function') e.stopPropagation();
+                }
+                toggleMusic(e);
+            };
+        }
+
+        // Sync with actual audio element events
+        bgmAudio.addEventListener('pause', () => updateAllAudioIcons(false));
+        bgmAudio.addEventListener('play', () => updateAllAudioIcons(true));
+        bgmAudio.addEventListener('playing', () => updateAllAudioIcons(true));
+
+        // Attempt initial autoplay or wait for first gesture
+        const initialPlay = bgmAudio.play();
+        if (initialPlay !== undefined) {
+            initialPlay.then(() => {
+                updateAllAudioIcons(true);
+            }).catch(() => {
+                // Autoplay blocked by browser policy until interaction
+                updateAllAudioIcons(false);
+
+                function unlockOnFirstTouch() {
+                    if (bgmAudio.paused) {
+                        bgmAudio.play().then(() => {
+                            updateAllAudioIcons(true);
+                        }).catch(() => { });
+                    }
+                    document.removeEventListener('click', unlockOnFirstTouch);
+                    document.removeEventListener('touchstart', unlockOnFirstTouch);
+                }
+                document.addEventListener('click', unlockOnFirstTouch, { once: true });
+                document.addEventListener('touchstart', unlockOnFirstTouch, { once: true });
             });
         }
     }
 
-    startDefaultMusic();
-
-    function updateIcons(playing) {
-        // Desktop icons
-        if (musicOnImg && musicOffImg) {
-            if (playing) {
-                musicOnImg.classList.remove("hidden");
-                musicOffImg.classList.add("hidden");
-            } else {
-                musicOnImg.classList.add("hidden");
-                musicOffImg.classList.remove("hidden");
-            }
-        }
-
-        // Mobile icons
-        if (mobileAudioIcon) {
-            mobileAudioIcon.src = playing ? MOBILE_MUSIC_ON_SRC : MOBILE_MUSIC_OFF_SRC;
-        }
-
-        const mobileDropdownAudioIcon = document.getElementById('mobileAudioIcon');
-        if (mobileDropdownAudioIcon) {
-            mobileDropdownAudioIcon.src = playing ? MOBILE_MUSIC_ON_SRC : MOBILE_MUSIC_OFF_SRC;
-        }
-
-        if (mobileAudioStatus) {
-            mobileAudioStatus.textContent = playing ? 'ON' : 'OFF';
-            mobileAudioStatus.classList.toggle('on', playing);
-        }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', setupMusic);
+    } else {
+        setupMusic();
     }
-
-    function toggleMusic(e) {
-        if (e) {
-            e.preventDefault();
-            e.stopPropagation();
-        }
-        if (!bgmAudio) return;
-
-        // Check the actual audio element state rather than a variable
-        if (!bgmAudio.paused && !bgmAudio.ended && bgmAudio.currentTime > 0) {
-            bgmAudio.pause();
-            isPlaying = false;
-            updateIcons(false);
-        } else {
-            bgmAudio.volume = 0.50;
-            const playPromise = bgmAudio.play();
-            if (playPromise !== undefined) {
-                playPromise.then(() => {
-                    isPlaying = true;
-                    updateIcons(true);
-                }).catch((error) => {
-                    console.error('Audio play error:', error);
-                });
-            }
-        }
-    }
-
-    // Event listeners
-    if (bgmButton) {
-        bgmButton.removeEventListener('click', toggleMusic);
-        bgmButton.addEventListener('click', toggleMusic);
-    }
-    if (mobileAudioIcon) {
-        mobileAudioIcon.removeEventListener('click', toggleMusic);
-        mobileAudioIcon.addEventListener('click', toggleMusic);
-    }
-    if (mobileAudioBtn) {
-        mobileAudioBtn.removeEventListener('click', toggleMusic);
-        mobileAudioBtn.addEventListener('click', toggleMusic);
-    }
-
-    // Sync with actual audio state events
-    if (bgmAudio) {
-        bgmAudio.addEventListener('pause', () => {
-            isPlaying = false;
-            updateIcons(false);
-        });
-
-        bgmAudio.addEventListener('play', () => {
-            isPlaying = true;
-            updateIcons(true);
-        });
-
-        bgmAudio.addEventListener('playing', () => {
-            isPlaying = true;
-            updateIcons(true);
-        });
-    }
-
-    // Visibility handling
-    let wasPlayingBeforeHidden = false;
-    document.addEventListener('visibilitychange', () => {
-        if (!bgmAudio) return;
-        if (document.hidden) {
-            wasPlayingBeforeHidden = isPlaying;
-            if (isPlaying) bgmAudio.pause();
-        } else {
-            if (wasPlayingBeforeHidden) {
-                bgmAudio.play().catch(() => { });
-            }
-        }
-    });
-
-    // Auto-play music on first interaction anywhere on the document
-    let hasInteracted = false;
-    function playOnInteraction() {
-        if (!hasInteracted && !isPlaying && bgmAudio) {
-            hasInteracted = true;
-            bgmAudio.play().then(() => {
-                isPlaying = true;
-                updateIcons(true);
-            }).catch((e) => console.log('Autoplay interaction failed:', e));
-        }
-        document.removeEventListener('click', playOnInteraction);
-        document.removeEventListener('touchstart', playOnInteraction);
-        document.removeEventListener('keydown', playOnInteraction);
-    }
-
-    document.addEventListener('click', playOnInteraction);
-    document.addEventListener('touchstart', playOnInteraction);
-    document.addEventListener('keydown', playOnInteraction);
-
-    window.toggleBgmMusic = toggleMusic;
-});
+    window.addEventListener('load', setupMusic);
+})();
 // ****************************music button navbar functionality start************************** 
 
 
@@ -897,49 +892,249 @@ document.getElementById("SearchModal")?.addEventListener("click", (e) => {
 
 const downloadBtn = document.getElementById("download-btn");
 const navMobileDownloadIcon = document.getElementById("navMobileDownloadIcon");
-const downloadPopup = document.getElementById("downloadPopup");
+const downloadOverlay = document.getElementById("downloadOverlay");
+const downloadModalTitle = document.getElementById("downloadModalTitle");
+const downloadModalSubtitle = document.getElementById("downloadModalSubtitle");
+const downloadProgressBar = document.getElementById("downloadProgressBar");
+const downloadProgressPercent = document.getElementById("downloadProgressPercent");
+const downloadPageIndicator = document.getElementById("downloadPageIndicator");
+const downloadSpinnerRing = document.getElementById("downloadSpinnerRing");
+const downloadCenterIcon = document.getElementById("downloadCenterIcon");
+
 let isGeneratingPdf = false;
 
-if (downloadBtn) {
-    downloadBtn.addEventListener("click", () => {
-        startCatalogPdfDownload();
-    });
-}
-if (navMobileDownloadIcon) {
-    navMobileDownloadIcon.addEventListener("click", () => {
-        startCatalogPdfDownload();
+// Explicitly expose on window
+window.startCatalogPdfDownload = startCatalogPdfDownload;
+
+function bindAllDownloadTriggers() {
+    const downloadSelectors = [
+        "#download-btn",
+        "#mobileDownloadBtn",
+        "#navMobileDownloadIcon",
+        "#download-tn"
+    ];
+
+    downloadSelectors.forEach(selector => {
+        document.querySelectorAll(selector).forEach(btn => {
+            if (btn && !btn._hasDownloadBind) {
+                btn._hasDownloadBind = true;
+                const triggerHandler = (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const menu = document.getElementById("mobileDropdownMenu");
+                    const overlay = document.getElementById("mobileMenuOverlay");
+                    if (menu) menu.classList.remove("active");
+                    if (overlay) overlay.classList.remove("active");
+                    startCatalogPdfDownload();
+                };
+                btn.addEventListener("click", triggerHandler);
+                btn.addEventListener("touchend", triggerHandler);
+            }
+        });
     });
 }
 
-function showDownloadToast(text, autoHideMs = 0) {
-    if (!downloadPopup) return;
-    downloadPopup.textContent = text;
-    downloadPopup.classList.remove("hidden");
-    requestAnimationFrame(() => {
-        downloadPopup.classList.add("opacity-100");
-    });
+bindAllDownloadTriggers();
+document.addEventListener("DOMContentLoaded", bindAllDownloadTriggers);
 
-    if (autoHideMs > 0) {
+// Global click/touch event delegation for mobile and desktop download buttons
+document.addEventListener("click", (e) => {
+    const trigger = e.target.closest("#download-btn, #mobileDownloadBtn, #navMobileDownloadIcon, #download-tn");
+    if (trigger) {
+        e.preventDefault();
+        e.stopPropagation();
+        const menu = document.getElementById("mobileDropdownMenu");
+        const overlay = document.getElementById("mobileMenuOverlay");
+        if (menu) menu.classList.remove("active");
+        if (overlay) overlay.classList.remove("active");
+        startCatalogPdfDownload();
+    }
+}, true);
+
+function getDownloadElements() {
+    return {
+        overlay: document.getElementById("downloadOverlay"),
+        title: document.getElementById("downloadModalTitle"),
+        subtitle: document.getElementById("downloadModalSubtitle"),
+        bar: document.getElementById("downloadProgressBar"),
+        percentText: document.getElementById("downloadProgressPercent"),
+        pageIndicator: document.getElementById("downloadPageIndicator"),
+        spinner: document.getElementById("downloadSpinnerRing"),
+        centerIcon: document.getElementById("downloadCenterIcon")
+    };
+}
+
+function showDownloadModal({
+    title = "Generating PDF",
+    subtitle = "Please wait while your document is being prepared...",
+    percent = 0,
+    pageText = "",
+    status = "loading" // "loading", "success", "error"
+} = {}) {
+    const el = getDownloadElements();
+    if (!el.overlay) return;
+
+    if (el.title) el.title.textContent = title;
+    if (el.subtitle) el.subtitle.textContent = subtitle;
+    if (el.bar) el.bar.style.width = Math.min(100, Math.max(0, percent)) + "%";
+    if (el.percentText) el.percentText.textContent = Math.round(percent) + "%";
+    if (el.pageIndicator) {
+        el.pageIndicator.textContent = pageText;
+        el.pageIndicator.style.display = pageText ? "inline-block" : "none";
+    }
+
+    if (el.spinner && el.centerIcon) {
+        if (status === "loading") {
+            el.spinner.className = "absolute inset-0 rounded-full border-4 border-slate-100 border-t-[#196F92] border-r-[#E7BF3F] animate-spin";
+            el.centerIcon.innerHTML = `
+                <svg class="w-7 h-7 text-[#196F92]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                </svg>
+            `;
+        } else if (status === "success") {
+            el.spinner.className = "absolute inset-0 rounded-full border-4 border-emerald-100 border-t-emerald-500";
+            el.centerIcon.innerHTML = `
+                <svg class="w-8 h-8 text-emerald-500 animate-bounce" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                </svg>
+            `;
+        } else if (status === "error") {
+            el.spinner.className = "absolute inset-0 rounded-full border-4 border-rose-100 border-t-rose-500";
+            el.centerIcon.innerHTML = `
+                <svg class="w-8 h-8 text-rose-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            `;
+        }
+    }
+
+    el.overlay.style.display = "flex";
+    el.overlay.classList.remove("hidden");
+    el.overlay.classList.remove("pointer-events-none");
+    el.overlay.style.pointerEvents = "auto";
+    void el.overlay.offsetWidth;
+    el.overlay.classList.add("active");
+    document.body.classList.add("download-active");
+}
+
+function hideDownloadModal(delayMs = 0) {
+    const el = getDownloadElements();
+    if (!el.overlay) return;
+    setTimeout(() => {
+        el.overlay.classList.remove("active");
+        el.overlay.style.pointerEvents = "none";
+        document.body.classList.remove("download-active");
         setTimeout(() => {
-            downloadPopup.classList.remove("opacity-100");
-            setTimeout(() => downloadPopup.classList.add("hidden"), 300);
-        }, autoHideMs);
+            if (!el.overlay.classList.contains("active")) {
+                el.overlay.style.display = "none";
+                el.overlay.classList.add("hidden");
+            }
+        }, 300);
+    }, delayMs);
+}
+
+// Fallback compatibility helper
+function showDownloadToast(text, autoHideMs = 0) {
+    showDownloadModal({
+        title: "Catalog Download",
+        subtitle: text,
+        percent: 100,
+        pageText: "",
+        status: "loading"
+    });
+    if (autoHideMs > 0) {
+        hideDownloadModal(autoHideMs);
     }
 }
 
 function hideDownloadToast() {
-    if (!downloadPopup) return;
-    downloadPopup.classList.remove("opacity-100");
-    setTimeout(() => downloadPopup.classList.add("hidden"), 300);
+    hideDownloadModal(0);
 }
+
+let downloadCancelled = false;
+let activeSandbox = null;
+
+function cancelCatalogPdfDownload(e) {
+    if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+    console.log("[CatalogPDF] User clicked Cancel Download");
+
+    downloadCancelled = true;
+    isGeneratingPdf = false;
+
+    // Immediately remove offscreen container if one is rendering
+    if (activeSandbox && activeSandbox.parentElement) {
+        try { activeSandbox.remove(); } catch (err) { }
+        activeSandbox = null;
+    }
+
+    showDownloadModal({
+        title: "Download Cancelled",
+        subtitle: "PDF generation was stopped.",
+        percent: 0,
+        pageText: "Cancelled",
+        status: "error"
+    });
+
+    hideDownloadModal(900);
+}
+
+// Global click delegation for guaranteed responsiveness
+document.addEventListener("click", function (e) {
+    const cancelBtn = e.target.closest("#downloadCancelActionBtn, .download-cancel-btn");
+    if (cancelBtn) {
+        cancelCatalogPdfDownload(e);
+    }
+}, true);
+
+document.addEventListener("touchend", function (e) {
+    const cancelBtn = e.target.closest("#downloadCancelActionBtn, .download-cancel-btn");
+    if (cancelBtn) {
+        cancelCatalogPdfDownload(e);
+    }
+}, true);
+
+function bindDownloadCancelButtons() {
+    const cancelActionBtn = document.getElementById("downloadCancelActionBtn");
+    if (cancelActionBtn && !cancelActionBtn._hasCancelBind) {
+        cancelActionBtn._hasCancelBind = true;
+        cancelActionBtn.addEventListener("click", cancelCatalogPdfDownload);
+    }
+}
+bindDownloadCancelButtons();
+document.addEventListener("DOMContentLoaded", bindDownloadCancelButtons);
 
 async function startCatalogPdfDownload() {
     if (isGeneratingPdf) return;
     isGeneratingPdf = true;
+    downloadCancelled = false;
+
+    // Show initial loading state with backdrop and spinner
+    showDownloadModal({
+        title: "Preparing PDF",
+        subtitle: "Initializing document engine...",
+        percent: 5,
+        pageText: "Starting...",
+        status: "loading"
+    });
 
     // Check if html2canvas and jsPDF are loaded
     if (typeof html2canvas === "undefined" || (typeof window.jspdf === "undefined" && typeof jsPDF === "undefined")) {
-        showDownloadToast("Loading PDF engine...", 2000);
+        if (downloadCancelled) {
+            isGeneratingPdf = false;
+            return;
+        }
+
+        showDownloadModal({
+            title: "Downloading File",
+            subtitle: "Loading standard catalog copy...",
+            percent: 60,
+            pageText: "Please wait",
+            status: "loading"
+        });
+
         // Fallback direct link
         const fallback = document.createElement("a");
         fallback.href = "../global%20assets/Mathurams_IDC.pdf";
@@ -947,15 +1142,23 @@ async function startCatalogPdfDownload() {
         document.body.appendChild(fallback);
         fallback.click();
         fallback.remove();
+
+        showDownloadModal({
+            title: "Download Started",
+            subtitle: "Your catalog file is being saved.",
+            percent: 100,
+            pageText: "Complete",
+            status: "success"
+        });
+
         isGeneratingPdf = false;
+        hideDownloadModal(1800);
         return;
     }
 
     const { jsPDF } = window.jspdf || window;
 
     try {
-        showDownloadToast("Preparing PDF: capturing pages...", 0);
-
         // Standard Page dimensions (4:5 ratio matching Yarika catalog standard, 800x1000px)
         const targetWidth = 800;
         const targetHeight = 1000;
@@ -973,26 +1176,39 @@ async function startCatalogPdfDownload() {
 
         // Make sure all SVGs on all pages are fully loaded into the DOM before capturing
         if (typeof loadSVGs === "function") {
-            try { loadSVGs(); } catch (e) {}
+            try { loadSVGs(); } catch (e) { }
         }
 
         // Define the 6 pages configuration:
-        // Pages 1, 2, 3, 6 use the direct vector SVGs from global assets/Images/home-page/
-        // Pages 4 and 5 use the live customized Yarika collage stage
         const catalogPagesConfig = [
-            { pageNum: 1, type: 'svg', src: '../global assets/Images/home-page/home-page-image.svg' },
-            { pageNum: 2, type: 'svg', src: '../global assets/Images/home-page/problems-page.svg' },
-            { pageNum: 3, type: 'svg', src: '../global assets/Images/home-page/opportunities-page.svg' },
-            { pageNum: 4, type: 'stage', selector: '#yarika-stage-page4', pageKey: 'page4' },
-            { pageNum: 5, type: 'stage', selector: '#yarika-stage-page5', pageKey: 'page5' },
-            { pageNum: 6, type: 'svg', src: '../global assets/Images/home-page/contact-page.svg' }
+            { pageNum: 1, name: "Cover Page", type: 'svg', src: '../global assets/Images/home-page/home-page-image.svg' },
+            { pageNum: 2, name: "Challenges", type: 'svg', src: '../global assets/Images/home-page/problems-page.svg' },
+            { pageNum: 3, name: "Opportunities", type: 'svg', src: '../global assets/Images/home-page/opportunities-page.svg' },
+            { pageNum: 4, name: "Collection Grid", type: 'stage', selector: '#yarika-stage-page4', pageKey: 'page4' },
+            { pageNum: 5, name: "Design Showcase", type: 'stage', selector: '#yarika-stage-page5', pageKey: 'page5' },
+            { pageNum: 6, name: "Contact & Info", type: 'svg', src: '../global assets/Images/home-page/contact-page.svg' }
         ];
 
         let renderedCount = 0;
+        const total = catalogPagesConfig.length;
 
-        for (let i = 0; i < catalogPagesConfig.length; i++) {
+        for (let i = 0; i < total; i++) {
+            // Check cancellation before every step
+            if (downloadCancelled) {
+                console.log("[CatalogPDF] Download cancelled by user.");
+                return;
+            }
+
             const pageCfg = catalogPagesConfig[i];
-            showDownloadToast(`Generating PDF: Page ${pageCfg.pageNum} of ${catalogPagesConfig.length}...`, 0);
+            const currentPct = Math.round(((i) / total) * 85) + 10;
+
+            showDownloadModal({
+                title: "Generating PDF",
+                subtitle: `Processing ${pageCfg.name} (${i + 1} of ${total})...`,
+                percent: currentPct,
+                pageText: `Page ${i + 1} of ${total}`,
+                status: "loading"
+            });
 
             // Create offscreen container
             const sandbox = document.createElement('div');
@@ -1006,7 +1222,6 @@ async function startCatalogPdfDownload() {
             sandbox.style.zIndex = '-9999';
 
             if (pageCfg.type === 'svg') {
-                // Fetch the clean original SVG image directly without runtime reveal animation styles
                 try {
                     const resp = await fetch(pageCfg.src);
                     const svgText = await resp.text();
@@ -1021,7 +1236,6 @@ async function startCatalogPdfDownload() {
                         svgEl.style.width = "100%";
                         svgEl.style.height = "100%";
                         svgEl.style.display = "block";
-                        // Ensure all elements inside the pure SVG have full opacity
                         svgEl.querySelectorAll('*').forEach(node => {
                             node.style.opacity = '1';
                             node.style.visibility = 'visible';
@@ -1032,7 +1246,6 @@ async function startCatalogPdfDownload() {
                     console.error("Failed loading SVG directly for page " + pageCfg.pageNum, e);
                 }
             } else if (pageCfg.type === 'stage') {
-                // Live customized Yarika stage for Pages 4 & 5
                 const origStage = document.querySelector(pageCfg.selector) || document.querySelector(`.page-${pageCfg.pageNum} .yarika-page-stage`);
                 if (origStage) {
                     const clone = origStage.cloneNode(true);
@@ -1041,7 +1254,6 @@ async function startCatalogPdfDownload() {
                     clone.style.position = 'relative';
                     clone.style.backgroundSize = 'cover';
                     clone.style.backgroundPosition = 'center';
-                    // Remove calibration overlays if present
                     clone.querySelectorAll('.calibrate-overlay-img, .slot-id-label').forEach(e => e.remove());
                     clone.querySelectorAll('.slot, .slot img, .yarika-heading-bar, img, text').forEach(el => {
                         el.style.opacity = '1';
@@ -1051,10 +1263,22 @@ async function startCatalogPdfDownload() {
                 }
             }
 
+            if (downloadCancelled) {
+                if (sandbox.parentElement) sandbox.remove();
+                return;
+            }
+
+            activeSandbox = sandbox;
             document.body.appendChild(sandbox);
 
-            // Brief pause for layout rendering
-            await new Promise(r => setTimeout(r, 60));
+            // Yield to browser event loop before heavy rasterization so hover & clicks are processed
+            await new Promise(r => requestAnimationFrame(() => setTimeout(r, 60)));
+
+            if (downloadCancelled) {
+                if (sandbox.parentElement) sandbox.remove();
+                activeSandbox = null;
+                return;
+            }
 
             // Capture to canvas
             const canvas = await html2canvas(sandbox, {
@@ -1067,7 +1291,14 @@ async function startCatalogPdfDownload() {
                 logging: false
             });
 
-            document.body.removeChild(sandbox);
+            if (sandbox.parentElement) {
+                document.body.removeChild(sandbox);
+            }
+            activeSandbox = null;
+
+            if (downloadCancelled) {
+                return;
+            }
 
             const imgData = canvas.toDataURL('image/jpeg', 0.92);
 
@@ -1077,26 +1308,52 @@ async function startCatalogPdfDownload() {
 
             pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight, undefined, 'FAST');
             renderedCount++;
+
+            // Yield after capture so browser repaints hover animations and dispatches mouse events
+            await new Promise(r => requestAnimationFrame(() => setTimeout(r, 60)));
         }
 
-        showDownloadToast("Download ready! Saving...", 1500);
+        if (downloadCancelled) {
+            return;
+        }
+
+        showDownloadModal({
+            title: "Download Ready!",
+            subtitle: "Finalizing your catalog PDF...",
+            percent: 100,
+            pageText: "All 6 Pages Ready",
+            status: "success"
+        });
 
         // Save PDF with requested filename
         pdf.save("ZillionThreads_Catalog.pdf");
 
+        hideDownloadModal(1800);
+
     } catch (err) {
+        if (downloadCancelled) {
+            return;
+        }
         console.error("[CatalogPDF] PDF generation error:", err);
-        showDownloadToast("Download error, using direct file...", 2000);
-        // Fallback direct download
+        showDownloadModal({
+            title: "Download Notice",
+            subtitle: "Falling back to standard catalog file...",
+            percent: 100,
+            pageText: "Fallback download",
+            status: "error"
+        });
+
         const fallback = document.createElement("a");
         fallback.href = "../global%20assets/Mathurams_IDC.pdf";
         fallback.download = "ZillionThreads_Catalog.pdf";
         document.body.appendChild(fallback);
         fallback.click();
         fallback.remove();
+
+        hideDownloadModal(2200);
     } finally {
         isGeneratingPdf = false;
-        setTimeout(() => hideDownloadToast(), 2500);
+        downloadCancelled = false;
     }
 }
 // ***********************************download code end******************************************
@@ -1373,8 +1630,15 @@ document.addEventListener("DOMContentLoaded", () => {
         const messageEl = alertBox.querySelector('.zoom-alert-message');
         const progressBar = alertBox.querySelector('.zoom-alert-progress-bar');
 
-        if (titleEl) titleEl.textContent = title || 'Action Blocked';
-        if (messageEl) messageEl.innerHTML = message || 'Please zoom out first to use this feature';
+        if (titleEl) {
+            // Strip any broken unicode / mojibake characters and keep text clean
+            const cleanTitle = (title || 'Action Blocked').replace(/[^\x20-\x7E]/g, '').trim();
+            titleEl.textContent = cleanTitle || 'Action Blocked';
+        }
+        if (messageEl) {
+            const cleanMsg = (message || 'Please zoom out first to use this feature').replace(/[^\x20-\x7E]/g, '').trim();
+            messageEl.innerHTML = cleanMsg;
+        }
 
         // Reset progress bar animation
         if (progressBar) {
@@ -1473,17 +1737,18 @@ document.addEventListener("DOMContentLoaded", () => {
     function updateBlockedElementsState() {
         const blockedSelectors = [
             '#iconTOC', '#navToggle', '#mobileTocBtn',
-            '.thumb-dot', '.tb-link', '#navToggle1',
+            '#desktopThumbToggle', '#navToggle1',
+            '.thumb-dot', '.tb-link',
             '#iconText', '#searchIconDesktop', 'img[alt="search-icon"]',
             '#iconNextPage', '#iconPrevPage', '#iconFrontPage', '#iconSkipForward',
             '.ui-arrow-next-page', '.ui-arrow-previous-page', '.next-arrow', '.prev-arrow',
-            '#iconAutoplay' // âœ… ADDED: Autoplay icon
+            '#iconAutoplay'
         ];
 
         blockedSelectors.forEach(selector => {
             document.querySelectorAll(selector).forEach(el => {
                 if (isZoomed) {
-                    el.style.opacity = '0.5';
+                    el.style.opacity = '0.35';
                     el.style.cursor = 'not-allowed';
                     el.classList.add('zoom-blocked');
                 } else {
@@ -1563,12 +1828,14 @@ document.addEventListener("DOMContentLoaded", () => {
             link.addEventListener('touchstart', blockThumbnail, true);
         });
 
-        // ===== THUMBNAIL TOGGLE (navToggle1) =====
-        const navToggle1 = document.getElementById('navToggle1');
-        if (navToggle1) {
-            navToggle1.addEventListener('click', blockThumbnail, true);
-            navToggle1.addEventListener('touchstart', blockThumbnail, true);
-        }
+        // ===== THUMBNAIL TOGGLE (navToggle1 & desktopThumbToggle) =====
+        ['navToggle1', 'desktopThumbToggle'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) {
+                el.addEventListener('click', blockThumbnail, true);
+                el.addEventListener('touchstart', blockThumbnail, true);
+            }
+        });
 
         // ===== SEARCH ICONS =====
         ['iconText', 'searchIconDesktop'].forEach(id => {
@@ -2020,7 +2287,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function createThumbItem(pageNumber, label, imageSrc) {
         const item = document.createElement('div');
         item.className = 'thumb-grid-item';
-        if (pageNumber === 1 || pageNumber === 40) {
+        if (pageNumber === 1 || pageNumber === 6 || pageNumber === 40) {
             item.classList.add('portrait-card');
         }
         item.setAttribute('data-page', pageNumber);
@@ -2280,7 +2547,7 @@ function initProductImageModal() {
         if (typeof $ !== 'undefined' && $('#flipbook').length && $('#flipbook').turn) {
             try {
                 $('#flipbook').turn('disable', true);
-            } catch (err) {}
+            } catch (err) { }
         }
     }
 
@@ -2296,7 +2563,7 @@ function initProductImageModal() {
         if (typeof $ !== 'undefined' && $('#flipbook').length && $('#flipbook').turn) {
             try {
                 $('#flipbook').turn('disable', false);
-            } catch (err) {}
+            } catch (err) { }
         }
     }
 

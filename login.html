@@ -381,7 +381,7 @@
         <!-- Left Side: Brand presentation -->
         <div class="brand-showcase-panel">
             <div class="brand-emblem-box">
-                <img src="./global assets/Images/logo.svg" alt="Zillion Threads Logo">
+                <img src="/global%20assets/Images/logo.svg" onerror="this.onerror=null; this.src='global%20assets/Images/logo.svg';" alt="Zillion Threads Logo">
             </div>
             <div class="brand-main-title">
                 <span>ZILLION</span>
@@ -494,10 +494,8 @@
                 
                 localStorage.setItem('admin_logged_in', 'true');
 
-                const isPhp = window.location.port === '8000';
-                const target = isPhp ? '/admin/index.php' : 'http://localhost:8000/admin/index.php';
                 setTimeout(() => {
-                    window.location.href = target;
+                    window.location.href = 'admin/index.php';
                 }, 400);
             } else {
                 alertText.textContent = 'Invalid username or password.';

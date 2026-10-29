@@ -2,9 +2,14 @@
 // Root Login Gateway for Zillion Threads Catalog Admin
 session_start();
 
+// Compute base path relative to current script for portable assets & redirects
+$isSubdir = basename(dirname($_SERVER['SCRIPT_NAME'] ?? '')) === 'login';
+$basePrefix = $isSubdir ? '../' : '';
+$adminRedirect = $basePrefix . 'admin/index.php';
+
 // If already logged in, redirect directly to admin dashboard
 if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true) {
-    header('Location: /admin/index.php');
+    header('Location: ' . $adminRedirect);
     exit();
 }
 
@@ -21,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login_submit'])) {
 
     if ($username === ADMIN_USER && $password === ADMIN_PASS) {
         $_SESSION['admin_logged_in'] = true;
-        header('Location: /admin/index.php');
+        header('Location: ' . $adminRedirect);
         exit();
     } else {
         $error = 'Invalid username or password.';
@@ -34,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login_submit'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zillion Threads Admin Login</title>
-    <link rel="icon" href="./global assets/Images/logo.svg">
+    <link rel="icon" href="<?php echo $basePrefix; ?>global%20assets/Images/logo.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Prompt:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -67,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login_submit'])) {
             width: 100vw;
             overflow-x: hidden;
             background-color: #EFECE6;
-            background-image: url('./global%20assets/Images/background-images/background-image-1.webp');
+            background-image: url('<?php echo $basePrefix; ?>global%20assets/Images/background-images/background-image-1.webp');
             background-size: cover;
             background-position: center center;
             background-repeat: no-repeat;
@@ -468,7 +473,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login_submit'])) {
         <!-- Left Side: Brand presentation -->
         <div class="brand-showcase-panel">
             <div class="brand-emblem-box">
-                <img src="./global assets/Images/logo.svg" alt="Zillion Threads Logo">
+                <img src="<?php echo $basePrefix; ?>global%20assets/Images/logo.svg" onerror="this.onerror=null; this.src='<?php echo $basePrefix; ?>global%20assets/Images/logo.svg';" alt="Zillion Threads Logo">
             </div>
             <div class="brand-main-title">
                 <span>ZILLION</span>
@@ -543,7 +548,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login_submit'])) {
             </div>
 
             <div class="back-link-wrap">
-                <a href="/index.html" class="back-link">
+                <a href="<?php echo $basePrefix; ?>index.html" class="back-link">
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <line x1="19" y1="12" x2="5" y2="12"></line>
                         <polyline points="12 19 5 12 12 5"></polyline>

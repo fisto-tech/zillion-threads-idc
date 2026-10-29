@@ -15,6 +15,15 @@
     background-color: white;
 }
 
+.ui-flipbook svg {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform: translateZ(0) scale(1.0, 1.0);
+    transform: translateZ(0);
+    -webkit-font-smoothing: antialiased;
+
+}
+
 .ui-flipbook .cover {
     background-color: white;
 }
@@ -103,20 +112,24 @@
 }
 
 @media screen and (min-width: 400px) and (max-width: 600px) {
+
     .ui-slider,
     .ui-slider .bar {
         width: 300px;
     }
+
     .ui-slider .progress-width {
         width: 290px;
     }
 }
 
 @media screen and (max-width: 400px) {
+
     .ui-slider,
     .ui-slider .bar {
         width: 100px;
     }
+
     .ui-slider .progress-width {
         width: 90px;
     }
@@ -494,6 +507,7 @@ body {
         -ms-transform: translateX(0px);
         transform: translateX(0px);
     }
+
     50% {
         -webkit-transform: translateX(6px);
         -moz-transform: translateX(6px);
@@ -501,6 +515,7 @@ body {
         -ms-transform: translateX(6px);
         transform: translateX(6px);
     }
+
     100% {
         -webkit-transform: translateX(0px);
         -moz-transform: translateX(0px);
@@ -521,6 +536,7 @@ body {
         -ms-transform: translateX(0px);
         transform: translateX(0px);
     }
+
     50% {
         -webkit-transform: translateX(6px);
         -moz-transform: translateX(6px);
@@ -528,6 +544,7 @@ body {
         -ms-transform: translateX(6px);
         transform: translateX(6px);
     }
+
     100% {
         -webkit-transform: translateX(0px);
         -moz-transform: translateX(0px);
@@ -926,7 +943,7 @@ html:full-screen #controls #ui-icon-full-screen .fa:before {
 
 
 
-.page-even{
+.page-even {
     background: -webkit-gradient(linear, left top, right top, color-stop(0.95, #fff), color-stop(1, #dadada));
     background-image: -webkit-linear-gradient(left, #fff 95%, #dadada 100%);
     background-image: -moz-linear-gradient(left, #fff 95%, #dadada 100%);
@@ -937,11 +954,12 @@ html:full-screen #controls #ui-icon-full-screen .fa:before {
     -moz-box-shadow: inset 0 0 5px #666;
     -o-box-shadow: inset 0 0 5px #666;
     -ms-box-shadow: inset 0 0 5px #666;
-    box-shadow: 6.2px 12.3px 12.3px hsl(0deg 0% 0% / 0.31); 
-     overflow: hidden;
-  
-  }
-  .page-odd{
+    box-shadow: 6.2px 12.3px 12.3px hsl(0deg 0% 0% / 0.31);
+    overflow: hidden;
+
+}
+
+.page-odd {
     background: -webkit-gradient(linear, right top, left top, color-stop(0.95, #FFF), color-stop(1, #DADADA));
     background-image: -webkit-linear-gradient(right, #FFF 95%, #C4C4C4 100%);
     background-image: -moz-linear-gradient(right, #FFF 95%, #C4C4C4 100%);
@@ -953,10 +971,10 @@ html:full-screen #controls #ui-icon-full-screen .fa:before {
     -o-box-shadow: inset 0 0 5px #666;
     -ms-box-shadow: inset 0 0 5px #666;
     overflow: hidden;
-    
-  }
 
-  .preloader{
+}
+
+.preloader {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -965,17 +983,20 @@ html:full-screen #controls #ui-icon-full-screen .fa:before {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #fff; /* Change the background color as needed */
-    z-index: 1000; /* Ensure the preloader is on top of other elements */
-  }
-  .preloader video{
+    background-color: #fff;
+    /* Change the background color as needed */
+    z-index: 1000;
+    /* Ensure the preloader is on top of other elements */
+}
+
+.preloader video {
     width: 40%;
     height: auto;
     object-fit: cover;
     animation: fade-in-out 7s 1 linear;
-  } 
-  
-  /* @media screen and (max-width: 500px) {
+}
+
+/* @media screen and (max-width: 500px) {
     .preloader video{
       width: 80%;
     }
@@ -987,13 +1008,14 @@ html:full-screen #controls #ui-icon-full-screen .fa:before {
     }
   }
    */
-  .preloader.over {
+.preloader.over {
     display: none;
-    pointer-events: none; /* Optional: Disable interactions with the preloader while it's hidden */
-    transition: opacity 0.5s ease; /* Add a transition effect */
-  }
-  .main-content {
-    display: block;
-  }
-  
+    pointer-events: none;
+    /* Optional: Disable interactions with the preloader while it's hidden */
+    transition: opacity 0.5s ease;
+    /* Add a transition effect */
+}
 
+.main-content {
+    display: block;
+}

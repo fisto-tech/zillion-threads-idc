@@ -10,7 +10,15 @@
 }
 
 /* ==================== CRISP FONT & IMAGE SHARPNESS FIX ==================== */
-html, body, #viewer, #flipbook, .ui-flipbook, .page, .page-wrapper, .inner-page, .products-page-container {
+html,
+body,
+#viewer,
+#flipbook,
+.ui-flipbook,
+.page,
+.page-wrapper,
+.inner-page,
+.products-page-container {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -19,7 +27,11 @@ html, body, #viewer, #flipbook, .ui-flipbook, .page, .page-wrapper, .inner-page,
 }
 
 /* Ensure crisp image edges during 3D transforms */
-img, .product-img-wrap img, .product-img-box img, .product-detail-img, .product-thumb-item img {
+img,
+.product-img-wrap img,
+.product-img-box img,
+.product-detail-img,
+.product-thumb-item img {
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
   transform: translateZ(0);
@@ -29,11 +41,16 @@ img, .product-img-wrap img, .product-img-box img, .product-detail-img, .product-
 }
 
 /* Eliminate Turn.js subpixel blur on static/hover states */
-.page, .page-wrapper, .products-page-container {
+.page,
+.page-wrapper,
+.products-page-container {
   transform-style: flat !important;
 }
 
-.product-item-card, .product-info-wrap, .product-card-name, .product-card-desc {
+.product-item-card,
+.product-info-wrap,
+.product-card-name,
+.product-card-desc {
   transform: translateZ(0);
   -webkit-transform: translateZ(0);
   will-change: auto;
@@ -1641,7 +1658,7 @@ img, .product-img-wrap img, .product-img-box img, .product-detail-img, .product-
 /* Flipbook stays centered */
 #flipbook {
   margin: auto;
- 
+
   /* Centers when not zoomed */
   flex-shrink: 0;
 }
@@ -2342,7 +2359,7 @@ img, .product-img-wrap img, .product-img-box img, .product-detail-img, .product-
   opacity: 0;
   transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1) !important;
   will-change: opacity;
-  background-image: url('../global%20assets/bottom-navbar/desktop-background-image.png');
+  background-image: url('../global%20assets/Images/products/desktop-background.png');
   filter: blur(2px);
   transform: scale(1.05);
 }
@@ -2353,7 +2370,7 @@ img, .product-img-wrap img, .product-img-box img, .product-detail-img, .product-
 
 @media (max-width: 768px) {
   .bg-layer {
-    background-image: url('../global%20assets/bottom-navbar/mobile-background-image.webp');
+    background-image: url('../global%20assets/Images/products/mobile-background.png');
   }
 }
 
@@ -2377,6 +2394,7 @@ img, .product-img-wrap img, .product-img-box img, .product-detail-img, .product-
   height: 48px;
   width: auto;
   object-fit: contain;
+  filter: brightness(10);
 }
 
 /* Top Right Toolbar Navigation */
@@ -2641,13 +2659,23 @@ img, .product-img-wrap img, .product-img-box img, .product-detail-img, .product-
 
 @media screen and (min-width: 769px) {
   .ui-arrow-next-page {
-    right: 20px !important;
-    left: auto !important;
+    left: calc(50% + (var(--flipbook-current-width, 1100px) / 2) + 16px) !important;
+    right: auto !important;
   }
 
   .ui-arrow-previous-page {
-    left: 20px !important;
+    left: calc(50% - (var(--flipbook-current-width, 1100px) / 2) - 64px) !important;
     right: auto !important;
+  }
+
+  @media screen and (min-width: 1281px) {
+    .ui-arrow-next-page {
+      left: calc(50% + (var(--flipbook-current-width, 1450px) / 2) + 16px) !important;
+    }
+
+    .ui-arrow-previous-page {
+      left: calc(50% - (var(--flipbook-current-width, 1450px) / 2) - 64px) !important;
+    }
   }
 }
 
@@ -3201,14 +3229,17 @@ img, .product-img-wrap img, .product-img-box img, .product-detail-img, .product-
       }
     }
   }
-/* Android Large-Height Mobile Phones */
-@media screen and (max-width: 549px) and (min-height: 800px) {
-  .ui-arrow-control,
-  .next-arrow,
-  .prev-arrow {
-    bottom: 120px !important;
+
+  /* Android Large-Height Mobile Phones */
+  @media screen and (max-width: 549px) and (min-height: 800px) {
+
+    .ui-arrow-control,
+    .next-arrow,
+    .prev-arrow {
+      bottom: 120px !important;
+    }
   }
-}
+
   /* Mobile Top Navigation Styling */
   .mobile-top-nav {
     background: #101c26 !important;
@@ -3332,14 +3363,16 @@ img, .product-img-wrap img, .product-img-box img, .product-detail-img, .product-
   #viewer.first-page .prev-arrow,
   .first-page .ui-arrow-previous-page,
   .first-page .prev-arrow {
-    display: flex !important;
+    display: none !important;
+    pointer-events: none !important;
   }
 
   #viewer.last-page .ui-arrow-next-page,
   #viewer.last-page .next-arrow,
   .last-page .ui-arrow-next-page,
   .last-page .next-arrow {
-    display: flex !important;
+    display: none !important;
+    pointer-events: none !important;
   }
 
   .ui-arrow-next-page,
@@ -3349,8 +3382,8 @@ img, .product-img-wrap img, .product-img-box img, .product-detail-img, .product-
     position: fixed !important;
     top: 50% !important;
     transform: translateY(-50%) !important;
-    right: 20px !important;
-    left: auto !important;
+    left: calc(50% + (var(--flipbook-current-width, 1100px) / 2) + 16px) !important;
+    right: auto !important;
     bottom: auto !important;
     z-index: 99999999 !important;
   }
@@ -3362,15 +3395,32 @@ img, .product-img-wrap img, .product-img-box img, .product-detail-img, .product-
     position: fixed !important;
     top: 50% !important;
     transform: translateY(-50%) !important;
-    left: 20px !important;
+    left: calc(50% - (var(--flipbook-current-width, 1100px) / 2) - 64px) !important;
     right: auto !important;
     bottom: auto !important;
     z-index: 99999999 !important;
   }
+
+  @media screen and (min-width: 1281px) {
+
+    .ui-arrow-next-page,
+    .next-arrow,
+    #viewer .ui-arrow-next-page,
+    #viewer .next-arrow {
+      left: calc(50% + (var(--flipbook-current-width, 1450px) / 2) + 16px) !important;
+    }
+
+    .ui-arrow-previous-page,
+    .prev-arrow,
+    #viewer .ui-arrow-previous-page,
+    #viewer .prev-arrow {
+      left: calc(50% - (var(--flipbook-current-width, 1450px) / 2) - 64px) !important;
+    }
+  }
 }
 
 /* ==========================================================================
-   FULLSCREEN MODE ONLY: Next & Previous Button Adjustments (Far Left & Far Right)
+   FULLSCREEN MODE ONLY: Next & Previous Button Adjustments (Attached to Flipbook)
    ========================================================================== */
 
 :fullscreen .ui-arrow-control,
@@ -3420,7 +3470,7 @@ html.is-fullscreen .next-arrow {
   html.is-fullscreen .prev-arrow,
   html.is-fullscreen .ui-arrow-control.ui-arrow-previous-page,
   html.is-fullscreen #viewer .ui-arrow-previous-page {
-    left: 20px !important;
+    left: calc(50% - (var(--flipbook-current-width, 1100px) / 2) - 64px) !important;
     right: auto !important;
     position: fixed !important;
   }
@@ -3439,9 +3489,46 @@ html.is-fullscreen .next-arrow {
   html.is-fullscreen .next-arrow,
   html.is-fullscreen .ui-arrow-control.ui-arrow-next-page,
   html.is-fullscreen #viewer .ui-arrow-next-page {
-    right: 20px !important;
-    left: auto !important;
+    left: calc(50% + (var(--flipbook-current-width, 1100px) / 2) + 16px) !important;
+    right: auto !important;
     position: fixed !important;
+  }
+
+  @media screen and (min-width: 1281px) {
+
+    :fullscreen .ui-arrow-previous-page,
+    :fullscreen .prev-arrow,
+    :-webkit-full-screen .ui-arrow-previous-page,
+    :-webkit-full-screen .prev-arrow,
+    :-moz-full-screen .ui-arrow-previous-page,
+    :-moz-full-screen .prev-arrow,
+    body.is-fullscreen .ui-arrow-previous-page,
+    body.is-fullscreen .prev-arrow,
+    body.is-fullscreen .ui-arrow-control.ui-arrow-previous-page,
+    body.is-fullscreen #viewer .ui-arrow-previous-page,
+    html.is-fullscreen .ui-arrow-previous-page,
+    html.is-fullscreen .prev-arrow,
+    html.is-fullscreen .ui-arrow-control.ui-arrow-previous-page,
+    html.is-fullscreen #viewer .ui-arrow-previous-page {
+      left: calc(50% - (var(--flipbook-current-width, 1450px) / 2) - 64px) !important;
+    }
+
+    :fullscreen .ui-arrow-next-page,
+    :fullscreen .next-arrow,
+    :-webkit-full-screen .ui-arrow-next-page,
+    :-webkit-full-screen .next-arrow,
+    :-moz-full-screen .ui-arrow-next-page,
+    :-moz-full-screen .next-arrow,
+    body.is-fullscreen .ui-arrow-next-page,
+    body.is-fullscreen .next-arrow,
+    body.is-fullscreen .ui-arrow-control.ui-arrow-next-page,
+    body.is-fullscreen #viewer .ui-arrow-next-page,
+    html.is-fullscreen .ui-arrow-next-page,
+    html.is-fullscreen .next-arrow,
+    html.is-fullscreen .ui-arrow-control.ui-arrow-next-page,
+    html.is-fullscreen #viewer .ui-arrow-next-page {
+      left: calc(50% + (var(--flipbook-current-width, 1450px) / 2) + 16px) !important;
+    }
   }
 }
 
@@ -3457,7 +3544,6 @@ body.is-fullscreen .ui-arrow-previous-page:hover,
 body.is-fullscreen .ui-arrow-next-page:hover {
   transform: translateY(-50%) scale(1.15) !important;
 }
-
 
 /* Force search button arrow to remain white */
 #SearchModal svg,
@@ -3999,7 +4085,10 @@ img[alt*="MF-"]:not(.cot-btn *):not(.cot-btn) {
    ========================================================================== */
 
 /* Disable text selection and dragging on all images, objects, embeds, and SVGs */
-img, object, embed, svg {
+img,
+object,
+embed,
+svg {
   -webkit-user-select: none !important;
   -moz-user-select: none !important;
   -ms-user-select: none !important;
@@ -4202,6 +4291,12 @@ a img,
    - Popup: Pops up with spring scale expansion and fade
    ========================================================================== */
 
+.page {
+  height: 100%;
+  width: 100%;
+  background-color: #f7f9fa;
+}
+
 .page .svg-container {
   position: absolute;
   inset: 0;
@@ -4211,6 +4306,7 @@ a img,
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: #f7f9fa;
 }
 
 .page .svg-container svg,
@@ -4247,7 +4343,7 @@ a img,
   transform-box: fill-box;
   transform-origin: center center;
   transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, opacity;
 }
 
@@ -4258,7 +4354,7 @@ a img,
   transform-box: fill-box;
   transform-origin: center center;
   transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, opacity;
 }
 
@@ -4269,7 +4365,7 @@ a img,
   transform-box: fill-box;
   transform-origin: center center;
   transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, opacity;
 }
 
@@ -4280,7 +4376,7 @@ a img,
   transform-box: fill-box;
   transform-origin: center center;
   transition: opacity 0.7s cubic-bezier(0.34, 1.56, 0.64, 1),
-              transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
   will-change: transform, opacity;
 }
 
@@ -4291,7 +4387,7 @@ a img,
   transform-box: fill-box;
   transform-origin: center center;
   transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, opacity;
 }
 
@@ -4360,7 +4456,7 @@ a img,
   opacity: 0;
   transform: translateY(-30px);
   transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, opacity;
 }
 
@@ -4370,7 +4466,7 @@ a img,
   opacity: 0;
   transform: scale(0.68) translateY(18px);
   transition: opacity 0.75s cubic-bezier(0.34, 1.56, 0.64, 1),
-              transform 0.75s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform 0.75s cubic-bezier(0.34, 1.56, 0.64, 1);
   will-change: transform, opacity;
 }
 
@@ -4380,7 +4476,7 @@ a img,
   opacity: 0;
   transform: translateY(35px);
   transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, opacity;
 }
 
@@ -4423,79 +4519,208 @@ a img,
   opacity: 0;
   transform: scale(0.65) translateY(16px);
   transition: opacity 0.65s cubic-bezier(0.34, 1.56, 0.64, 1),
-              transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1);
   will-change: transform, opacity;
 }
 
 /* Initial states for down-to-up reveal items */
-.page-2 #heading-1, .page-2 #content-1,
-.page-2 #heading-2, .page-2 #content-2,
-.page-2 #heading-3, .page-2 #content-3,
-.page-2 #heading-4, .page-2 #content-4,
-.page-2 #heading-5, .page-2 #content-5,
-.page-2 #heading-6, .page-2 #content-6 {
+.page-2 #heading-1,
+.page-2 #content-1,
+.page-2 #heading-2,
+.page-2 #content-2,
+.page-2 #heading-3,
+.page-2 #content-3,
+.page-2 #heading-4,
+.page-2 #content-4,
+.page-2 #heading-5,
+.page-2 #content-5,
+.page-2 #heading-6,
+.page-2 #content-6 {
   transform-box: fill-box;
   transform-origin: center center;
   opacity: 0;
   transform: translateY(35px);
   transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, opacity;
 }
 
 /* Initial states for right-to-left reveal items */
-.page-2 #heading-2-1, .page-2 #content-2-1,
-.page-2 #heading-2-2, .page-2 #content-2-2,
-.page-2 #heading-2-3, .page-2 #content-2-3,
-.page-2 #heading-2-4, .page-2 #content-2-4 {
+.page-2 #heading-2-1,
+.page-2 #content-2-1,
+.page-2 #heading-2-2,
+.page-2 #content-2-2,
+.page-2 #heading-2-3,
+.page-2 #content-2-3,
+.page-2 #heading-2-4,
+.page-2 #content-2-4 {
   transform-box: fill-box;
   transform-origin: center center;
   opacity: 0;
   transform: translateX(45px);
   transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, opacity;
 }
 
 /* Active animated states: Images 1-6 (Popup one by one) */
-.page-2.animation-on #image-1 { opacity: 1 !important; transform: scale(1) translateY(0) !important; transition-delay: 0.08s; }
-.page-2.animation-on #image-2 { opacity: 1 !important; transform: scale(1) translateY(0) !important; transition-delay: 0.20s; }
-.page-2.animation-on #image-3 { opacity: 1 !important; transform: scale(1) translateY(0) !important; transition-delay: 0.32s; }
-.page-2.animation-on #image-4 { opacity: 1 !important; transform: scale(1) translateY(0) !important; transition-delay: 0.44s; }
-.page-2.animation-on #image-5 { opacity: 1 !important; transform: scale(1) translateY(0) !important; transition-delay: 0.56s; }
-.page-2.animation-on #image-6 { opacity: 1 !important; transform: scale(1) translateY(0) !important; transition-delay: 0.68s; }
+.page-2.animation-on #image-1 {
+  opacity: 1 !important;
+  transform: scale(1) translateY(0) !important;
+  transition-delay: 0.08s;
+}
+
+.page-2.animation-on #image-2 {
+  opacity: 1 !important;
+  transform: scale(1) translateY(0) !important;
+  transition-delay: 0.20s;
+}
+
+.page-2.animation-on #image-3 {
+  opacity: 1 !important;
+  transform: scale(1) translateY(0) !important;
+  transition-delay: 0.32s;
+}
+
+.page-2.animation-on #image-4 {
+  opacity: 1 !important;
+  transform: scale(1) translateY(0) !important;
+  transition-delay: 0.44s;
+}
+
+.page-2.animation-on #image-5 {
+  opacity: 1 !important;
+  transform: scale(1) translateY(0) !important;
+  transition-delay: 0.56s;
+}
+
+.page-2.animation-on #image-6 {
+  opacity: 1 !important;
+  transform: scale(1) translateY(0) !important;
+  transition-delay: 0.68s;
+}
 
 /* Active animated states: Heading 1-6 and Content 1-6 (Down to Up, One by One) */
-.page-2.animation-on #heading-1 { opacity: 1 !important; transform: translateY(0) !important; transition-delay: 0.12s; }
-.page-2.animation-on #content-1 { opacity: 1 !important; transform: translateY(0) !important; transition-delay: 0.18s; }
+.page-2.animation-on #heading-1 {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  transition-delay: 0.12s;
+}
 
-.page-2.animation-on #heading-2 { opacity: 1 !important; transform: translateY(0) !important; transition-delay: 0.24s; }
-.page-2.animation-on #content-2 { opacity: 1 !important; transform: translateY(0) !important; transition-delay: 0.30s; }
+.page-2.animation-on #content-1 {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  transition-delay: 0.18s;
+}
 
-.page-2.animation-on #heading-3 { opacity: 1 !important; transform: translateY(0) !important; transition-delay: 0.36s; }
-.page-2.animation-on #content-3 { opacity: 1 !important; transform: translateY(0) !important; transition-delay: 0.42s; }
+.page-2.animation-on #heading-2 {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  transition-delay: 0.24s;
+}
 
-.page-2.animation-on #heading-4 { opacity: 1 !important; transform: translateY(0) !important; transition-delay: 0.48s; }
-.page-2.animation-on #content-4 { opacity: 1 !important; transform: translateY(0) !important; transition-delay: 0.54s; }
+.page-2.animation-on #content-2 {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  transition-delay: 0.30s;
+}
 
-.page-2.animation-on #heading-5 { opacity: 1 !important; transform: translateY(0) !important; transition-delay: 0.60s; }
-.page-2.animation-on #content-5 { opacity: 1 !important; transform: translateY(0) !important; transition-delay: 0.66s; }
+.page-2.animation-on #heading-3 {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  transition-delay: 0.36s;
+}
 
-.page-2.animation-on #heading-6 { opacity: 1 !important; transform: translateY(0) !important; transition-delay: 0.72s; }
-.page-2.animation-on #content-6 { opacity: 1 !important; transform: translateY(0) !important; transition-delay: 0.78s; }
+.page-2.animation-on #content-3 {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  transition-delay: 0.42s;
+}
+
+.page-2.animation-on #heading-4 {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  transition-delay: 0.48s;
+}
+
+.page-2.animation-on #content-4 {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  transition-delay: 0.54s;
+}
+
+.page-2.animation-on #heading-5 {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  transition-delay: 0.60s;
+}
+
+.page-2.animation-on #content-5 {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  transition-delay: 0.66s;
+}
+
+.page-2.animation-on #heading-6 {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  transition-delay: 0.72s;
+}
+
+.page-2.animation-on #content-6 {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  transition-delay: 0.78s;
+}
 
 /* Active animated states: Heading 2-1..4 and Content 2-1..4 (Right to Left, One by One) */
-.page-2.animation-on #heading-2-1 { opacity: 1 !important; transform: translateX(0) !important; transition-delay: 0.15s; }
-.page-2.animation-on #content-2-1 { opacity: 1 !important; transform: translateX(0) !important; transition-delay: 0.25s; }
+.page-2.animation-on #heading-2-1 {
+  opacity: 1 !important;
+  transform: translateX(0) !important;
+  transition-delay: 0.15s;
+}
 
-.page-2.animation-on #heading-2-2 { opacity: 1 !important; transform: translateX(0) !important; transition-delay: 0.35s; }
-.page-2.animation-on #content-2-2 { opacity: 1 !important; transform: translateX(0) !important; transition-delay: 0.45s; }
+.page-2.animation-on #content-2-1 {
+  opacity: 1 !important;
+  transform: translateX(0) !important;
+  transition-delay: 0.25s;
+}
 
-.page-2.animation-on #heading-2-3 { opacity: 1 !important; transform: translateX(0) !important; transition-delay: 0.55s; }
-.page-2.animation-on #content-2-3 { opacity: 1 !important; transform: translateX(0) !important; transition-delay: 0.65s; }
+.page-2.animation-on #heading-2-2 {
+  opacity: 1 !important;
+  transform: translateX(0) !important;
+  transition-delay: 0.35s;
+}
 
-.page-2.animation-on #heading-2-4 { opacity: 1 !important; transform: translateX(0) !important; transition-delay: 0.75s; }
-.page-2.animation-on #content-2-4 { opacity: 1 !important; transform: translateX(0) !important; transition-delay: 0.85s; }
+.page-2.animation-on #content-2-2 {
+  opacity: 1 !important;
+  transform: translateX(0) !important;
+  transition-delay: 0.45s;
+}
+
+.page-2.animation-on #heading-2-3 {
+  opacity: 1 !important;
+  transform: translateX(0) !important;
+  transition-delay: 0.55s;
+}
+
+.page-2.animation-on #content-2-3 {
+  opacity: 1 !important;
+  transform: translateX(0) !important;
+  transition-delay: 0.65s;
+}
+
+.page-2.animation-on #heading-2-4 {
+  opacity: 1 !important;
+  transform: translateX(0) !important;
+  transition-delay: 0.75s;
+}
+
+.page-2.animation-on #content-2-4 {
+  opacity: 1 !important;
+  transform: translateX(0) !important;
+  transition-delay: 0.85s;
+}
 
 /* -------------------------------------------------------------
    PAGE 3 (OPPORTUNITIES PAGE): ANIMATIONS
@@ -4513,7 +4738,7 @@ a img,
   opacity: 0;
   transform: translate(45px, -35px);
   transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, opacity;
 }
 
@@ -4527,7 +4752,7 @@ a img,
   opacity: 0;
   transform: translateX(-45px);
   transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, opacity;
 }
 
@@ -4540,7 +4765,7 @@ a img,
   opacity: 0;
   transform: translateX(45px);
   transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, opacity;
 }
 
@@ -4552,8 +4777,8 @@ a img,
   transform: translateY(40px) scale(0.96);
   filter: blur(4px);
   transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-              filter 0.8s ease;
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.8s ease;
   will-change: transform, opacity, filter;
 }
 
@@ -4829,20 +5054,136 @@ a img,
   display: block;
 }
 
-/* Page turn animation triggers */
+/* Page turn animation triggers - Staggered popup reveal for each image grid */
 .page-4.animation-on .slot,
 .page-5.animation-on .slot {
-  animation: yarikaFadeScale 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  opacity: 0;
+  transform: scale(0.65) translateY(16px);
+  animation: slotPopReveal 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation-delay: calc(var(--slot-idx, 0) * 0.055s + 0.08s);
+  will-change: transform, opacity;
 }
 
-@keyframes yarikaFadeScale {
-  from {
+/* Fallback stagger by child order in case --slot-idx is not present */
+.page-4.animation-on .slot:nth-child(1),
+.page-5.animation-on .slot:nth-child(1) {
+  animation-delay: 0.08s;
+}
+
+.page-4.animation-on .slot:nth-child(2),
+.page-5.animation-on .slot:nth-child(2) {
+  animation-delay: 0.13s;
+}
+
+.page-4.animation-on .slot:nth-child(3),
+.page-5.animation-on .slot:nth-child(3) {
+  animation-delay: 0.18s;
+}
+
+.page-4.animation-on .slot:nth-child(4),
+.page-5.animation-on .slot:nth-child(4) {
+  animation-delay: 0.23s;
+}
+
+.page-4.animation-on .slot:nth-child(5),
+.page-5.animation-on .slot:nth-child(5) {
+  animation-delay: 0.28s;
+}
+
+.page-4.animation-on .slot:nth-child(6),
+.page-5.animation-on .slot:nth-child(6) {
+  animation-delay: 0.33s;
+}
+
+.page-4.animation-on .slot:nth-child(7),
+.page-5.animation-on .slot:nth-child(7) {
+  animation-delay: 0.38s;
+}
+
+.page-4.animation-on .slot:nth-child(8),
+.page-5.animation-on .slot:nth-child(8) {
+  animation-delay: 0.43s;
+}
+
+.page-4.animation-on .slot:nth-child(9),
+.page-5.animation-on .slot:nth-child(9) {
+  animation-delay: 0.48s;
+}
+
+.page-4.animation-on .slot:nth-child(10),
+.page-5.animation-on .slot:nth-child(10) {
+  animation-delay: 0.53s;
+}
+
+.page-4.animation-on .slot:nth-child(11),
+.page-5.animation-on .slot:nth-child(11) {
+  animation-delay: 0.58s;
+}
+
+.page-4.animation-on .slot:nth-child(12),
+.page-5.animation-on .slot:nth-child(12) {
+  animation-delay: 0.63s;
+}
+
+.page-4.animation-on .slot:nth-child(13),
+.page-5.animation-on .slot:nth-child(13) {
+  animation-delay: 0.68s;
+}
+
+.page-4.animation-on .slot:nth-child(14),
+.page-5.animation-on .slot:nth-child(14) {
+  animation-delay: 0.73s;
+}
+
+.page-4.animation-on .slot:nth-child(15),
+.page-5.animation-on .slot:nth-child(15) {
+  animation-delay: 0.78s;
+}
+
+.page-4.animation-on .slot:nth-child(16),
+.page-5.animation-on .slot:nth-child(16) {
+  animation-delay: 0.83s;
+}
+
+.page-4.animation-on .slot:nth-child(17),
+.page-5.animation-on .slot:nth-child(17) {
+  animation-delay: 0.88s;
+}
+
+.page-4.animation-on .slot:nth-child(18),
+.page-5.animation-on .slot:nth-child(18) {
+  animation-delay: 0.93s;
+}
+
+.page-4.animation-on .slot:nth-child(19),
+.page-5.animation-on .slot:nth-child(19) {
+  animation-delay: 0.98s;
+}
+
+.page-4.animation-on .slot:nth-child(20),
+.page-5.animation-on .slot:nth-child(20) {
+  animation-delay: 1.03s;
+}
+
+.page-4.animation-on .slot:nth-child(21),
+.page-5.animation-on .slot:nth-child(21) {
+  animation-delay: 1.08s;
+}
+
+@keyframes slotPopReveal {
+  0% {
     opacity: 0;
-    transform: scale(0.97);
+    transform: scale(0.65) translateY(16px);
   }
-  to {
+
+  70% {
     opacity: 1;
-    transform: scale(1);
+    transform: scale(1.03) translateY(-2px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
   }
 }
 
@@ -4881,7 +5222,7 @@ a img,
   opacity: 0;
   transform: translateY(35px);
   transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, opacity;
 }
 
@@ -4998,6 +5339,7 @@ a img,
 
 /* Subtle desktop hover feedback without disrupting Turn.js */
 @media (hover: hover) and (pointer: fine) {
+
   .page-6 [id*="@zillionthreads.com"]:hover,
   .page-6 [id^="94890"]:hover,
   .page-6 [id^="www."]:hover,
@@ -5011,4 +5353,15 @@ a img,
   .page-6 #brand-3:hover {
     filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
   }
+}
+
+.page-6 #location:hover {
+  filter: brightness(1.2) drop-shadow(0 0 4px rgba(250, 185, 85, 0.6));
+}
+
+.page-6 #logo:hover,
+.page-6 #brand-1:hover,
+.page-6 #brand-2:hover,
+.page-6 #brand-3:hover {
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
 }

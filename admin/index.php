@@ -8,7 +8,7 @@ $success = '';
 if (isset($_GET['action']) && $_GET['action'] === 'logout') {
     unset($_SESSION['admin_logged_in']);
     session_destroy();
-    $returnUrl = $_GET['return'] ?? '/login.php';
+    $returnUrl = $_GET['return'] ?? '../login.php';
     header('Location: ' . $returnUrl);
     exit();
 }
@@ -16,7 +16,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'logout') {
 // Authentication check - If not logged in, redirect to login screen
 $isLoggedIn = isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true;
 if (!$isLoggedIn) {
-    header('Location: /login.php');
+    header('Location: ../login.php');
     exit();
 }
 ?>
@@ -105,7 +105,7 @@ if (!$isLoggedIn) {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--border-subtle);
-            padding: 0.85rem 2.5rem;
+            padding: 0.5rem 2rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -123,7 +123,7 @@ if (!$isLoggedIn) {
         }
 
         .brand-icon img {
-            height: 34px;
+            height: 30px;
             width: auto;
         }
 
@@ -154,16 +154,16 @@ if (!$isLoggedIn) {
         .nav-actions {
             display: flex;
             align-items: center;
-            gap: 0.85rem;
+            gap: 0.65rem;
         }
 
         .btn {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 0.6rem 1.25rem;
+            gap: 7px;
+            padding: 0.45rem 1rem;
             border-radius: 8px;
-            font-size: 0.86rem;
+            font-size: 0.82rem;
             font-weight: 600;
             text-decoration: none;
             cursor: pointer;
@@ -205,7 +205,7 @@ if (!$isLoggedIn) {
         .admin-container {
             max-width: 1540px;
             margin: 0 auto;
-            padding: 0 1.5rem 1rem 1.5rem;
+            padding: 0 1.5rem 0.75rem 1.5rem;
             width: 100%;
             flex: 1;
             display: flex;
@@ -221,31 +221,31 @@ if (!$isLoggedIn) {
             border: none;
             border-bottom: 1px solid var(--border-subtle);
             border-radius: 0;
-            padding: 0.85rem 0;
-            margin-bottom: 1rem;
+            padding: 0.5rem 0;
+            margin-bottom: 0.65rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
             box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
             flex-wrap: wrap;
-            gap: 1.25rem;
+            gap: 0.85rem;
             flex-shrink: 0;
         }
 
         .header-title h1 {
             font-family: 'Prompt', sans-serif;
-            font-size: 1.35rem;
+            font-size: 1.2rem;
             font-weight: 500;
             color: #0F172A;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
         .header-title p {
-            font-size: 0.85rem;
+            font-size: 0.80rem;
             color: var(--text-muted);
-            margin-top: 4px;
+            margin-top: 2px;
         }
 
         /* Page Switcher Tabs */
@@ -283,11 +283,11 @@ if (!$isLoggedIn) {
             transform: translateY(0);
         }
 
-        /* Two-Column Studio Layout: Left Page Canvas Stage, Right Inspector Panel */
+        /* 3-Column Studio Layout: Column 1 = Stage Canvas Preview (IDC), Column 2 = Section Headings Editor, Column 3 = Photo Adjustment & Action Buttons */
         .studio-layout {
             display: grid;
-            grid-template-columns: 1fr 420px;
-            gap: 1.75rem;
+            grid-template-columns:minmax(420px, 1fr) minmax(320px, 0.75fr) minmax(268px, 399px);
+            gap: 1.15rem;
             align-items: stretch;
             flex: 1;
             min-height: 0;
@@ -300,7 +300,7 @@ if (!$isLoggedIn) {
             background: #FFFFFF;
             border: 1px solid var(--border-card);
             border-radius: 16px;
-            padding: 1.5rem 1.5rem 3.5rem 1.5rem;
+            padding: 1rem 1rem 2rem 1rem;
             box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
             display: flex;
             flex-direction: column;
@@ -334,7 +334,7 @@ if (!$isLoggedIn) {
 
         .stage-viewport-box {
             width: 100%;
-            max-width: 620px;
+            max-width: 680px;
             flex-shrink: 0;
             position: relative;
             background: #FAF8F5;
@@ -527,6 +527,9 @@ if (!$isLoggedIn) {
             box-shadow: 0 0 0 3px #FFFFFF, 0 0 0 6px #0284C7, 0 0 25px rgba(2, 132, 199, 0.65) !important;
             z-index: 99 !important;
             cursor: grab !important;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: none;
             animation: slotSelectedPulse 1.8s infinite ease-in-out;
         }
 
@@ -560,12 +563,12 @@ if (!$isLoggedIn) {
             display: none !important;
         }
 
-        /* Right Side: Slot Inspector Panel */
+        /* Right Side: Slot Inspector Panel (Fits desktop without scrolling) */
         .inspector-panel {
             background: #FFFFFF;
             border: 1px solid var(--border-card);
             border-radius: 16px;
-            padding: 1.5rem;
+            padding: 1rem 1.25rem;
             box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
             height: 100%;
             max-height: calc(100vh - 145px);
@@ -574,8 +577,13 @@ if (!$isLoggedIn) {
             overflow-x: hidden;
             display: flex;
             flex-direction: column;
-            gap: 1.25rem;
-            scrollbar-gutter: stable;
+            gap: 1rem;
+        }
+
+        @media (min-width: 1081px) {
+            .inspector-panel {
+                overflow: hidden !important; /* Zero scroll in desktop screen */
+            }
         }
 
         .inspector-panel::-webkit-scrollbar {
@@ -595,14 +603,15 @@ if (!$isLoggedIn) {
 
         .inspector-header {
             border-bottom: 1px solid var(--border-subtle);
-            padding-bottom: 0.85rem;
+            padding-bottom: 0.5rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            flex-shrink: 0;
         }
 
         .inspector-title {
-            font-size: 1.05rem;
+            font-size: 0.96rem;
             font-weight: 800;
             color: #0F172A;
             display: flex;
@@ -613,27 +622,247 @@ if (!$isLoggedIn) {
         .inspector-slot-id {
             background: #E0F2FE;
             color: #0369A1;
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             font-weight: 800;
-            padding: 3px 8px;
+            padding: 2px 7px;
             border-radius: 6px;
+        }
+
+        /* ==================== 3-COLUMN STUDIO LAYOUT SPECIFICS ==================== */
+        
+        /* COLUMN 2: Section Headings Editor Panel */
+        .headings-editor-panel {
+            background: #FFFFFF;
+            border: 1px solid var(--border-card);
+            border-radius: 16px;
+            padding: 1rem 1.15rem;
+            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
+            height: 100%;
+            max-height: calc(100vh - 145px);
+            min-height: 0;
+            overflow-y: auto;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .headings-editor-panel::-webkit-scrollbar {
+            width: 6px;
+        }
+        .headings-editor-panel::-webkit-scrollbar-track {
+            background: #F8FAFC;
+            border-radius: 6px;
+        }
+        .headings-editor-panel::-webkit-scrollbar-thumb {
+            background: #CBD5E1;
+            border-radius: 6px;
+        }
+        .headings-editor-panel::-webkit-scrollbar-thumb:hover {
+            background: var(--brand-primary);
+        }
+
+        .section-cards-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+            overflow-y: visible;
+        }
+
+        .section-item-card {
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            border-radius: 8px;
+            padding: 6px 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            box-sizing: border-box;
+            width: 100%;
+            box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
+            transition: border-color 0.2s;
+        }
+
+        .section-item-card:hover {
+            border-color: #CBD5E1;
+        }
+
+        .section-input-row {
+            display: flex;
+            gap: 6px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .section-input-row input {
+            flex: 1;
+            min-width: 0;
+            width: 100%;
+            padding: 13px 8px;
+            border: 1px solid #CBD5E1;
+            border-radius: 5px;
+            font-size: 0.75rem;
+            font-family: inherit;
+            outline: none;
+            box-sizing: border-box;
+            transition: border-color 0.2s;
+            background: #FFFFFF;
+        }
+
+        .section-input-row input:focus {
+            border-color: var(--brand-primary);
+        }
+
+        .section-save-btn {
+            padding: 3px 9px;
+            border-radius: 5px;
+            background: var(--brand-primary);
+            color: #FFFFFF;
+            font-size: 0.70rem;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            align-self: flex-end;
+        }
+
+        .section-save-btn:hover {
+            filter: brightness(1.1);
+        }
+
+        /* COLUMN 3: Photo row (Framing Preview + Dashed Upload Card) */
+        .inspector-photo-row {
+            display: grid;
+            grid-template-columns: minmax(130px, 160px) 1fr;
+            gap: 0.75rem;
+            align-items: stretch;
+            flex: 1;
+            min-height: 0;
+        }
+
+        .inspector-preview-col {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            min-height: 0;
+        }
+
+        .inspector-upload-col {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            min-height: 0;
+        }
+
+        /* Dashed Swap / Upload Photo Button in Column 3 */
+        .btn-dashed-upload {
+            width: 100%;
+            padding: 8px 12px;
+            min-height: 48px;
+            background: #F8FAFC;
+            border: 2px dashed #94A3B8;
+            border-radius: 9px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+            cursor: pointer;
+            color: #1E293B;
+            font-weight: 700;
+            font-size: 0.80rem;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .btn-dashed-upload:hover {
+            background: #EFF6FF;
+            border-color: var(--brand-primary);
+            color: var(--brand-primary);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(26, 100, 126, 0.10);
+        }
+
+        .btn-dashed-upload svg {
+            stroke: currentColor;
+            transition: transform 0.2s ease;
+        }
+
+        .btn-dashed-upload:hover svg {
+            transform: scale(1.08);
+        }
+
+        /* 2x2 Action Buttons Grid in Right Column (Undo/Redo on Top, Reset/Save on Bottom) */
+        .inspector-action-grid-2x2 {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-template-rows: repeat(3, minmax(0, 1fr));
+            gap: 50px;
+            width: 100%;
+            flex: 1;
+            align-items: stretch;
+            min-height: 95px;
+        }
+
+        .inspector-action-grid-2x2 .btn {
+            width: 100% !important;
+            height: 100% !important;
+            min-height: 42px !important;
+            max-height: none !important;
+            padding: 8px 12px !important;
+            font-size: 0.82rem;
+            font-weight: 700;
+            justify-content: center;
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            box-sizing: border-box;
+            border-radius: 8px;
+            margin: 0;
+        }
+
+        .btn-publish-idc {
+            background: linear-gradient(135deg, #059669 0%, #10B981 100%);
+            color: #FFFFFF;
+            border: 1px solid #047857;
+            font-weight: 700;
+            padding: 8px 16px;
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+            transition: all 0.2s ease;
+        }
+
+        .btn-publish-idc:hover {
+            filter: brightness(1.1);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(16, 185, 129, 0.35);
         }
 
         /* Interactive Drag Reposition Viewport */
         .drag-stage-preview {
             width: 100%;
-            min-height: 330px;
+            flex: 1;
+            min-height: 140px;
+            max-height: 180px;
             background: #F8FAFC;
-            border-radius: 14px;
+            border-radius: 12px;
             position: relative;
             overflow: hidden;
             border: 2px dashed #CBD5E1;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 6px;
             background-image: radial-gradient(#E2E8F0 1.5px, transparent 1.5px);
-            background-size: 14px 14px;
+            background-size: 12px 12px;
+            box-sizing: border-box;
         }
 
         .drag-preview-frame {
@@ -642,9 +871,12 @@ if (!$isLoggedIn) {
             background: #0F172A;
             box-shadow: 0 8px 24px rgba(15, 23, 42, 0.22), 0 0 0 1px rgba(0, 0, 0, 0.08);
             cursor: grab;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: none;
             transition: border-radius 0.2s, aspect-ratio 0.2s, box-shadow 0.2s;
             max-width: 100%;
-            max-height: 310px;
+            max-height: 165px;
         }
 
         .drag-preview-frame:active {
@@ -665,13 +897,13 @@ if (!$isLoggedIn) {
 
         .drag-crosshair {
             position: absolute;
-            width: 26px;
-            height: 26px;
+            width: 24px;
+            height: 24px;
             transform: translate(-50%, -50%);
             pointer-events: none;
             border: 2px solid #FFFFFF;
             border-radius: 50%;
-            box-shadow: 0 0 0 1.5px rgba(0, 0, 0, 0.6), 0 0 12px rgba(223, 178, 83, 0.9);
+            box-shadow: 0 0 0 1.5px rgba(0, 0, 0, 0.6), 0 0 10px rgba(223, 178, 83, 0.9);
             z-index: 10;
         }
         .drag-crosshair::before,
@@ -680,23 +912,21 @@ if (!$isLoggedIn) {
             position: absolute;
             background: #FFFFFF;
         }
-        .drag-crosshair::before { top: -7px; bottom: -7px; left: 11px; width: 2px; }
-        .drag-crosshair::after { left: -7px; right: -7px; top: 11px; height: 2px; }
-
-
+        .drag-crosshair::before { top: -6px; bottom: -6px; left: 10px; width: 2px; }
+        .drag-crosshair::after { left: -6px; right: -6px; top: 10px; height: 2px; }
 
         /* Slider Controls */
         .control-group {
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 4px;
         }
 
         .control-label-row {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            font-size: 0.8rem;
+            font-size: 0.76rem;
             font-weight: 700;
             color: var(--text-secondary);
         }
@@ -706,94 +936,16 @@ if (!$isLoggedIn) {
             font-weight: 800;
             font-family: monospace;
             background: #F1F5F9;
-            padding: 2px 6px;
+            padding: 1px 5px;
             border-radius: 4px;
+            font-size: 0.72rem;
         }
 
         .range-slider {
             width: 100%;
             accent-color: var(--brand-primary);
             cursor: pointer;
-        }
-
-        /* Section Heading Editor Accordion Styles */
-        .section-editor-box {
-            border-top: 1px solid var(--border-subtle);
-            padding-top: 1rem;
-            margin-top: 0.5rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.85rem;
-        }
-
-        .section-editor-title {
-            font-size: 0.86rem;
-            font-weight: 800;
-            color: #0F172A;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .section-item-card {
-            background: #F8FAFC;
-            border: 1px solid #E2E8F0;
-            border-radius: 8px;
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            box-sizing: border-box;
-            width: 100%;
-        }
-
-        .section-input-row {
-            display: flex;
-            gap: 8px;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        .section-input-row input {
-            flex: 1;
-            min-width: 0;
-            width: 100%;
-            padding: 6px 10px;
-            border: 1px solid #CBD5E1;
-            border-radius: 6px;
-            font-size: 0.78rem;
-            font-family: inherit;
-            outline: none;
-            box-sizing: border-box;
-            transition: border-color 0.2s;
-        }
-
-        .section-input-row input:focus {
-            border-color: var(--brand-primary);
-        }
-
-        .section-save-btn {
-            padding: 6px 14px;
-            border-radius: 6px;
-            background: var(--brand-primary);
-            color: #FFFFFF;
-            font-size: 0.74rem;
-            font-weight: 700;
-            border: none;
-            cursor: pointer;
-            transition: all 0.2s;
-            align-self: flex-end;
-        }
-
-        .section-save-btn:hover {
-            filter: brightness(1.1);
-        }
-
-        /* Inspector Actions */
-        .inspector-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 0.5rem;
+            height: 6px;
         }
 
         /* Modal Styles */
@@ -994,10 +1146,15 @@ if (!$isLoggedIn) {
                 height: auto;
                 max-height: 80vh;
             }
+            .headings-editor-panel {
+                height: auto;
+                max-height: none;
+                overflow: visible !important;
+            }
             .inspector-panel {
                 height: auto;
                 max-height: none;
-                overflow: visible;
+                overflow: visible !important;
             }
             .stage-viewport-box {
                 max-width: 100%;
@@ -1120,16 +1277,26 @@ if (!$isLoggedIn) {
                 </div>
             </div>
         </a>
+
         <div class="nav-actions">
-            <a href="/For_Desc/index.html" class="btn btn-outline" target="_blank" title="Preview live catalog in new tab">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                    <circle cx="12" cy="12" r="3"></circle>
+            <!-- Live Flipbook (Public live version) -->
+            <a href="../For_Desc/index.html" class="btn btn-outline" target="_blank" title="View live published catalog in new tab">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polygon points="10 8 16 12 10 16 10 8"></polygon>
                 </svg>
                 <span>Live Flipbook</span>
             </a>
 
-            <a href="?action=logout&return=/login.php" class="btn btn-danger-outline">
+            <!-- Publish to IDC Button -->
+            <button type="button" class="btn btn-publish-idc" id="publishToIdcTopBtn" onclick="publishToIDC()" title="Publish all saved draft images & labels to the live IDC catalog flipbook">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span>Publish to IDC</span>
+            </button>
+
+            <a href="?action=logout&return=../login.php" class="btn btn-danger-outline">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
                     <polyline points="16 17 21 12 16 7"></polyline>
@@ -1155,14 +1322,14 @@ if (!$isLoggedIn) {
                 <p>Click any slot below or on the right to adjust framing, reposition focal point, and zoom.</p>
             </div>
 
-            <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+            <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
                 <div class="page-tabs">
                     <button class="tab-btn active" id="tab-p4" onclick="switchPageTab('page4')">Page 4</button>
                     <button class="tab-btn" id="tab-p5" onclick="switchPageTab('page5')">Page 5</button>
                 </div>
 
-                <button type="button" class="btn btn-primary" id="saveAllTopBtn" onclick="saveAllChanges()" style="padding: 10px 20px; font-weight: 700; box-shadow: 0 4px 14px rgba(26, 100, 126, 0.25);" title="Save all adjustments across all images on this page">
-                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <button type="button" class="btn btn-primary" id="saveAllTopBtn" onclick="saveAllChanges()" style="padding: 9px 18px; font-weight: 700; box-shadow: 0 4px 14px rgba(26, 100, 126, 0.25);" title="Save all adjustments across all images on both Page 4 and Page 5">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                         <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
                         <polyline points="17 21 17 13 7 13 7 21"></polyline>
                         <polyline points="7 3 7 8 15 8"></polyline>
@@ -1172,9 +1339,9 @@ if (!$isLoggedIn) {
             </div>
         </div>
 
-        <!-- Studio 2-Column Interface -->
+        <!-- Studio 3-Column Interface: IDC Flipbook | Section Headings Editor | Photo Adjustment & Actions -->
         <div class="studio-layout">
-            <!-- Left: Stage Canvas Preview -->
+            <!-- COLUMN 1: Stage Canvas Preview (IDC Live Book) -->
             <div class="stage-card-wrapper">
                 <div class="stage-viewport-box">
                     <div class="yarika-page-stage" id="admin-stage-canvas" data-page="page4">
@@ -1188,31 +1355,56 @@ if (!$isLoggedIn) {
                 </div>
             </div>
 
-            <!-- Right: Slot Inspector & Controls -->
+            <!-- COLUMN 2: Section Headings Editor Panel -->
+            <div class="headings-editor-panel">
+                <div class="inspector-header">
+                    <div class="inspector-title">
+                        <span>Section Headings</span>
+                    </div>
+                </div>
+                <div id="sectionCardsContainer" class="section-cards-list">
+                    <!-- Populated dynamically with all Grid sections -->
+                </div>
+            </div>
+
+            <!-- COLUMN 3: Photo Adjustment, Image Change/Upload & Action Buttons -->
             <div class="inspector-panel" id="slotInspector">
                 <div class="inspector-header">
                     <div class="inspector-title">
                         <span>Photo Adjustment</span>
-                        <span class="inspector-slot-id" id="insp-slot-id">Select a slot</span>
+                        <span class="inspector-slot-id" id="insp-slot-id" style="display: none;"></span>
                     </div>
                 </div>
 
-                <!-- Reposition viewport with slot shape matching -->
-                <div class="control-group">
+                <!-- 1. Framing and Alignment Preview -->
+                <div class="control-group" style="display: flex; flex-direction: column; gap: 4px; min-height: 0;">
                     <div class="control-label-row">
-                        <span>Framing &amp; Position</span>
+                        <span>Framing &amp; Alignment</span>
                         <span class="control-val-badge" id="insp-focal-text">50% / 50%</span>
                     </div>
                     <div class="drag-stage-preview">
                         <div class="drag-preview-frame" id="dragPreviewViewport">
-                            <img src="" id="insp-preview-img" alt="Slot Preview">
+                            <img src="" id="insp-preview-img" alt="Slot Preview" draggable="false">
                             <div class="drag-crosshair" id="dragCrosshair" style="left: 50%; top: 50%;"></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Zoom Slider -->
-                <div class="control-group">
+                <!-- 2. Upload / Replace Photo Option -->
+                <div class="control-group" style="display: flex; flex-direction: column; gap: 4px;">
+                    <button type="button" class="btn-dashed-upload" onclick="openImageModal()" title="Upload new photo or pick from gallery">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="17 8 12 3 7 8"></polyline>
+                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                        </svg>
+                        <span>Swap / Replace Photo</span>
+                        <span style="font-size: 0.68rem; color: #64748B; font-weight: 500;">Upload or choose from gallery</span>
+                    </button>
+                </div>
+
+                <!-- 3. Zoom Scale Slider -->
+                <div class="control-group" style="margin-top: 2px;">
                     <div class="control-label-row">
                         <span>Zoom Scale</span>
                         <span class="control-val-badge" id="insp-zoom-text">1.00x</span>
@@ -1220,62 +1412,31 @@ if (!$isLoggedIn) {
                     <input type="range" class="range-slider" id="inspZoomSlider" min="1.00" max="3.00" step="0.05" value="1.00">
                 </div>
 
-                <!-- Swap Image Button -->
-                <button type="button" class="btn btn-outline" style="width: 100%; justify-content: center;" onclick="openImageModal()">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                        <polyline points="17 8 12 3 7 8"></polyline>
-                        <line x1="12" y1="3" x2="12" y2="15"></line>
-                    </svg>
-                    <span>Swap Photo (Upload / Gallery)</span>
-                </button>
-
-                <!-- Undo / Redo & Save Action Buttons -->
-                <div class="inspector-history-actions" style="display: flex; gap: 8px;">
-                    <button type="button" class="btn btn-outline" id="undoBtn" style="flex: 1; justify-content: center; padding: 6px 10px;" onclick="undoSlotChange()" title="Undo adjustment (Ctrl+Z)" disabled>
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <!-- 4. Undo / Redo & 5. Reset / Save Buttons -->
+                <div class="inspector-action-grid-2x2">
+                    <button type="button" class="btn btn-outline" id="undoBtn" onclick="undoSlotChange()" title="Undo adjustment (Ctrl+Z)" disabled>
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <polyline points="9 14 4 9 9 4"></polyline>
                             <path d="M20 20v-7a4 4 0 0 0-4-4H4"></path>
                         </svg>
                         <span>Undo</span>
                     </button>
-                    <button type="button" class="btn btn-outline" id="redoBtn" style="flex: 1; justify-content: center; padding: 6px 10px;" onclick="redoSlotChange()" title="Redo adjustment (Ctrl+Y)" disabled>
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <button type="button" class="btn btn-outline" id="redoBtn" onclick="redoSlotChange()" title="Redo adjustment (Ctrl+Y)" disabled>
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <polyline points="15 14 20 9 15 4"></polyline>
                             <path d="M4 20v-7a4 4 0 0 1 4-4h12"></path>
                         </svg>
                         <span>Redo</span>
                     </button>
-                </div>
-
-                <div class="inspector-actions">
-                    <button type="button" class="btn btn-outline" style="flex: 1; justify-content: center;" onclick="resetSlotAdjustments()">
+                    <button type="button" class="btn btn-outline" onclick="resetSlotAdjustments()" title="Reset focal position & zoom">
                         <span>Reset</span>
                     </button>
-                    <button type="button" class="btn btn-accent" style="flex: 1.4; justify-content: center;" id="saveSlotBtn" onclick="saveActiveSlot()" title="Save currently selected image">
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <button type="button" class="btn btn-accent" id="saveSlotBtn" onclick="saveActiveSlot()" title="Save currently selected image">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                             <polyline points="20 6 9 17 4 12"></polyline>
                         </svg>
                         <span>Save</span>
                     </button>
-                    <button type="button" class="btn btn-primary" style="flex: 1.8; justify-content: center; font-weight: 700;" id="saveAllPanelBtn" onclick="saveAllChanges()" title="Save all adjusted images at once">
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
-                            <polyline points="17 21 17 13 7 13 7 21"></polyline>
-                            <polyline points="7 3 7 8 15 8"></polyline>
-                        </svg>
-                        <span>Save All</span>
-                    </button>
-                </div>
-
-                <!-- Section Headings Editor (Tamil / English) -->
-                <div class="section-editor-box">
-                    <div class="section-editor-title">
-                        <span>Section Headings Editor</span>
-                    </div>
-                    <div id="sectionCardsContainer" style="display: flex; flex-direction: column; gap: 8px;">
-                        <!-- Rendered dynamically per active page -->
-                    </div>
                 </div>
             </div>
         </div>
@@ -1369,7 +1530,7 @@ if (!$isLoggedIn) {
                     overflow: hidden;
                     z-index: ${zIndex};
                 ">
-                    <img src="${imgSrc}" alt="${slot.id}" style="
+                    <img src="${imgSrc}" alt="${slot.id}" draggable="false" style="
                         position: absolute;
                         inset: 0;
                         width: 100%;
@@ -1409,7 +1570,8 @@ if (!$isLoggedIn) {
                 const res = await fetch('../api/get_products.php?t=' + Date.now());
                 if (!res.ok) throw new Error('API error');
                 catalogData = await res.json();
-                restoreDraftFromLocalStorage();
+                restoreDraftFromLocalStorage('page4');
+                restoreDraftFromLocalStorage('page5');
                 renderStage();
                 renderSectionCards();
                 // Select first slot by default
@@ -1467,29 +1629,33 @@ if (!$isLoggedIn) {
             }
         }
 
-        // Render Section Headings in Inspector for Tamil & English editing
+        // Render Section Headings in Column 2 for Tamil & English editing
         function renderSectionCards() {
             const container = document.getElementById('sectionCardsContainer');
-            if (!container) return;
             const pageData = catalogData[activePageKey];
-            if (!pageData || !Array.isArray(pageData.sections)) {
+            if (!container) return;
+
+            function generateCardHtml(sec, idx) {
+                return `
+                    <div class="section-item-card" id="card-sec-${sec.id}">
+                        <div style="font-size: 0.74rem; font-weight: 700; color: #1A647E; display: flex; justify-content: space-between;">
+                            <span>Grid ${idx + 1}</span>
+                        </div>
+                        <div class="section-input-row">
+                            <input type="text" id="sec-ta-${sec.id}" value="${sec.label_ta || ''}" placeholder="Tamil (e.g. சுடிதார்)">
+                            <input type="text" id="sec-en-${sec.id}" value="${sec.label_en || ''}" placeholder="English (e.g. Silk Signature)">
+                        </div>
+                        <button type="button" class="section-save-btn" onclick="saveSectionHeading('${sec.id}')">Save Label</button>
+                    </div>
+                `;
+            }
+
+            if (!pageData || !Array.isArray(pageData.sections) || pageData.sections.length === 0) {
                 container.innerHTML = '<div style="color: var(--text-muted); font-size: 0.8rem;">No sections found.</div>';
                 return;
             }
 
-            container.innerHTML = pageData.sections.map((sec, idx) => {
-                return `
-                <div class="section-item-card" id="card-sec-${sec.id}">
-                    <div style="font-size: 0.76rem; font-weight: 700; color: #1A647E; display: flex; justify-content: space-between;">
-                        <span>Grid ${idx + 1}</span>
-                    </div>
-                    <div class="section-input-row">
-                        <input type="text" id="sec-ta-${sec.id}" value="${sec.label_ta || ''}" placeholder="Tamil (e.g. சுடிதார்)">
-                        <input type="text" id="sec-en-${sec.id}" value="${sec.label_en || ''}" placeholder="English (e.g. Silk Signature)">
-                    </div>
-                    <button type="button" class="section-save-btn" onclick="saveSectionHeading('${sec.id}')">Save Label</button>
-                </div>
-            `}).join('');
+            container.innerHTML = pageData.sections.map((sec, idx) => generateCardHtml(sec, idx)).join('');
         }
 
         async function saveSectionHeading(sectionId) {
@@ -1513,7 +1679,7 @@ if (!$isLoggedIn) {
 
                 const data = await res.json();
                 if (data.success) {
-                    showToast(`Heading for ${sectionId} updated!`);
+                    showToast('Label updated successfully!');
                     // Update in local memory
                     const pageData = catalogData[activePageKey];
                     if (pageData && Array.isArray(pageData.sections)) {
@@ -1577,10 +1743,10 @@ if (!$isLoggedIn) {
                 // Since stage has aspect-ratio 4/5, absolute slot width/height in px is:
                 // aspect ratio = (slot.w * 4) / (slot.h * 5) = (slot.w / slot.h) * 0.8
                 const aspect = (w / h) * 0.8;
-                let frameHeight = 300;
+                let frameHeight = 160;
                 let frameWidth = frameHeight * aspect;
-                if (frameWidth > 360) {
-                    frameWidth = 360;
+                if (frameWidth > 220) {
+                    frameWidth = 220;
                     frameHeight = frameWidth / aspect;
                 }
                 dragFrame.style.width = `${Math.round(frameWidth)}px`;
@@ -1626,7 +1792,7 @@ if (!$isLoggedIn) {
             }
         }
 
-        // Mouse Drag to Reposition Focal Point in Right Inspector Viewport (Relative Delta Drag)
+        // Mouse & Touch Drag to Reposition Focal Point in Right Inspector Viewport (Relative Delta Drag)
         const dragViewport = document.getElementById('dragPreviewViewport');
         let dragStartX = 0;
         let dragStartY = 0;
@@ -1635,9 +1801,13 @@ if (!$isLoggedIn) {
         
         function handleFocalDrag(e) {
             if (!activeSlot || !dragViewport) return;
+            const touch = e.touches ? e.touches[0] : null;
+            const clientX = touch ? touch.clientX : e.clientX;
+            const clientY = touch ? touch.clientY : e.clientY;
+            if (clientX === undefined || clientY === undefined) return;
+
             const rect = dragViewport.getBoundingClientRect();
-            const clientX = e.clientX || (e.touches && e.touches[0] ? e.touches[0].clientX : 0);
-            const clientY = e.clientY || (e.touches && e.touches[0] ? e.touches[0].clientY : 0);
+            if (rect.width <= 0 || rect.height <= 0) return;
 
             // Compute delta from drag start point
             const deltaPercentX = ((clientX - dragStartX) / rect.width) * 100;
@@ -1655,16 +1825,25 @@ if (!$isLoggedIn) {
             updateInspectorValues(activeSlot.focal_x, activeSlot.focal_y, activeSlot.zoom);
         }
 
+        function startViewportDrag(e) {
+            if (!activeSlot || !dragViewport) return;
+            // Prevent browser native image ghost-drag or text selection
+            if (e.cancelable && e.type === 'touchstart') e.preventDefault();
+            if (e.type === 'mousedown') e.preventDefault();
+
+            preDragSnapshot = getSlotSnapshot(activeSlot);
+            isDraggingCrosshair = true;
+
+            const touch = e.touches ? e.touches[0] : null;
+            dragStartX = touch ? touch.clientX : e.clientX;
+            dragStartY = touch ? touch.clientY : e.clientY;
+            focalStartX = typeof activeSlot.focal_x !== 'undefined' ? parseFloat(activeSlot.focal_x) : 50;
+            focalStartY = typeof activeSlot.focal_y !== 'undefined' ? parseFloat(activeSlot.focal_y) : 50;
+        }
+
         if (dragViewport) {
-            dragViewport.addEventListener('mousedown', (e) => {
-                if (!activeSlot) return;
-                preDragSnapshot = getSlotSnapshot(activeSlot);
-                isDraggingCrosshair = true;
-                dragStartX = e.clientX || (e.touches && e.touches[0] ? e.touches[0].clientX : 0);
-                dragStartY = e.clientY || (e.touches && e.touches[0] ? e.touches[0].clientY : 0);
-                focalStartX = typeof activeSlot.focal_x !== 'undefined' ? parseFloat(activeSlot.focal_x) : 50;
-                focalStartY = typeof activeSlot.focal_y !== 'undefined' ? parseFloat(activeSlot.focal_y) : 50;
-            });
+            dragViewport.addEventListener('mousedown', startViewportDrag);
+            dragViewport.addEventListener('touchstart', startViewportDrag, { passive: false });
 
             // Mouse Wheel Zoom inside Drag Viewport
             dragViewport.addEventListener('wheel', (e) => {
@@ -1680,12 +1859,18 @@ if (!$isLoggedIn) {
             }, { passive: false });
         }
 
-        window.addEventListener('mousemove', (e) => {
-            if (isDraggingCrosshair) handleFocalDrag(e);
-            if (isDraggingStageSlot) handleStageSlotDrag(e);
-        });
+        function onGlobalDragMove(e) {
+            if (isDraggingCrosshair) {
+                if (e.cancelable && e.type === 'touchmove') e.preventDefault();
+                handleFocalDrag(e);
+            }
+            if (isDraggingStageSlot) {
+                if (e.cancelable && e.type === 'touchmove') e.preventDefault();
+                handleStageSlotDrag(e);
+            }
+        }
 
-        window.addEventListener('mouseup', () => {
+        function onGlobalDragEnd() {
             if (isDraggingCrosshair || isDraggingStageSlot) {
                 // If position actually changed during drag, push preDragSnapshot to undo stack
                 if (preDragSnapshot && activeSlot) {
@@ -1699,9 +1884,16 @@ if (!$isLoggedIn) {
             }
             isDraggingCrosshair = false;
             isDraggingStageSlot = false;
-        });
+            stageDragSlotElement = null;
+        }
 
-        // DIRECT STAGE CANVAS DRAGGING (Orange marked area - Relative Delta Drag)
+        window.addEventListener('mousemove', onGlobalDragMove);
+        window.addEventListener('mouseup', onGlobalDragEnd);
+        window.addEventListener('touchmove', onGlobalDragMove, { passive: false });
+        window.addEventListener('touchend', onGlobalDragEnd);
+        window.addEventListener('touchcancel', onGlobalDragEnd);
+
+        // DIRECT STAGE CANVAS DRAGGING (Relative Delta Drag on Slot)
         let isDraggingStageSlot = false;
         let stageDragSlotElement = null;
         let stageDragStartX = 0;
@@ -1711,11 +1903,15 @@ if (!$isLoggedIn) {
 
         function handleStageSlotDrag(e) {
             if (!activeSlot || !stageDragSlotElement) return;
-            const rect = stageDragSlotElement.getBoundingClientRect();
-            const clientX = e.clientX || (e.touches && e.touches[0] ? e.touches[0].clientX : 0);
-            const clientY = e.clientY || (e.touches && e.touches[0] ? e.touches[0].clientY : 0);
+            const touch = e.touches ? e.touches[0] : null;
+            const clientX = touch ? touch.clientX : e.clientX;
+            const clientY = touch ? touch.clientY : e.clientY;
+            if (clientX === undefined || clientY === undefined) return;
 
-            // Compute delta from initial mousedown point
+            const rect = stageDragSlotElement.getBoundingClientRect();
+            if (rect.width <= 0 || rect.height <= 0) return;
+
+            // Compute delta from initial drag start point
             const deltaPercentX = ((clientX - stageDragStartX) / rect.width) * 100;
             const deltaPercentY = ((clientY - stageDragStartY) / rect.height) * 100;
 
@@ -1731,24 +1927,33 @@ if (!$isLoggedIn) {
             updateInspectorValues(activeSlot.focal_x, activeSlot.focal_y, activeSlot.zoom);
         }
 
+        function startStageSlotDrag(e) {
+            const slotEl = e.target.closest('.slot');
+            if (!slotEl) return;
+            // Prevent browser image dragging & text highlighting
+            if (e.cancelable && e.type === 'touchstart') e.preventDefault();
+            if (e.type === 'mousedown') e.preventDefault();
+
+            const slotId = slotEl.getAttribute('data-slot-id');
+            if (!activeSlot || activeSlot.id !== slotId) {
+                selectSlot(slotId);
+            }
+            preDragSnapshot = getSlotSnapshot(activeSlot);
+            isDraggingStageSlot = true;
+            stageDragSlotElement = slotEl;
+
+            const touch = e.touches ? e.touches[0] : null;
+            stageDragStartX = touch ? touch.clientX : e.clientX;
+            stageDragStartY = touch ? touch.clientY : e.clientY;
+            stageFocalStartX = typeof activeSlot.focal_x !== 'undefined' ? parseFloat(activeSlot.focal_x) : 50;
+            stageFocalStartY = typeof activeSlot.focal_y !== 'undefined' ? parseFloat(activeSlot.focal_y) : 50;
+        }
+
         // Attach event delegation for direct dragging and wheel zoom on Stage Slots
         const adminSlotsLayer = document.getElementById('admin-slots-layer');
         if (adminSlotsLayer) {
-            adminSlotsLayer.addEventListener('mousedown', (e) => {
-                const slotEl = e.target.closest('.slot');
-                if (!slotEl) return;
-                const slotId = slotEl.getAttribute('data-slot-id');
-                if (!activeSlot || activeSlot.id !== slotId) {
-                    selectSlot(slotId);
-                }
-                preDragSnapshot = getSlotSnapshot(activeSlot);
-                isDraggingStageSlot = true;
-                stageDragSlotElement = slotEl;
-                stageDragStartX = e.clientX || (e.touches && e.touches[0] ? e.touches[0].clientX : 0);
-                stageDragStartY = e.clientY || (e.touches && e.touches[0] ? e.touches[0].clientY : 0);
-                stageFocalStartX = typeof activeSlot.focal_x !== 'undefined' ? parseFloat(activeSlot.focal_x) : 50;
-                stageFocalStartY = typeof activeSlot.focal_y !== 'undefined' ? parseFloat(activeSlot.focal_y) : 50;
-            });
+            adminSlotsLayer.addEventListener('mousedown', startStageSlotDrag);
+            adminSlotsLayer.addEventListener('touchstart', startStageSlotDrag, { passive: false });
 
             adminSlotsLayer.addEventListener('wheel', (e) => {
                 const slotEl = e.target.closest('.slot');
@@ -1806,12 +2011,12 @@ if (!$isLoggedIn) {
             };
         }
 
-        // Save current modifications for current page in LocalStorage
-        function persistDraftToLocalStorage() {
+        // Save current modifications for current page (or all pages) in LocalStorage
+        function persistDraftToLocalStorage(pageKey = activePageKey) {
             try {
-                if (!catalogData || !catalogData[activePageKey] || !Array.isArray(catalogData[activePageKey].slots)) return;
+                if (!catalogData || !catalogData[pageKey] || !Array.isArray(catalogData[pageKey].slots)) return;
                 const pageDraft = {};
-                catalogData[activePageKey].slots.forEach(s => {
+                catalogData[pageKey].slots.forEach(s => {
                     pageDraft[s.id] = {
                         focal_x: s.focal_x,
                         focal_y: s.focal_y,
@@ -1819,21 +2024,21 @@ if (!$isLoggedIn) {
                         image: s.image
                     };
                 });
-                localStorage.setItem(LOCAL_STORAGE_KEY_PREFIX + activePageKey, JSON.stringify(pageDraft));
+                localStorage.setItem(LOCAL_STORAGE_KEY_PREFIX + pageKey, JSON.stringify(pageDraft));
             } catch (e) {
                 console.warn("Could not save to LocalStorage:", e);
             }
         }
 
         // Restore drafts from LocalStorage
-        function restoreDraftFromLocalStorage() {
+        function restoreDraftFromLocalStorage(pageKey = activePageKey) {
             try {
-                const stored = localStorage.getItem(LOCAL_STORAGE_KEY_PREFIX + activePageKey);
+                const stored = localStorage.getItem(LOCAL_STORAGE_KEY_PREFIX + pageKey);
                 if (!stored) return;
                 const pageDraft = JSON.parse(stored);
-                if (!pageDraft || !catalogData[activePageKey] || !Array.isArray(catalogData[activePageKey].slots)) return;
+                if (!pageDraft || !catalogData[pageKey] || !Array.isArray(catalogData[pageKey].slots)) return;
 
-                catalogData[activePageKey].slots.forEach(s => {
+                catalogData[pageKey].slots.forEach(s => {
                     if (pageDraft[s.id]) {
                         if (typeof pageDraft[s.id].focal_x !== 'undefined') s.focal_x = pageDraft[s.id].focal_x;
                         if (typeof pageDraft[s.id].focal_y !== 'undefined') s.focal_y = pageDraft[s.id].focal_y;
@@ -1963,8 +2168,10 @@ if (!$isLoggedIn) {
 
                 const data = await res.json();
                 if (data.success) {
-                    persistDraftToLocalStorage();
-                    showToast(`${getFriendlySlotLabel(activeSlot)} saved successfully!`);
+                    try {
+                        localStorage.removeItem(LOCAL_STORAGE_KEY_PREFIX + activePageKey);
+                    } catch (e) {}
+                    showToast('Image updated successfully!');
                 } else {
                     showToast(data.message || 'Failed to save slot');
                 }
@@ -1982,29 +2189,33 @@ if (!$isLoggedIn) {
             }
         }
 
-        // Save All Changes across all slots on the current page to API
+        // Save All Changes across all slots on both pages to API
         async function saveAllChanges() {
-            const pageData = catalogData[activePageKey];
-            if (!pageData || !Array.isArray(pageData.slots) || pageData.slots.length === 0) {
+            // Gather all slots from both page4 and page5
+            const pageKeys = ['page4', 'page5'];
+            let allSlotsToSave = [];
+
+            pageKeys.forEach(pk => {
+                if (catalogData && catalogData[pk] && Array.isArray(catalogData[pk].slots)) {
+                    allSlotsToSave = allSlotsToSave.concat(catalogData[pk].slots);
+                }
+            });
+
+            if (allSlotsToSave.length === 0) {
                 showToast("No slots found to save.");
                 return;
             }
 
             const topBtn = document.getElementById('saveAllTopBtn');
-            const panelBtn = document.getElementById('saveAllPanelBtn');
 
             if (topBtn) {
                 topBtn.disabled = true;
                 topBtn.innerHTML = `<span>Saving all...</span>`;
             }
-            if (panelBtn) {
-                panelBtn.disabled = true;
-                panelBtn.innerHTML = `<span>Saving...</span>`;
-            }
 
             try {
                 // Map all slots with current modified values
-                const payloadSlots = pageData.slots.map(s => ({
+                const payloadSlots = allSlotsToSave.map(s => ({
                     slot_id: s.id,
                     image: s.image,
                     focal_x: typeof s.focal_x !== 'undefined' ? s.focal_x : 50.0,
@@ -2020,8 +2231,11 @@ if (!$isLoggedIn) {
 
                 const data = await res.json();
                 if (data.success) {
-                    persistDraftToLocalStorage();
-                    showToast(`All changes saved successfully! (${payloadSlots.length} photos)`);
+                    try {
+                        localStorage.removeItem(LOCAL_STORAGE_KEY_PREFIX + 'page4');
+                        localStorage.removeItem(LOCAL_STORAGE_KEY_PREFIX + 'page5');
+                    } catch (e) {}
+                    showToast('All changes saved successfully!');
                 } else {
                     showToast(data.message || 'Failed to save all changes');
                 }
@@ -2040,17 +2254,32 @@ if (!$isLoggedIn) {
                         <span>Save All Changes</span>
                     `;
                 }
-                if (panelBtn) {
-                    panelBtn.disabled = false;
-                    panelBtn.innerHTML = `
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
-                            <polyline points="17 21 17 13 7 13 7 21"></polyline>
-                            <polyline points="7 3 7 8 15 8"></polyline>
-                        </svg>
-                        <span>Save All</span>
-                    `;
+            }
+        }
+
+        // Publish to IDC Live Flipbook (copies draft slots & sections to live public state)
+        async function publishToIDC() {
+            const confirmed = confirm("Are you sure you want to publish all saved changes to the live IDC catalog flipbook? This will make all current drafts visible on the public flipbook.");
+            if (!confirmed) return;
+
+            // First ensure any pending local adjustments are saved
+            try {
+                showToast("Publishing all changes to IDC live...");
+                const res = await fetch('../api/publish_to_idc.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action: 'publish' })
+                });
+
+                const data = await res.json();
+                if (data.success) {
+                    showToast("🎉 Published to IDC! Live flipbook is now updated.");
+                } else {
+                    showToast(data.message || "Failed to publish to IDC.");
                 }
+            } catch (err) {
+                console.error("Publish to IDC error:", err);
+                showToast("Network error publishing to IDC.");
             }
         }
 
@@ -2082,7 +2311,9 @@ if (!$isLoggedIn) {
                         return;
                     }
                     data.images.forEach(img => {
-                        const isMatch = activeSlot && activeSlot.image === img.url;
+                        const activeImgName = activeSlot && activeSlot.image ? activeSlot.image.split('/').pop().split('?')[0] : '';
+                        const galleryImgName = img.name || (img.url ? img.url.split('/').pop().split('?')[0] : '');
+                        const isMatch = activeSlot && (activeSlot.image === img.url || (activeImgName && activeImgName === galleryImgName));
                         const item = document.createElement('div');
                         item.className = 'gallery-item' + (isMatch ? ' selected' : '');
                         item.onclick = (e) => {
@@ -2146,19 +2377,63 @@ if (!$isLoggedIn) {
             document.getElementById('applySelectedImageBtn').disabled = false;
         }
 
+        function setSlotImage(newImageUrl, msg = "Image updated successfully!") {
+            if (!activeSlot || !newImageUrl) return;
+            pushUndoSnapshot(getSlotSnapshot(activeSlot));
+            activeSlot.image = newImageUrl;
+
+            // 1. Update Inspector preview image
+            const inspImg = document.getElementById('insp-preview-img');
+            if (inspImg) inspImg.src = newImageUrl;
+
+            // 2. Update Stage slot element directly
+            const slotEl = document.getElementById(`slot-${activeSlot.id}`);
+            if (slotEl) {
+                const stageSlotImg = slotEl.querySelector('img');
+                if (stageSlotImg) {
+                    stageSlotImg.src = newImageUrl;
+                }
+            }
+
+            // 3. Keep focal point and zoom styling in sync
+            const fx = typeof activeSlot.focal_x !== 'undefined' ? activeSlot.focal_x : 50;
+            const fy = typeof activeSlot.focal_y !== 'undefined' ? activeSlot.focal_y : 50;
+            const zoom = typeof activeSlot.zoom !== 'undefined' ? activeSlot.zoom : 1.00;
+            updateInspectorValues(fx, fy, zoom);
+
+            // 4. Save to LocalStorage draft
+            persistDraftToLocalStorage();
+
+            // 5. Automatically persist slot to database so it stays saved
+            saveActiveSlotSilent();
+
+            showToast(msg);
+        }
+
+        async function saveActiveSlotSilent() {
+            if (!activeSlot) return;
+            try {
+                await fetch('../api/save_slot.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        slot_id: activeSlot.id,
+                        image: activeSlot.image,
+                        focal_x: activeSlot.focal_x,
+                        focal_y: activeSlot.focal_y,
+                        zoom: activeSlot.zoom
+                    })
+                });
+            } catch (err) {
+                console.warn("Silent slot save background sync:", err);
+            }
+        }
+
         function applySelectedGalleryImage() {
             if (!selectedGalleryUrl || !activeSlot) return;
-            pushUndoSnapshot(getSlotSnapshot(activeSlot));
-            activeSlot.image = selectedGalleryUrl;
-
-            // Update previews
-            document.getElementById('insp-preview-img').src = selectedGalleryUrl;
-            const stageSlotImg = document.querySelector(`#slot-${activeSlot.id} img`);
-            if (stageSlotImg) stageSlotImg.src = selectedGalleryUrl;
-
-            persistDraftToLocalStorage();
+            const chosenUrl = selectedGalleryUrl;
             closeImageModal();
-            showToast("New photo applied to slot! Click 'Save' to persist.");
+            setSlotImage(chosenUrl, "Image updated successfully!");
         }
 
         // Upload Handlers
@@ -2197,15 +2472,8 @@ if (!$isLoggedIn) {
                 });
                 const data = await res.json();
                 if (data.success && data.url) {
-                    pushUndoSnapshot(getSlotSnapshot(activeSlot));
-                    activeSlot.image = data.url;
-                    document.getElementById('insp-preview-img').src = data.url;
-                    const stageSlotImg = document.querySelector(`#slot-${activeSlot.id} img`);
-                    if (stageSlotImg) stageSlotImg.src = data.url;
-
-                    persistDraftToLocalStorage();
                     closeImageModal();
-                    showToast("Photo uploaded and applied to slot! Click 'Save' to persist.");
+                    setSlotImage(data.url, "Image updated successfully!");
                 } else {
                     showToast(data.message || "Failed to upload photo.");
                 }

@@ -30,16 +30,34 @@ $dataFile = __DIR__ . '/products.json';
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if ($pdo) {
         try {
+            // Determine preview/draft mode: default is 'published' for live public flipbook,
+            // 'draft' when mode=draft or preview=1 or called from admin editor
+            $mode = isset($_GET['mode']) ? strtolower(trim($_GET['mode'])) : '';
+            $isPreview = isset($_GET['preview']) && $_GET['preview'] === '1';
+            $isDraftMode = ($mode === 'draft' || $isPreview);
+
+            // Table selection: draft uses working catalog_sections/slots, live uses catalog_sections_published/slots_published
+            $slotsTable = $isDraftMode ? 'catalog_slots' : 'catalog_slots_published';
+            $sectionsTable = $isDraftMode ? 'catalog_sections' : 'catalog_sections_published';
+
+            // Verify published tables exist, fallback to main if not
+            try {
+                $pdo->query("SELECT 1 FROM {$slotsTable} LIMIT 1");
+            } catch (Exception $e) {
+                $slotsTable = 'catalog_slots';
+                $sectionsTable = 'catalog_sections';
+            }
+
             // Fetch pages
             $pageStmt = $pdo->query("SELECT id, title, subtitle FROM catalog_pages ORDER BY id ASC");
             $pages = $pageStmt->fetchAll();
 
             // Fetch sections
-            $sectionsStmt = $pdo->query("SELECT id, page_key, label_ta, label_en, x, y, w, h FROM catalog_sections ORDER BY y ASC, x ASC");
+            $sectionsStmt = $pdo->query("SELECT id, page_key, label_ta, label_en, x, y, w, h FROM {$sectionsTable} ORDER BY y ASC, x ASC");
             $allSections = $sectionsStmt->fetchAll();
 
             // Fetch slots
-            $slotsStmt = $pdo->query("SELECT id, page_key, section_id, x, y, w, h, radius, z_index, image, focal_x, focal_y, zoom FROM catalog_slots ORDER BY z_index ASC, id ASC");
+            $slotsStmt = $pdo->query("SELECT id, page_key, section_id, x, y, w, h, radius, z_index, image, focal_x, focal_y, zoom FROM {$slotsTable} ORDER BY z_index ASC, id ASC");
             $allSlots = $slotsStmt->fetchAll();
 
             // Fetch legacy items for fallback or other pages

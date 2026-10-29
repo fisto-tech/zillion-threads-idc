@@ -541,13 +541,10 @@
             btn.innerHTML = "Authenticating...";
             btn.disabled = true;
 
-            const isPhpServer = window.location.port === '8000';
-            const adminBase = isPhpServer ? 'admin/' : 'http://localhost:8000/admin/';
-
             if (user === 'admin' && pass === 'admin123') {
                 btn.innerHTML = "Success! Redirecting...";
-                // Redirect directly to the full Admin Portal
-                window.location.href = adminBase + 'index.php';
+                // Redirect directly to the full Admin Portal via relative path
+                window.location.href = 'admin/index.php';
             } else {
                 alertBox.textContent = "Invalid username or password.";
                 alertBox.style.display = "block";
